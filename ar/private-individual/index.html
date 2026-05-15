@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تفويض البحث – N20 Immobilier</title>
+<meta name="description" content="ابدأ بحثك عن المسكن المثالي في ثلاث خطوات بسيطة. أرسل تفويض البحث ودعنا نعثر على العقار المناسب لك.">
+<link rel="canonical" href="/ar/private-individual/">
+<link rel="icon" href="/wp-content/uploads/2025/09/n20-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#021623;--marine:#033560;--accent:#6EC1E4;--accent2:#4ab0d9;--light-bg:#f4f8fb;--white:#fff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%,#033560 80%);min-height:100vh;color:var(--white)}
+#site-header{position:fixed;top:0;left:0;right:0;height:72px;z-index:9000;background:rgba(2,22,35,.92);backdrop-filter:blur(12px);display:flex;align-items:center}
+.hdr-inner{max-width:1280px;margin:0 auto;padding:0 24px;width:100%;display:flex;align-items:center;gap:32px}
+.hdr-logo{flex-shrink:0;display:flex;align-items:center;text-decoration:none}
+.hdr-logo img{height:40px;width:auto}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-right:auto}
+.hdr-nav a{font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.78);text-decoration:none;padding:7px 13px;border-radius:8px;transition:color .35s,background .35s;white-space:nowrap}
+.hdr-nav a:hover,.hdr-nav a.active{color:#fff;background:rgba(110,193,228,.18)}
+.hdr-nav a.nav-cta{background:var(--accent);color:var(--navy);padding:8px 18px;border-radius:50px;font-weight:700;margin-right:8px}
+.hdr-nav a.nav-cta:hover{background:#4ab0d9;color:#fff}
+.lang-sw{position:relative;margin-right:12px}
+.lang-sw-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer;transition:background .35s;white-space:nowrap}
+.lang-sw-btn:hover{background:rgba(255,255,255,.2)}
+.lang-sw-btn img{width:20px;height:auto;border-radius:2px}
+.lang-sw-btn svg{width:14px;height:14px;opacity:.7;transition:transform .35s}
+.lang-sw.open .lang-sw-btn svg{transform:rotate(180deg)}
+.lang-dd{position:absolute;top:calc(100% + 6px);left:0;right:auto;background:rgba(2,22,35,.97);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:6px;min-width:150px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s,transform .25s,visibility .25s}
+.lang-sw.open .lang-dd{opacity:1;visibility:visible;transform:translateY(0)}
+.lang-dd a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;color:rgba(255,255,255,.85);font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:background .2s,color .2s}
+.lang-dd a:hover{background:rgba(110,193,228,.2);color:#fff}
+.lang-dd img{width:20px;height:auto;border-radius:2px}
+.mob-nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:auto}
+.mob-nav-toggle span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
+#mob-nav{display:none;position:fixed;inset:0;z-index:8999;background:rgba(2,22,35,.97);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:80px 24px 40px}
+#mob-nav.open{display:flex}
+#mob-nav a{font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 24px;border-radius:12px;width:100%;max-width:320px;text-align:center;transition:background .2s,color .2s}
+#mob-nav a:hover,#mob-nav a.active{background:rgba(110,193,228,.18);color:#fff}
+#mob-nav a.mob-cta{background:var(--accent);color:var(--navy);font-weight:800}
+#mob-nav a.mob-cta:hover{background:#4ab0d9;color:#fff}
+#mob-close{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;position:absolute;top:20px;left:24px}
+.mob-lang{display:flex;gap:10px;margin-top:8px}
+.mob-lang a{color:rgba(255,255,255,.65);font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:6px}
+.mob-lang a:hover{background:rgba(255,255,255,.1);color:#fff}
+.mob-lang img{width:20px;border-radius:2px}
+@media(max-width:900px){.hdr-nav,.lang-sw{display:none}.mob-nav-toggle{display:flex}}
+/* MAIN */
+.page-wrap{padding-top:72px;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-bottom:80px}
+.pi-hero{text-align:center;padding:72px 24px 48px;max-width:760px;width:100%}
+.pi-hero-tag{display:inline-block;font-family:'Cairo',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);padding:5px 14px;border-radius:100px;margin-bottom:20px}
+.pi-hero h1{font-family:'Amiri',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:400;color:#fff;margin-bottom:16px;line-height:1.15}
+.pi-hero p{font-size:1rem;color:rgba(255,255,255,.65);line-height:1.7;max-width:560px;margin:0 auto}
+/* PROGRESS */
+.progress-bar{display:flex;align-items:center;justify-content:center;gap:0;margin:40px 0 0;padding:0 24px}
+.prog-step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;max-width:140px;position:relative}
+.prog-step:not(:last-child)::after{content:'';position:absolute;top:19px;left:-50%;width:100%;height:2px;background:rgba(255,255,255,.15);z-index:0}
+.prog-step.done::after{background:var(--accent)}
+.prog-dot{width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;color:rgba(255,255,255,.5);position:relative;z-index:1;transition:all .35s}
+.prog-step.active .prog-dot{border-color:var(--accent);background:var(--accent);color:var(--navy)}
+.prog-step.done .prog-dot{border-color:var(--accent);background:rgba(110,193,228,.2);color:var(--accent)}
+.prog-label{font-family:'Cairo',sans-serif;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);transition:color .35s;text-align:center}
+.prog-step.active .prog-label{color:#fff}
+.prog-step.done .prog-label{color:var(--accent)}
+/* FORM */
+.form-outer{width:100%;max-width:720px;padding:0 24px}
+.form-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:48px 52px;backdrop-filter:blur(10px)}
+.step-pane{display:none}
+.step-pane.active{display:block}
+.step-title{font-family:'Amiri',serif;font-size:1.8rem;color:#fff;margin-bottom:8px}
+.step-sub{font-family:'Cairo',sans-serif;font-size:.92rem;color:rgba(255,255,255,.6);margin-bottom:32px;line-height:1.6}
+.f-row{display:grid;gap:16px;margin-bottom:18px}
+.f-row.cols-2{grid-template-columns:1fr 1fr}
+.f-row.cols-1{grid-template-columns:1fr}
+.f-group{display:flex;flex-direction:column;gap:6px}
+.f-group label{font-family:'Cairo',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.f-group input,.f-group select,.f-group textarea{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px 16px;color:#fff;font-family:'Cairo',sans-serif;font-size:.92rem;outline:none;transition:border-color .25s;width:100%;text-align:right}
+.f-group input::placeholder,.f-group textarea::placeholder{color:rgba(255,255,255,.3)}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{border-color:var(--accent)}
+.f-group select option{background:#021623;color:#fff}
+.f-group textarea{resize:vertical;min-height:100px}
+.f-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:24px 0}
+.radio-label{font-family:'Cairo',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);display:block;margin-bottom:12px;margin-top:8px}
+.radio-group{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.radio-opt{display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 18px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);transition:all .2s;font-family:'Cairo',sans-serif;font-size:.88rem;color:rgba(255,255,255,.7);user-select:none;flex-direction:row-reverse}
+.radio-opt input[type=radio]{display:none}
+.radio-circle{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.3);flex-shrink:0;transition:all .2s;position:relative}
+.radio-opt.selected{border-color:var(--accent);background:rgba(110,193,228,.12);color:#fff}
+.radio-opt.selected .radio-circle{border-color:var(--accent);background:var(--accent)}
+.cond-block{display:none}
+.cond-block.visible{display:block}
+.check-opt{display:flex;align-items:flex-start;gap:12px;cursor:pointer;margin-bottom:16px;font-family:'Cairo',sans-serif;font-size:.9rem;color:rgba(255,255,255,.78);line-height:1.6;flex-direction:row-reverse}
+.check-opt input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);flex-shrink:0;margin-top:2px}
+.check-opt a{color:var(--accent);text-decoration:underline}
+.form-nav{display:flex;gap:12px;margin-top:32px;flex-direction:row-reverse}
+.btn-next,.btn-submit{background:var(--accent);color:var(--navy);border:none;padding:12px 28px;border-radius:50px;font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .25s}
+.btn-next:hover,.btn-submit:hover{background:#fff;color:var(--navy)}
+.btn-prev,.btn-skip{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:12px 22px;border-radius:50px;font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .25s}
+.btn-prev:hover,.btn-skip:hover{background:rgba(255,255,255,.15);color:#fff}
+.success-panel{display:none;text-align:center;padding:64px 32px;max-width:500px;margin:0 auto}
+.success-icon{width:80px;height:80px;border-radius:50%;background:rgba(110,193,228,.15);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 32px}
+.success-icon svg{width:40px;height:40px;stroke:var(--accent)}
+.success-panel h2{font-family:'Amiri',serif;font-size:2rem;color:#fff;margin-bottom:16px}
+.success-panel p{color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:32px}
+.success-panel a{display:inline-block;background:var(--accent);color:var(--navy);padding:12px 28px;border-radius:50px;font-family:'Cairo',sans-serif;font-weight:700;text-decoration:none}
+/* FOOTER */
+#site-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);padding:48px 0 0}
+.ftr-inner{max-width:1280px;margin:0 auto;padding:0 40px}
+.ftr-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;text-align:right}
+.ftr-brand p{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:12px}
+.ftr-brand img{height:36px;width:auto}
+.ftr-col h4{font-family:'Cairo',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
+.ftr-col a{display:block;font-size:.9rem;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.ftr-col a:hover{color:#fff}
+.ftr-bottom{border-top:1px solid rgba(255,255,255,.06);padding:18px 0;display:flex;align-items:center;justify-content:space-between;flex-direction:row-reverse}
+.ftr-copy{font-size:.78rem;color:rgba(255,255,255,.3)}
+.ftr-legal{display:flex;gap:16px}
+.ftr-legal a{font-size:.78rem;color:rgba(255,255,255,.38);text-decoration:none}
+.ftr-legal a:hover{color:#fff}
+#whatsapp-btn{position:fixed;bottom:28px;left:24px;right:auto;width:54px;height:54px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.22);z-index:8000;transition:transform .2s}
+#whatsapp-btn:hover{transform:scale(1.08)}
+#whatsapp-btn svg{width:28px;height:28px;fill:#fff}
+@media(max-width:900px){.ftr-top{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:600px){.form-card{padding:32px 24px}.f-row.cols-2{grid-template-columns:1fr}.ftr-top{grid-template-columns:1fr;gap:24px}.ftr-inner{padding:0 20px}.ftr-bottom{flex-direction:column;gap:12px;text-align:center}}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="hdr-inner">
+    <a class="hdr-logo" href="/ar/homepage/">
+      <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+    </a>
+    <nav class="hdr-nav">
+      <a href="/ar/homepage/">الرئيسية</a>
+      <a href="/ar/find-accomodation/" class="active">إيجاد سكن</a>
+      <a href="/ar/terminate-lease/">إنهاء العقد</a>
+      <a href="/ar/buy-sell/">شراء / بيع</a>
+      <a href="/ar/additional-services/">الخدمات</a>
+      <a href="/ar/about-us/">عملاء مؤسسيون</a>
+      <a href="/ar/private-individual/" class="nav-cta">تفويض البحث</a>
+    </nav>
+    <div class="lang-sw" id="langSw">
+      <button class="lang-sw-btn" id="langBtn" aria-label="اختيار اللغة">
+        <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23006C35'/%3E%3Crect x='.25' y='.48' width='2.5' height='.52' fill='%23fff' rx='.05'/%3E%3Crect x='.9' y='1.1' width='1.1' height='.11' fill='%23fff'/%3E%3Cpolygon points='2,1.04 2,1.28 2.25,1.16' fill='%23fff'/%3E%3C/svg%3E" alt="AR">
+        العربية
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+      <div class="lang-dd" id="langDd">
+        <a href="/ar/private-individual/">
+          <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23006C35'/%3E%3Crect x='.25' y='.48' width='2.5' height='.52' fill='%23fff' rx='.05'/%3E%3Crect x='.9' y='1.1' width='1.1' height='.11' fill='%23fff'/%3E%3Cpolygon points='2,1.04 2,1.28 2.25,1.16' fill='%23fff'/%3E%3C/svg%3E" alt="AR"> العربية
+        </a>
+        <a href="/en/private-individual/">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN"> English
+        </a>
+        <a href="/particulier/">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR"> Français
+        </a>
+        <a href="/ru/private-individual/">
+          <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU"> Русский
+        </a>
+      </div>
+    </div>
+    <button class="mob-nav-toggle" id="mobToggle" aria-label="القائمة">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav id="mob-nav">
+  <button id="mob-close" aria-label="إغلاق">&#x2715;</button>
+  <a href="/ar/homepage/">الرئيسية</a>
+  <a href="/ar/find-accomodation/" class="active">إيجاد سكن</a>
+  <a href="/ar/terminate-lease/">إنهاء العقد</a>
+  <a href="/ar/buy-sell/">شراء / بيع</a>
+  <a href="/ar/additional-services/">الخدمات</a>
+  <a href="/ar/about-us/">عملاء مؤسسيون</a>
+  <a href="/ar/private-individual/" class="mob-cta">تفويض البحث</a>
+  <div class="mob-lang">
+    <a href="/ar/private-individual/">
+      <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23006C35'/%3E%3Crect x='.25' y='.48' width='2.5' height='.52' fill='%23fff' rx='.05'/%3E%3Crect x='.9' y='1.1' width='1.1' height='.11' fill='%23fff'/%3E%3Cpolygon points='2,1.04 2,1.28 2.25,1.16' fill='%23fff'/%3E%3C/svg%3E" alt="AR"> AR
+    </a>
+    <a href="/en/private-individual/">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN"> EN
+    </a>
+    <a href="/particulier/">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR"> FR
+    </a>
+    <a href="/ru/private-individual/">
+      <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU"> RU
+    </a>
+  </div>
+</nav>
+
+<main class="page-wrap">
+
+  <section class="pi-hero">
+    <div class="pi-hero-tag">تفويض البحث</div>
+    <h1>أرسل تفويض البحث</h1>
+    <p>وفّر وقتك واستفد من مرافقة شخصية. أرسل التفويض ودعنا نعثر على العقار المثالي الذي يناسب احتياجاتك.</p>
+    <div class="progress-bar" id="progressBar">
+      <div class="prog-step active" data-step="1">
+        <div class="prog-dot">1</div>
+        <div class="prog-label">مقدم الطلب</div>
+      </div>
+      <div class="prog-step" data-step="2">
+        <div class="prog-dot">2</div>
+        <div class="prog-label">مقدم مشارك</div>
+      </div>
+      <div class="prog-step" data-step="3">
+        <div class="prog-dot">3</div>
+        <div class="prog-label">معايير العقار</div>
+      </div>
+      <div class="prog-step" data-step="4">
+        <div class="prog-dot">4</div>
+        <div class="prog-label">التأكيد</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="form-outer">
+    <div class="form-card" id="formCard">
+
+      <!-- STEP 1 -->
+      <div class="step-pane active" id="step1">
+        <div class="step-title">مقدم الطلب</div>
+        <div class="step-sub">أخبرنا عن نفسك حتى نتمكن من تخصيص بحثنا وفق احتياجاتك.</div>
+
+        <span class="radio-label">هل أنت فرد أم مؤسسة؟</span>
+        <div class="radio-group" id="typeGroup">
+          <label class="radio-opt selected" id="opt-individual">
+            <input type="radio" name="applicantType" value="individual" checked>
+            <span class="radio-circle"></span> فرد
+          </label>
+          <label class="radio-opt" id="opt-professional">
+            <input type="radio" name="applicantType" value="professional">
+            <span class="radio-circle"></span> مؤسسة / شركة
+          </label>
+        </div>
+
+        <div class="cond-block" id="proFields">
+          <div class="f-row cols-1">
+            <div class="f-group">
+              <label>اسم الشركة</label>
+              <input type="text" name="company" placeholder="Société SA">
+            </div>
+          </div>
+          <div class="f-row cols-1">
+            <div class="f-group">
+              <label>العنوان المسجّل</label>
+              <input type="text" name="companyAddress" placeholder="Rue de Rive 10, 1204 Genève">
+            </div>
+          </div>
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>الممثل القانوني</label>
+              <input type="text" name="legalRep" placeholder="الاسم الكامل">
+            </div>
+            <div class="f-group">
+              <label>الهاتف</label>
+              <input type="tel" name="proPhone" placeholder="+41 xx xxx xx xx">
+            </div>
+          </div>
+          <div class="f-row cols-1">
+            <div class="f-group">
+              <label>البريد الإلكتروني</label>
+              <input type="email" name="proEmail" placeholder="contact@company.ch">
+            </div>
+          </div>
+          <hr class="f-divider">
+        </div>
+
+        <div class="cond-block visible" id="indivFields">
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>الكنية</label>
+              <input type="text" name="lastName" placeholder="الكنية">
+            </div>
+            <div class="f-group">
+              <label>الاسم</label>
+              <input type="text" name="firstName" placeholder="الاسم">
+            </div>
+          </div>
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>تاريخ الميلاد</label>
+              <input type="date" name="dob">
+            </div>
+            <div class="f-group">
+              <label>عدد الأطفال</label>
+              <input type="number" name="children" placeholder="0" min="0" max="20">
+            </div>
+          </div>
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>الهاتف</label>
+              <input type="tel" name="phone" placeholder="+41 xx xxx xx xx">
+            </div>
+            <div class="f-group">
+              <label>البريد الإلكتروني</label>
+              <input type="email" name="email" placeholder="you@example.com">
+            </div>
+          </div>
+        </div>
+
+        <hr class="f-divider">
+
+        <span class="radio-label">هل سيكون عقد الإيجار باسمك؟</span>
+        <div class="radio-group">
+          <label class="radio-opt selected" id="opt-lease-yes">
+            <input type="radio" name="leaseInName" value="yes" checked>
+            <span class="radio-circle"></span> نعم
+          </label>
+          <label class="radio-opt" id="opt-lease-no">
+            <input type="radio" name="leaseInName" value="no">
+            <span class="radio-circle"></span> لا
+          </label>
+        </div>
+
+        <span class="radio-label">هل تحتاج مساعدة في إنهاء عقدك الحالي؟</span>
+        <div class="radio-group">
+          <label class="radio-opt" id="opt-term-yes">
+            <input type="radio" name="needTermination" value="yes">
+            <span class="radio-circle"></span> نعم
+          </label>
+          <label class="radio-opt selected" id="opt-term-no">
+            <input type="radio" name="needTermination" value="no" checked>
+            <span class="radio-circle"></span> لا
+          </label>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-next" onclick="goTo(2)">التالي &larr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-pane" id="step2">
+        <div class="step-title">مقدم الطلب المشارك</div>
+        <div class="step-sub">هل هناك مستأجر مشارك؟ إذا لم يكن كذلك، يمكنك تخطي هذه الخطوة.</div>
+
+        <span class="radio-label">هل لديك مستأجر مشارك؟</span>
+        <div class="radio-group">
+          <label class="radio-opt" id="opt-cotenant-yes">
+            <input type="radio" name="hasCotenant" value="yes">
+            <span class="radio-circle"></span> نعم
+          </label>
+          <label class="radio-opt selected" id="opt-cotenant-no">
+            <input type="radio" name="hasCotenant" value="no" checked>
+            <span class="radio-circle"></span> لا
+          </label>
+        </div>
+
+        <div class="cond-block" id="cotenantFields">
+          <hr class="f-divider">
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>الكنية</label>
+              <input type="text" name="coLastName" placeholder="الكنية">
+            </div>
+            <div class="f-group">
+              <label>الاسم</label>
+              <input type="text" name="coFirstName" placeholder="الاسم">
+            </div>
+          </div>
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>تاريخ الميلاد</label>
+              <input type="date" name="coDob">
+            </div>
+            <div class="f-group">
+              <label>عدد الأطفال</label>
+              <input type="number" name="coChildren" placeholder="0" min="0" max="20">
+            </div>
+          </div>
+          <div class="f-row cols-2">
+            <div class="f-group">
+              <label>الهاتف</label>
+              <input type="tel" name="coPhone" placeholder="+41 xx xxx xx xx">
+            </div>
+            <div class="f-group">
+              <label>البريد الإلكتروني</label>
+              <input type="email" name="coEmail" placeholder="co-tenant@example.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-next" onclick="goTo(3)">التالي &larr;</button>
+          <button class="btn-skip" onclick="goTo(3)">تخطي</button>
+          <button class="btn-prev" onclick="goTo(1)">&rarr; السابق</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-pane" id="step3">
+        <div class="step-title">معايير العقار</div>
+        <div class="step-sub">أخبرنا بما تبحث عنه وسنتولى الباقي.</div>
+
+        <div class="f-row cols-2">
+          <div class="f-group">
+            <label>نوع العقار</label>
+            <select name="propertyType">
+              <option value="">اختر...</option>
+              <option>شقة سكنية</option>
+              <option>منزل / فيلا</option>
+              <option>إيجار قصير المدى</option>
+              <option>عقار فاخر</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label>الحد الأدنى من الغرف</label>
+            <select name="minRooms">
+              <option value="">اختر...</option>
+              <option>1</option>
+              <option>2</option>
+              <option>2.5</option>
+              <option>3</option>
+              <option>3.5</option>
+              <option>4</option>
+              <option>4.5</option>
+              <option>5+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="f-row cols-2">
+          <div class="f-group">
+            <label>الميزانية القصوى (شاملة الرسوم، CHF)</label>
+            <input type="text" name="budget" placeholder="مثال: 3 500">
+          </div>
+          <div class="f-group">
+            <label>تاريخ الانتقال المرغوب</label>
+            <input type="date" name="moveIn">
+          </div>
+        </div>
+
+        <div class="f-row cols-1">
+          <div class="f-group">
+            <label>الأحياء المفضلة</label>
+            <input type="text" name="areas" placeholder="مثال: Champel، Eaux-Vives، Carouge...">
+          </div>
+        </div>
+
+        <div class="f-row cols-1">
+          <div class="f-group">
+            <label>ملاحظات إضافية</label>
+            <textarea name="notes" placeholder="موقف سيارات، حديقة، متطلبات خاصة..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-next" onclick="goTo(4)">التالي &larr;</button>
+          <button class="btn-prev" onclick="goTo(2)">&rarr; السابق</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-pane" id="step4">
+        <div class="step-title">التأكيد</div>
+        <div class="step-sub">يرجى قراءة الشروط والموافقة عليها قبل إرسال تفويضك.</div>
+
+        <label class="check-opt">
+          <input type="checkbox" id="chkMandate" required>
+          <span>أؤكد أنني قرأت وقبلت <a href="/ar/terms-and-conditions/" target="_blank">الشروط العامة لتفويض البحث</a>.</span>
+        </label>
+
+        <label class="check-opt">
+          <input type="checkbox" id="chkPrivacy" required>
+          <span>لقد اطلعت وقبلت <a href="/ar/privacy-policy/" target="_blank">سياسة الخصوصية</a> ووافقت على معالجة بياناتي الشخصية.</span>
+        </label>
+
+        <div class="form-nav">
+          <button class="btn-submit" onclick="submitForm()">إرسال التفويض</button>
+          <button class="btn-prev" onclick="goTo(3)">&rarr; السابق</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="success-panel" id="successPanel">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h2>تم استلام التفويض!</h2>
+      <p>شكراً لك — تم إرسال تفويض بحثك إلى فريقنا. سنتواصل معك خلال 24 ساعة لمناقشة الخطوات التالية.</p>
+      <a href="/ar/homepage/">العودة إلى الرئيسية</a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer id="site-footer">
+  <div class="ftr-inner">
+    <div class="ftr-top">
+      <div class="ftr-brand">
+        <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+        <p>شريككم العقاري في جنيف — إيجاد السكن، إنهاء العقد، الشراء والبيع.</p>
+      </div>
+      <div class="ftr-col">
+        <h4>الخدمات</h4>
+        <a href="/ar/find-accomodation/">إيجاد سكن</a>
+        <a href="/ar/terminate-lease/">إنهاء العقد</a>
+        <a href="/ar/buy-sell/">شراء / بيع</a>
+        <a href="/ar/additional-services/">خدمات إضافية</a>
+      </div>
+      <div class="ftr-col">
+        <h4>الشركة</h4>
+        <a href="/ar/about-us/">عملاء مؤسسيون</a>
+        <a href="/ar/private-individual/">تفويض البحث</a>
+        <a href="/ar/terms-and-conditions/">الشروط العامة</a>
+        <a href="/ar/privacy-policy/">سياسة الخصوصية</a>
+      </div>
+      <div class="ftr-col">
+        <h4>تواصل</h4>
+        <a href="mailto:contact@n20immobilier.ch">contact@n20immobilier.ch</a>
+        <a href="tel:+41764192021">+41 76 419 20 21</a>
+        <a href="https://wa.me/41764192021" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="ftr-bottom">
+      <nav class="ftr-legal">
+        <a href="/ar/terms-and-conditions/">الشروط</a>
+        <a href="/ar/privacy-policy/">الخصوصية</a>
+      </nav>
+      <span class="ftr-copy">© 2026 N20 Immobilier. جميع الحقوق محفوظة · تصميم الموقع: <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<a id="whatsapp-btn" href="https://wa.me/41764192021" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/></svg>
+</a>
+
+<script>
+const mobToggle=document.getElementById('mobToggle');
+const mobNav=document.getElementById('mob-nav');
+const mobClose=document.getElementById('mob-close');
+mobToggle.addEventListener('click',()=>mobNav.classList.add('open'));
+mobClose.addEventListener('click',()=>mobNav.classList.remove('open'));
+mobNav.addEventListener('click',e=>{if(e.target===mobNav)mobNav.classList.remove('open')});
+
+const langSw=document.getElementById('langSw');
+const langBtn=document.getElementById('langBtn');
+langBtn.addEventListener('click',e=>{e.stopPropagation();langSw.classList.toggle('open')});
+document.addEventListener('click',()=>langSw.classList.remove('open'));
+
+let currentStep=1;
+function goTo(n){
+  document.getElementById('step'+currentStep).classList.remove('active');
+  const steps=document.querySelectorAll('.prog-step');
+  steps.forEach(s=>{
+    const sn=parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if(sn<n)s.classList.add('done');
+    if(sn===n)s.classList.add('active');
+  });
+  currentStep=n;
+  document.getElementById('step'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function makeRadio(groupId,onChange){
+  const group=document.getElementById(groupId);
+  if(!group)return;
+  group.querySelectorAll('.radio-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      group.querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      const inp=opt.querySelector('input[type=radio]');
+      if(inp){inp.checked=true;if(onChange)onChange(inp.value);}
+    });
+  });
+}
+
+makeRadio('typeGroup',val=>{
+  const pro=document.getElementById('proFields');
+  const ind=document.getElementById('indivFields');
+  if(val==='professional'){pro.classList.add('visible');ind.classList.remove('visible');}
+  else{ind.classList.add('visible');pro.classList.remove('visible');}
+});
+
+document.querySelectorAll('input[name="hasCotenant"]').forEach(inp=>{
+  inp.closest('.radio-opt').addEventListener('click',()=>{
+    const show=inp.value==='yes';
+    document.getElementById('cotenantFields').classList.toggle('visible',show);
+  });
+});
+
+function submitForm(){
+  const m=document.getElementById('chkMandate');
+  const p=document.getElementById('chkPrivacy');
+  if(!m.checked||!p.checked){alert('يرجى قراءة الشروط والموافقة عليها.');return;}
+  document.getElementById('formCard').style.display='none';
+  document.getElementById('successPanel').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
