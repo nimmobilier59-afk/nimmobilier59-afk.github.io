@@ -1,0 +1,49 @@
+User-agent: *
+Allow: /
+
+# Bloquer contenu admin et technique WordPress
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /trackback/
+Disallow: /?s=
+Disallow: /search/
+
+# Bloquer contenu démo WP Residence (inutile pour Google)
+Disallow: /estate_property/
+Disallow: /estate_agent/
+Disallow: /property_city/
+Disallow: /property_area/
+Disallow: /property_county_state/
+Disallow: /property_features/
+Disallow: /property_status/
+Disallow: /property_action_category/
+Disallow: /category/selling-properties/
+Disallow: /category/location/
+Disallow: /category/price/
+Disallow: /category/real-estate/
+Disallow: /hello-world/
+Disallow: /sample-page/
+Disallow: /blog-list-sidebar-right-2/
+Disallow: /blog-list-sidebar-left/
+Disallow: /blog-list-no-sidebar/
+Disallow: /contact-us-3/
+Disallow: /selling-your-home/
+Disallow: /full-width-post/
+Disallow: /sidebar-on-the-right/
+Disallow: /sidebar-on-the-left/
+Disallow: /images-in-post/
+Disallow: /video-in-slider/
+Disallow: /buying-a-home/
+Disallow: /manhattan-apartments/
+Disallow: /why-live-in-new-york-2/
+
+# Autoriser Googlebot Images (utile pour annonces)
+User-agent: Googlebot-Image
+Allow: /wp-content/uploads/
+
+# Sitemap
+Sitemap: https://n20immobilier.ch/sitemap.xml

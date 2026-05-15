@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en-GB" prefix="og: https://ogp.me/ns#" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relocation Agency in Geneva – N20 Immobilier</title>
+<meta name="description" content="N20 Immobilier, relocation agency in Geneva, helps you find accommodation, terminate your lease and handle all your administrative procedures in Switzerland.">
+<link rel="canonical" href="/en/homepage/">
+<link rel="alternate" href="/en/homepage/" hreflang="en">
+<link rel="alternate" href="/" hreflang="fr">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════════════ */
+:root {
+  --navy:   #021623;
+  --marine: #033560;
+  --dark:   #0C181F;
+  --accent: #6EC1E4;
+  --white:  #FFFFFF;
+  --text-dark: #021623;
+  --text-mid:  #445a6f;
+  --border-light: rgba(2,22,35,.1);
+  --max: 1140px;
+  --light-bg: #f4f8fb;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--navy);
+  color: var(--text-dark);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.1; }
+p { line-height: 1.75; }
+strong { font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════ */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+.sec  { padding: 90px 0; }
+
+.btn-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 11px 22px; border-radius: 100px; cursor: pointer;
+  transition: all .22s ease; white-space: nowrap;
+}
+.btn-white-dark  { background: var(--white); color: var(--navy); border: 2px solid var(--white); }
+.btn-white-dark:hover { background: transparent; color: var(--white); }
+.btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); }
+.btn-outline-light:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
+.btn-dark { background: var(--navy); color: var(--white); border: 2px solid var(--navy); }
+.btn-dark:hover { background: transparent; color: var(--navy); }
+.arr-icon {
+  width: 14px; height: 14px; transition: transform .2s;
+  fill: currentColor; flex-shrink: 0;
+}
+.btn-pill:hover .arr-icon { transform: translateX(4px); }
+
+/* ══════════════════════════════════════════
+   INTRO OVERLAY
+══════════════════════════════════════════ */
+#n20-intro {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  animation: introHide .4s ease 1.4s forwards;
+}
+#n20-intro-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+#n20-intro-logo {
+  height: 80px; width: auto;
+  animation: logoPop .55s cubic-bezier(.34,1.56,.64,1) .2s both;
+}
+.n20-intro-text {
+  display: flex; gap: 9px; flex-wrap: wrap; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: clamp(20px,4vw,34px);
+  color: var(--white);
+}
+@keyframes introHide { to { opacity: 0; pointer-events: none; visibility: hidden; } }
+@keyframes logoPop   { from { transform: scale(.3) rotate(-10deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+@keyframes textFade  { from { opacity: 0; } to { opacity: 1; } }
+.n20-intro-text { opacity: 0; animation: textFade .4s ease .7s forwards; }
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+#site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  background: var(--navy);
+  border-bottom: none;
+  height: 72px;
+}
+.hdr-inner {
+  height: 72px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; max-width: 100%;
+}
+.hdr-logo { display: flex; align-items: center; flex-shrink: 0; }
+.hdr-logo img { height: 38px; width: auto; }
+
+.hdr-nav { display: flex; align-items: center; gap: 0; }
+.hdr-nav a {
+  font-size: 16px; font-weight: 400; color: rgba(255,255,255,.8);
+  padding: 0 18px; line-height: 72px; display: block;
+  transition: color .18s;
+}
+.hdr-nav a:hover { color: var(--white); }
+.pro-link { color: rgba(255,255,255,.8) !important; font-weight: 400 !important; }
+
+.hdr-lang {
+  position: relative; display: flex; align-items: center;
+}
+.hdr-lang > a {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; color: rgba(255,255,255,.8);
+  padding: 0 14px; line-height: 72px; cursor: pointer;
+  transition: color .18s;
+}
+.hdr-lang > a:hover { color: var(--white); }
+.hdr-lang > a img { width: 18px; height: 12px; border-radius: 2px; }
+.lang-dropdown {
+  display: none; position: absolute; top: 72px; right: 0;
+  background: var(--navy); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px; overflow: hidden; min-width: 140px;
+}
+.hdr-lang:hover .lang-dropdown { display: block; }
+.lang-dropdown a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; font-size: 15px; color: rgba(255,255,255,.8);
+  transition: background .15s;
+}
+.lang-dropdown a:hover { background: rgba(255,255,255,.08); color: var(--white); }
+.lang-dropdown img { width: 18px; height: 12px; border-radius: 2px; }
+
+.hdr-burger { display: none; background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; padding: 0 4px; }
+.mob-nav {
+  display: none; position: fixed; top: 72px; inset-inline: 0; bottom: 0;
+  background: var(--navy); z-index: 8999;
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  padding-bottom: 40px;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a { font-size: 22px; font-weight: 500; color: rgba(255,255,255,.75); padding: 6px 0; }
+.mob-nav a:hover { color: var(--white); }
+.mob-nav .mob-lang { display: flex; gap: 16px; margin-top: 8px; }
+.mob-nav .mob-lang a { font-size: 16px; font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   HERO — VIDEO
+══════════════════════════════════════════ */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 24px; padding-top: 72px;
+  overflow: hidden;
+  background: var(--dark);
+}
+#hero-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+#hero-overlay {
+  position: absolute; inset: 0;
+  background-color: rgba(66,140,180,.57);
+}
+#hero-title {
+  position: relative; z-index: 2;
+  text-align: center; width: 100%;
+  padding: 0 20px;
+}
+#hero-title h1 {
+  font-family: 'Manrope', sans-serif; font-weight: 400;
+  font-size: clamp(36px, 6.5vw, 65px);
+  color: var(--white); mix-blend-mode: luminosity;
+  letter-spacing: .01em;
+}
+
+/* ══════════════════════════════════════════
+   OUR SERVICES
+══════════════════════════════════════════ */
+#nos-services {
+  padding: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #dce8f0 100%);
+}
+.services-wrapper {
+  display: flex; flex-direction: column; gap: 40px;
+  padding: 80px 40px; max-width: 1300px; margin: 0 auto;
+}
+.services-intro { padding-right: 0; }
+.services-intro h2 {
+  font-size: clamp(30px, 4vw, 48px); color: var(--text-dark); margin-bottom: 14px;
+}
+.services-intro p { font-size: 16px; color: var(--text-mid); line-height: 1.8; max-width: 620px; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.svc-card {
+  background: linear-gradient(55deg, #0C181F 35%, #033560 100%);
+  border: 1px solid rgba(255,255,255,.25); border-radius: 28px;
+  padding: 44px 28px 36px; min-height: 240px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between; text-align: center;
+  gap: 20px; transition: border-color .28s ease, transform .22s ease, box-shadow .22s ease;
+  cursor: pointer;
+}
+.svc-card:hover {
+  border-color: transparent;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(2,22,35,.35);
+}
+.svc-card-top { display: flex; justify-content: center; align-items: center; }
+.svc-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .22s;
+}
+.svc-card:hover .svc-icon { background: rgba(255,255,255,.22); }
+.svc-icon svg { width: 26px; height: 26px; }
+.svc-card h3 {
+  font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 700;
+  color: var(--white); letter-spacing: -.01em; flex: 1;
+  display: flex; align-items: center;
+}
+.svc-card-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--white); color: var(--navy);
+  font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 11px 24px; border-radius: 100px; border: 2px solid var(--white);
+  transition: all .2s; white-space: nowrap;
+}
+.svc-card-btn:hover { background: transparent; color: var(--white); }
+.svc-card-btn svg { width: 13px; height: 13px; fill: currentColor; transition: transform .18s; }
+.svc-card-btn:hover svg { transform: translateX(4px); }
+
+/* ══════════════════════════════════════════
+   MOBILE-ONLY ELEMENTS
+══════════════════════════════════════════ */
+.bsc-mob-tag, .bsc-mob-cta, .mob-steps { display: none; }
+
+/* ══════════════════════════════════════════
+   BIG SERVICE SECTIONS
+══════════════════════════════════════════ */
+.big-sec {
+  padding: 90px 0; background: var(--white);
+}
+.big-sec-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+}
+.big-sec.reverse .big-sec-inner { direction: rtl; }
+.big-sec.reverse .big-sec-inner > * { direction: ltr; }
+.big-sec-text h2 {
+  font-size: clamp(26px, 3.5vw, 42px); color: var(--text-dark); margin-bottom: 18px;
+}
+.big-sec-text p { font-size: 16px; color: var(--text-mid); line-height: 1.82; margin-bottom: 10px; }
+.big-sec-text .read-more {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text-dark);
+  margin-top: 18px; transition: gap .2s;
+}
+.big-sec-text .read-more:hover { gap: 18px; }
+.read-more-icon {
+  width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--navy);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.read-more-icon svg { width: 16px; height: 16px; fill: var(--navy); }
+.big-sec-visual {
+  border-radius: 24px; overflow: hidden;
+  min-height: 360px;
+}
+.big-sec-visual img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  min-height: 360px;
+}
+
+/* ══════════════════════════════════════════
+   STATS STRIP
+══════════════════════════════════════════ */
+.partenaire-stats {
+  display: flex; align-items: center; gap: 0;
+  border-top: 1px solid rgba(2,22,35,.1);
+  margin-top: 48px; padding-top: 36px;
+}
+.partenaire-stat { flex: 1; text-align: center; }
+.partenaire-stat-sep { width: 1px; height: 36px; background: rgba(2,22,35,.12); flex-shrink: 0; }
+.stat-number {
+  font-family: 'DM Serif Display', serif; font-size: clamp(26px, 3vw, 36px);
+  color: var(--navy); line-height: 1; margin-bottom: 6px;
+}
+.stat-label {
+  font-family: 'Manrope', sans-serif; font-size: 12px;
+  color: var(--text-mid); line-height: 1.4; text-align: center;
+}
+
+/* ══════════════════════════════════════════
+   PARTNER SECTION
+══════════════════════════════════════════ */
+#partenaire-section {
+  padding: 100px 0; background: var(--light-bg);
+}
+.partenaire-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 48px;
+}
+.partenaire-top {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+  margin-bottom: 64px;
+}
+.partenaire-badge {
+  font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--white);
+  background: var(--navy); padding: 6px 14px; border-radius: 4px;
+  display: inline-block; margin-bottom: 24px;
+}
+.partenaire-title {
+  font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 50px);
+  color: var(--navy); line-height: 1.1; font-weight: 400;
+}
+.partenaire-desc-block {
+  border-left: 3px solid var(--accent); padding-left: 28px;
+}
+.partenaire-desc {
+  font-family: 'Manrope', sans-serif; font-size: 16px;
+  color: var(--navy); line-height: 1.85; opacity: .82;
+}
+.partenaire-cols {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+}
+.partenaire-col {
+  background: var(--white); border: 1px solid rgba(2,22,35,.07);
+  border-radius: 12px; padding: 36px 32px;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.partenaire-col:hover {
+  box-shadow: 0 16px 48px rgba(2,22,35,.09); transform: translateY(-4px);
+}
+.partenaire-col-num {
+  font-family: 'DM Serif Display', serif; font-size: 52px; font-style: italic;
+  color: rgba(2,22,35,.07); line-height: 1; margin-bottom: 12px;
+}
+.partenaire-col h3 {
+  font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400;
+  color: var(--navy); margin-bottom: 12px; text-align: left;
+}
+.partenaire-col p {
+  font-family: 'Manrope', sans-serif; font-size: 15px;
+  color: var(--navy); line-height: 1.75; text-align: left; opacity: .72;
+}
+@media (max-width: 900px) {
+  .partenaire-top { grid-template-columns: 1fr; gap: 32px; }
+  .partenaire-cols { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .partenaire-cols { grid-template-columns: 1fr; }
+  .partenaire-inner { padding: 0 20px; }
+  .partenaire-col { padding: 28px 24px; }
+  #partenaire-section { padding: 72px 0; }
+}
+
+/* ══════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════ */
+#n20-faq {
+  background: var(--dark); padding: 72px 0;
+}
+.n20-faq-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+}
+.n20-faq-header { text-align: center; margin-bottom: 48px; }
+.n20-faq-title {
+  font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,48px);
+  color: var(--white); margin-bottom: 12px;
+}
+.n20-faq-subtitle { font-size: 16px; color: rgba(255,255,255,.55); max-width: 600px; margin: 0 auto; line-height: 1.75; }
+.n20-faq-grid { display: flex; flex-direction: column; gap: 10px; max-width: 820px; margin: 0 auto; }
+.n20-faq-item {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px; overflow: hidden; transition: border-color .2s;
+}
+.n20-faq-item[open] { border-color: rgba(110,193,228,.3); }
+.n20-faq-item summary {
+  padding: 20px 28px; cursor: pointer; list-style: none;
+  font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: var(--white);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  user-select: none;
+}
+.n20-faq-item summary::-webkit-details-marker { display: none; }
+.faq-toggle {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(110,193,228,.12); border: 1px solid rgba(110,193,228,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: var(--accent); font-weight: 300; line-height: 1;
+  transition: transform .28s;
+}
+.n20-faq-item[open] .faq-toggle { transform: rotate(45deg); }
+.n20-faq-answer { padding: 0 28px 22px; font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.82; }
+
+/* ══════════════════════════════════════════
+   CONTACT FORM
+══════════════════════════════════════════ */
+#contact-section {
+  padding: 90px 0;
+  background-image: url('/wp-content/uploads/2025/10/category-footer2-webp-1.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+#contact-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(2,22,35,0.52);
+  z-index: 0;
+}
+#contact-section > * { position: relative; z-index: 1; }
+.contact-inner {
+  max-width: 600px; margin: 0 auto; padding: 0 40px;
+}
+.contact-inner h2 {
+  font-size: clamp(26px,3.5vw,40px); color: var(--white); margin-bottom: 40px; text-align: center;
+}
+.fg label { color: rgba(255,255,255,.75) !important; }
+.contact-form { display: flex; flex-direction: column; gap: 0; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.fg { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.fg label {
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-mid);
+}
+.fg input, .fg textarea, .fg select {
+  background: #f4f7fa; border: 1px solid #d0dce8;
+  border-radius: 10px; padding: 13px 16px;
+  color: var(--text-dark); font-family: 'Manrope', sans-serif; font-size: 15px;
+  outline: none; transition: border-color .2s; width: 100%; appearance: none;
+}
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--marine); }
+.fg input::placeholder, .fg textarea::placeholder { color: #a0b0bf; }
+textarea { resize: vertical; min-height: 100px; }
+.form-submit { display: flex; justify-content: center; margin-top: 8px; }
+.form-submit button {
+  background: var(--navy); color: var(--white); border: 2px solid var(--navy);
+  font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 13px 40px; border-radius: 100px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px; transition: all .2s;
+}
+.form-submit button:hover { background: transparent; color: var(--white); border-color: var(--white); }
+.form-submit button svg { width: 14px; height: 14px; fill: currentColor; transition: transform .18s; }
+.form-submit button:hover svg { transform: translateX(4px); }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+#n20-footer {
+  background: var(--navy); border-top: 1px solid rgba(255,255,255,.08);
+}
+.n20-footer-main { padding: 60px 0 48px; }
+.n20-footer-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+}
+.n20-footer-logo { height: 36px; width: auto; margin-bottom: 12px; }
+.n20-footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); margin-bottom: 22px; font-style: italic; }
+.n20-footer-contact { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.n20-footer-contact li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.55); }
+.n20-footer-contact svg { width: 15px; height: 15px; fill: var(--accent); flex-shrink: 0; }
+.n20-footer-contact a:hover { color: var(--white); }
+.n20-footer-social { display: flex; gap: 10px; margin-top: 22px; }
+.n20-footer-social a {
+  width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); transition: all .2s;
+}
+.n20-footer-social a:hover { background: var(--accent); border-color: var(--accent); }
+.n20-footer-social svg { width: 15px; height: 15px; fill: var(--white); }
+.n20-footer-col h4 {
+  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 18px;
+}
+.n20-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.n20-footer-col ul a { font-size: 14px; color: rgba(255,255,255,.55); transition: color .18s; }
+.n20-footer-col ul a:hover { color: var(--white); }
+.n20-footer-partners {
+  border-top: 1px solid rgba(255,255,255,.06); padding: 28px 0;
+}
+.n20-footer-partners-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
+}
+.n20-footer-partners-inner img {
+  height: 32px; width: auto; filter: grayscale(1) brightness(2); opacity: .35; transition: opacity .2s;
+}
+.n20-footer-partners-inner img:hover { opacity: .7; }
+.n20-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 18px 40px; max-width: var(--max); margin: 0 auto;
+  display: flex; justify-content: center;
+  font-size: 13px; color: rgba(255,255,255,.4);
+}
+.n20-footer-bottom a { transition: color .18s; }
+.n20-footer-bottom a:hover { color: rgba(255,255,255,.8); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .hdr-nav { display: none; }
+  .hdr-lang { display: none; }
+  .hdr-burger { display: block; }
+  .services-wrapper { padding: 60px 24px; gap: 28px; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+
+  .big-sec-inner { grid-template-columns: 1fr; gap: 36px; }
+  .big-sec.reverse .big-sec-inner { direction: ltr; }
+  .big-sec-visual { min-height: 240px; order: -1; }
+  .big-sec-text { order: 0; }
+  .n20-footer-inner { grid-template-columns: 1fr; }
+  .n20-faq-inner { padding: 0 24px; }
+  .contact-inner { padding: 0 24px; }
+}
+@media (max-width: 600px) {
+  .wrap { padding: 0 20px; }
+  .hdr-inner { padding: 0 20px; }
+  .services-wrapper { padding: 48px 20px; }
+  .big-sec-inner { padding: 0 20px; }
+  .contact-inner { padding: 0 20px; }
+  .n20-footer-inner { padding: 0 20px; }
+  .n20-footer-bottom { padding: 18px 20px; }
+  .n20-footer-partners-inner { padding: 0 20px; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .partenaire-stats { flex-direction: column; gap: 20px; }
+  .partenaire-stat-sep { display: none; }
+  #sec-find-accommodation .read-more { display: none; }
+  .bsc-mob-tag {
+    display: inline-block;
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(2,22,35,.14); padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .bsc-mob-cta {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; margin-top: 22px;
+    background: var(--navy); color: #fff;
+    font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 15px 24px; border-radius: 100px; text-decoration: none;
+    border: 2px solid var(--navy); transition: all .2s;
+  }
+  .bsc-mob-cta:hover { background: transparent; color: var(--navy); }
+  .mob-steps {
+    display: flex; flex-direction: column; gap: 0;
+    margin-top: 28px; position: relative;
+  }
+  .mob-steps::before {
+    content: ''; position: absolute;
+    left: 19px; top: 42px; bottom: 16px; width: 2px;
+    background: linear-gradient(to bottom, var(--accent), rgba(2,22,35,.08));
+  }
+  .mob-step {
+    display: flex; align-items: flex-start; gap: 18px; padding-bottom: 28px;
+  }
+  .mob-step:last-child { padding-bottom: 0; }
+  .mob-bubble {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: var(--navy); color: #fff;
+    font-family: 'DM Serif Display', serif; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 16px rgba(2,22,35,.18);
+    border: 3px solid #fff;
+  }
+  .mob-step-body { padding-top: 8px; }
+  .mob-step-lbl {
+    font-size: 10px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 3px;
+  }
+  .mob-step-txt {
+    font-size: 15px; font-weight: 500; color: var(--text-dark); line-height: 1.4;
+  }
+  .services-grid { display: flex; flex-direction: column; padding: 0 16px; gap: 0; }
+  .svc-card { position: sticky; box-shadow: 0 -6px 32px rgba(2,22,35,.6); }
+  .svc-card:nth-child(1) { top: 80px; z-index: 1; }
+  .svc-card:nth-child(2) { top: 88px; z-index: 2; }
+  .svc-card:nth-child(3) { top: 96px; z-index: 3; }
+  .svc-card:nth-child(4) { top: 104px; z-index: 4; }
+}
+
+/* ── SCROLL REVEAL ── */
+.sr{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1)}
+.sr-img{opacity:0;transform:scale(.96) translateY(20px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
+.sr.in,.sr-img.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ INTRO ══════════════════ -->
+<div id="n20-intro">
+  <div id="n20-intro-inner">
+    <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" id="n20-intro-logo">
+    <p class="n20-intro-text">
+      <span>Welcome</span>
+      <span>to</span>
+      <span>your</span>
+      <span>new</span>
+      <span>home</span>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="/en/homepage/" class="hdr-logo">
+      <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+    </a>
+    <nav class="hdr-nav">
+      <a href="/en/find-accomodation/">Find Accommodation</a>
+      <a href="/en/terminate-lease/">Terminate Lease</a>
+      <a href="/en/buy-sell/">Buy &amp; Sell</a>
+      <a href="/en/additional-services/">Services</a>
+      <a href="/en/about-us/" class="pro-link">Professional Client</a>
+    </nav>
+    <div class="hdr-lang">
+      <a href="#">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN">
+        English
+      </a>
+      <div class="lang-dropdown">
+        <a href="/en/homepage/">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN">
+          English
+        </a>
+        <a href="/">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR">
+          Français
+        </a>
+        <a href="/ru/homepage/">
+          <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU">
+          Русский
+        </a>
+      </div>
+    </div>
+    <button class="hdr-burger" id="burgerBtn">☰</button>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/en/find-accomodation/"   onclick="closeMob()">Find Accommodation</a>
+  <a href="/en/terminate-lease/"     onclick="closeMob()">Terminate Lease</a>
+  <a href="/en/buy-sell/"            onclick="closeMob()">Buy &amp; Sell</a>
+  <a href="/en/additional-services/" onclick="closeMob()">Services</a>
+  <a href="/en/about-us/"            onclick="closeMob()">Professional Client</a>
+  <div class="mob-lang">
+    <a href="/en/homepage/" style="color:white;">EN</a>
+    <a href="/">FR</a>
+    <a href="/ru/homepage/">RU</a>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <video id="hero-video" autoplay muted playsinline loop>
+    <source src="/wp-content/uploads/2025/11/geneva-city-centre-from-above-1080p-2025-08-29-04-42-11-utc.mov" type="video/mp4">
+  </video>
+  <div id="hero-overlay"></div>
+</section>
+
+<!-- ══════════════════ OUR SERVICES ══════════════════ -->
+<section id="nos-services">
+  <div class="services-wrapper">
+    <div class="services-intro">
+      <h2>Our services</h2>
+      <p>Settling in, finding a home, moving out, and handling formalities — tailored support in Geneva, from first contact to key handover.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Find Accommodation -->
+      <div class="svc-card">
+        <div class="svc-card-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          </div>
+        </div>
+        <h3>Find Accommodation</h3>
+        <a href="/en/find-accomodation/" class="svc-card-btn">
+          Get started
+          <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </a>
+      </div>
+
+      <!-- Terminate Lease -->
+      <div class="svc-card">
+        <div class="svc-card-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          </div>
+        </div>
+        <h3>Terminate Lease</h3>
+        <a href="/en/terminate-lease/" class="svc-card-btn">
+          Learn more
+          <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </a>
+      </div>
+
+      <!-- Buy & Sell -->
+      <div class="svc-card">
+        <div class="svc-card-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/></svg>
+          </div>
+        </div>
+        <h3>Buy / Sell</h3>
+        <a href="/en/buy-sell/" class="svc-card-btn">
+          Value my property
+          <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </a>
+      </div>
+
+      <!-- Additional Services -->
+      <div class="svc-card">
+        <div class="svc-card-top">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M18 11l-5-5v3.5c-5.17.15-8.76 1.71-11 5.5 1-3.5 3.25-6.5 11-7.5V11l5-5z"/></svg>
+          </div>
+        </div>
+        <h3>Services</h3>
+        <a href="/en/additional-services/" class="svc-card-btn">
+          Learn more
+          <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FIND ACCOMMODATION ══════════════════ -->
+<section class="big-sec" id="sec-find-accommodation">
+  <div class="big-sec-inner">
+    <div class="big-sec-text">
+      <span class="bsc-mob-tag">Relocation service</span>
+      <h2>Find your<br><strong>ideal home</strong></h2>
+      <p>Our relocation team handles everything: <strong>apartment searches</strong>, <strong>organising viewings</strong>, application file preparation, and <strong>support right through to your move-in</strong>. Thanks to our <strong>exclusive network</strong>, you gain access to carefully selected properties, perfectly matched to your needs and lifestyle.</p>
+      <a href="/en/find-accomodation/" class="read-more">
+        <span class="read-more-icon">
+          <svg viewBox="0 0 512 512"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"/></svg>
+        </span>
+        Learn more
+      </a>
+      <!-- Mobile only: CTA + steps -->
+      <a href="/en/private-individual/" class="bsc-mob-cta">
+        Access the form
+        <svg width="14" height="14" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+      </a>
+      <div class="mob-steps">
+        <div class="mob-step">
+          <div class="mob-bubble">1</div>
+          <div class="mob-step-body">
+            <div class="mob-step-lbl">Step 1</div>
+            <div class="mob-step-txt">First contact</div>
+          </div>
+        </div>
+        <div class="mob-step">
+          <div class="mob-bubble">2</div>
+          <div class="mob-step-body">
+            <div class="mob-step-lbl">Step 2</div>
+            <div class="mob-step-txt">File compilation &amp; Viewings</div>
+          </div>
+        </div>
+        <div class="mob-step">
+          <div class="mob-bubble">3</div>
+          <div class="mob-step-body">
+            <div class="mob-step-lbl">Step 3</div>
+            <div class="mob-step-txt">Approval &amp; Lease signing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="big-sec-visual">
+      <img src="/wp-content/uploads/2025/10/house-9-webp.webp" alt="Accommodation in Geneva">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TERMINATE LEASE ══════════════════ -->
+<section class="big-sec reverse">
+  <div class="big-sec-inner">
+    <div class="big-sec-text">
+      <h2>Simplify <strong>your departure</strong></h2>
+      <p>We guide you through the lease termination process and handle all <strong>administrative procedures</strong> on your behalf. From selecting a reliable tenant to thoroughly verifying the application file and submitting it to the landlord, we ensure a <strong>fast</strong>, <strong>secure</strong> and <strong>stress-free</strong> transition. Enjoy a smooth departure, <strong>without wasting time</strong> or energy.</p>
+      <a href="/en/terminate-lease/" class="read-more">
+        <span class="read-more-icon">
+          <svg viewBox="0 0 512 512"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"/></svg>
+        </span>
+        Learn more
+      </a>
+    </div>
+    <div class="big-sec-visual">
+      <img src="/wp-content/uploads/2025/10/9i5eqbarv-k.jpg" alt="Terminate lease in Geneva">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BUY & SELL ══════════════════ -->
+<section class="big-sec">
+  <div class="big-sec-inner">
+    <div class="big-sec-text">
+      <h2>Buy &amp; <strong>Sell</strong></h2>
+      <p>Whether you wish to <strong>purchase</strong> or <strong>sell</strong> a property in <strong>Geneva</strong>, we offer personalised, attentive support. Our team guides you at every stage — <strong>valuation</strong>, <strong>property presentation</strong>, <strong>exclusive property search</strong> and full coordination right through to <strong>notary signing</strong>. An <strong>efficient</strong>, <strong>seamless</strong> and entirely managed experience, designed for you.</p>
+      <a href="/en/buy-sell/" class="read-more">
+        <span class="read-more-icon">
+          <svg viewBox="0 0 512 512"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"/></svg>
+        </span>
+        Learn more
+      </a>
+    </div>
+    <div class="big-sec-visual">
+      <img src="/wp-content/uploads/2025/10/9ryfg8swrvo.jpg" alt="Buy and sell property Geneva">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PARTNER SECTION ══════════════════ -->
+<section id="partenaire-section">
+  <div class="partenaire-inner">
+    <div class="partenaire-top">
+      <div>
+        <span class="partenaire-badge">Our agency</span>
+        <h2 class="partenaire-title">Your real estate<br>partner in Geneva</h2>
+      </div>
+      <div class="partenaire-desc-block">
+        <p class="partenaire-desc">Based in Geneva, <strong>N20 Immobilier</strong> is a <strong>relocation</strong> and <strong>real estate support</strong> agency tailored for <strong>individuals</strong> and <strong>professionals</strong>. Our mission: to take care of your entire property project — well beyond simply finding accommodation — with rigour, discretion and commitment.</p>
+      </div>
+    </div>
+    <div class="partenaire-cols">
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">01</div>
+        <h3>Our Mission</h3>
+        <p>To support every client with a <strong>personalised approach</strong> and full commitment at every stage of their property project.</p>
+      </div>
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">02</div>
+        <h3>Our Commitment</h3>
+        <p>To deliver a transparent, <strong>human</strong> and <strong>bespoke</strong> service, built on trust and <strong>professional excellence</strong>.</p>
+      </div>
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">03</div>
+        <h3>Our Vision</h3>
+        <p>To make every relocation or acquisition a <strong>smooth</strong>, <strong>stress-free</strong> experience, <strong>perfectly suited</strong> to your needs.</p>
+      </div>
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">04</div>
+        <h3>Why choose us?</h3>
+        <p>Local expertise, <strong>exclusive network</strong> and comprehensive support — your <strong>peace of mind</strong> is our priority.</p>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="partenaire-stats">
+      <div class="partenaire-stat">
+        <div class="stat-number" data-to="203" data-prefix="+">0</div>
+        <div class="stat-label">Clients supported</div>
+      </div>
+      <div class="partenaire-stat-sep"></div>
+      <div class="partenaire-stat">
+        <div class="stat-number" data-to="150" data-prefix="+">0</div>
+        <div class="stat-label">Properties offered each year</div>
+      </div>
+      <div class="partenaire-stat-sep"></div>
+      <div class="partenaire-stat">
+        <div class="stat-number" data-to="15" data-prefix="+">0</div>
+        <div class="stat-label">Years of expertise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FAQ ══════════════════ -->
+<section id="n20-faq">
+  <div class="n20-faq-inner">
+    <div class="n20-faq-header">
+      <h2 class="n20-faq-title">FAQ</h2>
+      <p class="n20-faq-subtitle">Find answers to the most frequently asked questions about settling in Geneva and your property search.</p>
+    </div>
+    <div class="n20-faq-grid">
+      <details class="n20-faq-item" open>
+        <summary>Why use N20 Immobilier for your property search in Geneva? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>N20 Immobilier specialises in relocation in Geneva and has deep knowledge of the local market, neighbourhoods, and Swiss-specific requirements (applications, permits, agency practices). You save considerable time and avoid the common mistakes of searching alone in a very competitive market. Our team guides you every step of the way: defining your needs, shortlisting properties, organising viewings, preparing your file, and following through to key handover.</p></div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>What is a relocation agency in Geneva? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>A relocation agency like N20 Immobilier supports you from A to Z in your move to Geneva: apartment search, organising viewings, preparing the rental application, administrative procedures (residence permit, SIG energy contracts, insurance) and integration assistance. Unlike a standard real estate agency, we manage the entire installation process to save you time and avoid costly mistakes.</p></div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Which Geneva neighbourhoods do you search? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>N20 Immobilier covers the entire canton of Geneva: city centre, Eaux-Vives, Carouge, Champel, Grand-Saconnex, Meyrin, Lancy, Vernier, as well as the French border communes (Ferney-Voltaire, Saint-Genis-Pouilly, Annemasse). We tailor the search to your priorities: international schools, proximity to your workplace, budget, neighbourhood atmosphere.</p></div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Do you assist expats and international civil servants? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>Yes, this is one of our core specialisations. We regularly assist expats on assignment, civil servants from international organisations (UN, WHO, ICRC, WTO) and their families. We understand the specific constraints: tight arrival timelines, high-standard accommodation requirements, proximity to international schools, and accompanying partner support.</p></div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>What documents are needed to rent an apartment in Geneva? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>To build a strong rental application in Geneva, you will need: a valid identity document or passport, a residence permit (or proof of application in progress), your last 3 pay slips or employment contract, an extract from the debt enforcement register, and sometimes a cover letter. N20 helps you prepare a complete and compelling application.</p></div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Is it possible to live in France and work in Geneva? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>Absolutely. Thousands of cross-border commuters make this choice every day. Living in Ferney-Voltaire, Saint-Genis-Pouilly or Annemasse offers more affordable rents while working in Geneva. N20 can advise you on the best communes based on your workplace, available transport links (Léman Express, TPG, motorway) and your budget.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section id="contact-section">
+  <div class="contact-inner">
+    <h2>Tell us about your <strong>property project</strong></h2>
+    <form class="contact-form">
+      <div class="form-row-2">
+        <div class="fg">
+          <label>First name</label>
+          <input type="text" name="prenom" placeholder="First name" required>
+        </div>
+        <div class="fg">
+          <label>Last name</label>
+          <input type="text" name="nom" placeholder="Last name" required>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="fg">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="fg">
+          <label>Phone</label>
+          <input type="tel" name="tel" placeholder="Phone" required>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Project</label>
+        <select name="projet">
+          <option value="Find accommodation">Find accommodation</option>
+          <option value="Sell a property">Sell a property</option>
+          <option value="Buy a property">Buy a property</option>
+          <option value="Terminate a lease">Terminate a lease</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Message</label>
+        <textarea name="message" placeholder="Message"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">
+          Send
+          <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer id="n20-footer">
+  <div class="n20-footer-main">
+    <div class="n20-footer-inner">
+      <div class="n20-footer-brand">
+        <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" class="n20-footer-logo">
+        <p class="n20-footer-tagline">Your relocation partner</p>
+        <ul class="n20-footer-contact">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:contact@n20immobilier.ch">contact@n20immobilier.ch</a>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span>+41 76 419 20 21</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Cours des Bastions 13, 1205 Geneva</span>
+          </li>
+        </ul>
+        <div class="n20-footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/n20-immobilier/about/" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Our services</h4>
+        <ul>
+          <li><a href="/en/find-accomodation/">Find Accommodation</a></li>
+          <li><a href="/en/terminate-lease/">Terminate Lease</a></li>
+          <li><a href="/en/buy-sell/">Buy &amp; Sell</a></li>
+          <li><a href="/en/additional-services/">Additional Services</a></li>
+        </ul>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Useful links</h4>
+        <ul>
+          <li><a href="/en/private-individual/">Search Mandate</a></li>
+          <li><a href="/en/terms-and-conditions/">Terms &amp; Conditions</a></li>
+          <li><a href="/en/privacy-policy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="n20-footer-partners">
+    <div class="n20-footer-partners-inner">
+      <img src="/wp-content/uploads/2025/11/Untitled-design-5.png" alt="Partner 1">
+      <img src="/wp-content/uploads/2025/11/2.png" alt="Partner 2">
+    </div>
+  </div>
+  <div class="n20-footer-bottom">
+    <p>© 2026 N20 Immobilier — All rights reserved &nbsp;·&nbsp; <a href="/en/terms-and-conditions/">Terms &amp; Conditions</a> &nbsp;·&nbsp; <a href="/en/privacy-policy/">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+// ── Intro: plays on every page load
+(function() {
+  const intro = document.getElementById('n20-intro');
+  if (!intro) return;
+  setTimeout(() => { if (intro) intro.remove(); }, 1900);
+})();
+
+// ── Hamburger mobile
+document.getElementById('burgerBtn').addEventListener('click', function() {
+  const nav = document.getElementById('mobNav');
+  nav.classList.toggle('open');
+  this.textContent = nav.classList.contains('open') ? '✕' : '☰';
+});
+function closeMob() {
+  document.getElementById('mobNav').classList.remove('open');
+  document.getElementById('burgerBtn').textContent = '☰';
+}
+
+// ── Scroll background (lerp white → light blue-grey)
+(function() {
+  const heroEl = document.getElementById('hero');
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function hexToRgb(h) {
+    const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
+    return r ? [parseInt(r[1],16), parseInt(r[2],16), parseInt(r[3],16)] : [255,255,255];
+  }
+  const cA = hexToRgb('#ffffff');
+  const cB = hexToRgb('#dce8f0');
+  window.addEventListener('scroll', function() {
+    const heroH  = heroEl.offsetHeight;
+    const scroll = window.scrollY;
+    const start  = heroH * 0.8;
+    const end    = heroH * 1.3;
+    const t = Math.max(0, Math.min(1, (scroll - start) / (end - start)));
+    const r = Math.round(lerp(cA[0], cB[0], t));
+    const g = Math.round(lerp(cA[1], cB[1], t));
+    const b = Math.round(lerp(cA[2], cB[2], t));
+    document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
+  }, { passive: true });
+})();
+
+// ── Animated counters
+(function() {
+  const els = document.querySelectorAll('.stat-number[data-to]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const to = parseInt(el.dataset.to);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const dur = 2000;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const val = Math.round(p * to);
+        el.textContent = prefix + val + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+  els.forEach(el => obs.observe(el));
+})();
+
+// ── Bubble steps scroll animation (mobile only)
+(function(){
+  if (window.innerWidth > 600) return;
+  var steps = document.querySelectorAll('.mob-step');
+  if (!steps.length) return;
+  steps.forEach(function(s){ s.style.opacity='0'; s.style.transform='translateY(44px)'; s.style.transition='opacity .55s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)'; });
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var step = e.target;
+      var siblings = Array.from(step.parentElement.querySelectorAll('.mob-step'));
+      var idx = siblings.indexOf(step);
+      setTimeout(function(){ step.style.opacity='1'; step.style.transform='translateY(0)'; }, idx*200);
+      io2.unobserve(step);
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -10px 0px'});
+  steps.forEach(function(s){ io2.observe(s); });
+})();
+
+// ── Stacking card scroll animation (mobile only)
+(function(){
+  if (window.innerWidth > 600) return;
+  var cards = document.querySelectorAll('.type-card,.srv-card,.client-card,.hon-card');
+  if (!cards.length) return;
+  var groups = new Map();
+  cards.forEach(function(c){
+    var p = c.parentElement;
+    if (!groups.has(p)) groups.set(p,[]);
+    groups.get(p).push(c);
+  });
+  cards.forEach(function(c){
+    c.style.opacity='0';
+    c.style.transform='translateY(56px)';
+    c.style.transition='opacity .6s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)';
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var card = e.target;
+      var grp = groups.get(card.parentElement)||[card];
+      var idx = grp.indexOf(card);
+      setTimeout(function(){ card.style.opacity='1'; card.style.transform='translateY(0)'; }, idx*180);
+      io.unobserve(card);
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
+  cards.forEach(function(c){ io.observe(c); });
+})();
+
+/* ── Scroll Reveal ── */
+(function(){
+  var T='.kicker,.section-label,.section-title,.n20-faq-title,.stat-item,.stat-number,.check-item,.n20-faq-item,.hon-card,.client-card,.type-card,.contact-inner h2,.contact-inner p,.mob-step,.svc-card-top,.partenaire-col,.partenaire-badge,.partenaire-title,.partenaire-desc';
+  var I='.big-sec-visual';
+  function add(el,c){if(!el||el.closest('#hero,#site-header,.mob-nav,#n20-footer,.hdr-inner'))return;el.classList.add(c);}
+  document.querySelectorAll(T).forEach(function(el){add(el,'sr');});
+  document.querySelectorAll(I).forEach(function(el){add(el,'sr-img');});
+  var seen=new Set();
+  document.querySelectorAll('.sr,.sr-img').forEach(function(el){
+    var p=el.parentElement;if(seen.has(p))return;seen.add(p);
+    var kids=Array.from(p.querySelectorAll(':scope>.sr,:scope>.sr-img'));
+    kids.forEach(function(k,i){k.style.transitionDelay=(i*90)+'ms';});
+  });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);});
+  },{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+  document.querySelectorAll('.sr,.sr-img').forEach(function(el){io.observe(el);});
+})();
+</script>
+
+<!-- ══ WHATSAPP FLOATING BUTTON ══ -->
+<style>
+#wa-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+}
+#wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+#wa-btn svg { width: 30px; height: 30px; fill: #fff; }
+</style>
+<a id="wa-btn" href="https://wa.me/41764192021" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+</body>
+</html>

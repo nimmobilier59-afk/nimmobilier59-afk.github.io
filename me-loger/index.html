@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="fr-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Me Loger à Genève – N20 Immobilier</title>
+<meta name="description" content="N20 Immobilier vous accompagne pour trouver votre logement à Genève. Appartements, maisons, location courte durée — un service de relocation sur mesure, du premier contact à la remise des clés.">
+<meta name="keywords" content="Eaux-Vives, Plainpalais, Champel, Carouge, Petit-Saconnex, Grand-Saconnex, Les Pâquis, Saint-Jean Charmilles, Jonction, Vieille-Ville, Florissant, Cologny, Vandœuvres, Chêne-Bougeries, Lancy, Meyrin, Vernier, Le Lignon, Veyrier, Thônex, Bernex, Onex, Naef Immobilier, Rosset Immobilier, Comptoir Immobilier, Moser Vernet Cie, Brolliet SA, Grange Cie, Gerofinance Dunand, Privera, SPG Société Privée de Gérance, Wincasa, Régie du Rhône, Domi Sàrl, propriété de maître, hôtel particulier Genève, appartement de haut standing, waterfront property Geneva, domaine viticole Vaud Genève, attique avec vue jet d'eau, housing near UN Geneva, accommodation CERN, relocation services Geneva, furnished apartments Geneva, short term rental Geneva, bâtiment Minergie, borne de recharge Tesla électrique, pompe à chaleur solaire, cuisine équipée îlot central, domotique smart home, accessibilité PMR ascenseur, piscine intérieure spa, frais de notaire Genève, cédule hypothécaire, calcul capacité achat, taux fixe Libor Saron, droit de superficie DDP, ASLOCA droit du bail, indexation loyer, appartement sur plan, maison à rénover, transformation grange, promotion immobilière Genève, surfaces administratives, arcade vitrine Rue du Rhône, halle industrielle Meyrin, espace de stockage self-storage, cabinet médical à louer, local commercial Plainpalais">
+<link rel="canonical" href="/me-loger/">
+<link rel="alternate" href="/en/find-accomodation/" hreflang="en">
+<link rel="alternate" href="/me-loger/" hreflang="fr">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════ */
+:root {
+  --navy:   #021623;
+  --marine: #033560;
+  --dark:   #0C181F;
+  --accent: #6EC1E4;
+  --white:  #FFFFFF;
+  --text-dark: #021623;
+  --text-mid:  #445a6f;
+  --border-light: rgba(2,22,35,.1);
+  --max: 1140px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--navy);
+  color: var(--text-dark);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.1; }
+p { line-height: 1.75; }
+strong { font-weight: 600; }
+
+/* ═══════════════════════════════════
+   HELPERS
+═══════════════════════════════════ */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+.sec  { padding: 90px 0; }
+.btn-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 11px 22px; border-radius: 100px; cursor: pointer;
+  transition: all .22s ease; white-space: nowrap;
+}
+.btn-white-dark  { background: var(--white); color: var(--navy); border: 2px solid var(--white); }
+.btn-white-dark:hover { background: transparent; color: var(--white); }
+.btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); }
+.btn-outline-light:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
+.btn-dark { background: var(--navy); color: var(--white); border: 2px solid var(--navy); }
+.btn-dark:hover { background: transparent; color: var(--navy); }
+.arr-icon {
+  width: 14px; height: 14px; transition: transform .2s;
+  fill: currentColor; flex-shrink: 0;
+}
+.btn-pill:hover .arr-icon { transform: translateX(4px); }
+
+/* ═══════════════════════════════════
+   HEADER
+═══════════════════════════════════ */
+#site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  background: var(--navy);
+  border-bottom: none;
+  height: 72px;
+}
+.hdr-inner {
+  height: 72px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; max-width: 100%;
+}
+.hdr-logo { display: flex; align-items: center; flex-shrink: 0; }
+.hdr-logo img { height: 38px; width: auto; }
+.hdr-nav { display: flex; align-items: center; gap: 0; }
+.hdr-nav a {
+  font-size: 16px; font-weight: 400; color: rgba(255,255,255,.8);
+  padding: 0 18px; line-height: 72px; display: block;
+  transition: color .18s;
+}
+.hdr-nav a:hover, .hdr-nav a.active { color: var(--white);  }
+.hdr-lang {
+  position: relative; display: flex; align-items: center;
+}
+.hdr-lang > a {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; color: rgba(255,255,255,.8);
+  padding: 0 14px; line-height: 72px; cursor: pointer;
+  transition: color .18s;
+}
+.hdr-lang > a:hover { color: var(--white); }
+.hdr-lang > a img { width: 18px; height: 12px; border-radius: 2px; }
+.lang-dropdown {
+  display: none; position: absolute; top: 72px; right: 0;
+  background: var(--navy); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px; overflow: hidden; min-width: 140px;
+}
+.hdr-lang:hover .lang-dropdown { display: block; }
+.lang-dropdown a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; font-size: 15px; color: rgba(255,255,255,.8);
+  transition: background .15s;
+}
+.lang-dropdown a:hover { background: rgba(255,255,255,.08); color: var(--white); }
+.lang-dropdown img { width: 18px; height: 12px; border-radius: 2px; }
+.hdr-burger { display: none; background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; padding: 0 4px; }
+.mob-nav {
+  display: none; position: fixed; top: 72px; inset-inline: 0; bottom: 0;
+  background: var(--navy); z-index: 8999;
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  padding-bottom: 40px;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a { font-size: 22px; font-weight: 500; color: rgba(255,255,255,.75); padding: 6px 0; }
+.mob-nav a:hover { color: var(--white); }
+.mob-nav .mob-lang { display: flex; gap: 16px; margin-top: 8px; }
+.mob-nav .mob-lang a { font-size: 16px; font-weight: 600; }
+
+/* ═══════════════════════════════════
+   HERO — IMAGE + ÉTAPES
+═══════════════════════════════════ */
+#hero {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 100vh; padding-top: 72px; overflow: hidden;
+  background: url('/wp-content/uploads/2025/10/interior-4-webp.webp') center center / cover no-repeat;
+}
+#hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(2,22,35,.52) 0%, rgba(2,22,35,.72) 70%, rgba(2,22,35,.92) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: var(--max); margin: 0 auto; padding: 0 48px;
+  width: 100%;
+  padding-bottom: 60px;
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--white); border: 1px solid rgba(255,255,255,.35);
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 24px;
+}
+.hero-tag-top { display: none; }
+.hero-content h1 {
+  font-family: 'DM Serif Display', serif; font-weight: 400;
+  font-size: clamp(38px, 6vw, 72px); color: var(--white);
+  line-height: 1.08; margin-bottom: 22px; max-width: 700px;
+}
+/* ── Flow 3 étapes dans le hero */
+.hero-flow {
+  display: flex; align-items: flex-start; gap: 0;
+  flex-wrap: wrap;
+  margin-bottom: 44px; margin-top: 40px;
+}
+.hf-step {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  min-width: 140px; flex: 1;
+}
+.hf-num {
+  font-family: 'DM Serif Display', serif; font-size: 32px; font-weight: 400;
+  color: rgba(255,255,255,.4); line-height: 1;
+}
+.hf-label {
+  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.55);
+}
+.hf-text {
+  font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--white); line-height: 1.4; max-width: 160px;
+}
+.hf-arrow {
+  display: flex; align-items: center; padding: 0 20px; margin-top: 20px; flex-shrink: 0;
+}
+.hf-arrow svg {
+  stroke: rgba(255,255,255,.35); stroke-width: 2; fill: none;
+}
+.hero-single-cta { font-size: 13px; }
+
+
+/* ═══════════════════════════════════
+   INTRO
+═══════════════════════════════════ */
+#intro {
+  padding: 96px 0;
+  background: transparent;
+}
+.intro-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+}
+.intro-text .kicker {
+  font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text-mid); margin-bottom: 18px; display: block;
+}
+.intro-text h2 { font-size: clamp(28px, 3.5vw, 44px); color: var(--text-dark); margin-bottom: 22px; }
+.intro-text p { font-size: 16px; color: var(--text-mid); line-height: 1.82; margin-bottom: 16px; }
+.intro-text .read-more {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text-dark);
+  margin-top: 10px; transition: gap .2s;
+}
+.intro-text .read-more:hover { gap: 18px; }
+.read-more-icon {
+  width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--navy);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.read-more-icon svg { width: 16px; height: 16px; fill: var(--navy); }
+.intro-visual {
+  border-radius: 24px; overflow: hidden; min-height: 420px;
+}
+.intro-visual img {
+  width: 100%; height: 100%; object-fit: cover; display: block; min-height: 420px;
+}
+
+/* ═══════════════════════════════════
+   PROCESSUS
+═══════════════════════════════════ */
+#processus {
+  padding: 90px 0;
+  background: transparent; background-image: radial-gradient(at top right, #B4F0F8 0%, #FFFFFF 80%);
+}
+.processus-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+}
+.processus-header { margin-bottom: 56px; }
+.processus-header .kicker {
+  font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text-mid); margin-bottom: 14px; display: block;
+}
+.processus-header h2 { font-size: clamp(28px, 4vw, 46px); color: var(--text-dark); }
+.processus-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.step {
+  display: flex; flex-direction: column;
+  padding: 36px 28px; position: relative;
+}
+.step:not(:last-child)::after {
+  content: ''; position: absolute; top: 48px; right: 0;
+  width: 1px; height: 60px;
+  background: rgba(2,22,35,.15);
+}
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px; font-weight: 400;
+  color: rgba(2,22,35,.08); line-height: 1;
+  margin-bottom: 12px;
+}
+.step-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: rgba(2,22,35,.07);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.step-icon svg { width: 22px; height: 22px; fill: var(--navy); }
+.step h3 {
+  font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700;
+  color: var(--text-dark); margin-bottom: 12px;
+}
+.step p { font-size: 14px; color: var(--text-mid); line-height: 1.75; }
+
+/* ═══════════════════════════════════
+   TYPES DE BIENS
+═══════════════════════════════════ */
+#types {
+  padding: 90px 0;
+  background: transparent;
+}
+.types-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+}
+.types-text h2 { font-size: clamp(28px, 3.5vw, 44px); color: var(--text-dark); margin-bottom: 22px; }
+.types-text p { font-size: 16px; color: var(--text-mid); line-height: 1.82; margin-bottom: 24px; }
+.types-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.types-list li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 15px; color: var(--text-dark); font-weight: 500;
+}
+.types-list li::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+}
+.types-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.type-card {
+  background: linear-gradient(145deg, #1a2e3d 0%, #033560 100%);
+  border: 1px solid rgba(255,255,255,.15); border-radius: 24px;
+  padding: 36px 28px; display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .25s, transform .22s;
+}
+.type-card:hover { border-color: rgba(110,193,228,.35); transform: translateY(-3px); }
+.type-card-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center;
+}
+.type-card-icon svg { width: 20px; height: 20px; fill: var(--white); }
+.type-card h3 {
+  font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 700; color: var(--white);
+}
+.type-card p { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.65; }
+
+/* ═══════════════════════════════════
+   HONORAIRES
+═══════════════════════════════════ */
+#honoraires {
+  padding: 90px 0;
+  background: transparent;
+}
+.honoraires-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+}
+.honoraires-header { text-align: center; margin-bottom: 52px; }
+.honoraires-header h2 {
+  font-size: clamp(28px, 4vw, 46px); color: var(--navy); margin-bottom: 14px;
+}
+.honoraires-header p { font-size: 16px; color: var(--text-mid); max-width: 560px; margin: 0 auto; }
+
+/* card unique */
+.hon-single {
+  max-width: 820px; margin: 0 auto;
+  background: var(--white);
+  border: 1px solid rgba(2,22,35,.1);
+  border-radius: 28px; padding: 52px 56px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  box-shadow: 0 8px 40px rgba(2,22,35,.08);
+}
+.hon-single-left { display: flex; flex-direction: column; gap: 20px; }
+.hon-card-icon {
+  width: 52px; height: 52px; border-radius: 16px;
+  background: rgba(2,22,35,.06); border: 1px solid rgba(2,22,35,.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.hon-card-icon svg { width: 24px; height: 24px; fill: var(--navy); }
+.hon-single-left h3 {
+  font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy);
+}
+.hon-single-left p { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
+.hon-single-right {
+  display: flex; flex-direction: column; gap: 20px;
+  border-left: 1px solid rgba(2,22,35,.1); padding-left: 56px;
+}
+.hon-single-price { display: flex; flex-direction: column; gap: 6px; }
+.hon-price {
+  font-family: 'DM Serif Display', serif; font-size: 64px; color: var(--navy); line-height: 1;
+}
+.hon-price-label { font-size: 15px; color: var(--text-mid); font-weight: 500; }
+.hon-single-divider { width: 100%; height: 1px; background: rgba(2,22,35,.1); }
+.hon-single-min {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--text-mid); font-weight: 500;
+}
+.hon-single-min svg { width: 15px; height: 15px; fill: var(--navy); flex-shrink: 0; }
+
+/* ═══════════════════════════════════
+   FAQ
+═══════════════════════════════════ */
+#n20-faq {
+  padding: 72px 0;
+  background: transparent;
+}
+.n20-faq-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+}
+.n20-faq-header { text-align: center; margin-bottom: 48px; }
+.n20-faq-title {
+  font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,48px);
+  color: var(--navy); margin-bottom: 12px;
+}
+.n20-faq-subtitle { font-size: 16px; color: var(--text-mid); max-width: 600px; margin: 0 auto; line-height: 1.75; }
+.n20-faq-grid { display: flex; flex-direction: column; gap: 10px; max-width: 820px; margin: 0 auto; }
+.n20-faq-item {
+  background: rgba(255,255,255,.7); border: 1px solid rgba(2,22,35,.1);
+  border-radius: 16px; overflow: hidden; transition: border-color .2s;
+}
+.n20-faq-item[open] { border-color: rgba(2,22,35,.25); }
+.n20-faq-item summary {
+  padding: 20px 28px; cursor: pointer; list-style: none;
+  font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; color: var(--navy);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  user-select: none;
+}
+.n20-faq-item summary::-webkit-details-marker { display: none; }
+.faq-toggle {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(2,22,35,.07); border: 1px solid rgba(2,22,35,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: var(--navy); font-weight: 300; line-height: 1;
+  transition: transform .28s;
+}
+.n20-faq-item[open] .faq-toggle { transform: rotate(45deg); }
+.n20-faq-answer { padding: 0 28px 22px; font-size: 14px; color: var(--text-mid); line-height: 1.82; }
+
+/* ═══════════════════════════════════
+   CONTACT FORM
+═══════════════════════════════════ */
+#contact-section {
+  padding: 90px 0;
+  background-image: url('/wp-content/uploads/2025/10/category-footer2-webp-1.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+#contact-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(2,22,35,0.52);
+  z-index: 0;
+}
+#contact-section > * { position: relative; z-index: 1; }
+.contact-inner {
+  max-width: 600px; margin: 0 auto; padding: 0 40px;
+}
+.contact-inner h2 {
+  font-size: clamp(26px,3.5vw,40px); color: var(--white); margin-bottom: 40px; text-align: center;
+}
+.fg label { color: rgba(255,255,255,.75) !important; }
+.contact-form { display: flex; flex-direction: column; gap: 0; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.fg { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.fg label {
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-mid);
+}
+.fg input, .fg textarea, .fg select {
+  background: #f4f7fa; border: 1px solid #d0dce8;
+  border-radius: 10px; padding: 13px 16px;
+  color: var(--text-dark); font-family: 'Manrope', sans-serif; font-size: 15px;
+  outline: none; transition: border-color .2s; width: 100%; appearance: none;
+}
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--marine); }
+.fg input::placeholder, .fg textarea::placeholder { color: #a0b0bf; }
+textarea { resize: vertical; min-height: 100px; }
+.form-submit { display: flex; justify-content: center; margin-top: 8px; }
+.form-submit button {
+  background: var(--navy); color: var(--white); border: 2px solid var(--navy);
+  font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 13px 40px; border-radius: 100px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px; transition: all .2s;
+}
+.form-submit button:hover { background: transparent; color: var(--white); border-color: var(--white); }
+.form-submit button svg { width: 14px; height: 14px; fill: currentColor; transition: transform .18s; }
+.form-submit button:hover svg { transform: translateX(4px); }
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+#n20-footer {
+  background: var(--navy); border-top: 1px solid rgba(255,255,255,.08);
+}
+.n20-footer-main { padding: 60px 0 48px; }
+.n20-footer-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+}
+.n20-footer-logo { height: 36px; width: auto; margin-bottom: 12px; }
+.n20-footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); margin-bottom: 22px; font-style: italic; }
+.n20-footer-contact { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.n20-footer-contact li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.55); }
+.n20-footer-contact svg { width: 15px; height: 15px; fill: var(--accent); flex-shrink: 0; }
+.n20-footer-contact a:hover { color: var(--white); }
+.n20-footer-social { display: flex; gap: 10px; margin-top: 22px; }
+.n20-footer-social a {
+  width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); transition: all .2s;
+}
+.n20-footer-social a:hover { background: var(--accent); border-color: var(--accent); }
+.n20-footer-social svg { width: 15px; height: 15px; fill: var(--white); }
+.n20-footer-col h4 {
+  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 18px;
+}
+.n20-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.n20-footer-col ul a { font-size: 14px; color: rgba(255,255,255,.55); transition: color .18s; }
+.n20-footer-col ul a:hover { color: var(--white); }
+.n20-footer-partners {
+  border-top: 1px solid rgba(255,255,255,.06); padding: 28px 0;
+}
+.n20-footer-partners-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 40px;
+  display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
+}
+.n20-footer-partners-inner img {
+  height: 32px; width: auto; filter: grayscale(1) brightness(2); opacity: .35; transition: opacity .2s;
+}
+.n20-footer-partners-inner img:hover { opacity: .7; }
+.n20-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 18px 40px; max-width: var(--max); margin: 0 auto;
+  display: flex; justify-content: center;
+  font-size: 13px; color: rgba(255,255,255,.4);
+}
+.n20-footer-bottom a { transition: color .18s; }
+.n20-footer-bottom a:hover { color: rgba(255,255,255,.8); }
+
+/* ═══════════════════════════════════
+   ZONE CLAIRE CONTINUE
+═══════════════════════════════════ */
+.light-zone {
+  background-image: radial-gradient(at top right, #B4F0F8 0%, #FFFFFF 80%);
+  background-attachment: local;
+}
+
+/* ═══════════════════════════════════
+   WHATSAPP
+═══════════════════════════════════ */
+#whatsapp-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 8000;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(37,211,102,.4);
+  transition: transform .2s, box-shadow .2s;
+}
+#whatsapp-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,.55); }
+#whatsapp-btn svg { width: 28px; height: 28px; fill: white; }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 960px) {
+  .hdr-nav { display: none; }
+  .hdr-lang { display: none; }
+  .hdr-burger { display: block; }
+  .intro-inner { grid-template-columns: 1fr; gap: 36px; }
+  .types-inner { grid-template-columns: 1fr; gap: 36px; }
+  .processus-grid { grid-template-columns: 1fr 1fr; }
+  .step:not(:last-child)::after { display: none; }
+  .hon-single { grid-template-columns: 1fr; padding: 36px 28px; gap: 32px; }
+  .hon-single-right { border-left: none; padding-left: 0; border-top: 1px solid rgba(2,22,35,.1); padding-top: 32px; }
+  .n20-footer-inner { grid-template-columns: 1fr; }
+  .n20-faq-inner { padding: 0 24px; }
+  .contact-inner { padding: 0 24px; }
+  .hero-flow { flex-direction: column; gap: 0; }
+  .hf-arrow { transform: rotate(90deg); margin: 0; }
+  .hf-step { padding: 16px 0; min-width: unset; flex: none; }
+}
+@media (max-width: 600px) {
+  .hdr-inner { padding: 0 20px; }
+  #hero { justify-content: flex-start; min-height: 100dvh; }
+  .hero-content {
+    padding: calc(72px + 110px) 20px 44px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-content h1 { text-align: center; }
+  .hero-single-cta { margin-top: 16px; width: 100%; justify-content: center; }
+  .hero-tag { display: none; }
+  .hero-tag-top {
+    display: inline-block;
+    position: absolute;
+    top: calc(72px + 44px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    width: max-content;
+    z-index: 3;
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--white); border: 1px solid rgba(255,255,255,.35);
+    padding: 6px 16px; border-radius: 100px;
+  }
+  /* ── Hero flow compact card ── */
+  .hero-flow {
+    flex-direction: column;
+    gap: 0;
+    margin-top: auto;
+    margin-bottom: 0;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .hf-step {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    min-width: unset;
+    flex: none;
+  }
+  .hf-step:last-child { border-bottom: none; }
+  .hf-num { font-size: 20px; min-width: 36px; color: var(--accent); line-height: 1; }
+  .hf-label { display: none; }
+  .hf-text { font-size: 15px; font-weight: 500; max-width: none; flex: 1; }
+  .hf-arrow { display: none; }
+  .intro-inner, .types-inner, .processus-inner, .honoraires-inner { padding: 0 20px; }
+  .processus-grid { grid-template-columns: 1fr; }
+  .types-cards { display: flex; flex-direction: column; padding: 0 16px; gap: 0; }
+  .type-card { position: relative; box-shadow: 0 10px 32px rgba(2,22,35,.5); }
+  .type-card + .type-card { margin-top: -36px; }
+  .type-card:nth-child(1) { z-index: 6; }
+  .type-card:nth-child(2) { z-index: 5; }
+  .type-card:nth-child(3) { z-index: 4; }
+  .type-card:nth-child(4) { z-index: 3; }
+  .type-card:nth-child(5) { z-index: 2; }
+  .type-card:nth-child(6) { z-index: 1; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .n20-footer-inner { padding: 0 20px; }
+  .n20-footer-bottom { padding: 18px 20px; }
+  .n20-footer-partners-inner { padding: 0 20px; }
+  .contact-inner { padding: 0 20px; }
+  .hero-steps-inner { padding: 0 20px; }
+  /* Bug fixes mobile */
+  .hon-price { font-size: clamp(32px, 9vw, 64px); }
+  .hon-single { padding: 28px 20px; }
+  .hon-single-right { padding-left: 0; }
+  .types-inner { padding: 0 20px; }
+  .honoraires-inner { padding: 0 20px; }
+  .processus-inner { padding: 0 20px; }
+  .n20-faq-inner { padding: 0 20px; }
+}
+
+/* ── SCROLL REVEAL ── */
+.sr{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1)}
+.sr-img{opacity:0;transform:scale(.96) translateY(20px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
+.sr.in,.sr-img.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="/" class="hdr-logo">
+      <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+    </a>
+    <nav class="hdr-nav">
+      <a href="/">Accueil</a>
+      <a href="/me-loger/" class="active">Me Loger</a>
+      <a href="/resilier-bail/">Résilier Mon Bail</a>
+      <a href="/achat-vente/">Achat &amp; Vente</a>
+      <a href="/services-complementaires/">Services</a>
+      <a href="/client-professionnel/" class="pro-link">Client Professionnel</a>
+    </nav>
+    <div class="hdr-lang">
+      <a href="#">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR">
+        Français
+      </a>
+      <div class="lang-dropdown">
+        <a href="/en/find-accomodation/">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN">
+          English
+        </a>
+        <a href="/me-loger/">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR">
+          Français
+        </a>
+        <a href="/ru/find-accomodation/">
+          <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU">
+          Русский
+        </a>
+      </div>
+    </div>
+    <button class="hdr-burger" id="burgerBtn">☰</button>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/"                           onclick="closeMob()">Accueil</a>
+  <a href="/me-loger/"                  onclick="closeMob()">Me Loger</a>
+  <a href="/resilier-bail/"             onclick="closeMob()">Résilier Mon Bail</a>
+  <a href="/achat-vente/"               onclick="closeMob()">Achat &amp; Vente</a>
+  <a href="/services-complementaires/"  onclick="closeMob()">Services</a>
+  <div class="mob-lang">
+    <a href="/en/find-accomodation/">EN</a>
+    <a href="/me-loger/" style="color:white;">FR</a>
+    <a href="/ru/find-accomodation/">RU</a>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Service de relocation</span>
+
+  <div class="hero-content">
+    <span class="hero-tag">Service de relocation</span>
+    <h1>Plus qu'un toit,<br>une signature</h1>
+
+    <!-- 3 étapes inline -->
+    <div class="hero-flow">
+      <div class="hf-step">
+        <div class="hf-num">01</div>
+        <div class="hf-label">Étape 1</div>
+        <div class="hf-text">Prise de contact</div>
+      </div>
+      <div class="hf-arrow">
+        <svg width="32" height="16" viewBox="0 0 32 16"><path d="M0 8h28M22 2l6 6-6 6"/></svg>
+      </div>
+      <div class="hf-step">
+        <div class="hf-num">02</div>
+        <div class="hf-label">Étape 2</div>
+        <div class="hf-text">Constitution du dossier &amp; Visites</div>
+      </div>
+      <div class="hf-arrow">
+        <svg width="32" height="16" viewBox="0 0 32 16"><path d="M0 8h28M22 2l6 6-6 6"/></svg>
+      </div>
+      <div class="hf-step">
+        <div class="hf-num">03</div>
+        <div class="hf-label">Étape 3</div>
+        <div class="hf-text">Validation &amp; Signature du bail</div>
+      </div>
+    </div>
+
+    <a href="/particulier/" class="btn-pill btn-white-dark hero-single-cta">
+      Accéder au formulaire
+      <svg class="arr-icon" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+    </a>
+  </div>
+
+</section>
+
+<!-- ══════════════════ ZONE CLAIRE ══════════════════ -->
+<div class="light-zone">
+
+<!-- ══════════════════ INTRO ══════════════════ -->
+<section id="intro">
+  <div class="intro-inner">
+    <div class="intro-text">
+      <span class="kicker">Notre approche</span>
+      <h2>Un accompagnement<br>de bout en bout</h2>
+      <p>À Genève, le marché locatif est l'un des plus compétitifs d'Europe. Taux de vacance inférieur à 1 %, délais de réponse très courts, dossiers exigeants — trouver un logement seul prend du temps et peut coûter cher en erreurs.</p>
+      <p>N20 Immobilier vous évite ces écueils. Grâce à notre <strong>réseau de régies exclusives</strong> et notre connaissance fine du territoire genevois, nous accédons à des biens <strong>hors marché</strong> et sélectionnons pour vous uniquement ce qui correspond à vos critères.</p>
+    </div>
+    <div class="intro-visual">
+      <img src="/wp-content/uploads/2025/10/house-3-webp.webp" alt="Logement à Genève">
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ TYPES DE BIENS ══════════════════ -->
+<section id="types">
+  <div class="types-inner">
+    <div class="types-text">
+      <h2>Tous types de biens<br>à Genève</h2>
+      <p>Que vous cherchiez un appartement de standing, une maison familiale, un logement meublé pour une mission courte ou un local commercial, nous avons le réseau et l'expertise pour vous trouver la solution idéale.</p>
+      <ul class="types-list">
+        <li>Appartements — studios, 2 à 6 pièces et plus</li>
+        <li>Maisons et villas dans tout le canton</li>
+        <li>Location courte durée et logements meublés</li>
+        <li>Biens de prestige — villas, penthouses</li>
+      </ul>
+    </div>
+    <div class="types-cards">
+
+      <div class="type-card">
+        <div class="type-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
+        <h3>Appartement</h3>
+        <p>Du studio au 6 pièces, dans les meilleurs quartiers genevois.</p>
+      </div>
+
+      <div class="type-card">
+        <div class="type-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+        </div>
+        <h3>Maison</h3>
+        <p>Villas et maisons avec jardin, pour les familles et expatriés.</p>
+      </div>
+
+      <div class="type-card">
+        <div class="type-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+        </div>
+        <h3>Courte durée</h3>
+        <p>Logements meublés pour missions, détachements et transitions.</p>
+      </div>
+
+      <div class="type-card">
+        <div class="type-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg>
+        </div>
+        <h3>Biens de prestige</h3>
+        <p>Villas, penthouses et logements haut de gamme pour une clientèle exigeante.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ HONORAIRES ══════════════════ -->
+<section id="honoraires">
+  <div class="honoraires-inner">
+    <div class="honoraires-header">
+      <h2>Nos honoraires</h2>
+      <p>Une tarification claire et transparente — sans frais d'inscription, sans surprise.</p>
+    </div>
+
+    <div class="hon-single">
+      <div class="hon-single-left">
+        <div class="hon-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
+        <h3>Logements particuliers</h3>
+        <p>Appartements, maisons, studios à Genève et alentours. Honoraires dus uniquement à la signature du bail — zéro frais avant résultat.</p>
+      </div>
+      <div class="hon-single-right">
+        <div class="hon-single-price">
+          <div class="hon-price">10%</div>
+          <div class="hon-price-label">du loyer annuel CC</div>
+        </div>
+        <div class="hon-single-divider"></div>
+        <div class="hon-single-min">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Minimum CHF 1'500
+        </div>
+        <div class="hon-single-min">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Zéro frais d'inscription
+        </div>
+        <div class="hon-single-min">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Aucun engagement avant résultat
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ FAQ ══════════════════ -->
+<section id="n20-faq">
+  <div class="n20-faq-inner">
+    <div class="n20-faq-header">
+      <h2 class="n20-faq-title">Questions fréquentes</h2>
+      <p class="n20-faq-subtitle">Tout ce que vous devez savoir sur notre service de recherche de logement à Genève.</p>
+    </div>
+    <div class="n20-faq-grid">
+
+      <details class="n20-faq-item" open>
+        <summary>Pourquoi faire appel à N20 Immobilier pour votre recherche de logement ? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>N20 Immobilier est spécialisé dans la relocation à Genève et connaît très finement le marché local, les quartiers et les spécificités suisses (dossiers, permis, usages des régies). Vous gagnez ainsi un temps précieux et évitez les erreurs fréquentes quand on cherche seul dans un marché très tendu. L'équipe vous accompagne de bout en bout : définition du besoin, présélection des logements, organisation des visites, préparation du dossier et suivi jusqu'à la remise des clés.</p></div>
+      </details>
+
+      <details class="n20-faq-item">
+        <summary>Combien coûte votre service de recherche de logement ? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>Notre service est rémunéré uniquement à la conclusion du bail : 10 % du loyer annuel charges comprises pour un logement (min. CHF 1'500), 1 mois de loyer CC pour un local commercial (min. CHF 5'000). L'inscription est entièrement gratuite — vous ne payez rien tant que nous n'avons pas trouvé votre logement.</p></div>
+      </details>
+
+      <details class="n20-faq-item">
+        <summary>Dans quels quartiers de Genève cherchez-vous des logements ? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>N20 Immobilier couvre l'ensemble du canton de Genève : centre-ville, Eaux-Vives, Carouge, Champel, Grand-Saconnex, Meyrin, Lancy, Vernier, ainsi que les communes frontalières côté France (Ferney-Voltaire, Saint-Genis-Pouilly, Annemasse). Nous adaptons la recherche à vos priorités : école internationale, proximité du lieu de travail, budget, ambiance de quartier.</p></div>
+      </details>
+
+      <details class="n20-faq-item">
+        <summary>Quels documents faut-il pour louer un appartement à Genève ? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>Pour constituer un dossier locatif solide à Genève, vous aurez besoin de : pièce d'identité ou passeport, permis de séjour (ou preuve de demande en cours), 3 dernières fiches de salaire ou contrat de travail, extrait de l'office des poursuites, et parfois d'une lettre de motivation. N20 vous aide à préparer un dossier complet et convaincant.</p></div>
+      </details>
+
+      <details class="n20-faq-item">
+        <summary>Aidez-vous les expatriés et fonctionnaires internationaux ? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>Oui, c'est l'une de nos spécialités. Nous accompagnons régulièrement des expatriés en mission, des fonctionnaires d'organisations internationales (ONU, OMS, CICR, OMC) et leurs familles. Nous maîtrisons les contraintes spécifiques : timing d'arrivée serré, logement de standing, proximité des écoles internationales, accompagnement du conjoint.</p></div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+</div><!-- /.light-zone -->
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section id="contact-section">
+  <div class="contact-inner">
+    <h2>Parlez-nous de votre <strong>projet immobilier</strong></h2>
+    <form class="contact-form">
+      <div class="form-row-2">
+        <div class="fg">
+          <label>Nom</label>
+          <input type="text" name="nom" placeholder="Nom" required>
+        </div>
+        <div class="fg">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Téléphone</label>
+        <input type="tel" name="tel" placeholder="Téléphone" required>
+      </div>
+      <div class="fg">
+        <label>Projet</label>
+        <select name="projet">
+          <option value="Trouver un logement">Trouver un logement</option>
+          <option value="Vendre votre bien">Vendre votre bien</option>
+          <option value="Acheter un bien">Acheter un bien</option>
+          <option value="Quitter votre logement">Quitter votre logement</option>
+          <option value="Autre(s)">Autre(s)</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Message</label>
+        <textarea name="message" placeholder="Décrivez votre projet..."></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">
+          Envoyer
+          <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer id="n20-footer">
+  <div class="n20-footer-main">
+    <div class="n20-footer-inner">
+      <div class="n20-footer-brand">
+        <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" class="n20-footer-logo">
+        <p class="n20-footer-tagline">Votre partenaire de relocation</p>
+        <ul class="n20-footer-contact">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:contact@n20immobilier.ch">contact@n20immobilier.ch</a>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span>+41 76 419 20 21</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Cours des Bastions 13, 1205 Genève</span>
+          </li>
+        </ul>
+        <div class="n20-footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/n20-immobilier/about/" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Nos services</h4>
+        <ul>
+          <li><a href="/me-loger/">Me Loger</a></li>
+          <li><a href="/resilier-bail/">Résilier Mon Bail</a></li>
+          <li><a href="/achat-vente/">Achat &amp; Vente</a></li>
+          <li><a href="/services-complementaires/">Services complémentaires</a></li>
+        </ul>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="/particulier/">Mandat de recherche</a></li>
+          <li><a href="/conditions-generales/">Conditions générales</a></li>
+          <li><a href="/politique-de-confidentialite/">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="n20-footer-partners">
+    <div class="n20-footer-partners-inner">
+      <img src="/wp-content/uploads/2025/11/Untitled-design-5.png" alt="Partenaire 1">
+      <img src="/wp-content/uploads/2025/11/2.png" alt="Partenaire 2">
+    </div>
+  </div>
+  <div class="n20-footer-bottom">
+    <p>© 2026 N20 Immobilier — Tous droits réservés &nbsp;·&nbsp; <a href="/conditions-generales/">Conditions générales</a> &nbsp;·&nbsp; <a href="/politique-de-confidentialite/">Politique de confidentialité</a></p>
+  </div>
+</footer>
+
+<!-- WhatsApp -->
+<a id="whatsapp-btn" href="https://wa.me/41764192021" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+document.getElementById('burgerBtn').addEventListener('click', function() {
+  const nav = document.getElementById('mobNav');
+  nav.classList.toggle('open');
+  this.textContent = nav.classList.contains('open') ? '✕' : '☰';
+});
+function closeMob() {
+  document.getElementById('mobNav').classList.remove('open');
+  document.getElementById('burgerBtn').textContent = '☰';
+}
+
+// ── Stacking card scroll animation (mobile only)
+(function(){
+  if (window.innerWidth > 600) return;
+  var cards = document.querySelectorAll('.svc-card,.type-card,.srv-card,.client-card,.hon-card');
+  if (!cards.length) return;
+  var groups = new Map();
+  cards.forEach(function(c){
+    var p = c.parentElement;
+    if (!groups.has(p)) groups.set(p,[]);
+    groups.get(p).push(c);
+  });
+  cards.forEach(function(c){
+    c.style.opacity='0';
+    c.style.transform='translateY(56px)';
+    c.style.transition='opacity .6s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)';
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var card = e.target;
+      var grp = groups.get(card.parentElement)||[card];
+      var idx = grp.indexOf(card);
+      setTimeout(function(){ card.style.opacity='1'; card.style.transform='translateY(0)'; }, idx*180);
+      io.unobserve(card);
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
+  cards.forEach(function(c){ io.observe(c); });
+})();
+
+/* ── Scroll Reveal ── */
+(function(){
+  var T='.kicker,.section-label,.section-title,.n20-faq-title,.stat-item,.stat-number,.check-item,.n20-faq-item,.hon-card,.client-card,.type-card,.intro-inner h2,.intro-inner p,.apporteur-inner h2,.apporteur-inner .subtitle,.apporteur-inner .check-item,.why-inner h2,.why-inner .subtitle,.why-inner .check-item,.contact-inner h2,.contact-inner p,.bsc-content h2,.bsc-content p,.pourquoi-inner h2,.pourquoi-inner p,.gratuit-card,.hero-flow,.hf-step,.mob-step,.srv-card-icon,.svc-card-top,.hon-section h2';
+  var I='.intro-img,.big-sec-visual,.pourquoi-card,.apporteur-card,.why-card';
+  function add(el,c){if(!el||el.closest('#hero,#site-header,.mob-nav,#n20-footer,.hdr-inner'))return;el.classList.add(c);}
+  document.querySelectorAll(T).forEach(function(el){add(el,'sr');});
+  document.querySelectorAll(I).forEach(function(el){add(el,'sr-img');});
+  var seen=new Set();
+  document.querySelectorAll('.sr,.sr-img').forEach(function(el){
+    var p=el.parentElement;if(seen.has(p))return;seen.add(p);
+    var kids=Array.from(p.querySelectorAll(':scope>.sr,:scope>.sr-img'));
+    kids.forEach(function(k,i){k.style.transitionDelay=(i*90)+'ms';});
+  });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);});
+  },{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+  document.querySelectorAll('.sr,.sr-img').forEach(function(el){io.observe(el);});
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дополнительные услуги – N20 Immobilier Женева</title>
+<meta name="description" content="Арендная гарантия, страхование, договоры SIG, консьерж-услуги — N20 Immobilier сопровождает вас за пределами жилья для комфортного обустройства в Женеве.">
+<link rel="icon" href="/wp-content/uploads/2025/09/n20-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#021623;--marine:#033560;--dark:#0C181F;--accent:#6EC1E4;--white:#ffffff;--max:1280px}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);line-height:1.6;overflow-x:hidden}
+#site-header{position:fixed;top:0;left:0;right:0;z-index:9000;background:var(--navy);border-bottom:none;height:72px}
+.hdr-inner{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;max-width:100%}
+.hdr-logo{display:flex;align-items:center;flex-shrink:0}
+.hdr-logo img{height:38px;width:auto}
+.hdr-nav{display:flex;align-items:center;gap:0}
+.hdr-nav a{font-size:15px;font-weight:400;color:rgba(255,255,255,.8);padding:0 13px;line-height:72px;display:block;transition:color .18s;text-decoration:none}
+.hdr-nav a:hover,.hdr-nav a.active{color:#fff}
+.hdr-lang{position:relative;display:flex;align-items:center}
+.hdr-lang>a{display:flex;align-items:center;gap:8px;font-size:15px;color:rgba(255,255,255,.8);padding:0 14px;line-height:72px;cursor:pointer;transition:color .18s;text-decoration:none}
+.hdr-lang>a:hover{color:#fff}
+.hdr-lang>a img{width:18px;height:12px;border-radius:2px}
+.lang-dropdown{display:none;position:absolute;top:72px;right:0;background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden;min-width:150px}
+.hdr-lang:hover .lang-dropdown{display:block}
+.lang-dropdown a{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:15px;color:rgba(255,255,255,.8);transition:background .15s;text-decoration:none}
+.lang-dropdown a:hover{background:rgba(255,255,255,.08);color:#fff}
+.lang-dropdown img{width:18px;height:12px;border-radius:2px}
+.hdr-burger{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:0 4px}
+.mob-nav{display:none;position:fixed;top:72px;inset-inline:0;bottom:0;background:var(--navy);z-index:8999;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding-bottom:40px}
+.mob-nav.open{display:flex}
+.mob-nav a{font-size:22px;font-weight:500;color:rgba(255,255,255,.75);padding:6px 0;text-decoration:none}
+.mob-nav a:hover{color:#fff}
+.mob-nav .mob-lang{display:flex;gap:16px;margin-top:8px}
+.mob-nav .mob-lang a{font-size:16px;font-weight:600}
+@media(max-width:900px){.hdr-nav,.hdr-lang{display:none}.hdr-burger{display:block}}
+#hero{position:relative;min-height:80vh;display:flex;align-items:center;background:url('/wp-content/uploads/2025/10/agent-desk-webp.webp') center/cover no-repeat;padding-top:72px;overflow:hidden}
+#hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(2,22,35,.45) 0%,rgba(2,22,35,.68) 65%,rgba(2,22,35,.92) 100%)}
+.hero-content{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 48px;width:100%}
+.hero-tag{display:inline-block;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.35);padding:6px 16px;border-radius:100px;margin-bottom:28px}
+.hero-content h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(40px,6vw,72px);color:#fff;line-height:1.08;max-width:720px;margin-bottom:24px}
+.hero-content p{font-family:'Manrope',sans-serif;font-size:18px;color:rgba(255,255,255,.75);max-width:560px;line-height:1.65;margin-bottom:44px}
+.btn-white-dark{display:inline-block;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:#fff;padding:15px 36px;border-radius:100px;text-decoration:none;transition:opacity .2s}
+.btn-white-dark:hover{opacity:.88}
+.light-zone{background:radial-gradient(ellipse at top right,#B4F0F8 0%,#ffffff 80%)}
+.section-intro{padding:96px 0}
+.intro-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.kicker{display:block;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.intro-inner h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.5vw,48px);font-weight:400;color:var(--navy);line-height:1.15;margin-bottom:20px}
+.intro-inner p{font-family:'Manrope',sans-serif;font-size:16px;color:rgba(2,22,35,.7);line-height:1.75;margin-bottom:14px}
+.intro-img{border-radius:24px;overflow:hidden;aspect-ratio:4/3}
+.intro-img img{width:100%;height:100%;object-fit:cover;display:block}
+.srv-section{padding:80px 0}
+.srv-section-inner{max-width:var(--max);margin:0 auto;padding:0 48px}
+.section-label{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:14px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,44px);font-weight:400;color:var(--navy);text-align:center;margin-bottom:56px;line-height:1.15}
+.srv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.srv-card{background:rgba(255,255,255,.7);border:1px solid rgba(2,22,35,.08);border-radius:24px;padding:44px 40px;display:grid;grid-template-columns:auto 1fr;gap:0 28px;align-items:start}
+.srv-icon{width:56px;height:56px;border-radius:16px;background:rgba(2,22,35,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.srv-icon svg{width:26px;height:26px;fill:none;stroke:var(--navy);stroke-width:1.8}
+.srv-body h3{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:var(--navy);margin-bottom:10px;line-height:1.2}
+.srv-body p{font-family:'Manrope',sans-serif;font-size:14px;color:rgba(2,22,35,.65);line-height:1.7;margin-bottom:16px}
+.srv-features{list-style:none;display:flex;flex-direction:column;gap:8px}
+.srv-features li{display:flex;align-items:center;gap:8px;font-family:'Manrope',sans-serif;font-size:13px;color:rgba(2,22,35,.7)}
+.srv-features li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.why-section{padding:120px 0}
+.why-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center}
+.why-inner h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,44px);font-weight:400;color:var(--navy);margin-bottom:10px}
+.why-inner .subtitle{font-family:'Manrope',sans-serif;font-size:16px;color:rgba(2,22,35,.6);margin-bottom:32px}
+.checklist{display:flex;flex-direction:column;gap:16px}
+.check-item{display:flex;align-items:flex-start;gap:14px}
+.check-icon{width:28px;height:28px;border-radius:50%;background:rgba(2,22,35,.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.check-icon svg{width:13px;height:13px;fill:none;stroke:var(--navy);stroke-width:2.5}
+.check-text strong{display:block;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.check-text span{font-family:'Manrope',sans-serif;font-size:14px;color:rgba(2,22,35,.6);line-height:1.5}
+.why-card{background:var(--navy);border-radius:28px;padding:48px 40px;color:#fff}
+.why-card-icon{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.why-card-icon svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8}
+.why-card h3{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2}
+.why-card p{font-family:'Manrope',sans-serif;font-size:15px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:28px}
+.why-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:10px 20px;border-radius:100px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.06em}
+.why-badge svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2}
+#n20-faq{padding:80px 0}
+.n20-faq-inner{max-width:820px;margin:0 auto;padding:0 32px}
+.n20-faq-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,40px);font-weight:400;color:var(--navy);text-align:center;margin-bottom:48px}
+.n20-faq-list{display:flex;flex-direction:column;gap:12px}
+.n20-faq-item{background:rgba(255,255,255,.7);border:1px solid rgba(2,22,35,.1);border-radius:14px;overflow:hidden}
+.n20-faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:22px 26px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;color:var(--navy)}
+.n20-faq-item summary::-webkit-details-marker{display:none}
+.faq-chevron{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;transition:transform .3s}
+.n20-faq-item[open] .faq-chevron{transform:rotate(180deg)}
+.n20-faq-body{padding:0 26px 22px;font-family:'Manrope',sans-serif;font-size:14px;color:rgba(2,22,35,.7);line-height:1.7}
+.contact-section{position:relative;padding:96px 0;background:url('/wp-content/uploads/2025/10/category-footer2-webp-1.webp') center/cover no-repeat}
+.contact-overlay{position:absolute;inset:0;background:rgba(2,22,35,.52)}
+.contact-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:0 32px;text-align:center}
+.contact-inner h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,3.5vw,48px);font-weight:400;color:#fff;margin-bottom:16px;line-height:1.15}
+.contact-inner p{font-family:'Manrope',sans-serif;font-size:16px;color:rgba(255,255,255,.8);margin-bottom:40px;line-height:1.65}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:15px 18px;border:none;border-radius:10px;background:#fff;color:var(--navy);font-family:'Manrope',sans-serif;font-size:14px;outline:none;transition:box-shadow .2s}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(2,22,35,.4)}
+.contact-form input:focus,.contact-form textarea:focus{box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.contact-form select{color:rgba(2,22,35,.6);appearance:none;cursor:pointer}
+.contact-form textarea{resize:vertical;min-height:110px}
+.form-submit{display:flex;justify-content:center;margin-top:8px}
+.form-submit button{background:var(--navy);color:#fff;border:2px solid var(--navy);font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 40px;border-radius:100px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
+.form-submit button:hover{background:transparent;color:#fff;border-color:#fff}
+.form-submit button svg{width:14px;height:14px;fill:currentColor;transition:transform .18s}
+.form-submit button:hover svg{transform:translateX(4px)}
+#n20-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08)}
+.n20-footer-main{padding:60px 0 48px}
+.n20-footer-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+.n20-footer-logo{height:36px;width:auto;margin-bottom:12px}
+.n20-footer-tagline{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:22px;font-style:italic}
+.n20-footer-contact{list-style:none;display:flex;flex-direction:column;gap:11px}
+.n20-footer-contact li{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.55)}
+.n20-footer-contact svg{width:15px;height:15px;fill:var(--accent);flex-shrink:0}
+.n20-footer-contact a{color:rgba(255,255,255,.55);text-decoration:none;transition:color .18s}
+.n20-footer-contact a:hover{color:#fff}
+.n20-footer-social{display:flex;gap:10px;margin-top:22px}
+.n20-footer-social a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);transition:all .2s;text-decoration:none}
+.n20-footer-social a:hover{background:var(--accent);border-color:var(--accent)}
+.n20-footer-social svg{width:15px;height:15px;fill:#fff}
+.n20-footer-col h4{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px}
+.n20-footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.n20-footer-col ul a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .18s}
+.n20-footer-col ul a:hover{color:#fff}
+.n20-footer-partners{border-top:1px solid rgba(255,255,255,.06);padding:28px 0}
+.n20-footer-partners-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.n20-footer-partners-inner img{height:32px;width:auto;filter:grayscale(1) brightness(2);opacity:.35;transition:opacity .2s}
+.n20-footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding:18px 40px;max-width:var(--max);margin:0 auto;display:flex;justify-content:center;font-size:13px;color:rgba(255,255,255,.4)}
+.n20-footer-bottom a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .18s}
+.n20-footer-bottom a:hover{color:rgba(255,255,255,.8)}
+#whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:8000;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s;text-decoration:none}
+#whatsapp-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(37,211,102,.55)}
+#whatsapp-btn svg{width:28px;height:28px;fill:white}
+.sr{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1)}
+.sr-img{opacity:0;transform:scale(.96) translateY(20px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
+.sr.in,.sr-img.in{opacity:1;transform:none}
+@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:40px;padding:0 24px}.intro-img{order:-1}.srv-grid{grid-template-columns:1fr}.srv-section-inner{padding:0 24px}.why-inner{grid-template-columns:1fr;padding:0 24px}.n20-footer-inner{grid-template-columns:1fr}}
+@media(max-width:600px){.hdr-inner{padding:0 20px}.hero-content,.srv-section-inner,.n20-faq-inner,.contact-inner{padding-left:20px;padding-right:20px}.form-row{grid-template-columns:1fr}.n20-footer-inner{padding:0 20px}.n20-footer-bottom{padding:18px 20px}.n20-footer-partners-inner{padding:0 20px}}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="/ru/homepage/" class="hdr-logo"><img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier"></a>
+    <nav class="hdr-nav">
+      <a href="/ru/homepage/">Главная</a>
+      <a href="/ru/find-accomodation/">Найти жильё</a>
+      <a href="/ru/terminate-lease/">Расторжение</a>
+      <a href="/ru/buy-sell/">Купля-продажа</a>
+      <a href="/ru/additional-services/" class="active">Услуги</a>
+      <a href="/ru/about-us/">Корп. клиентам</a>
+    </nav>
+    <div class="hdr-lang">
+      <a href="#"><img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU"> Русский</a>
+      <div class="lang-dropdown">
+        <a href="/ru/additional-services/"><img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU"> Русский</a>
+        <a href="/en/additional-services/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN"> English</a>
+        <a href="/services-complementaires/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR"> Français</a>
+      </div>
+    </div>
+    <button class="hdr-burger" id="burgerBtn">☰</button>
+  </div>
+</header>
+
+<nav class="mob-nav" id="mobNav">
+  <a href="/ru/homepage/" onclick="closeMob()">Главная</a>
+  <a href="/ru/find-accomodation/" onclick="closeMob()">Найти жильё</a>
+  <a href="/ru/terminate-lease/" onclick="closeMob()">Расторжение</a>
+  <a href="/ru/buy-sell/" onclick="closeMob()">Купля-продажа</a>
+  <a href="/ru/additional-services/" onclick="closeMob()">Услуги</a>
+  <a href="/ru/about-us/" onclick="closeMob()">Корп. клиентам</a>
+  <div class="mob-lang">
+    <a href="/ru/additional-services/" style="color:white;">RU</a>
+    <a href="/en/additional-services/">EN</a>
+    <a href="/services-complementaires/">FR</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div id="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Дополнительные услуги</span>
+    <h1>Всё необходимое<br>для успешного переезда.</h1>
+    <p>Кроме жилья, N20 Immobilier сопровождает вас на каждом шагу: арендная гарантия, страхование, договоры SIG, консьерж-услуги.</p>
+    <a href="#contact" class="btn-white-dark">Связаться с нами</a>
+  </div>
+</section>
+
+<div class="light-zone">
+
+<section class="section-intro">
+  <div class="intro-inner">
+    <div>
+      <span class="kicker">Наш комплексный подход</span>
+      <h2>Полное сопровождение — от жилья до обустройства</h2>
+      <p>Найти жильё — одно. Комфортно обустроиться — другое. Арендная гарантия, страхование, договоры на энергоснабжение, консьерж-услуги — каждая деталь важна для переезда без стресса.</p>
+      <p>N20 Immobilier соединяет вас с лучшими партнёрами Женевы для каждой из этих потребностей, экономя недели административных процедур.</p>
+    </div>
+    <div class="intro-img">
+      <img src="/wp-content/uploads/2025/10/male-plumber-working-with-client-fix-kitchen-problems.jpg" alt="Дополнительные услуги в Женеве" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="srv-section">
+  <div class="srv-section-inner">
+    <div class="section-label">Что мы предлагаем</div>
+    <h2 class="section-title">Наши дополнительные услуги</h2>
+    <div class="srv-grid">
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="srv-body">
+          <h3>Арендная гарантия</h3>
+          <p>Залог за аренду часто является барьером для новоприбывших. Мы предлагаем адаптированные решения, избавляя от необходимости заморозить 3 месяца арендной платы наличными.</p>
+          <ul class="srv-features">
+            <li>Решения для экспатов и международных чиновников</li>
+            <li>Быстрое оформление</li>
+            <li>Альтернативы депозиту наличными</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="srv-body">
+          <h3>Страхование</h3>
+          <p>Гражданская ответственность, домашнее имущество, защита собственности — направляем к подходящему покрытию с согласованными тарифами от наших партнёров.</p>
+          <ul class="srv-features">
+            <li>Страхование ответственности и имущества</li>
+            <li>Юридическая защита</li>
+            <li>Покрытие для экспатов</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="srv-body">
+          <h3>Договоры SIG</h3>
+          <p>Электричество, газ, вода — договоры с SIG активируются до вашего прибытия. Вы въезжаете с готовым жильём с первого дня.</p>
+          <ul class="srv-features">
+            <li>Активация до въезда</li>
+            <li>Полное административное сопровождение</li>
+            <li>Контроль до подтверждения SIG</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="srv-body">
+          <h3>Консьерж-услуги</h3>
+          <p>Для клиентов, желающих премиального обслуживания: индивидуальный консьерж-сервис — дискретный, оперативный и ориентированный на запросы международной клиентуры.</p>
+          <ul class="srv-features">
+            <li>Индивидуальный и конфиденциальный сервис</li>
+            <li>Расширенная доступность</li>
+            <li>Сеть премиум-поставщиков</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="why-inner">
+    <div>
+      <span class="kicker">Почему N20</span>
+      <h2>Одна точка контакта для полного обустройства</h2>
+      <p class="subtitle">Единый консультант для всех ваших процедур — от жилья до полноценной инсталляции.</p>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>Тщательно отобранные партнёры</strong>
+            <span>Каждый поставщик выбран за надёжность и экспертизу на женевском рынке.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>Значительная экономия времени</strong>
+            <span>Мы координируем всех поставщиков, чтобы всё было готово к вашему приезду.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>Экспертиза для экспатов</strong>
+            <span>Сотрудники ООН, ВОЗ, МККК — мы понимаем ваши особые потребности.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>Многоязычная поддержка</strong>
+            <span>Наша команда помогает вам на французском, английском и русском языках.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Всё активировано<br>с первого дня</h3>
+      <p>Энергоснабжение, страхование, гарантия — координируем всё, чтобы ваше жильё было полностью готово в первый же день. Вам остаётся только распаковать вещи.</p>
+      <div class="why-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Ноль административного стресса</div>
+    </div>
+  </div>
+</section>
+
+<section id="n20-faq">
+  <div class="n20-faq-inner">
+    <h2 class="n20-faq-title">Часто задаваемые вопросы</h2>
+    <div class="n20-faq-list">
+      <details class="n20-faq-item">
+        <summary>Входят ли эти услуги в базовый пакет? <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Часть услуг, таких как направление к SIG и консультации по страхованию, включены в стандартное сопровождение. Для премиальных услуг (консьерж, индивидуальные решения по гарантии) мы предоставляем персональное предложение в зависимости от ваших потребностей.</div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Можно ли воспользоваться услугами без договора аренды N20? <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Да. Наши дополнительные услуги доступны независимо от поиска жилья. Если вы нашли жильё через другой канал или просто хотите воспользоваться нашей партнёрской сетью — обращайтесь напрямую.</div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>За сколько времени нужно активировать договоры SIG? <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Рекомендуем начать процедуры SIG минимум за 2 недели до даты въезда. Это позволяет обработать запрос и обеспечить активацию с первого дня. N20 берёт на себя эту координацию.</div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Какие решения по арендной гарантии вы предлагаете? <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Мы сотрудничаем с несколькими специалистами в области швейцарских арендных гарантий, в том числе для профилей экспатов и международных чиновников. Решения варьируются в зависимости от вашей ситуации: совместная гарантия, банковская гарантия или страховая гарантия.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="contact-overlay"></div>
+  <div class="contact-inner">
+    <h2>Обсудим ваше обустройство</h2>
+    <p>Расскажите, что вам нужно, и мы направим вас к оптимальному решению в течение 24 часов.</p>
+    <form class="contact-form" onsubmit="return false">
+      <div class="form-row">
+        <input type="text" placeholder="Имя" required>
+        <input type="text" placeholder="Фамилия" required>
+      </div>
+      <div class="form-row">
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Телефон">
+      </div>
+      <select>
+        <option value="" disabled selected>Нужная услуга</option>
+        <option>Арендная гарантия</option>
+        <option>Страхование</option>
+        <option>Договоры SIG</option>
+        <option>Консьерж-услуги</option>
+        <option>Несколько услуг</option>
+      </select>
+      <textarea placeholder="Опишите вашу ситуацию — дата въезда, особые потребности..."></textarea>
+      <div class="form-submit">
+        <button type="submit">Отправить запрос <svg viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer id="n20-footer">
+  <div class="n20-footer-main">
+    <div class="n20-footer-inner">
+      <div class="n20-footer-brand">
+        <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" class="n20-footer-logo">
+        <p class="n20-footer-tagline">Ваш партнёр по переезду</p>
+        <ul class="n20-footer-contact">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:contact@n20immobilier.ch">contact@n20immobilier.ch</a></li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>+41 76 419 20 21</span></li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><span>Cours des Bastions 13, 1205 Geneva</span></li>
+        </ul>
+        <div class="n20-footer-social">
+          <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.linkedin.com/company/n20-immobilier/about/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Наши услуги</h4>
+        <ul>
+          <li><a href="/ru/find-accomodation/">Найти жильё</a></li>
+          <li><a href="/ru/terminate-lease/">Расторжение договора</a></li>
+          <li><a href="/ru/buy-sell/">Купля-продажа</a></li>
+          <li><a href="/ru/additional-services/">Доп. услуги</a></li>
+        </ul>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Полезные ссылки</h4>
+        <ul>
+          <li><a href="/ru/private-individual/">Мандат поиска</a></li>
+          <li><a href="/ru/terms-and-conditions/">Условия использования</a></li>
+          <li><a href="/ru/privacy-policy/">Политика конфиденциальности</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="n20-footer-partners">
+    <div class="n20-footer-partners-inner">
+      <img src="/wp-content/uploads/2025/11/Untitled-design-5.png" alt="Партнёр 1">
+      <img src="/wp-content/uploads/2025/11/2.png" alt="Партнёр 2">
+    </div>
+  </div>
+  <div class="n20-footer-bottom">
+    <p>© 2026 N20 Immobilier — Все права защищены &nbsp;·&nbsp; <a href="/ru/terms-and-conditions/">Условия использования</a> &nbsp;·&nbsp; <a href="/ru/privacy-policy/">Политика конфиденциальности</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/41764192021" id="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+document.getElementById('burgerBtn').addEventListener('click',function(){const n=document.getElementById('mobNav');n.classList.toggle('open');this.textContent=n.classList.contains('open')?'✕':'☰';});
+function closeMob(){document.getElementById('mobNav').classList.remove('open');document.getElementById('burgerBtn').textContent='☰';}
+(function(){var T='.kicker,.section-label,.section-title,.n20-faq-title,.n20-faq-item,.check-item,.intro-inner h2,.intro-inner p,.why-inner h2,.why-inner .subtitle';var I='.intro-img,.why-card';function add(el,c){if(!el||el.closest('#hero,#site-header,.mob-nav,#n20-footer'))return;el.classList.add(c);}document.querySelectorAll(T).forEach(function(el){add(el,'sr');});document.querySelectorAll(I).forEach(function(el){add(el,'sr-img');});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);});},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});document.querySelectorAll('.sr,.sr-img').forEach(function(el){io.observe(el);});})();
+</script>
+</body>
+</html>

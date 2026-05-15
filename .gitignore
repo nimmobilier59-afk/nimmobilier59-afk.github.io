@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+# Large unused video files (>100MB or unreferenced)
+wp-content/uploads/2025/10/N20.mov
+wp-content/uploads/2025/09/9113160-uhd_3840_2160_30fps.mp4
+wp-content/uploads/2025/09/openart-video_e2ca45dd_1758817196181.mp4
+wp-content/uploads/2025/09/openart-video_e2ca45dd_1758817196181-1.mp4
+wp-content/uploads/2025/09/openart-video_e2ca45dd_1758817196181-2.mp4
+wp-content/uploads/2025/10/openart-video_66e441aa_1761228020702.mp4
+wp-content/uploads/2025/10/openart-video_66e441aa_1761228020702-1.mp4
