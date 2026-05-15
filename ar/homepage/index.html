@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N20 Immobilier – وكالة عقارية في جنيف</title>
 <meta name="description" content="N20 Immobilier — وكالتك العقارية المتخصصة في جنيف. إيجاد سكن، إنهاء عقد الإيجار، شراء وبيع العقارات. خدمة مخصصة للأفراد والمؤسسات.">
+<meta name="keywords" content="N20 عقارات, عقارات جنيف, شراء شقة جنيف, إيجار شقة جنيف, وكالة عقارية جنيف, إدارة عقارات جنيف, وسيط عقاري جنيف, بيع شقة جنيف, بيع منزل جنيف, شراء منزل جنيف, شقة للبيع جنيف, منزل للبيع جنيف, عقارات فاخرة جنيف, تقييم عقاري جنيف, سعر المتر المربع جنيف, سوق العقارات جنيف, رهن عقاري سويسرا, استثمار عقاري جنيف, شقة للإيجار جنيف, منزل للإيجار جنيف, عقارات راقية جنيف, شراء فيلا جنيف, عقارات كولوني, عقارات شامبيل, عقارات أو فيف, عقارات كاروج, عقارات لانسي, عقارات فيرنيي, عقارات مارين, انتقال جنيف, فسخ عقد إيجار جنيف, ملكية مشتركة جنيف, أسعار العقارات جنيف, رهن عقاري سويسرا, شراء عقار جنيف, إيجاد شقة جنيف, شقة 3 غرف جنيف, شقة 4 غرف جنيف, عقارات سويسرا, إعلانات عقارية جنيف, استوديو للإيجار جنيف">
 <link rel="canonical" href="/ar/homepage/">
 <link rel="icon" href="/wp-content/uploads/2025/09/n20-favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +20,14 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 h1,h2,h3,h4{font-family:'Amiri',serif;font-weight:400;line-height:1.15}
 strong{font-weight:600}
+/* INTRO */
+#n20-intro{position:fixed;inset:0;z-index:9999;background:var(--navy);display:flex;align-items:center;justify-content:center;animation:introHide .4s ease 1.4s forwards}
+#n20-intro-inner{display:flex;flex-direction:column;align-items:center;gap:24px}
+#n20-intro-logo{height:80px;width:auto;animation:logoPop .55s cubic-bezier(.34,1.56,.64,1) .2s both}
+.n20-intro-text{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;font-family:'Amiri',serif;font-size:clamp(22px,4vw,36px);color:var(--white);opacity:0;animation:textFade .4s ease .7s forwards;direction:rtl}
+@keyframes introHide{to{opacity:0;pointer-events:none;visibility:hidden}}
+@keyframes logoPop{from{transform:scale(.3) rotate(-10deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+@keyframes textFade{from{opacity:0}to{opacity:1}}
 /* HEADER */
 #site-header{position:fixed;top:0;left:0;right:0;z-index:9000;background:var(--navy);height:72px}
 .hdr-inner{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;max-width:100%}
@@ -126,6 +135,21 @@ strong{font-weight:600}
 </style>
 </head>
 <body>
+
+<!-- ══════════════════ INTRO ══════════════════ -->
+<div id="n20-intro">
+  <div id="n20-intro-inner">
+    <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" id="n20-intro-logo">
+    <p class="n20-intro-text">
+      <span>أهلاً</span>
+      <span>وسهلاً</span>
+      <span>في</span>
+      <span>منزلكم</span>
+      <span>الجديد</span>
+    </p>
+  </div>
+</div>
+
 
 <header id="site-header">
   <div class="hdr-inner">
@@ -348,6 +372,9 @@ strong{font-weight:600}
 </a>
 
 <script>
+// Intro
+(function(){const i=document.getElementById('n20-intro');if(i)setTimeout(()=>i.remove(),1900);})();
+
 const burger=document.getElementById('burgerBtn'),mob=document.getElementById('mobNav');
 function closeMob(){mob.classList.remove('open');burger.textContent='☰'}
 burger.addEventListener('click',()=>{const o=mob.classList.toggle('open');burger.textContent=o?'✕':'☰'});
