@@ -883,7 +883,19 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
   <svg viewBox="0 0 32 32"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/></svg>
 </a>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ── EmailJS — à configurer ────────────────────────────────────────────────────
+// 1. Créez un compte sur https://www.emailjs.com
+// 2. Ajoutez un service email (Gmail / SMTP) → copiez le Service ID ci-dessous
+// 3. Créez un template → copiez le Template ID ci-dessous
+// 4. Account > API Keys → copiez la Public Key ci-dessous
+const EJS_SERVICE  = 'YOUR_SERVICE_ID';
+const EJS_TEMPLATE = 'YOUR_TEMPLATE_ID';
+const EJS_KEY      = 'YOUR_PUBLIC_KEY';
+emailjs.init({publicKey: EJS_KEY});
+
 const mobToggle=document.getElementById('mobToggle');
 const mobNav=document.getElementById('mob-nav');
 const mobClose=document.getElementById('mob-close');
@@ -1002,20 +1014,203 @@ function showFile(input,zoneId,fnId){
   }
 }
 
-function submitForm(){
-  const chkM=document.getElementById('chkMandate');
-  const chkP=document.getElementById('chkPrivacy');
+// ── Collecte toutes les données du formulaire ─────────────────────────────────
+function buildMandat(){
+  const v=n=>{const el=document.querySelector(`[name="${n}"]`);return el?el.value.trim():'';};
+  const r=n=>{const el=document.querySelector(`input[name="${n}"]:checked`);return el?el.value:'';};
+  const fd=val=>{if(!val)return'—';const[y,m,d]=val.split('-');return`${d}.${m}.${y}`;};
+  const p1=document.querySelector('#step1 .phone-prefix')?.value||'+41';
+  const p2=document.querySelector('#step2 .phone-prefix')?.value||'+41';
+  const a1=document.getElementById('annex1')?.files[0]||null;
+  const a2=document.getElementById('annex2')?.files[0]||null;
+  const a3=document.getElementById('annex3')?.files[0]||null;
+  return{
+    lastName:v('lastName'),firstName:v('firstName'),dob:fd(v('dob')),
+    currentAddress:v('currentAddress'),children:v('children')||'0',
+    phone:p1+' '+v('phone'),email:v('email'),
+    leaseInName:r('leaseInName')==='yes'?'Oui':'Non',
+    needTermination:r('needTermination')==='yes'?'Oui':'Non',
+    coVisible:document.getElementById('cotenantFields')?.classList.contains('visible'),
+    coLastName:v('coLastName'),coFirstName:v('coFirstName'),coDob:fd(v('coDob')),
+    coChildren:v('coChildren')||'0',coPhone:p2+' '+v('coPhone'),coEmail:v('coEmail'),
+    propertyType:v('propertyType'),minRooms:v('minRooms'),
+    budget:v('budget'),moveIn:fd(v('moveIn')),
+    area1:v('area1'),area2:v('area2'),area3:v('area3'),notes:v('notes'),
+    annex1:a1?a1.name:'',annex2:a2?a2.name:'',annex3:a3?a3.name:'',
+  };
+}
+
+// ── Génère le PDF mandat A4 ───────────────────────────────────────────────────
+function generatePDF(d){
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4'});
+  const W=210,M=18,CW=174;
+  const NAV=[2,22,35],ACC=[110,193,228],LG=[240,243,246],MG=[150,162,172],BK=[20,25,30],WH=[255,255,255];
+  let y=0;
+
+  // ── En-tête ──
+  doc.setFillColor(...NAV);doc.rect(0,0,W,34,'F');
+  doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor(...WH);
+  doc.text('N20 IMMOBILIER',M,15);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...ACC);
+  doc.text('Votre partenaire immobilier a Geneve',M,22);
+  doc.setFont('helvetica','bold');doc.setFontSize(15);doc.setTextColor(...WH);
+  doc.text('MANDAT DE RECHERCHE',W-M,13,{align:'right'});
+  const ref='MR-'+Date.now().toString(36).toUpperCase().slice(-8);
+  const now=new Date();
+  const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...ACC);
+  doc.text(`Ref. ${ref}  -  Date : ${dt}`,W-M,22,{align:'right'});
+  y=42;
+
+  // ── Helpers ──
+  const chkPage=h=>{if(y+h>272){doc.addPage();y=20;}};
+  const sec=title=>{
+    chkPage(12);
+    doc.setFillColor(...ACC);doc.rect(M,y,CW,7,'F');
+    doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...NAV);
+    doc.text(title,M+4,y+5);y+=10;
+  };
+  const row=fields=>{
+    chkPage(16);
+    const n=fields.length,cw=CW/n;
+    doc.setFillColor(...LG);doc.rect(M,y,CW,13,'F');
+    fields.forEach((f,i)=>{
+      const x=M+i*cw+3;
+      doc.setFont('helvetica','normal');doc.setFontSize(6.5);doc.setTextColor(...MG);
+      doc.text(String(f.l).toUpperCase(),x,y+4.5);
+      doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(...BK);
+      doc.text(f.v||'—',x,y+10,{maxWidth:cw-6});
+    });
+    y+=15;
+  };
+  const frow=(label,value)=>{
+    const lines=doc.splitTextToSize(value||'—',CW-6);
+    const h=Math.max(13,lines.length*5+8);
+    chkPage(h+2);
+    doc.setFillColor(...LG);doc.rect(M,y,CW,h,'F');
+    doc.setFont('helvetica','normal');doc.setFontSize(6.5);doc.setTextColor(...MG);
+    doc.text(String(label).toUpperCase(),M+3,y+4.5);
+    doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(...BK);
+    doc.text(lines,M+3,y+10);
+    y+=h+2;
+  };
+  const gap=()=>{y+=3;};
+
+  // ── 1. DEMANDEUR ──
+  sec('1. DEMANDEUR');
+  row([{l:'Nom',v:d.lastName},{l:'Prenom',v:d.firstName},{l:'Date de naissance',v:d.dob},{l:"Nb d'enfants",v:d.children}]);
+  gap();frow('Adresse actuelle',d.currentAddress);gap();
+  row([{l:'Telephone',v:d.phone},{l:'Email',v:d.email}]);gap();
+  row([{l:'Bail a son nom',v:d.leaseInName},{l:'Resiliation necessaire',v:d.needTermination}]);gap();
+
+  // ── 2. CO-LOCATAIRE ──
+  if(d.coVisible){
+    sec('2. CO-LOCATAIRE');
+    row([{l:'Nom',v:d.coLastName},{l:'Prenom',v:d.coFirstName},{l:'Date de naissance',v:d.coDob},{l:"Nb d'enfants",v:d.coChildren}]);
+    gap();row([{l:'Telephone',v:d.coPhone},{l:'Email',v:d.coEmail}]);gap();
+  }
+
+  // ── CRITERES DU BIEN ──
+  const sn=d.coVisible?'3':'2';
+  sec(`${sn}. CRITERES DU BIEN`);
+  row([{l:'Type de bien',v:d.propertyType},{l:'Pieces min.',v:d.minRooms},{l:'Budget max (CHF)',v:d.budget},{l:"Date d'entree",v:d.moveIn}]);
+  gap();
+  const zones=[d.area1,d.area2,d.area3].filter(Boolean).join('  >  ')||'—';
+  frow('Communes souhaitees',zones);gap();
+  if(d.notes){frow('Remarques complementaires',d.notes);gap();}
+
+  // ── PIECES JOINTES ──
+  const as=d.coVisible?'4':'3';
+  sec(`${as}. PIECES JOINTES`);
+  const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean);
+  if(aList.length===0){
+    chkPage(12);
+    doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(...MG);
+    doc.text('Aucune piece jointe transmise.',M+3,y+6);y+=12;
+  }else{
+    aList.forEach((name,i)=>{
+      chkPage(12);
+      doc.setFillColor(...LG);doc.rect(M,y,CW,10,'F');
+      doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...BK);
+      doc.text(`Annexe ${i+1} :`,M+3,y+6.5);
+      doc.setFont('helvetica','normal');doc.text(name,M+30,y+6.5,{maxWidth:CW-33});
+      y+=12;
+    });
+  }
+  gap();
+
+  // ── SIGNATURE ──
+  const ss=d.coVisible?'5':'4';
+  chkPage(50);
+  sec(`${ss}. SIGNATURE`);
+  doc.setFillColor(...LG);doc.rect(M,y,CW,40,'F');
+  doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...MG);
+  doc.text('Le soussigne mandate N20 Immobilier pour effectuer des recherches conformement aux criteres definis ci-dessus.',M+3,y+8,{maxWidth:CW-6});
+  doc.setDrawColor(...MG);
+  doc.line(M+3,y+24,M+74,y+24);doc.line(M+90,y+24,W-M-3,y+24);
+  doc.setFontSize(7);doc.setTextColor(...MG);
+  doc.text('Lieu et date',M+3,y+29);
+  doc.text('Signature du mandant',M+90,y+29);
+  y+=46;
+
+  // ── Pied de page ──
+  const FY=287;
+  doc.setDrawColor(...ACC);doc.line(M,FY,W-M,FY);
+  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...MG);
+  doc.text('N20 Immobilier  -  info@n20immobilier.ch  -  +41 76 419 20 21  -  www.n20immobilier.ch',W/2,FY+5,{align:'center'});
+  doc.text(`Ref. ${ref}  -  Genere le ${dt}`,W/2,FY+10,{align:'center'});
+
+  return{doc,ref,dt};
+}
+
+// ── Envoi email via EmailJS ───────────────────────────────────────────────────
+async function sendEmail(d,ref,dt){
+  const zones=[d.area1,d.area2,d.area3].filter(Boolean).join(' > ')||'—';
+  const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`Annexe ${i+1} : ${n}`).join('\n')||'Aucune annexe';
+  return emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{
+    ref,date:dt,
+    full_name:`${d.firstName} ${d.lastName}`,
+    dob:d.dob,address:d.currentAddress,children:d.children,
+    phone:d.phone,email:d.email,
+    lease_in_name:d.leaseInName,need_termination:d.needTermination,
+    has_cotenant:d.coVisible?'Oui':'Non',
+    co_name:d.coVisible?`${d.coFirstName} ${d.coLastName}`:'N/A',
+    co_dob:d.coVisible?d.coDob:'N/A',
+    co_phone:d.coVisible?d.coPhone:'N/A',
+    co_email:d.coVisible?d.coEmail:'N/A',
+    property_type:d.propertyType,min_rooms:d.minRooms,
+    budget:d.budget,move_in:d.moveIn,
+    zones,notes:d.notes||'—',annexes:aList,
+    reply_to:d.email,
+  });
+}
+
+// ── Soumission du formulaire ──────────────────────────────────────────────────
+async function submitForm(){
   const annex1=document.getElementById('annex1');
   if(!annex1.files||!annex1.files.length){
     document.getElementById('uz1').style.borderColor='#f87171';
-    alert('Veuillez joindre au minimum l\'Annexe 1 (obligatoire).');
+    alert("Veuillez joindre au minimum l'Annexe 1 (obligatoire).");
     return;
   }
   document.getElementById('uz1').style.borderColor='';
+  const chkM=document.getElementById('chkMandate');
+  const chkP=document.getElementById('chkPrivacy');
   if(!chkM.checked||!chkP.checked){
-    alert('Veuillez accepter les Conditions Générales et la Politique de Confidentialité pour continuer.');
+    alert('Veuillez accepter les Conditions Generales et la Politique de Confidentialite pour continuer.');
     return;
   }
+  const btn=document.querySelector('.btn-submit');
+  btn.disabled=true;btn.textContent='Envoi en cours…';
+
+  const data=buildMandat();
+  const{doc,ref,dt}=generatePDF(data);
+  doc.save(`Mandat_Recherche_N20_${ref}.pdf`);
+
+  try{await sendEmail(data,ref,dt);}
+  catch(e){console.warn('EmailJS:',e);}
+
   document.getElementById('formCard').style.display='none';
   document.getElementById('progressBar').style.display='none';
   document.querySelector('.pi-hero p').style.display='none';
