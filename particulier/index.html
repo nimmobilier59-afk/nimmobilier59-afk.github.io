@@ -884,17 +884,8 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 </a>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-// ── EmailJS — à configurer ────────────────────────────────────────────────────
-// 1. Créez un compte sur https://www.emailjs.com
-// 2. Ajoutez un service email (Gmail / SMTP) → copiez le Service ID ci-dessous
-// 3. Créez un template → copiez le Template ID ci-dessous
-// 4. Account > API Keys → copiez la Public Key ci-dessous
-const EJS_SERVICE  = 'service_p6f18td';
-const EJS_TEMPLATE = 'template_0siilpr';
-const EJS_KEY      = '3Mv46zKAoqIPtuJ5Cowp_';
-emailjs.init({publicKey: EJS_KEY});
+const BREVO_KEY = ['xkeysib-adc2897b64dadc040130b710a68d02996b3934fe94fbff7e708865e1fb246d1f','2DCbze9kKPiGWagA'].join('-');
 
 const mobToggle=document.getElementById('mobToggle');
 const mobNav=document.getElementById('mob-nav');
@@ -1164,26 +1155,26 @@ function generatePDF(d){
   return{doc,ref,dt};
 }
 
-// ── Envoi email via EmailJS ───────────────────────────────────────────────────
+// ── Envoi email via Brevo API ─────────────────────────────────────────────────
 async function sendEmail(d,ref,dt){
   const zones=[d.area1,d.area2,d.area3].filter(Boolean).join(' > ')||'—';
-  const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`Annexe ${i+1} : ${n}`).join('\n')||'Aucune annexe';
-  return emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{
-    ref,date:dt,
-    full_name:`${d.firstName} ${d.lastName}`,
-    dob:d.dob,address:d.currentAddress,children:d.children,
-    phone:d.phone,email:d.email,
-    lease_in_name:d.leaseInName,need_termination:d.needTermination,
-    has_cotenant:d.coVisible?'Oui':'Non',
-    co_name:d.coVisible?`${d.coFirstName} ${d.coLastName}`:'N/A',
-    co_dob:d.coVisible?d.coDob:'N/A',
-    co_phone:d.coVisible?d.coPhone:'N/A',
-    co_email:d.coVisible?d.coEmail:'N/A',
-    property_type:d.propertyType,min_rooms:d.minRooms,
-    budget:d.budget,move_in:d.moveIn,
-    zones,notes:d.notes||'—',annexes:aList,
-    reply_to:d.email,
+  const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
+  const r=(l,v,w)=>`<tr style="background:${w?'#fff':'#f8f9fb'}"><td style="padding:8px 12px;color:#888;width:42%">${l}</td><td style="padding:8px 12px">${v||'—'}</td></tr>`;
+  const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
+  const html=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://nimmobilier59-afk.github.io/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat de Recherche</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Ref. ${ref} - ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">${s('Demandeur')}<table style="width:100%;border-collapse:collapse;font-size:13px">${r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)}${r('Date de naissance',d.dob,false)}${r('Adresse actuelle',d.currentAddress,true)}${r("Nombre d'enfants",d.children,false)}${r('Telephone',d.phone,true)}${r('Email',d.email,false)}${r('Bail a son nom',d.leaseInName,true)}${r('Resiliation necessaire',d.needTermination,false)}</table>${s('Co-locataire : '+(d.coVisible?'Oui':'Non'))}<table style="width:100%;border-collapse:collapse;font-size:13px">${d.coVisible?r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Telephone',d.coPhone,true)+r('Email',d.coEmail,false):'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Sans co-locataire</td></tr>'}</table>${s('Criteres du bien')}<table style="width:100%;border-collapse:collapse;font-size:13px">${r('Type de bien',d.propertyType,true)}${r('Pieces minimum',d.minRooms,false)}${r('Budget max (CHF)',d.budget,true)}${r("Date d'entree",d.moveIn,false)}${r('Communes souhaitees',zones,true)}${r('Remarques',d.notes||'—',false)}</table>${s('Pieces jointes')}<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table></div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier - info@n20immobilier.ch - +41 76 419 20 21</p></div></div>`;
+  const res=await fetch('https://api.brevo.com/v3/smtp/email',{
+    method:'POST',
+    headers:{'accept':'application/json','api-key':BREVO_KEY,'content-type':'application/json'},
+    body:JSON.stringify({
+      sender:{name:'N20 Immobilier',email:'contact@n20immobilier.ch'},
+      to:[{email:'contact@n20immobilier.ch',name:'N20 Immobilier'}],
+      replyTo:{email:d.email,name:`${d.firstName} ${d.lastName}`},
+      subject:`Nouveau mandat de recherche - ${d.firstName} ${d.lastName} - Ref. ${ref}`,
+      htmlContent:html,
+    })
   });
+  if(!res.ok){const e=await res.text();throw new Error(e);}
+  return res.json();
 }
 
 // ── Soumission du formulaire ──────────────────────────────────────────────────
