@@ -81,7 +81,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 .step-sub{font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:32px;line-height:1.6}
 
 .f-row{display:grid;gap:16px;margin-bottom:20px}
-.f-row.cols-2{grid-template-columns:1fr 1fr}
+.f-row.cols-2{grid-template-columns:1fr 1fr}.f-row.cols-3{grid-template-columns:1fr 1fr 1fr}
 .f-row.cols-1{grid-template-columns:1fr}
 .f-group{display:flex;flex-direction:column;gap:6px}
 .f-group label{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.04em;text-transform:uppercase}
@@ -120,6 +120,41 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 .btn-skip{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:600;padding:10px 22px;border-radius:50px;cursor:pointer;transition:all .2s}
 .btn-skip:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.9)}
 
+.recap-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:24px 28px;margin-bottom:28px}
+.recap-section{margin-bottom:20px}
+.recap-section:last-child{margin-bottom:0}
+.recap-section h4{font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.recap-item{display:flex;flex-direction:column;gap:3px}
+.recap-item span:first-child{font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.07em}
+.recap-item span:last-child{font-size:.9rem;color:#fff;font-weight:500}
+@media(max-width:600px){.recap-grid{grid-template-columns:1fr}}
+.annex-section{margin-bottom:28px}
+.annex-title{font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.annex-hint{font-size:.78rem;color:rgba(255,255,255,.45);margin:0 0 16px}
+.annex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.annex-grid{grid-template-columns:1fr}}
+.annex-item label{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(255,255,255,.7);margin-bottom:8px;font-weight:600}
+.badge-req{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(239,68,68,.18);color:#f87171;border:1px solid rgba(239,68,68,.3);border-radius:20px;padding:2px 8px}
+.badge-opt{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:2px 8px}
+.upload-zone{border:2px dashed rgba(255,255,255,.18);border-radius:12px;padding:20px 14px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:110px;justify-content:center}
+.upload-zone:hover{border-color:var(--accent);background:rgba(110,193,228,.06)}
+.upload-zone.has-file{border-color:var(--accent);border-style:solid;background:rgba(110,193,228,.08)}
+.upload-zone svg{width:28px;height:28px;stroke:rgba(255,255,255,.35);flex-shrink:0}
+.upload-zone.has-file svg{stroke:var(--accent)}
+.upload-zone .uz-label{font-size:.78rem;color:rgba(255,255,255,.45)}
+.upload-zone .uz-filename{font-size:.75rem;color:var(--accent);font-weight:600;word-break:break-all;display:none}
+.upload-zone.has-file .uz-filename{display:block}
+.upload-zone.has-file .uz-label{display:none}
+.annex-docs{list-style:none;margin:16px 0 0;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;display:flex;flex-direction:column;gap:10px}
+.annex-docs li{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(255,255,255,.75)}
+.annex-docs strong{color:#fff}
+.annex-doc-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);flex-shrink:0}
+.annex-doc-dot.req{background:var(--accent)}
+.annex-doc-tag{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:2px 8px;margin-left:4px}
+.annex-doc-tag.req{background:rgba(110,193,228,.15);color:var(--accent);border:1px solid rgba(110,193,228,.3)}
+.annex-doc-tag:not(.req){background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12)}
+.annex-doc-note{font-size:.75rem;color:rgba(255,255,255,.35);font-style:italic;margin-left:2px}
 .success-panel{display:none;text-align:center;padding:60px 24px}
 .success-panel.visible{display:block}
 .success-icon{width:72px;height:72px;border-radius:50%;background:rgba(110,193,228,.2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
@@ -147,7 +182,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 #whatsapp-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55)}
 #whatsapp-btn svg{width:28px;height:28px;fill:#fff}
 
-@media(max-width:900px){.hdr-nav{display:none}.lang-sw{display:none}.mob-nav-toggle{display:flex}.ftr-top{grid-template-columns:1fr 1fr;gap:32px}.form-card{padding:28px 24px}.f-row.cols-2{grid-template-columns:1fr}}
+@media(max-width:900px){.hdr-nav{display:none}.lang-sw{display:none}.mob-nav-toggle{display:flex}.ftr-top{grid-template-columns:1fr 1fr;gap:32px}.form-card{padding:28px 24px}.f-row.cols-2,.f-row.cols-3{grid-template-columns:1fr}}
 @media(max-width:560px){.ftr-top{grid-template-columns:1fr}.pi-hero{padding:60px 16px 40px}.pi-hero h1{font-size:2rem}.form-outer{padding:0 16px 60px}.form-card{padding:24px 16px}.form-nav{flex-wrap:wrap}.btn-prev,.btn-next,.btn-submit{width:100%;text-align:center}}
 .phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
 </style>
@@ -226,6 +261,9 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
           <div class="f-row cols-2">
             <div class="f-group"><label>Nom</label><input type="text" name="lastName" placeholder="Dupont"></div>
             <div class="f-group"><label>Prénom</label><input type="text" name="firstName" placeholder="Marie"></div>
+          </div>
+          <div class="f-row cols-1">
+            <div class="f-group"><label>Adresse actuelle</label><input type="text" name="currentAddress" placeholder="Rue de Rive 10, 1204 Genève"></div>
           </div>
           <div class="f-row cols-2">
             <div class="f-group"><label>Date de naissance</label><input type="date" name="dob"></div>
@@ -713,7 +751,12 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
           <div class="f-group"><label>Date d'entrée souhaitée</label><input type="date" name="moveIn"></div>
         </div>
 
-        <div class="f-row cols-1"><div class="f-group"><label>Quartiers / zones souhaités</label><input type="text" name="areas" placeholder="ex. Champel, Eaux-Vives, Carouge…"></div></div>
+        <div class="f-row cols-1"><div class="f-group"><label>Communes / zones souhaitées</label><small style="display:block;margin-bottom:10px;color:#aaa;font-size:0.78rem">Sélectionnez vos 3 communes de prédilection par ordre de préférence.</small></div></div>
+        <div class="f-row cols-3">
+          <div class="f-group"><label>1er choix</label><select name="area1"><option value="">— Choisir —</option><option value="Aire-la-Ville">Aire-la-Ville</option><option value="Anières">Anières</option><option value="Avully">Avully</option><option value="Avusy">Avusy</option><option value="Bardonnex">Bardonnex</option><option value="Bellevue">Bellevue</option><option value="Bernex">Bernex</option><option value="Carouge">Carouge</option><option value="Cartigny">Cartigny</option><option value="Céligny">Céligny</option><option value="Chancy">Chancy</option><option value="Chêne-Bougeries">Chêne-Bougeries</option><option value="Chêne-Bourg">Chêne-Bourg</option><option value="Choulex">Choulex</option><option value="Collex-Bossy">Collex-Bossy</option><option value="Collonge-Bellerive">Collonge-Bellerive</option><option value="Cologny">Cologny</option><option value="Confignon">Confignon</option><option value="Corsier">Corsier</option><option value="Dardagny">Dardagny</option><option value="Genève">Genève (ville)</option><option value="Genthod">Genthod</option><option value="Grand-Saconnex">Grand-Saconnex (Le)</option><option value="Gy">Gy</option><option value="Hermance">Hermance</option><option value="Jussy">Jussy</option><option value="Laconnex">Laconnex</option><option value="Lancy">Lancy</option><option value="Meinier">Meinier</option><option value="Meyrin">Meyrin</option><option value="Onex">Onex</option><option value="Perly-Certoux">Perly-Certoux</option><option value="Plan-les-Ouates">Plan-les-Ouates</option><option value="Pregny-Chambésy">Pregny-Chambésy</option><option value="Presinge">Presinge</option><option value="Puplinge">Puplinge</option><option value="Russin">Russin</option><option value="Satigny">Satigny</option><option value="Soral">Soral</option><option value="Thônex">Thônex</option><option value="Troinex">Troinex</option><option value="Vandœuvres">Vandœuvres</option><option value="Vernier">Vernier</option><option value="Versoix">Versoix</option><option value="Veyrier">Veyrier</option></select></div>
+          <div class="f-group"><label>2e choix</label><select name="area2"><option value="">— Choisir —</option><option value="Aire-la-Ville">Aire-la-Ville</option><option value="Anières">Anières</option><option value="Avully">Avully</option><option value="Avusy">Avusy</option><option value="Bardonnex">Bardonnex</option><option value="Bellevue">Bellevue</option><option value="Bernex">Bernex</option><option value="Carouge">Carouge</option><option value="Cartigny">Cartigny</option><option value="Céligny">Céligny</option><option value="Chancy">Chancy</option><option value="Chêne-Bougeries">Chêne-Bougeries</option><option value="Chêne-Bourg">Chêne-Bourg</option><option value="Choulex">Choulex</option><option value="Collex-Bossy">Collex-Bossy</option><option value="Collonge-Bellerive">Collonge-Bellerive</option><option value="Cologny">Cologny</option><option value="Confignon">Confignon</option><option value="Corsier">Corsier</option><option value="Dardagny">Dardagny</option><option value="Genève">Genève (ville)</option><option value="Genthod">Genthod</option><option value="Grand-Saconnex">Grand-Saconnex (Le)</option><option value="Gy">Gy</option><option value="Hermance">Hermance</option><option value="Jussy">Jussy</option><option value="Laconnex">Laconnex</option><option value="Lancy">Lancy</option><option value="Meinier">Meinier</option><option value="Meyrin">Meyrin</option><option value="Onex">Onex</option><option value="Perly-Certoux">Perly-Certoux</option><option value="Plan-les-Ouates">Plan-les-Ouates</option><option value="Pregny-Chambésy">Pregny-Chambésy</option><option value="Presinge">Presinge</option><option value="Puplinge">Puplinge</option><option value="Russin">Russin</option><option value="Satigny">Satigny</option><option value="Soral">Soral</option><option value="Thônex">Thônex</option><option value="Troinex">Troinex</option><option value="Vandœuvres">Vandœuvres</option><option value="Vernier">Vernier</option><option value="Versoix">Versoix</option><option value="Veyrier">Veyrier</option></select></div>
+          <div class="f-group"><label>3e choix</label><select name="area3"><option value="">— Choisir —</option><option value="Aire-la-Ville">Aire-la-Ville</option><option value="Anières">Anières</option><option value="Avully">Avully</option><option value="Avusy">Avusy</option><option value="Bardonnex">Bardonnex</option><option value="Bellevue">Bellevue</option><option value="Bernex">Bernex</option><option value="Carouge">Carouge</option><option value="Cartigny">Cartigny</option><option value="Céligny">Céligny</option><option value="Chancy">Chancy</option><option value="Chêne-Bougeries">Chêne-Bougeries</option><option value="Chêne-Bourg">Chêne-Bourg</option><option value="Choulex">Choulex</option><option value="Collex-Bossy">Collex-Bossy</option><option value="Collonge-Bellerive">Collonge-Bellerive</option><option value="Cologny">Cologny</option><option value="Confignon">Confignon</option><option value="Corsier">Corsier</option><option value="Dardagny">Dardagny</option><option value="Genève">Genève (ville)</option><option value="Genthod">Genthod</option><option value="Grand-Saconnex">Grand-Saconnex (Le)</option><option value="Gy">Gy</option><option value="Hermance">Hermance</option><option value="Jussy">Jussy</option><option value="Laconnex">Laconnex</option><option value="Lancy">Lancy</option><option value="Meinier">Meinier</option><option value="Meyrin">Meyrin</option><option value="Onex">Onex</option><option value="Perly-Certoux">Perly-Certoux</option><option value="Plan-les-Ouates">Plan-les-Ouates</option><option value="Pregny-Chambésy">Pregny-Chambésy</option><option value="Presinge">Presinge</option><option value="Puplinge">Puplinge</option><option value="Russin">Russin</option><option value="Satigny">Satigny</option><option value="Soral">Soral</option><option value="Thônex">Thônex</option><option value="Troinex">Troinex</option><option value="Vandœuvres">Vandœuvres</option><option value="Vernier">Vernier</option><option value="Versoix">Versoix</option><option value="Veyrier">Veyrier</option></select></div>
+        </div>
         <div class="f-row cols-1"><div class="f-group"><label>Remarques complémentaires</label><textarea name="notes" placeholder="Parking, jardin, accessibilité PMR…"></textarea></div></div>
 
         <div class="form-nav">
@@ -725,7 +768,48 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       <!-- ÉTAPE 4 -->
       <div class="step-pane" id="step4">
         <div class="step-title">Confirmation</div>
-        <div class="step-sub">Veuillez lire et accepter les conditions avant de soumettre votre mandat.</div>
+        <div class="step-sub">Vérifiez vos informations puis acceptez les conditions pour soumettre votre mandat.</div>
+
+        <div id="recap" class="recap-card"></div>
+
+        <div class="annex-section">
+          <div class="annex-title">Pièces jointes</div>
+          <p class="annex-hint">Joignez au minimum 1 document. Formats acceptés : PDF, JPG, PNG — 5 Mo max par fichier.</p>
+          <div class="annex-grid">
+            <div class="annex-item">
+              <label>Annexe 1 <span class="badge-req">Obligatoire</span></label>
+              <div class="upload-zone" id="uz1" onclick="document.getElementById('annex1').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="uz-label">Cliquez pour joindre</span>
+                <span class="uz-filename" id="fn1"></span>
+              </div>
+              <input type="file" id="annex1" name="annex1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz1','fn1')">
+            </div>
+            <div class="annex-item">
+              <label>Annexe 2 <span class="badge-opt">Optionnel</span></label>
+              <div class="upload-zone" id="uz2" onclick="document.getElementById('annex2').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="uz-label">Cliquez pour joindre</span>
+                <span class="uz-filename" id="fn2"></span>
+              </div>
+              <input type="file" id="annex2" name="annex2" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz2','fn2')">
+            </div>
+            <div class="annex-item">
+              <label>Annexe 3 <span class="badge-opt">Optionnel</span></label>
+              <div class="upload-zone" id="uz3" onclick="document.getElementById('annex3').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="uz-label">Cliquez pour joindre</span>
+                <span class="uz-filename" id="fn3"></span>
+              </div>
+              <input type="file" id="annex3" name="annex3" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz3','fn3')">
+            </div>
+          </div>
+          <ul class="annex-docs">
+            <li><span class="annex-doc-dot req"></span><strong>3 dernières fiches de salaire</strong></li>
+            <li><span class="annex-doc-dot"></span><strong>Extrait de l'office des poursuites</strong></li>
+            <li><span class="annex-doc-dot"></span><strong>Pièce d'identité</strong> + <strong>Permis d'établissement</strong> <em class="annex-doc-note">pour citoyen étranger</em></li>
+          </ul>
+        </div>
 
         <label class="check-opt">
           <input type="checkbox" id="chkMandate" required>
@@ -823,7 +907,48 @@ function goTo(n){
   });
   currentStep=n;
   document.getElementById('step'+n).classList.add('active');
+  if(n===4)buildRecap();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildRecap(){
+  const v=name=>{const el=document.querySelector(`[name="${name}"]`);return el?el.value.trim():'';};
+  const r=name=>{const el=document.querySelector(`input[name="${name}"]:checked`);return el?el.value:'';};
+  const fmt=val=>val||'—';
+  const fmtDate=val=>{if(!val)return'—';const[y,m,d]=val.split('-');return`${d}.${m}.${y}`;};
+  const prefix1=document.querySelector('#step1 .phone-prefix')?.value||'+41';
+  const prefix2=document.querySelector('#step2 .phone-prefix')?.value||'+41';
+  const ph1=v('phone'),ph2=v('coPhone');
+  const coVisible=document.getElementById('cotenantFields')?.classList.contains('visible');
+  const zones=[v('area1'),v('area2'),v('area3')].filter(Boolean).join(' › ')||'—';
+  let html=`<div class="recap-section"><h4>Demandeur</h4><div class="recap-grid">
+    <div class="recap-item"><span>Nom</span><span>${fmt(v('lastName'))}</span></div>
+    <div class="recap-item"><span>Prénom</span><span>${fmt(v('firstName'))}</span></div>
+    <div class="recap-item"><span>Date de naissance</span><span>${fmtDate(v('dob'))}</span></div>
+    <div class="recap-item"><span>Nombre d'enfants</span><span>${v('children')||'0'}</span></div>
+    <div class="recap-item" style="grid-column:1/-1"><span>Adresse actuelle</span><span>${fmt(v('currentAddress'))}</span></div>
+    <div class="recap-item"><span>Téléphone</span><span>${ph1?prefix1+' '+ph1:'—'}</span></div>
+    <div class="recap-item"><span>Email</span><span>${fmt(v('email'))}</span></div>
+    <div class="recap-item"><span>Bail à son nom</span><span>${r('leaseInName')==='yes'?'Oui':'Non'}</span></div>
+    <div class="recap-item"><span>Résiliation nécessaire</span><span>${r('needTermination')==='yes'?'Oui':'Non'}</span></div>
+  </div></div>`;
+  if(coVisible){html+=`<div class="recap-section"><h4>Co-locataire</h4><div class="recap-grid">
+    <div class="recap-item"><span>Nom</span><span>${fmt(v('coLastName'))}</span></div>
+    <div class="recap-item"><span>Prénom</span><span>${fmt(v('coFirstName'))}</span></div>
+    <div class="recap-item"><span>Date de naissance</span><span>${fmtDate(v('coDob'))}</span></div>
+    <div class="recap-item"><span>Nombre d'enfants</span><span>${v('coChildren')||'0'}</span></div>
+    <div class="recap-item"><span>Téléphone</span><span>${ph2?prefix2+' '+ph2:'—'}</span></div>
+    <div class="recap-item"><span>Email</span><span>${fmt(v('coEmail'))}</span></div>
+  </div></div>`;}
+  html+=`<div class="recap-section"><h4>Critères du bien</h4><div class="recap-grid">
+    <div class="recap-item"><span>Type de bien</span><span>${fmt(v('propertyType'))}</span></div>
+    <div class="recap-item"><span>Pièces minimum</span><span>${fmt(v('minRooms'))}</span></div>
+    <div class="recap-item"><span>Budget max (CHF)</span><span>${fmt(v('budget'))}</span></div>
+    <div class="recap-item"><span>Date d'entrée</span><span>${fmtDate(v('moveIn'))}</span></div>
+    <div class="recap-item" style="grid-column:1/-1"><span>Communes souhaitées</span><span>${zones}</span></div>
+    ${v('notes')?`<div class="recap-item" style="grid-column:1/-1"><span>Remarques</span><span>${v('notes')}</span></div>`:''}
+  </div></div>`;
+  document.getElementById('recap').innerHTML=html;
 }
 
 function makeRadio(groupId,onChange){
@@ -865,9 +990,28 @@ document.querySelectorAll('.radio-opt').forEach(opt=>{
   });
 });
 
+function showFile(input,zoneId,fnId){
+  const zone=document.getElementById(zoneId);
+  const fn=document.getElementById(fnId);
+  if(input.files&&input.files[0]){
+    fn.textContent=input.files[0].name;
+    zone.classList.add('has-file');
+  }else{
+    fn.textContent='';
+    zone.classList.remove('has-file');
+  }
+}
+
 function submitForm(){
   const chkM=document.getElementById('chkMandate');
   const chkP=document.getElementById('chkPrivacy');
+  const annex1=document.getElementById('annex1');
+  if(!annex1.files||!annex1.files.length){
+    document.getElementById('uz1').style.borderColor='#f87171';
+    alert('Veuillez joindre au minimum l\'Annexe 1 (obligatoire).');
+    return;
+  }
+  document.getElementById('uz1').style.borderColor='';
   if(!chkM.checked||!chkP.checked){
     alert('Veuillez accepter les Conditions Générales et la Politique de Confidentialité pour continuer.');
     return;
