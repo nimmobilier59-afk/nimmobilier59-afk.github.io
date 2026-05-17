@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr-CH" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mandat Professionnel – N20 Immobilier</title>
+<meta name="description" content="Formulaire de mandat professionnel N20 Immobilier. Recherche de locaux commerciaux, relocation de collaborateurs, partenariat RH à Genève.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#021623;--marine:#033560;--accent:#6EC1E4;--accent2:#4ab0d9;
+  --dark:#021623;--white:#fff;
+  --fs-h1:clamp(2rem,5vw,3.8rem);--trans:.35s ease;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 0%,#021f3d 50%,#033560 100%);min-height:100vh;color:var(--white)}
+
+#site-header{position:fixed;top:0;left:0;right:0;height:72px;z-index:9000;background:rgba(2,22,35,.92);backdrop-filter:blur(12px);display:flex;align-items:center}
+.hdr-inner{max-width:1280px;margin:0 auto;padding:0 24px;width:100%;display:flex;align-items:center;gap:32px}
+.hdr-logo{flex-shrink:0;display:flex;align-items:center;text-decoration:none}
+.hdr-logo img{height:40px;width:auto}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.hdr-nav a{font-family:'Manrope',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.78);text-decoration:none;padding:7px 13px;border-radius:8px;transition:color var(--trans),background var(--trans);white-space:nowrap}
+.hdr-nav a:hover,.hdr-nav a.active{color:#fff;background:rgba(110,193,228,.18)}
+.hdr-nav a.nav-cta{background:var(--accent);color:var(--navy);padding:8px 18px;border-radius:50px;font-weight:700;margin-left:8px}
+.hdr-nav a.nav-cta:hover{background:#4ab0d9;color:#fff}
+
+.mob-nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-left:auto}
+.mob-nav-toggle span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+#mob-nav{display:none;position:fixed;inset:0;z-index:8999;background:rgba(2,22,35,.97);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:80px 24px 40px}
+#mob-nav.open{display:flex}
+#mob-nav a{font-family:'Manrope',sans-serif;font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.85);text-decoration:none;padding:14px 24px;border-radius:12px;width:100%;max-width:320px;text-align:center;transition:background .2s,color .2s}
+#mob-nav a:hover{background:rgba(110,193,228,.18);color:#fff}
+#mob-nav a.mob-cta{background:var(--accent);color:var(--navy);font-weight:800}
+#mob-close{position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;color:#fff;font-size:1.8rem;line-height:1;padding:8px}
+
+.page-wrap{min-height:100vh;padding-top:72px;display:flex;flex-direction:column}
+
+.pi-hero{padding:80px 24px 60px;text-align:center}
+.pi-hero-tag{display:inline-block;background:rgba(110,193,228,.18);border:1px solid rgba(110,193,228,.35);color:var(--accent);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:24px}
+.pi-hero h1{font-family:'DM Serif Display',serif;font-size:var(--fs-h1);color:#fff;line-height:1.15;max-width:760px;margin:0 auto 20px}
+.pi-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);max-width:580px;margin:0 auto 40px;line-height:1.7}
+
+.progress-bar{display:flex;align-items:center;justify-content:center;gap:0;max-width:520px;margin:0 auto 48px}
+.prog-step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative}
+.prog-step::before{content:'';position:absolute;top:16px;left:-50%;right:50%;height:2px;background:rgba(255,255,255,.2);z-index:0}
+.prog-step:first-child::before{display:none}
+.prog-step.active::before,.prog-step.done::before{background:var(--accent)}
+.prog-dot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:rgba(255,255,255,.5);position:relative;z-index:1;transition:all .3s}
+.prog-step.active .prog-dot,.prog-step.done .prog-dot{border-color:var(--accent);background:var(--accent);color:var(--navy)}
+.prog-label{font-size:.7rem;font-weight:600;color:rgba(255,255,255,.45);text-align:center;line-height:1.2;transition:color .3s}
+.prog-step.active .prog-label,.prog-step.done .prog-label{color:rgba(255,255,255,.85)}
+
+.form-outer{max-width:800px;margin:0 auto;padding:0 24px 80px;width:100%}
+.form-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px 48px;backdrop-filter:blur(8px)}
+.step-pane{display:none}
+.step-pane.active{display:block}
+.step-title{font-family:'DM Serif Display',serif;font-size:1.6rem;color:#fff;margin-bottom:8px}
+.step-sub{font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:32px;line-height:1.6}
+
+.f-row{display:grid;gap:16px;margin-bottom:20px}
+.f-row.cols-2{grid-template-columns:1fr 1fr}
+.f-row.cols-1{grid-template-columns:1fr}
+.f-row.cols-3{grid-template-columns:1fr 1fr 1fr}
+.f-group{display:flex;flex-direction:column;gap:6px}
+.f-group label{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.04em;text-transform:uppercase}
+.f-group input,.f-group select,.f-group textarea{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;color:#fff;font-family:'Manrope',sans-serif;font-size:.95rem;padding:12px 16px;transition:border-color .2s,background .2s;width:100%}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{outline:none;border-color:var(--accent);background:rgba(110,193,228,.08)}
+.f-group input::placeholder,.f-group textarea::placeholder{color:rgba(255,255,255,.3)}
+.f-group select option{background:#021623;color:#fff}
+.f-group textarea{resize:vertical;min-height:100px}
+
+.radio-group{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.radio-label{font-size:.85rem;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:10px;display:block}
+.radio-opt{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;cursor:pointer;transition:all .2s;font-size:.9rem;color:rgba(255,255,255,.8)}
+.radio-opt:hover{border-color:var(--accent);background:rgba(110,193,228,.1)}
+.radio-opt input[type=radio]{display:none}
+.radio-opt.selected{border-color:var(--accent);background:rgba(110,193,228,.15);color:#fff}
+.radio-opt .radio-circle{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s}
+.radio-opt.selected .radio-circle{border-color:var(--accent)}
+.radio-opt.selected .radio-circle::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+.check-opt{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px;cursor:pointer;margin-bottom:14px;transition:border-color .2s}
+.check-opt:hover{border-color:rgba(110,193,228,.4)}
+.check-opt input[type=checkbox]{width:20px;height:20px;min-width:20px;accent-color:var(--accent);cursor:pointer;margin-top:1px;flex-shrink:0}
+.check-opt span{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.5}
+.check-opt a{color:var(--accent);text-decoration:none}
+.check-opt a:hover{text-decoration:underline}
+
+.f-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:28px 0}
+
+.form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:12px}
+.btn-prev{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:600;padding:13px 28px;border-radius:50px;cursor:pointer;transition:background .2s}
+.btn-prev:hover{background:rgba(255,255,255,.18)}
+.btn-next,.btn-submit{background:var(--accent);border:none;color:var(--navy);font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;padding:13px 32px;border-radius:50px;cursor:pointer;transition:background .2s,transform .15s;margin-left:auto}
+.btn-next:hover,.btn-submit:hover{background:#4ab0d9;transform:translateY(-1px)}
+
+.success-panel{display:none;text-align:center;padding:60px 24px}
+.success-panel.visible{display:block}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(110,193,228,.2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.success-icon svg{width:32px;height:32px;stroke:var(--accent)}
+.success-panel h2{font-family:'DM Serif Display',serif;font-size:2rem;color:#fff;margin-bottom:12px}
+.success-panel p{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.7;max-width:440px;margin:0 auto 32px}
+.success-panel a{display:inline-block;background:var(--accent);color:var(--navy);font-family:'Manrope',sans-serif;font-weight:700;font-size:.95rem;padding:13px 32px;border-radius:50px;text-decoration:none;transition:background .2s}
+.success-panel a:hover{background:#4ab0d9}
+
+#site-footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:64px 24px 32px;margin-top:auto}
+.ftr-inner{max-width:1280px;margin:0 auto}
+.ftr-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:48px;margin-bottom:48px}
+.ftr-brand img{height:44px;margin-bottom:16px}
+.ftr-brand p{font-size:.87rem;color:rgba(255,255,255,.5);line-height:1.7;max-width:240px}
+.ftr-col h4{font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:16px}
+.ftr-col a{display:block;font-size:.9rem;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.ftr-col a:hover{color:#fff}
+.ftr-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ftr-copy{font-size:.8rem;color:rgba(255,255,255,.32)}
+.ftr-legal{display:flex;gap:20px}
+.ftr-legal a{font-size:.8rem;color:rgba(255,255,255,.32);text-decoration:none;transition:color .2s}
+.ftr-legal a:hover{color:rgba(255,255,255,.7)}
+
+#whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:8000;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;text-decoration:none}
+#whatsapp-btn:hover{transform:scale(1.08)}
+#whatsapp-btn svg{width:28px;height:28px;fill:#fff}
+
+@media(max-width:900px){.hdr-nav{display:none}.mob-nav-toggle{display:flex}.ftr-top{grid-template-columns:1fr 1fr;gap:32px}.form-card{padding:28px 24px}.f-row.cols-2,.f-row.cols-3{grid-template-columns:1fr}}
+@media(max-width:560px){.ftr-top{grid-template-columns:1fr}.pi-hero{padding:60px 16px 40px}.form-outer{padding:0 16px 60px}.form-card{padding:24px 16px}.form-nav{flex-wrap:wrap}.btn-prev,.btn-next,.btn-submit{width:100%;text-align:center}}
+.phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="hdr-inner">
+    <a class="hdr-logo" href="/"><img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier"></a>
+    <nav class="hdr-nav">
+      <a href="/">Accueil</a>
+      <a href="/me-loger/">Me Loger</a>
+      <a href="/resilier-bail/">Résilier Mon Bail</a>
+      <a href="/achat-vente/">Achat &amp; Vente</a>
+      <a href="/services-complementaires/">Services</a>
+      <a href="/client-professionnel/" class="active">Professionnel</a>
+      <a href="/mandat-professionnel/" class="nav-cta">Formulaire Professionnel</a>
+    </nav>
+    <button class="mob-nav-toggle" id="mobToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav id="mob-nav">
+  <button id="mob-close" aria-label="Fermer">&#x2715;</button>
+  <a href="/">Accueil</a>
+  <a href="/me-loger/">Me Loger</a>
+  <a href="/resilier-bail/">Résilier Mon Bail</a>
+  <a href="/achat-vente/">Achat &amp; Vente</a>
+  <a href="/services-complementaires/">Services</a>
+  <a href="/client-professionnel/">Professionnel</a>
+  <a href="/mandat-professionnel/" class="mob-cta">Formulaire Professionnel</a>
+</nav>
+
+<main class="page-wrap">
+
+  <section class="pi-hero">
+    <div class="pi-hero-tag">Client Professionnel — B2B</div>
+    <h1>Formulaire de Mandat&nbsp;Professionnel</h1>
+    <p>Décrivez votre besoin en quelques étapes. Un conseiller dédié vous contacte sous 24h pour établir une proposition sur mesure.</p>
+    <div class="progress-bar" id="progressBar">
+      <div class="prog-step active" data-step="1"><div class="prog-dot">1</div><div class="prog-label">Entreprise</div></div>
+      <div class="prog-step" data-step="2"><div class="prog-dot">2</div><div class="prog-label">Besoin</div></div>
+      <div class="prog-step" data-step="3"><div class="prog-dot">3</div><div class="prog-label">Détails</div></div>
+      <div class="prog-step" data-step="4"><div class="prog-dot">4</div><div class="prog-label">Confirmation</div></div>
+    </div>
+  </section>
+
+  <div class="form-outer">
+    <div class="form-card" id="formCard">
+
+      <!-- ÉTAPE 1 — ENTREPRISE -->
+      <div class="step-pane active" id="step1">
+        <div class="step-title">Votre entreprise</div>
+        <div class="step-sub">Renseignez les coordonnées de votre société afin que nous puissions vous identifier et vous recontacter.</div>
+
+        <div class="f-row cols-2">
+          <div class="f-group"><label>Raison sociale *</label><input type="text" name="company" placeholder="N20 Partenaire SA" required></div>
+          <div class="f-group"><label>Secteur d'activité</label><input type="text" name="sector" placeholder="Finance, Pharma, ONG…"></div>
+        </div>
+        <div class="f-row cols-1">
+          <div class="f-group"><label>Adresse du siège</label><input type="text" name="address" placeholder="Rue de Rive 10, 1204 Genève"></div>
+        </div>
+        <hr class="f-divider">
+        <div class="f-row cols-2">
+          <div class="f-group"><label>Nom du contact *</label><input type="text" name="contactName" placeholder="Dupont Marie" required></div>
+          <div class="f-group"><label>Fonction</label><input type="text" name="contactRole" placeholder="DRH, Office Manager…"></div>
+        </div>
+        <div class="f-row cols-2">
+          <div class="f-group"><label>Email professionnel *</label><input type="email" name="email" placeholder="contact@societe.ch" required></div>
+          <div class="f-group"><label>Téléphone *</label><div class="phone-group"><select class="phone-prefix" aria-label="Indicatif">
+<option value="+41" selected>&#127464;&#127469; Suisse +41</option>
+<option value="+93">&#127462;&#127467; Afghanistan +93</option>
+<option value="+27">&#127487;&#127462; Afrique du Sud +27</option>
+<option value="+355">&#127462;&#127473; Albanie +355</option>
+<option value="+213">&#127465;&#127487; Algérie +213</option>
+<option value="+49">&#127465;&#127466; Allemagne +49</option>
+<option value="+376">&#127462;&#127465; Andorre +376</option>
+<option value="+244">&#127462;&#127476; Angola +244</option>
+<option value="+1268">&#127462;&#127468; Antigua-et-Barbuda +1268</option>
+<option value="+966">&#127480;&#127462; Arabie saoudite +966</option>
+<option value="+54">&#127462;&#127479; Argentine +54</option>
+<option value="+374">&#127462;&#127474; Arménie +374</option>
+<option value="+61">&#127462;&#127482; Australie +61</option>
+<option value="+43">&#127462;&#127481; Autriche +43</option>
+<option value="+994">&#127462;&#127487; Azerbaïdjan +994</option>
+<option value="+1242">&#127463;&#127480; Bahamas +1242</option>
+<option value="+973">&#127463;&#127469; Bahreïn +973</option>
+<option value="+880">&#127463;&#127465; Bangladesh +880</option>
+<option value="+1246">&#127463;&#127463; Barbade +1246</option>
+<option value="+32">&#127463;&#127466; Belgique +32</option>
+<option value="+501">&#127463;&#127487; Belize +501</option>
+<option value="+975">&#127463;&#127481; Bhoutan +975</option>
+<option value="+375">&#127463;&#127486; Biélorussie +375</option>
+<option value="+591">&#127463;&#127476; Bolivie +591</option>
+<option value="+387">&#127463;&#127462; Bosnie-Herzégovine +387</option>
+<option value="+267">&#127463;&#127484; Botswana +267</option>
+<option value="+673">&#127463;&#127475; Brunei +673</option>
+<option value="+55">&#127463;&#127479; Brésil +55</option>
+<option value="+359">&#127463;&#127468; Bulgarie +359</option>
+<option value="+226">&#127463;&#127467; Burkina Faso +226</option>
+<option value="+257">&#127463;&#127470; Burundi +257</option>
+<option value="+229">&#127463;&#127471; Bénin +229</option>
+<option value="+238">&#127464;&#127483; Cabo Verde +238</option>
+<option value="+855">&#127472;&#127469; Cambodge +855</option>
+<option value="+237">&#127464;&#127474; Cameroun +237</option>
+<option value="+1">&#127464;&#127462; Canada +1</option>
+<option value="+56">&#127464;&#127473; Chili +56</option>
+<option value="+86">&#127464;&#127475; Chine +86</option>
+<option value="+357">&#127464;&#127486; Chypre +357</option>
+<option value="+57">&#127464;&#127476; Colombie +57</option>
+<option value="+269">&#127472;&#127474; Comores +269</option>
+<option value="+242">&#127464;&#127468; Congo +242</option>
+<option value="+243">&#127464;&#127465; Congo (RDC) +243</option>
+<option value="+850">&#127472;&#127477; Corée du Nord +850</option>
+<option value="+82">&#127472;&#127479; Corée du Sud +82</option>
+<option value="+506">&#127464;&#127479; Costa Rica +506</option>
+<option value="+385">&#127469;&#127479; Croatie +385</option>
+<option value="+53">&#127464;&#127482; Cuba +53</option>
+<option value="+225">&#127464;&#127470; Côte d'Ivoire +225</option>
+<option value="+45">&#127465;&#127472; Danemark +45</option>
+<option value="+253">&#127465;&#127471; Djibouti +253</option>
+<option value="+1767">&#127465;&#127474; Dominique +1767</option>
+<option value="+34">&#127466;&#127480; Espagne +34</option>
+<option value="+372">&#127466;&#127466; Estonie +372</option>
+<option value="+268">&#127480;&#127487; Eswatini +268</option>
+<option value="+679">&#127467;&#127471; Fidji +679</option>
+<option value="+358">&#127467;&#127470; Finlande +358</option>
+<option value="+33">&#127467;&#127479; France +33</option>
+<option value="+241">&#127468;&#127462; Gabon +241</option>
+<option value="+220">&#127468;&#127474; Gambie +220</option>
+<option value="+233">&#127468;&#127469; Ghana +233</option>
+<option value="+1473">&#127468;&#127465; Grenade +1473</option>
+<option value="+502">&#127468;&#127481; Guatemala +502</option>
+<option value="+224">&#127468;&#127475; Guinée +224</option>
+<option value="+240">&#127468;&#127478; Guinée équatoriale +240</option>
+<option value="+245">&#127468;&#127484; Guinée-Bissau +245</option>
+<option value="+592">&#127468;&#127486; Guyana +592</option>
+<option value="+995">&#127468;&#127466; Géorgie +995</option>
+<option value="+509">&#127469;&#127481; Haïti +509</option>
+<option value="+504">&#127469;&#127475; Honduras +504</option>
+<option value="+36">&#127469;&#127482; Hongrie +36</option>
+<option value="+91">&#127470;&#127475; Inde +91</option>
+<option value="+62">&#127470;&#127465; Indonésie +62</option>
+<option value="+964">&#127470;&#127478; Irak +964</option>
+<option value="+98">&#127470;&#127479; Iran +98</option>
+<option value="+353">&#127470;&#127466; Irlande +353</option>
+<option value="+354">&#127470;&#127480; Islande +354</option>
+<option value="+972">&#127470;&#127473; Israël +972</option>
+<option value="+39">&#127470;&#127481; Italie +39</option>
+<option value="+1876">&#127471;&#127474; Jamaïque +1876</option>
+<option value="+81">&#127471;&#127477; Japon +81</option>
+<option value="+962">&#127471;&#127476; Jordanie +962</option>
+<option value="+7">&#127472;&#127487; Kazakhstan +7</option>
+<option value="+254">&#127472;&#127466; Kenya +254</option>
+<option value="+996">&#127472;&#127468; Kirghizistan +996</option>
+<option value="+686">&#127472;&#127470; Kiribati +686</option>
+<option value="+383">&#127485;&#127472; Kosovo +383</option>
+<option value="+965">&#127472;&#127484; Koweït +965</option>
+<option value="+856">&#127473;&#127462; Laos +856</option>
+<option value="+266">&#127473;&#127480; Lesotho +266</option>
+<option value="+371">&#127473;&#127483; Lettonie +371</option>
+<option value="+961">&#127473;&#127463; Liban +961</option>
+<option value="+231">&#127473;&#127479; Liberia +231</option>
+<option value="+218">&#127473;&#127486; Libye +218</option>
+<option value="+423">&#127473;&#127470; Liechtenstein +423</option>
+<option value="+370">&#127473;&#127481; Lituanie +370</option>
+<option value="+352">&#127473;&#127482; Luxembourg +352</option>
+<option value="+389">&#127474;&#127472; Macédoine du Nord +389</option>
+<option value="+261">&#127474;&#127468; Madagascar +261</option>
+<option value="+60">&#127474;&#127486; Malaisie +60</option>
+<option value="+265">&#127474;&#127484; Malawi +265</option>
+<option value="+960">&#127474;&#127483; Maldives +960</option>
+<option value="+223">&#127474;&#127473; Mali +223</option>
+<option value="+356">&#127474;&#127481; Malte +356</option>
+<option value="+212">&#127474;&#127462; Maroc +212</option>
+<option value="+230">&#127474;&#127482; Maurice +230</option>
+<option value="+222">&#127474;&#127479; Mauritanie +222</option>
+<option value="+52">&#127474;&#127485; Mexique +52</option>
+<option value="+691">&#127467;&#127474; Micronésie +691</option>
+<option value="+373">&#127474;&#127465; Moldavie +373</option>
+<option value="+377">&#127474;&#127464; Monaco +377</option>
+<option value="+976">&#127474;&#127475; Mongolie +976</option>
+<option value="+382">&#127474;&#127466; Monténégro +382</option>
+<option value="+258">&#127474;&#127487; Mozambique +258</option>
+<option value="+95">&#127474;&#127474; Myanmar +95</option>
+<option value="+264">&#127475;&#127462; Namibie +264</option>
+<option value="+674">&#127475;&#127479; Nauru +674</option>
+<option value="+505">&#127475;&#127470; Nicaragua +505</option>
+<option value="+227">&#127475;&#127466; Niger +227</option>
+<option value="+234">&#127475;&#127468; Nigeria +234</option>
+<option value="+47">&#127475;&#127476; Norvège +47</option>
+<option value="+64">&#127475;&#127487; Nouvelle-Zélande +64</option>
+<option value="+977">&#127475;&#127477; Népal +977</option>
+<option value="+968">&#127476;&#127474; Oman +968</option>
+<option value="+256">&#127482;&#127468; Ouganda +256</option>
+<option value="+998">&#127482;&#127487; Ouzbékistan +998</option>
+<option value="+92">&#127477;&#127472; Pakistan +92</option>
+<option value="+680">&#127477;&#127484; Palaos +680</option>
+<option value="+970">&#127477;&#127480; Palestine +970</option>
+<option value="+507">&#127477;&#127462; Panama +507</option>
+<option value="+675">&#127477;&#127468; Papouasie-Nvl-Guinée +675</option>
+<option value="+595">&#127477;&#127486; Paraguay +595</option>
+<option value="+31">&#127475;&#127473; Pays-Bas +31</option>
+<option value="+63">&#127477;&#127469; Philippines +63</option>
+<option value="+48">&#127477;&#127473; Pologne +48</option>
+<option value="+351">&#127477;&#127481; Portugal +351</option>
+<option value="+51">&#127477;&#127466; Pérou +51</option>
+<option value="+974">&#127478;&#127462; Qatar +974</option>
+<option value="+40">&#127479;&#127476; Roumanie +40</option>
+<option value="+44">&#127468;&#127463; Royaume-Uni +44</option>
+<option value="+7">&#127479;&#127482; Russie +7</option>
+<option value="+250">&#127479;&#127484; Rwanda +250</option>
+<option value="+236">&#127464;&#127467; Rép. centrafricaine +236</option>
+<option value="+1809">&#127465;&#127476; Rép. dominicaine +1809</option>
+<option value="+1869">&#127472;&#127475; Saint-Kitts-et-Nevis +1869</option>
+<option value="+378">&#127480;&#127474; Saint-Marin +378</option>
+<option value="+1784">&#127483;&#127464; Saint-Vincent-et-Gren. +1784</option>
+<option value="+1758">&#127473;&#127464; Sainte-Lucie +1758</option>
+<option value="+503">&#127480;&#127483; Salvador +503</option>
+<option value="+685">&#127484;&#127480; Samoa +685</option>
+<option value="+239">&#127480;&#127481; Sao Tomé-et-Principe +239</option>
+<option value="+381">&#127479;&#127480; Serbie +381</option>
+<option value="+248">&#127480;&#127464; Seychelles +248</option>
+<option value="+232">&#127480;&#127473; Sierra Leone +232</option>
+<option value="+65">&#127480;&#127468; Singapour +65</option>
+<option value="+421">&#127480;&#127472; Slovaquie +421</option>
+<option value="+386">&#127480;&#127470; Slovénie +386</option>
+<option value="+252">&#127480;&#127476; Somalie +252</option>
+<option value="+249">&#127480;&#127465; Soudan +249</option>
+<option value="+211">&#127480;&#127480; Soudan du Sud +211</option>
+<option value="+94">&#127473;&#127472; Sri Lanka +94</option>
+<option value="+597">&#127480;&#127479; Suriname +597</option>
+<option value="+46">&#127480;&#127466; Suède +46</option>
+<option value="+963">&#127480;&#127486; Syrie +963</option>
+<option value="+221">&#127480;&#127475; Sénégal +221</option>
+<option value="+992">&#127481;&#127471; Tadjikistan +992</option>
+<option value="+255">&#127481;&#127487; Tanzanie +255</option>
+<option value="+886">&#127481;&#127484; Taïwan +886</option>
+<option value="+235">&#127481;&#127465; Tchad +235</option>
+<option value="+420">&#127464;&#127487; Tchéquie +420</option>
+<option value="+66">&#127481;&#127469; Thaïlande +66</option>
+<option value="+670">&#127481;&#127473; Timor-Leste +670</option>
+<option value="+228">&#127481;&#127468; Togo +228</option>
+<option value="+676">&#127481;&#127476; Tonga +676</option>
+<option value="+1868">&#127481;&#127481; Trinité-et-Tobago +1868</option>
+<option value="+216">&#127481;&#127475; Tunisie +216</option>
+<option value="+993">&#127481;&#127474; Turkménistan +993</option>
+<option value="+90">&#127481;&#127479; Turquie +90</option>
+<option value="+688">&#127481;&#127483; Tuvalu +688</option>
+<option value="+380">&#127482;&#127462; Ukraine +380</option>
+<option value="+598">&#127482;&#127486; Uruguay +598</option>
+<option value="+678">&#127483;&#127482; Vanuatu +678</option>
+<option value="+379">&#127483;&#127462; Vatican +379</option>
+<option value="+58">&#127483;&#127466; Venezuela +58</option>
+<option value="+84">&#127483;&#127475; Viêt Nam +84</option>
+<option value="+967">&#127486;&#127466; Yémen +967</option>
+<option value="+260">&#127487;&#127474; Zambie +260</option>
+<option value="+263">&#127487;&#127484; Zimbabwe +263</option>
+<option value="+20">&#127466;&#127468; Égypte +20</option>
+<option value="+971">&#127462;&#127466; Émirats arabes unis +971</option>
+<option value="+593">&#127466;&#127464; Équateur +593</option>
+<option value="+291">&#127466;&#127479; Érythrée +291</option>
+<option value="+1">&#127482;&#127480; États-Unis +1</option>
+<option value="+251">&#127466;&#127481; Éthiopie +251</option>
+<option value="+692">&#127474;&#127469; Îles Marshall +692</option>
+<option value="+677">&#127480;&#127463; Îles Salomon +677</option>
+</select><input type="tel" class="phone-input" name="phone" placeholder="xx xxx xx xx" required></div></div>
+        </div>
+
+        <div class="form-nav"><button class="btn-next" onclick="goTo(2)">Suivant &rarr;</button></div>
+      </div>
+
+      <!-- ÉTAPE 2 — BESOIN -->
+      <div class="step-pane" id="step2">
+        <div class="step-title">Votre besoin</div>
+        <div class="step-sub">Sélectionnez le ou les services dont vous avez besoin.</div>
+
+        <span class="radio-label">Type de demande *</span>
+        <div class="radio-group" id="needGroup">
+          <label class="radio-opt selected" id="opt-reloc1">
+            <input type="radio" name="needType" value="reloc1" checked>
+            <span class="radio-circle"></span> Relocation d'un collaborateur
+          </label>
+          <label class="radio-opt" id="opt-reloc-multi">
+            <input type="radio" name="needType" value="relocMulti">
+            <span class="radio-circle"></span> Relocation de plusieurs collaborateurs
+          </label>
+          <label class="radio-opt" id="opt-locaux">
+            <input type="radio" name="needType" value="locaux">
+            <span class="radio-circle"></span> Recherche de locaux commerciaux
+          </label>
+          <label class="radio-opt" id="opt-partnership">
+            <input type="radio" name="needType" value="partnership">
+            <span class="radio-circle"></span> Convention de partenariat RH
+          </label>
+        </div>
+
+        <span class="radio-label">Urgence du besoin</span>
+        <div class="radio-group" id="urgencyGroup">
+          <label class="radio-opt selected" id="opt-urg1">
+            <input type="radio" name="urgency" value="immediate" checked>
+            <span class="radio-circle"></span> Immédiat (moins d'1 mois)
+          </label>
+          <label class="radio-opt" id="opt-urg2">
+            <input type="radio" name="urgency" value="short">
+            <span class="radio-circle"></span> Court terme (1–3 mois)
+          </label>
+          <label class="radio-opt" id="opt-urg3">
+            <input type="radio" name="urgency" value="medium">
+            <span class="radio-circle"></span> Moyen terme (3–6 mois)
+          </label>
+          <label class="radio-opt" id="opt-urg4">
+            <input type="radio" name="urgency" value="planning">
+            <span class="radio-circle"></span> En cours de planification
+          </label>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-prev" onclick="goTo(1)">&larr; Retour</button>
+          <button class="btn-next" onclick="goTo(3)">Suivant &rarr;</button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 3 — DÉTAILS -->
+      <div class="step-pane" id="step3">
+        <div class="step-title">Détails du projet</div>
+        <div class="step-sub">Plus vous êtes précis, mieux nous pouvons adapter notre recherche à vos attentes.</div>
+
+        <div class="f-row cols-2">
+          <div class="f-group">
+            <label>Nombre de personnes / collaborateurs</label>
+            <input type="number" name="nbPersons" placeholder="ex. 3" min="1">
+          </div>
+          <div class="f-group">
+            <label>Budget mensuel max (CHF, toutes charges)</label>
+            <input type="text" name="budget" placeholder="ex. 5 000">
+          </div>
+        </div>
+
+        <div class="f-row cols-2">
+          <div class="f-group">
+            <label>Date d'entrée souhaitée</label>
+            <input type="date" name="moveIn">
+          </div>
+          <div class="f-group">
+            <label>Durée souhaitée</label>
+            <select name="duration">
+              <option value="">Sélectionner…</option>
+              <option>Courte durée (moins de 6 mois)</option>
+              <option>1 an</option>
+              <option>2 ans</option>
+              <option>3 ans et plus</option>
+              <option>Indéterminée</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="f-row cols-1">
+          <div class="f-group">
+            <label>Quartiers ou zones préférés à Genève</label>
+            <input type="text" name="areas" placeholder="ex. Centre-ville, Champel, Carouge, Sécheron…">
+          </div>
+        </div>
+
+        <div class="f-row cols-1">
+          <div class="f-group">
+            <label>Exigences particulières</label>
+            <textarea name="notes" placeholder="Superficie, nombre de pièces, équipements, parking, accessibilité PMR, langue du collaborateur à reloger…"></textarea>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-prev" onclick="goTo(2)">&larr; Retour</button>
+          <button class="btn-next" onclick="goTo(4)">Suivant &rarr;</button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 4 — CONFIRMATION -->
+      <div class="step-pane" id="step4">
+        <div class="step-title">Confirmation</div>
+        <div class="step-sub">Veuillez lire et accepter les conditions avant de soumettre votre mandat.</div>
+
+        <label class="check-opt">
+          <input type="checkbox" id="chkMandate" required>
+          <span>Je confirme avoir lu et accepté les <a href="/conditions-generales/" target="_blank">Conditions Générales du Mandat Professionnel</a>.</span>
+        </label>
+
+        <label class="check-opt">
+          <input type="checkbox" id="chkPrivacy" required>
+          <span>J'ai lu et accepté la <a href="/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a> et consens au traitement des données de mon entreprise.</span>
+        </label>
+
+        <div class="form-nav">
+          <button class="btn-prev" onclick="goTo(3)">&larr; Retour</button>
+          <button class="btn-submit" onclick="submitForm()">Envoyer le mandat</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="success-panel" id="successPanel">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>Mandat reçu !</h2>
+      <p>Merci — votre mandat professionnel a bien été transmis. Un conseiller dédié vous contactera sous 24 heures pour vous proposer une solution sur mesure.</p>
+      <a href="/client-professionnel/">Retour à l'espace professionnel</a>
+    </div>
+  </div>
+
+</main>
+
+<footer id="site-footer">
+  <div class="ftr-inner">
+    <div class="ftr-top">
+      <div class="ftr-brand">
+        <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+        <p>Votre partenaire immobilier à Genève — solutions B2B, relocation, achat &amp; vente.</p>
+      </div>
+      <div class="ftr-col">
+        <h4>Nos services</h4>
+        <a href="/me-loger/">Me Loger</a>
+        <a href="/resilier-bail/">Résilier Mon Bail</a>
+        <a href="/achat-vente/">Achat &amp; Vente</a>
+        <a href="/services-complementaires/">Services complémentaires</a>
+      </div>
+      <div class="ftr-col">
+        <h4>Professionnels</h4>
+        <a href="/client-professionnel/">Client Professionnel</a>
+        <a href="/mandat-professionnel/">Formulaire Professionnel</a>
+        <a href="/conditions-generales/">Conditions Générales</a>
+        <a href="/politique-de-confidentialite/">Politique de Confidentialité</a>
+      </div>
+      <div class="ftr-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@n20immobilier.ch">info@n20immobilier.ch</a>
+        <a href="tel:+41764192021">+41 76 419 20 21</a>
+        <a href="https://wa.me/41764192021" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="ftr-bottom">
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés.</span>
+      <nav class="ftr-legal">
+        <a href="/conditions-generales/">CGU</a>
+        <a href="/politique-de-confidentialite/">Confidentialité</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<a id="whatsapp-btn" href="https://wa.me/41764192021" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/></svg>
+</a>
+
+<script>
+const mobToggle=document.getElementById('mobToggle');
+const mobNav=document.getElementById('mob-nav');
+const mobClose=document.getElementById('mob-close');
+mobToggle.addEventListener('click',()=>mobNav.classList.add('open'));
+mobClose.addEventListener('click',()=>mobNav.classList.remove('open'));
+mobNav.addEventListener('click',e=>{if(e.target===mobNav)mobNav.classList.remove('open')});
+
+let currentStep=1;
+function goTo(n){
+  document.getElementById('step'+currentStep).classList.remove('active');
+  document.querySelectorAll('.prog-step').forEach(s=>{
+    const sn=parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if(sn<n)s.classList.add('done');
+    if(sn===n)s.classList.add('active');
+  });
+  currentStep=n;
+  document.getElementById('step'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.radio-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    const name=opt.querySelector('input[type=radio]')?.name;
+    if(!name)return;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(i=>{i.closest('.radio-opt').classList.remove('selected')});
+    opt.classList.add('selected');
+    const inp=opt.querySelector('input[type=radio]');
+    if(inp)inp.checked=true;
+  });
+});
+
+function submitForm(){
+  const chkM=document.getElementById('chkMandate');
+  const chkP=document.getElementById('chkPrivacy');
+  if(!chkM.checked||!chkP.checked){
+    alert('Veuillez accepter les Conditions Générales et la Politique de Confidentialité pour continuer.');
+    return;
+  }
+  document.getElementById('formCard').style.display='none';
+  document.getElementById('progressBar').style.display='none';
+  document.querySelector('.pi-hero p').style.display='none';
+  document.getElementById('successPanel').classList.add('visible');
+}
+</script>
+</body>
+</html>

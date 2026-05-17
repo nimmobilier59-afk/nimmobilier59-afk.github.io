@@ -172,6 +172,7 @@ textarea{resize:vertical;min-height:100px}
 #wa-btn{position:fixed;bottom:28px;right:28px;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 4px 16px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s}
 #wa-btn:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(0,0,0,.35)}
 #wa-btn svg{width:30px;height:30px;fill:#fff}
+.phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
 </style>
 </head>
 <body>
@@ -200,7 +201,7 @@ textarea{resize:vertical;min-height:100px}
       <a href="/ru/terminate-lease/">Расторжение</a>
       <a href="/ru/buy-sell/">Купля-продажа</a>
       <a href="/ru/additional-services/">Услуги</a>
-      <a href="/ru/about-us/">Корп. клиентам</a>
+      <a href="/ru/professional-client/">Корп. клиентам</a>
     </nav>
     <div class="hdr-lang">
       <a href="#">
@@ -235,7 +236,7 @@ textarea{resize:vertical;min-height:100px}
   <a href="/ru/terminate-lease/" onclick="closeMob()">Расторжение</a>
   <a href="/ru/buy-sell/" onclick="closeMob()">Купля-продажа</a>
   <a href="/ru/additional-services/" onclick="closeMob()">Услуги</a>
-  <a href="/ru/about-us/" onclick="closeMob()">Корп. клиентам</a>
+  <a href="/ru/professional-client/" onclick="closeMob()">Корп. клиентам</a>
   <div class="mob-lang">
     <a href="/ru/" style="color:white;">RU</a>
     <a href="/en/homepage/">EN</a>
@@ -434,7 +435,204 @@ textarea{resize:vertical;min-height:100px}
       </div>
       <div class="form-row-2">
         <div class="fg"><label>Email</label><input type="email" name="email" placeholder="Email" required></div>
-        <div class="fg"><label>Телефон</label><input type="tel" name="tel" placeholder="Телефон" required></div>
+        <div class="fg"><label>Телефон</label><div class="phone-group"><select class="phone-prefix" aria-label="Код страны">
+<option value="+41" selected>&#127464;&#127469; Швейцария +41</option>
+<option value="+61">&#127462;&#127482; Австралия +61</option>
+<option value="+43">&#127462;&#127481; Австрия +43</option>
+<option value="+994">&#127462;&#127487; Азербайджан +994</option>
+<option value="+355">&#127462;&#127473; Албания +355</option>
+<option value="+213">&#127465;&#127487; Алжир +213</option>
+<option value="+244">&#127462;&#127476; Ангола +244</option>
+<option value="+376">&#127462;&#127465; Андорра +376</option>
+<option value="+1268">&#127462;&#127468; Антигуа и Барбуда +1268</option>
+<option value="+54">&#127462;&#127479; Аргентина +54</option>
+<option value="+374">&#127462;&#127474; Армения +374</option>
+<option value="+93">&#127462;&#127467; Афганистан +93</option>
+<option value="+1242">&#127463;&#127480; Багамы +1242</option>
+<option value="+880">&#127463;&#127465; Бангладеш +880</option>
+<option value="+1246">&#127463;&#127463; Барбадос +1246</option>
+<option value="+973">&#127463;&#127469; Бахрейн +973</option>
+<option value="+375">&#127463;&#127486; Беларусь +375</option>
+<option value="+501">&#127463;&#127487; Белиз +501</option>
+<option value="+32">&#127463;&#127466; Бельгия +32</option>
+<option value="+229">&#127463;&#127471; Бенин +229</option>
+<option value="+359">&#127463;&#127468; Болгария +359</option>
+<option value="+591">&#127463;&#127476; Боливия +591</option>
+<option value="+387">&#127463;&#127462; Босния и Герцеговина +387</option>
+<option value="+267">&#127463;&#127484; Ботсвана +267</option>
+<option value="+55">&#127463;&#127479; Бразилия +55</option>
+<option value="+673">&#127463;&#127475; Бруней +673</option>
+<option value="+226">&#127463;&#127467; Буркина-Фасо +226</option>
+<option value="+257">&#127463;&#127470; Бурунди +257</option>
+<option value="+975">&#127463;&#127481; Бутан +975</option>
+<option value="+678">&#127483;&#127482; Вануату +678</option>
+<option value="+379">&#127483;&#127462; Ватикан +379</option>
+<option value="+44">&#127468;&#127463; Великобритания +44</option>
+<option value="+36">&#127469;&#127482; Венгрия +36</option>
+<option value="+58">&#127483;&#127466; Венесуэла +58</option>
+<option value="+670">&#127481;&#127473; Восточный Тимор +670</option>
+<option value="+84">&#127483;&#127475; Вьетнам +84</option>
+<option value="+241">&#127468;&#127462; Габон +241</option>
+<option value="+509">&#127469;&#127481; Гаити +509</option>
+<option value="+592">&#127468;&#127486; Гайана +592</option>
+<option value="+220">&#127468;&#127474; Гамбия +220</option>
+<option value="+233">&#127468;&#127469; Гана +233</option>
+<option value="+502">&#127468;&#127481; Гватемала +502</option>
+<option value="+224">&#127468;&#127475; Гвинея +224</option>
+<option value="+245">&#127468;&#127484; Гвинея-Бисау +245</option>
+<option value="+49">&#127465;&#127466; Германия +49</option>
+<option value="+504">&#127469;&#127475; Гондурас +504</option>
+<option value="+1473">&#127468;&#127465; Гренада +1473</option>
+<option value="+995">&#127468;&#127466; Грузия +995</option>
+<option value="+45">&#127465;&#127472; Дания +45</option>
+<option value="+253">&#127465;&#127471; Джибути +253</option>
+<option value="+1767">&#127465;&#127474; Доминика +1767</option>
+<option value="+1809">&#127465;&#127476; Доминиканская Республика +1809</option>
+<option value="+243">&#127464;&#127465; ДР Конго +243</option>
+<option value="+20">&#127466;&#127468; Египет +20</option>
+<option value="+260">&#127487;&#127474; Замбия +260</option>
+<option value="+263">&#127487;&#127484; Зимбабве +263</option>
+<option value="+972">&#127470;&#127473; Израиль +972</option>
+<option value="+91">&#127470;&#127475; Индия +91</option>
+<option value="+62">&#127470;&#127465; Индонезия +62</option>
+<option value="+962">&#127471;&#127476; Иордания +962</option>
+<option value="+964">&#127470;&#127478; Ирак +964</option>
+<option value="+98">&#127470;&#127479; Иран +98</option>
+<option value="+353">&#127470;&#127466; Ирландия +353</option>
+<option value="+354">&#127470;&#127480; Исландия +354</option>
+<option value="+34">&#127466;&#127480; Испания +34</option>
+<option value="+39">&#127470;&#127481; Италия +39</option>
+<option value="+967">&#127486;&#127466; Йемен +967</option>
+<option value="+238">&#127464;&#127483; Кабо-Верде +238</option>
+<option value="+7">&#127472;&#127487; Казахстан +7</option>
+<option value="+855">&#127472;&#127469; Камбоджа +855</option>
+<option value="+237">&#127464;&#127474; Камерун +237</option>
+<option value="+1">&#127464;&#127462; Канада +1</option>
+<option value="+974">&#127478;&#127462; Катар +974</option>
+<option value="+254">&#127472;&#127466; Кения +254</option>
+<option value="+357">&#127464;&#127486; Кипр +357</option>
+<option value="+686">&#127472;&#127470; Кирибати +686</option>
+<option value="+86">&#127464;&#127475; Китай +86</option>
+<option value="+57">&#127464;&#127476; Колумбия +57</option>
+<option value="+269">&#127472;&#127474; Коморы +269</option>
+<option value="+383">&#127485;&#127472; Косово +383</option>
+<option value="+506">&#127464;&#127479; Коста-Рика +506</option>
+<option value="+225">&#127464;&#127470; Кот-д'Ивуар +225</option>
+<option value="+53">&#127464;&#127482; Куба +53</option>
+<option value="+965">&#127472;&#127484; Кувейт +965</option>
+<option value="+996">&#127472;&#127468; Кыргызстан +996</option>
+<option value="+856">&#127473;&#127462; Лаос +856</option>
+<option value="+371">&#127473;&#127483; Латвия +371</option>
+<option value="+266">&#127473;&#127480; Лесото +266</option>
+<option value="+231">&#127473;&#127479; Либерия +231</option>
+<option value="+961">&#127473;&#127463; Ливан +961</option>
+<option value="+218">&#127473;&#127486; Ливия +218</option>
+<option value="+370">&#127473;&#127481; Литва +370</option>
+<option value="+423">&#127473;&#127470; Лихтенштейн +423</option>
+<option value="+352">&#127473;&#127482; Люксембург +352</option>
+<option value="+230">&#127474;&#127482; Маврикий +230</option>
+<option value="+222">&#127474;&#127479; Мавритания +222</option>
+<option value="+261">&#127474;&#127468; Мадагаскар +261</option>
+<option value="+265">&#127474;&#127484; Малави +265</option>
+<option value="+60">&#127474;&#127486; Малайзия +60</option>
+<option value="+223">&#127474;&#127473; Мали +223</option>
+<option value="+960">&#127474;&#127483; Мальдивы +960</option>
+<option value="+356">&#127474;&#127481; Мальта +356</option>
+<option value="+212">&#127474;&#127462; Марокко +212</option>
+<option value="+692">&#127474;&#127469; Маршалловы Острова +692</option>
+<option value="+52">&#127474;&#127485; Мексика +52</option>
+<option value="+691">&#127467;&#127474; Микронезия +691</option>
+<option value="+258">&#127474;&#127487; Мозамбик +258</option>
+<option value="+373">&#127474;&#127465; Молдова +373</option>
+<option value="+377">&#127474;&#127464; Монако +377</option>
+<option value="+976">&#127474;&#127475; Монголия +976</option>
+<option value="+95">&#127474;&#127474; Мьянма +95</option>
+<option value="+264">&#127475;&#127462; Намибия +264</option>
+<option value="+674">&#127475;&#127479; Науру +674</option>
+<option value="+977">&#127475;&#127477; Непал +977</option>
+<option value="+227">&#127475;&#127466; Нигер +227</option>
+<option value="+234">&#127475;&#127468; Нигерия +234</option>
+<option value="+31">&#127475;&#127473; Нидерланды +31</option>
+<option value="+505">&#127475;&#127470; Никарагуа +505</option>
+<option value="+64">&#127475;&#127487; Новая Зеландия +64</option>
+<option value="+47">&#127475;&#127476; Норвегия +47</option>
+<option value="+971">&#127462;&#127466; ОАЭ +971</option>
+<option value="+968">&#127476;&#127474; Оман +968</option>
+<option value="+92">&#127477;&#127472; Пакистан +92</option>
+<option value="+680">&#127477;&#127484; Палау +680</option>
+<option value="+970">&#127477;&#127480; Палестина +970</option>
+<option value="+507">&#127477;&#127462; Панама +507</option>
+<option value="+675">&#127477;&#127468; Папуа — Новая Гвинея +675</option>
+<option value="+595">&#127477;&#127486; Парагвай +595</option>
+<option value="+51">&#127477;&#127466; Перу +51</option>
+<option value="+48">&#127477;&#127473; Польша +48</option>
+<option value="+351">&#127477;&#127481; Португалия +351</option>
+<option value="+242">&#127464;&#127468; Республика Конго +242</option>
+<option value="+7">&#127479;&#127482; Россия +7</option>
+<option value="+250">&#127479;&#127484; Руанда +250</option>
+<option value="+40">&#127479;&#127476; Румыния +40</option>
+<option value="+503">&#127480;&#127483; Сальвадор +503</option>
+<option value="+685">&#127484;&#127480; Самоа +685</option>
+<option value="+378">&#127480;&#127474; Сан-Марино +378</option>
+<option value="+239">&#127480;&#127481; Сан-Томе и Принсипи +239</option>
+<option value="+966">&#127480;&#127462; Саудовская Аравия +966</option>
+<option value="+850">&#127472;&#127477; Северная Корея +850</option>
+<option value="+389">&#127474;&#127472; Северная Македония +389</option>
+<option value="+248">&#127480;&#127464; Сейшелы +248</option>
+<option value="+221">&#127480;&#127475; Сенегал +221</option>
+<option value="+1784">&#127483;&#127464; Сент-Винсент и Гренадины +1784</option>
+<option value="+1869">&#127472;&#127475; Сент-Китс и Невис +1869</option>
+<option value="+1758">&#127473;&#127464; Сент-Люсия +1758</option>
+<option value="+381">&#127479;&#127480; Сербия +381</option>
+<option value="+65">&#127480;&#127468; Сингапур +65</option>
+<option value="+963">&#127480;&#127486; Сирия +963</option>
+<option value="+421">&#127480;&#127472; Словакия +421</option>
+<option value="+386">&#127480;&#127470; Словения +386</option>
+<option value="+677">&#127480;&#127463; Соломоновы Острова +677</option>
+<option value="+252">&#127480;&#127476; Сомали +252</option>
+<option value="+249">&#127480;&#127465; Судан +249</option>
+<option value="+597">&#127480;&#127479; Суринам +597</option>
+<option value="+1">&#127482;&#127480; США +1</option>
+<option value="+232">&#127480;&#127473; Сьерра-Леоне +232</option>
+<option value="+992">&#127481;&#127471; Таджикистан +992</option>
+<option value="+66">&#127481;&#127469; Таиланд +66</option>
+<option value="+886">&#127481;&#127484; Тайвань +886</option>
+<option value="+255">&#127481;&#127487; Танзания +255</option>
+<option value="+228">&#127481;&#127468; Того +228</option>
+<option value="+676">&#127481;&#127476; Тонга +676</option>
+<option value="+1868">&#127481;&#127481; Тринидад и Тобаго +1868</option>
+<option value="+688">&#127481;&#127483; Тувалу +688</option>
+<option value="+216">&#127481;&#127475; Тунис +216</option>
+<option value="+993">&#127481;&#127474; Туркменистан +993</option>
+<option value="+90">&#127481;&#127479; Турция +90</option>
+<option value="+256">&#127482;&#127468; Уганда +256</option>
+<option value="+998">&#127482;&#127487; Узбекистан +998</option>
+<option value="+380">&#127482;&#127462; Украина +380</option>
+<option value="+598">&#127482;&#127486; Уругвай +598</option>
+<option value="+679">&#127467;&#127471; Фиджи +679</option>
+<option value="+63">&#127477;&#127469; Филиппины +63</option>
+<option value="+358">&#127467;&#127470; Финляндия +358</option>
+<option value="+33">&#127467;&#127479; Франция +33</option>
+<option value="+385">&#127469;&#127479; Хорватия +385</option>
+<option value="+236">&#127464;&#127467; ЦАР +236</option>
+<option value="+235">&#127481;&#127465; Чад +235</option>
+<option value="+382">&#127474;&#127466; Черногория +382</option>
+<option value="+420">&#127464;&#127487; Чехия +420</option>
+<option value="+56">&#127464;&#127473; Чили +56</option>
+<option value="+46">&#127480;&#127466; Швеция +46</option>
+<option value="+94">&#127473;&#127472; Шри-Ланка +94</option>
+<option value="+593">&#127466;&#127464; Эквадор +593</option>
+<option value="+240">&#127468;&#127478; Экваториальная Гвинея +240</option>
+<option value="+291">&#127466;&#127479; Эритрея +291</option>
+<option value="+268">&#127480;&#127487; Эсватини +268</option>
+<option value="+372">&#127466;&#127466; Эстония +372</option>
+<option value="+251">&#127466;&#127481; Эфиопия +251</option>
+<option value="+27">&#127487;&#127462; Южная Африка +27</option>
+<option value="+82">&#127472;&#127479; Южная Корея +82</option>
+<option value="+211">&#127480;&#127480; Южный Судан +211</option>
+<option value="+1876">&#127471;&#127474; Ямайка +1876</option>
+<option value="+81">&#127471;&#127477; Япония +81</option>
+</select><input type="tel" class="phone-input" name="tel" placeholder="Телефон" required></div></div>
       </div>
       <div class="fg">
         <label>Проект</label>

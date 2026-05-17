@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Корпоративный клиент – N20 Immobilier Женева</title>
+<meta name="description" content="B2B решения в сфере недвижимости в Женеве — коммерческие помещения, релокация команд, поддержка экспатриантов для компаний и международных организаций.">
+<link rel="icon" href="/wp-content/uploads/2025/09/n20-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#021623;--marine:#033560;--dark:#0C181F;--accent:#6EC1E4;--white:#ffffff;--max:1280px}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);line-height:1.6;overflow-x:hidden}
+#site-header{position:fixed;top:0;left:0;right:0;z-index:9000;background:var(--navy);height:72px}
+.hdr-inner{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;max-width:100%}
+.hdr-logo{display:flex;align-items:center;flex-shrink:0}
+.hdr-logo img{height:38px;width:auto}
+.hdr-nav{display:flex;align-items:center;gap:0}
+.hdr-nav a{font-size:16px;font-weight:400;color:rgba(255,255,255,.8);padding:0 18px;line-height:72px;display:block;transition:color .18s;text-decoration:none}
+.hdr-nav a:hover,.hdr-nav a.active{color:#fff}
+.hdr-lang{position:relative;display:flex;align-items:center}
+.hdr-lang>a{display:flex;align-items:center;gap:8px;font-size:15px;color:rgba(255,255,255,.8);padding:0 14px;line-height:72px;cursor:pointer;transition:color .18s;text-decoration:none}
+.hdr-lang>a:hover{color:#fff}
+.hdr-lang>a img{width:18px;height:12px;border-radius:2px}
+.lang-dropdown{display:none;position:absolute;top:72px;right:0;background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden;min-width:140px}
+.hdr-lang:hover .lang-dropdown{display:block}
+.lang-dropdown a{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:15px;color:rgba(255,255,255,.8);transition:background .15s;text-decoration:none}
+.lang-dropdown a:hover{background:rgba(255,255,255,.08);color:#fff}
+.lang-dropdown img{width:18px;height:12px;border-radius:2px}
+.hdr-burger{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:0 4px}
+.mob-nav{display:none;position:fixed;top:72px;inset-inline:0;bottom:0;background:var(--navy);z-index:8999;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding-bottom:40px}
+.mob-nav.open{display:flex}
+.mob-nav a{font-size:22px;font-weight:500;color:rgba(255,255,255,.75);padding:6px 0;text-decoration:none}
+.mob-nav a:hover{color:#fff}
+.mob-nav .mob-lang{display:flex;gap:16px;margin-top:8px}
+.mob-nav .mob-lang a{font-size:16px;font-weight:600}
+@media(max-width:900px){.hdr-nav,.hdr-lang{display:none}.hdr-burger{display:block}}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;background:url('/wp-content/uploads/2025/10/business_people_header-1-2.jpeg') center/cover no-repeat;padding-top:72px;overflow:hidden}
+#hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(2,22,35,.55) 0%,rgba(2,22,35,.72) 65%,rgba(2,22,35,.95) 100%)}
+.hero-content{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 48px;width:100%}
+.hero-tag{display:inline-block;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(110,193,228,.45);padding:6px 16px;border-radius:100px;margin-bottom:28px}
+.hero-content h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(40px,6vw,76px);color:#fff;line-height:1.08;max-width:820px;margin-bottom:24px}
+.hero-content p{font-family:'Manrope',sans-serif;font-size:18px;color:rgba(255,255,255,.75);max-width:580px;line-height:1.65;margin-bottom:44px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.btn-accent{display:inline-block;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--accent);padding:15px 36px;border-radius:100px;text-decoration:none;transition:opacity .2s}
+.btn-accent:hover{opacity:.88}
+.btn-outline-white{display:inline-block;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:transparent;border:2px solid rgba(255,255,255,.5);padding:13px 36px;border-radius:100px;text-decoration:none;transition:all .2s}
+.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.light-zone{background:radial-gradient(ellipse at top right,#B4F0F8 0%,#ffffff 80%)}
+.section-intro{padding:96px 0}
+.intro-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.kicker{display:block;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.intro-inner h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,3.5vw,48px);font-weight:400;color:var(--navy);line-height:1.15;margin-bottom:20px}
+.intro-inner p{font-family:'Manrope',sans-serif;font-size:16px;color:rgba(2,22,35,.7);line-height:1.75;margin-bottom:14px}
+.intro-img{border-radius:24px;overflow:hidden;aspect-ratio:4/3}
+.intro-img img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:40px;padding:0 24px}.intro-img{order:-1}}
+.srv-section{padding:80px 0}
+.srv-inner{max-width:var(--max);margin:0 auto;padding:0 48px}
+.section-label{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:14px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,44px);font-weight:400;color:var(--navy);text-align:center;margin-bottom:56px;line-height:1.15}
+.srv-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.srv-card{background:rgba(255,255,255,.7);border:1px solid rgba(2,22,35,.08);border-radius:24px;padding:48px 44px}
+.srv-card-icon{width:56px;height:56px;border-radius:16px;background:rgba(2,22,35,.06);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.srv-card-icon svg{width:26px;height:26px;fill:none;stroke:var(--navy);stroke-width:1.8}
+.srv-card h3{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:var(--navy);margin-bottom:12px}
+.srv-card p{font-family:'Manrope',sans-serif;font-size:15px;color:rgba(2,22,35,.65);line-height:1.7;margin-bottom:24px}
+.srv-features{list-style:none;display:flex;flex-direction:column;gap:10px}
+.srv-features li{display:flex;align-items:center;gap:10px;font-family:'Manrope',sans-serif;font-size:14px;color:rgba(2,22,35,.75)}
+.srv-features li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+@media(max-width:768px){.srv-grid{grid-template-columns:1fr}.srv-inner{padding:0 24px}}
+.process-section{padding:80px 0}
+.process-inner{max-width:var(--max);margin:0 auto;padding:0 48px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.process-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:rgba(2,22,35,.1);z-index:0}
+.p-step{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 16px}
+.p-step-num{width:56px;height:56px;border-radius:50%;background:var(--navy);color:#fff;font-family:'DM Serif Display',serif;font-size:20px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0}
+.p-step h4{font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.p-step p{font-family:'Manrope',sans-serif;font-size:13px;color:rgba(2,22,35,.6);line-height:1.6}
+.clients-section{padding:80px 0}
+.clients-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.client-card{background:var(--navy);border-radius:20px;padding:36px 32px;color:#fff;text-align:center}
+.client-icon{width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.client-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8}
+.client-card h4{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:#fff;margin-bottom:8px}
+.client-card p{font-family:'Manrope',sans-serif;font-size:13px;color:rgba(255,255,255,.6);line-height:1.65}
+#n20-faq{padding:80px 0}
+.n20-faq-inner{max-width:820px;margin:0 auto;padding:0 32px}
+.n20-faq-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,3vw,40px);font-weight:400;color:var(--navy);text-align:center;margin-bottom:48px}
+.n20-faq-list{display:flex;flex-direction:column;gap:12px}
+.n20-faq-item{background:rgba(255,255,255,.7);border:1px solid rgba(2,22,35,.1);border-radius:14px;overflow:hidden}
+.n20-faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:22px 26px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;color:var(--navy)}
+.n20-faq-item summary::-webkit-details-marker{display:none}
+.faq-chevron{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;transition:transform .3s}
+.n20-faq-item[open] .faq-chevron{transform:rotate(180deg)}
+.n20-faq-body{padding:0 26px 22px;font-family:'Manrope',sans-serif;font-size:14px;color:rgba(2,22,35,.7);line-height:1.7}
+.hon-section{background:var(--navy);padding:96px 0}
+.hon-inner{max-width:var(--max);margin:0 auto;padding:0 48px;text-align:center}
+.hon-inner .section-label{color:var(--accent)}
+.hon-inner .section-title{color:#fff;margin-bottom:16px}
+.hon-subtitle{font-family:'Manrope',sans-serif;font-size:16px;color:rgba(255,255,255,.6);max-width:600px;margin:0 auto 60px;line-height:1.7}
+.hon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.hon-card{background:rgba(255,255,255,.05);border:1px solid rgba(110,193,228,.15);border-radius:20px;padding:40px 32px;text-align:left;transition:border-color .2s}
+.hon-card:hover{border-color:rgba(110,193,228,.4)}
+.hon-card-icon{width:52px;height:52px;border-radius:14px;background:rgba(110,193,228,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.hon-card-icon svg{width:24px;height:24px;fill:none;stroke:var(--accent);stroke-width:1.8}
+.hon-card h3{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:8px}
+.hon-card .hon-price{font-family:'DM Serif Display',serif;font-size:32px;color:var(--accent);margin-bottom:4px;line-height:1}
+.hon-card .hon-unit{font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px}
+.hon-features{list-style:none;display:flex;flex-direction:column;gap:10px}
+.hon-features li{display:flex;align-items:flex-start;gap:10px;font-family:'Manrope',sans-serif;font-size:14px;color:rgba(255,255,255,.65);line-height:1.5}
+.hon-features li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px}
+.hon-note{font-family:'Manrope',sans-serif;font-size:13px;color:rgba(255,255,255,.35);margin-top:40px;font-style:italic}
+@media(max-width:900px){.hon-grid{grid-template-columns:1fr}.hon-inner{padding:0 24px}}
+.contact-section{position:relative;padding:96px 0;background:url('/wp-content/uploads/2025/10/category-footer2-webp-1.webp') center/cover no-repeat}
+.contact-overlay{position:absolute;inset:0;background:rgba(2,22,35,.68)}
+.contact-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:0 32px}
+.form-col{background:rgba(255,255,255,.07);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:40px 36px}
+.form-col h3{font-family:'DM Serif Display',serif;font-size:clamp(22px,2vw,30px);font-weight:400;color:#fff;margin-bottom:8px}
+.form-col>p{font-family:'Manrope',sans-serif;font-size:14px;color:rgba(255,255,255,.6);margin-bottom:24px;line-height:1.6}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.contact-form input,.contact-form textarea{width:100%;padding:15px 18px;border:none;border-radius:10px;background:#fff;color:var(--navy);font-family:'Manrope',sans-serif;font-size:14px;outline:none;transition:box-shadow .2s}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(2,22,35,.4)}
+.contact-form input:focus,.contact-form textarea:focus{box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.contact-form textarea{resize:vertical;min-height:110px}
+.form-submit{display:flex;justify-content:center;margin-top:8px}
+.form-submit button{background:var(--accent);color:var(--navy);border:2px solid var(--accent);font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 40px;border-radius:100px;cursor:pointer;transition:all .2s}
+.form-submit button:hover{background:transparent;color:#fff;border-color:#fff}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}.form-col{padding:28px 20px}}
+#n20-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08)}
+.n20-footer-main{padding:60px 0 48px}
+.n20-footer-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+.n20-footer-logo{height:36px;width:auto;margin-bottom:12px}
+.n20-footer-tagline{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:22px;font-style:italic}
+.n20-footer-contact{list-style:none;display:flex;flex-direction:column;gap:11px}
+.n20-footer-contact li{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.55)}
+.n20-footer-contact svg{width:15px;height:15px;fill:var(--accent);flex-shrink:0}
+.n20-footer-contact a{color:rgba(255,255,255,.55);text-decoration:none;transition:color .18s}
+.n20-footer-contact a:hover{color:#fff}
+.n20-footer-col h4{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px}
+.n20-footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.n20-footer-col ul a{font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .18s}
+.n20-footer-col ul a:hover{color:#fff}
+.n20-footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding:18px 40px;display:flex;justify-content:center;font-size:13px;color:rgba(255,255,255,.4)}
+#whatsapp-btn{position:fixed;bottom:28px;right:28px;z-index:8000;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:transform .2s;text-decoration:none}
+#whatsapp-btn:hover{transform:scale(1.08)}
+#whatsapp-btn svg{width:28px;height:28px;fill:white}
+.phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
+</style>
+</head>
+<body>
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="/ru/homepage/" class="hdr-logo"><img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier"></a>
+    <nav class="hdr-nav">
+      <a href="/ru/homepage/">Главная</a>
+      <a href="/ru/find-accomodation/">Найти жильё</a>
+      <a href="/ru/terminate-lease/">Расторжение договора</a>
+      <a href="/ru/buy-sell/">Купить / продать</a>
+      <a href="/ru/additional-services/">Услуги</a>
+      <a href="/ru/professional-client/" class="active">Корп. клиентам</a>
+    </nav>
+    <div class="hdr-lang">
+      <a href="#"><img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU"> Русский</a>
+      <div class="lang-dropdown">
+        <a href="/ru/professional-client/"><img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='.667' fill='%23fff'/%3E%3Crect width='3' height='.667' y='.667' fill='%230039A6'/%3E%3Crect width='3' height='.666' y='1.334' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU"> Русский</a>
+        <a href="/client-professionnel/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAbFBMVEVzldTg4ODS0tLxDwDtAwDjAADD0uz39/fy8vL3k4nzgna4yOixwuXu7u7s6+zn5+fyd2rvcGPtZljYAABrjNCpvOHrWkxegsqfs93NAADpUUFRd8THAABBa7wnVbERRKa8vLyxsLCoqKigoKClCvcsAAAAXklEQVR4AS3JxUEAQQAEwZo13Mk/R9w5/7UERJCIGIgj5qfRJZEpPyNfCgJTjMR1eRRnJiExFJz5Mf1PokWr/UztIjRGQ3V486u0HO55m634U6dMcf0RNPfkVCTvKjO16xHA8miowAAAAABJRU5ErkJggg==" alt="FR"> Français</a>
+        <a href="/en/professional-client/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAt1BMVEWSmb66z+18msdig8La3u+tYX9IaLc7W7BagbmcUW+kqMr/q6n+//+hsNv/lIr/jIGMnNLJyOP9/fyQttT/wb3/////aWn+YWF5kNT0oqz0i4ueqtIZNJjhvt/8gn//WVr/6+rN1+o9RKZwgcMPJpX/VFT9UEn+RUX8Ozv2Ly+FGzdYZrfU1e/8LS/lQkG/mbVUX60AE231hHtcdMb0mp3qYFTFwNu3w9prcqSURGNDaaIUMX5FNW5wYt7AAAAAjklEQVR4AR3HNUJEMQCGwf+L8RR36ajR+1+CEuvRdd8kK9MNAiRQNgJmVDAt1yM6kSzYVJUsPNssAk5N7ZFKjVNFAY4co6TAOI+kyQm+LFUEBEKKzuWUNB7rSH/rSnvOulOGk+QlXTBqMIrfYX4tSe2nP3iRa/KNK7uTmWJ5a9+erZ3d+18od4ytiZdvZyuKWy8o3UpTVAAAAABJRU5ErkJggg==" alt="EN"> English</a>
+        <a href="/ar/professional-client/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAMAAABcOc2zAAAAkFBMVEUAQycAMRoAMRkBRSgDWTsAMhoCRCkAQCMBWDkHWz4AQyYARCYALhcDXT4CUzMBVTcAMxoANBwAVDEAUS4CWDUATiwASSkAZEAAQCIAPiEARycASyoFWjdJhmwARSYAQyQAXToAYT1bkHkANRtSinExeFopbE8AZ0MAOh8ALhcAXzxwoo0fZ0g8dVs/g2cRXj2WtYNSAAAAEnRSTlMgk+FMkzU+ct01y8vIyG+51blOcT8rAAAAmklEQVQIHQXBQU7DMBBA0T+TsZ04RaRi3Qv0/ndCLCoVBJFd22PeWzZ2NdvHpa+daEnuDyDPXxeNDdTOgydk6KU6slhPz9zzz0rI8RN9t9LyZiMN0G80sqxvs51Sw0TGiFNNZi/8cSKeZRqqvbjfRFW2l5lgsTgyPiDxMKnZmiP6FRtmgSrYWraKuOIv5GiwpwhhSXI9VC8S/gGbnDzupG4PbQAAAABJRU5ErkJggg==" alt="AR"> العربية</a>
+      </div>
+    </div>
+    <button class="hdr-burger" id="burgerBtn">☰</button>
+  </div>
+</header>
+<nav class="mob-nav" id="mobNav">
+  <a href="/ru/homepage/">Главная</a>
+  <a href="/ru/find-accomodation/">Найти жильё</a>
+  <a href="/ru/terminate-lease/">Расторжение договора</a>
+  <a href="/ru/buy-sell/">Купить / продать</a>
+  <a href="/ru/additional-services/">Услуги</a>
+  <a href="/ru/professional-client/">Корп. клиентам</a>
+  <div class="mob-lang">
+    <a href="/ru/professional-client/" style="color:white;">RU</a>
+    <a href="/client-professionnel/">FR</a>
+    <a href="/en/professional-client/">EN</a>
+    <a href="/ar/professional-client/">AR</a>
+  </div>
+</nav>
+<section id="hero">
+  <div id="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Корпоративный клиент</span>
+    <h1>Решения в сфере<br>недвижимости вашего уровня.</h1>
+    <p>Коммерческие помещения, релокация сотрудников, поддержка экспатриантов — N20 Immobilier является партнёром компаний и международных организаций в Женеве.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-accent">Связаться с нами</a>
+      <a href="/ru/professional-mandate/" class="btn-outline-white">Открыть профессиональную форму</a>
+    </div>
+  </div>
+</section>
+<div class="light-zone">
+<section class="section-intro">
+  <div class="intro-inner">
+    <div>
+      <span class="kicker">Наш B2B подход</span>
+      <h2>Единый контакт для всех ваших профессиональных задач в сфере недвижимости</h2>
+      <p>В Женеве расположены штаб-квартиры сотен международных организаций и транснациональных корпораций. Поиск подходящих помещений или релокация сотрудников на этом конкурентном рынке требует местной экспертизы и широкой сети контактов.</p>
+      <p>N20 Immobilier предлагает услугу «под ключ»: от поиска офисов до полноценного обустройства вашей команды, с выделенным координатором на протяжении всего процесса.</p>
+    </div>
+    <div class="intro-img">
+      <img src="/wp-content/uploads/2025/10/business_people_standing-3-2-2.jpeg" alt="Профессиональные решения в сфере недвижимости" loading="lazy">
+    </div>
+  </div>
+</section>
+<section class="srv-section" id="services">
+  <div class="srv-inner">
+    <div class="section-label">Наши решения</div>
+    <h2 class="section-title">Что мы делаем для вас</h2>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Коммерческие помещения</h3>
+        <p>Офисы, коворкинги, профессиональные помещения — мы находим площади, точно отвечающие вашим операционным и бюджетным требованиям.</p>
+        <ul class="srv-features">
+          <li>Анализ ваших потребностей в площади и расположении</li>
+          <li>Доступ к предложениям вне рынка (off-market)</li>
+          <li>Переговоры по условиям аренды</li>
+          <li>Сопровождение до подписания договора</li>
+          <li>Коммерческая недвижимость от CHF 5'000/месяц</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Релокация команды</h3>
+        <p>Переводите сотрудников в Женеву? Мы берём на себя полное обустройство: жильё, административные процедуры, школы для детей, местная интеграция.</p>
+        <ul class="srv-features">
+          <li>Поиск жилья для каждого сотрудника</li>
+          <li>Административная поддержка (разрешения, договоры)</li>
+          <li>Индивидуальная программа интеграции</li>
+          <li>Сопровождение после переезда</li>
+          <li>Льготные тарифы при объёме от 3 человек</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="process-section">
+  <div class="process-inner">
+    <div class="section-label">Наш метод</div>
+    <h2 class="section-title" style="margin-bottom:56px">Структурированный и прозрачный процесс</h2>
+    <div class="process-steps">
+      <div class="p-step"><div class="p-step-num">01</div><h4>Анализ потребностей</h4><p>Целевое интервью для понимания вашей организации, ограничений и приоритетов</p></div>
+      <div class="p-step"><div class="p-step-num">02</div><h4>Целевые предложения</h4><p>Подборка объектов в соответствии с вашим запросом в течение 48 часов</p></div>
+      <div class="p-step"><div class="p-step-num">03</div><h4>Просмотры и переговоры</h4><p>Организация показов и переговоры по лучшим условиям от вашего имени</p></div>
+      <div class="p-step"><div class="p-step-num">04</div><h4>Обустройство и сопровождение</h4><p>Координация полного обустройства и мониторинг после заезда</p></div>
+    </div>
+  </div>
+</section>
+<section class="clients-section">
+  <div class="srv-inner">
+    <div class="section-label">Нам доверяют</div>
+    <h2 class="section-title">Мы сопровождаем</h2>
+    <div class="clients-inner" style="max-width:var(--max);margin:0 auto;padding:0 48px">
+      <div class="client-card">
+        <div class="client-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h4>Международные организации</h4>
+        <p>ООН, ВОЗ, МККК, ВТО — сопровождение сотрудников и их семей</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h4>Компании и МСП</h4>
+        <p>Быстрорастущие стартапы, расширяющиеся МСП — помещения для каждого этапа</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <h4>Фирмы и Family Offices</h4>
+        <p>Частные банки, трасты, family offices — конфиденциальность и премиальная сеть</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="n20-faq">
+  <div class="n20-faq-inner">
+    <h2 class="n20-faq-title">Часто задаваемые вопросы</h2>
+    <div class="n20-faq-list">
+      <details class="n20-faq-item">
+        <summary>Каковы ваши гонорары за коммерческие помещения?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Наши гонорары за коммерческие помещения соответствуют 1 месяцу арендной платы с учётом всех расходов, минимум CHF 5'000. Оплата производится только при подписании договора аренды. Никаких регистрационных сборов или предварительных обязательств.</div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Предлагаете ли вы льготные тарифы при массовой релокации?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Да. Для компаний, перевозящих нескольких сотрудников одновременно (от 3 человек), мы предлагаем договорные тарифы и выделенного координатора. Свяжитесь с нами для получения персонализированного коммерческого предложения.</div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Оказываете ли вы помощь сотрудникам в административных процедурах?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Да. Наш сервис релокации включает поддержку в получении вида на жительство, открытии банковских счетов, записи в школу и прохождении муниципальных процедур. Мы также можем рекомендовать специализированных юридических партнёров.</div>
+      </details>
+      <details class="n20-faq-item">
+        <summary>Работаете ли вы с HR-отделами компаний?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="n20-faq-body">Безусловно. Мы регулярно сотрудничаем с HR и Mobility командами крупных организаций. Мы можем заключить рамочное партнёрское соглашение для упрощения процессов и обеспечения единых условий для всех ваших сотрудников.</div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+<section class="hon-section" id="honoraires">
+  <div class="hon-inner">
+    <div class="section-label">Прозрачность и ясность</div>
+    <h2 class="section-title">Профессиональные гонорары</h2>
+    <p class="hon-subtitle">Наши гонорары озвучиваются на первой встрече и взимаются только после реализации вашего проекта. Никаких регистрационных сборов и авансовых платежей.</p>
+    <div class="hon-grid">
+      <div class="hon-card">
+        <div class="hon-card-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Коммерческие помещения</h3>
+        <div class="hon-price">1 месяц CC</div>
+        <div class="hon-unit">минимум CHF 5'000</div>
+        <ul class="hon-features">
+          <li>Оплата только при подписании договора</li>
+          <li>Активный поиск и off-market включены</li>
+          <li>Никаких авансовых обязательств</li>
+          <li>Сопровождение до передачи ключей</li>
+        </ul>
+      </div>
+      <div class="hon-card">
+        <div class="hon-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Релокация команды</h3>
+        <div class="hon-price">По запросу</div>
+        <div class="hon-unit">льготные тарифы от 3 чел.</div>
+        <ul class="hon-features">
+          <li>Выделенный координатор для HR и Mobility</li>
+          <li>Договорные тарифы при объёме</li>
+          <li>Полная административная поддержка</li>
+          <li>Рамочное партнёрское соглашение</li>
+        </ul>
+      </div>
+      <div class="hon-card">
+        <div class="hon-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+        <h3>Услуги à la carte</h3>
+        <div class="hon-price">Бесплатный расчёт</div>
+        <div class="hon-unit">в течение 24 рабочих часов</div>
+        <ul class="hon-features">
+          <li>Анализ потребностей без обязательств</li>
+          <li>Юридические и административные услуги</li>
+          <li>Консультации по дизайну интерьера</li>
+          <li>Координация переезда</li>
+        </ul>
+      </div>
+    </div>
+    <p class="hon-note">Указанные гонорары не включают НДС. Детальное коммерческое предложение предоставляется до принятия каких-либо обязательств.</p>
+  </div>
+</section>
+<section class="contact-section" id="contact">
+  <div class="contact-overlay"></div>
+  <div class="contact-inner">
+    <div class="form-col">
+      <h3>Обсудим ваш проект</h3>
+      <p>Выделенный консультант свяжется с вами в течение 24 часов, чтобы проанализировать вашу ситуацию и предложить индивидуальное решение.</p>
+      <form class="contact-form" onsubmit="return false">
+        <div class="form-row">
+          <input type="text" placeholder="Имя" required>
+          <input type="text" placeholder="Фамилия" required>
+        </div>
+        <div class="form-row">
+          <input type="email" placeholder="Корпоративный email" required>
+          <div class="phone-group"><select class="phone-prefix" aria-label="Код страны">
+<option value="+41" selected>&#127464;&#127469; Швейцария +41</option>
+<option value="+61">&#127462;&#127482; Австралия +61</option>
+<option value="+43">&#127462;&#127481; Австрия +43</option>
+<option value="+994">&#127462;&#127487; Азербайджан +994</option>
+<option value="+355">&#127462;&#127473; Албания +355</option>
+<option value="+213">&#127465;&#127487; Алжир +213</option>
+<option value="+244">&#127462;&#127476; Ангола +244</option>
+<option value="+376">&#127462;&#127465; Андорра +376</option>
+<option value="+1268">&#127462;&#127468; Антигуа и Барбуда +1268</option>
+<option value="+54">&#127462;&#127479; Аргентина +54</option>
+<option value="+374">&#127462;&#127474; Армения +374</option>
+<option value="+93">&#127462;&#127467; Афганистан +93</option>
+<option value="+1242">&#127463;&#127480; Багамы +1242</option>
+<option value="+880">&#127463;&#127465; Бангладеш +880</option>
+<option value="+1246">&#127463;&#127463; Барбадос +1246</option>
+<option value="+973">&#127463;&#127469; Бахрейн +973</option>
+<option value="+375">&#127463;&#127486; Беларусь +375</option>
+<option value="+501">&#127463;&#127487; Белиз +501</option>
+<option value="+32">&#127463;&#127466; Бельгия +32</option>
+<option value="+229">&#127463;&#127471; Бенин +229</option>
+<option value="+359">&#127463;&#127468; Болгария +359</option>
+<option value="+591">&#127463;&#127476; Боливия +591</option>
+<option value="+387">&#127463;&#127462; Босния и Герцеговина +387</option>
+<option value="+267">&#127463;&#127484; Ботсвана +267</option>
+<option value="+55">&#127463;&#127479; Бразилия +55</option>
+<option value="+673">&#127463;&#127475; Бруней +673</option>
+<option value="+226">&#127463;&#127467; Буркина-Фасо +226</option>
+<option value="+257">&#127463;&#127470; Бурунди +257</option>
+<option value="+975">&#127463;&#127481; Бутан +975</option>
+<option value="+678">&#127483;&#127482; Вануату +678</option>
+<option value="+379">&#127483;&#127462; Ватикан +379</option>
+<option value="+44">&#127468;&#127463; Великобритания +44</option>
+<option value="+36">&#127469;&#127482; Венгрия +36</option>
+<option value="+58">&#127483;&#127466; Венесуэла +58</option>
+<option value="+670">&#127481;&#127473; Восточный Тимор +670</option>
+<option value="+84">&#127483;&#127475; Вьетнам +84</option>
+<option value="+241">&#127468;&#127462; Габон +241</option>
+<option value="+509">&#127469;&#127481; Гаити +509</option>
+<option value="+592">&#127468;&#127486; Гайана +592</option>
+<option value="+220">&#127468;&#127474; Гамбия +220</option>
+<option value="+233">&#127468;&#127469; Гана +233</option>
+<option value="+502">&#127468;&#127481; Гватемала +502</option>
+<option value="+224">&#127468;&#127475; Гвинея +224</option>
+<option value="+245">&#127468;&#127484; Гвинея-Бисау +245</option>
+<option value="+49">&#127465;&#127466; Германия +49</option>
+<option value="+504">&#127469;&#127475; Гондурас +504</option>
+<option value="+1473">&#127468;&#127465; Гренада +1473</option>
+<option value="+995">&#127468;&#127466; Грузия +995</option>
+<option value="+45">&#127465;&#127472; Дания +45</option>
+<option value="+253">&#127465;&#127471; Джибути +253</option>
+<option value="+1767">&#127465;&#127474; Доминика +1767</option>
+<option value="+1809">&#127465;&#127476; Доминиканская Республика +1809</option>
+<option value="+243">&#127464;&#127465; ДР Конго +243</option>
+<option value="+20">&#127466;&#127468; Египет +20</option>
+<option value="+260">&#127487;&#127474; Замбия +260</option>
+<option value="+263">&#127487;&#127484; Зимбабве +263</option>
+<option value="+972">&#127470;&#127473; Израиль +972</option>
+<option value="+91">&#127470;&#127475; Индия +91</option>
+<option value="+62">&#127470;&#127465; Индонезия +62</option>
+<option value="+962">&#127471;&#127476; Иордания +962</option>
+<option value="+964">&#127470;&#127478; Ирак +964</option>
+<option value="+98">&#127470;&#127479; Иран +98</option>
+<option value="+353">&#127470;&#127466; Ирландия +353</option>
+<option value="+354">&#127470;&#127480; Исландия +354</option>
+<option value="+34">&#127466;&#127480; Испания +34</option>
+<option value="+39">&#127470;&#127481; Италия +39</option>
+<option value="+967">&#127486;&#127466; Йемен +967</option>
+<option value="+238">&#127464;&#127483; Кабо-Верде +238</option>
+<option value="+7">&#127472;&#127487; Казахстан +7</option>
+<option value="+855">&#127472;&#127469; Камбоджа +855</option>
+<option value="+237">&#127464;&#127474; Камерун +237</option>
+<option value="+1">&#127464;&#127462; Канада +1</option>
+<option value="+974">&#127478;&#127462; Катар +974</option>
+<option value="+254">&#127472;&#127466; Кения +254</option>
+<option value="+357">&#127464;&#127486; Кипр +357</option>
+<option value="+686">&#127472;&#127470; Кирибати +686</option>
+<option value="+86">&#127464;&#127475; Китай +86</option>
+<option value="+57">&#127464;&#127476; Колумбия +57</option>
+<option value="+269">&#127472;&#127474; Коморы +269</option>
+<option value="+383">&#127485;&#127472; Косово +383</option>
+<option value="+506">&#127464;&#127479; Коста-Рика +506</option>
+<option value="+225">&#127464;&#127470; Кот-д'Ивуар +225</option>
+<option value="+53">&#127464;&#127482; Куба +53</option>
+<option value="+965">&#127472;&#127484; Кувейт +965</option>
+<option value="+996">&#127472;&#127468; Кыргызстан +996</option>
+<option value="+856">&#127473;&#127462; Лаос +856</option>
+<option value="+371">&#127473;&#127483; Латвия +371</option>
+<option value="+266">&#127473;&#127480; Лесото +266</option>
+<option value="+231">&#127473;&#127479; Либерия +231</option>
+<option value="+961">&#127473;&#127463; Ливан +961</option>
+<option value="+218">&#127473;&#127486; Ливия +218</option>
+<option value="+370">&#127473;&#127481; Литва +370</option>
+<option value="+423">&#127473;&#127470; Лихтенштейн +423</option>
+<option value="+352">&#127473;&#127482; Люксембург +352</option>
+<option value="+230">&#127474;&#127482; Маврикий +230</option>
+<option value="+222">&#127474;&#127479; Мавритания +222</option>
+<option value="+261">&#127474;&#127468; Мадагаскар +261</option>
+<option value="+265">&#127474;&#127484; Малави +265</option>
+<option value="+60">&#127474;&#127486; Малайзия +60</option>
+<option value="+223">&#127474;&#127473; Мали +223</option>
+<option value="+960">&#127474;&#127483; Мальдивы +960</option>
+<option value="+356">&#127474;&#127481; Мальта +356</option>
+<option value="+212">&#127474;&#127462; Марокко +212</option>
+<option value="+692">&#127474;&#127469; Маршалловы Острова +692</option>
+<option value="+52">&#127474;&#127485; Мексика +52</option>
+<option value="+691">&#127467;&#127474; Микронезия +691</option>
+<option value="+258">&#127474;&#127487; Мозамбик +258</option>
+<option value="+373">&#127474;&#127465; Молдова +373</option>
+<option value="+377">&#127474;&#127464; Монако +377</option>
+<option value="+976">&#127474;&#127475; Монголия +976</option>
+<option value="+95">&#127474;&#127474; Мьянма +95</option>
+<option value="+264">&#127475;&#127462; Намибия +264</option>
+<option value="+674">&#127475;&#127479; Науру +674</option>
+<option value="+977">&#127475;&#127477; Непал +977</option>
+<option value="+227">&#127475;&#127466; Нигер +227</option>
+<option value="+234">&#127475;&#127468; Нигерия +234</option>
+<option value="+31">&#127475;&#127473; Нидерланды +31</option>
+<option value="+505">&#127475;&#127470; Никарагуа +505</option>
+<option value="+64">&#127475;&#127487; Новая Зеландия +64</option>
+<option value="+47">&#127475;&#127476; Норвегия +47</option>
+<option value="+971">&#127462;&#127466; ОАЭ +971</option>
+<option value="+968">&#127476;&#127474; Оман +968</option>
+<option value="+92">&#127477;&#127472; Пакистан +92</option>
+<option value="+680">&#127477;&#127484; Палау +680</option>
+<option value="+970">&#127477;&#127480; Палестина +970</option>
+<option value="+507">&#127477;&#127462; Панама +507</option>
+<option value="+675">&#127477;&#127468; Папуа — Новая Гвинея +675</option>
+<option value="+595">&#127477;&#127486; Парагвай +595</option>
+<option value="+51">&#127477;&#127466; Перу +51</option>
+<option value="+48">&#127477;&#127473; Польша +48</option>
+<option value="+351">&#127477;&#127481; Португалия +351</option>
+<option value="+242">&#127464;&#127468; Республика Конго +242</option>
+<option value="+7">&#127479;&#127482; Россия +7</option>
+<option value="+250">&#127479;&#127484; Руанда +250</option>
+<option value="+40">&#127479;&#127476; Румыния +40</option>
+<option value="+503">&#127480;&#127483; Сальвадор +503</option>
+<option value="+685">&#127484;&#127480; Самоа +685</option>
+<option value="+378">&#127480;&#127474; Сан-Марино +378</option>
+<option value="+239">&#127480;&#127481; Сан-Томе и Принсипи +239</option>
+<option value="+966">&#127480;&#127462; Саудовская Аравия +966</option>
+<option value="+850">&#127472;&#127477; Северная Корея +850</option>
+<option value="+389">&#127474;&#127472; Северная Македония +389</option>
+<option value="+248">&#127480;&#127464; Сейшелы +248</option>
+<option value="+221">&#127480;&#127475; Сенегал +221</option>
+<option value="+1784">&#127483;&#127464; Сент-Винсент и Гренадины +1784</option>
+<option value="+1869">&#127472;&#127475; Сент-Китс и Невис +1869</option>
+<option value="+1758">&#127473;&#127464; Сент-Люсия +1758</option>
+<option value="+381">&#127479;&#127480; Сербия +381</option>
+<option value="+65">&#127480;&#127468; Сингапур +65</option>
+<option value="+963">&#127480;&#127486; Сирия +963</option>
+<option value="+421">&#127480;&#127472; Словакия +421</option>
+<option value="+386">&#127480;&#127470; Словения +386</option>
+<option value="+677">&#127480;&#127463; Соломоновы Острова +677</option>
+<option value="+252">&#127480;&#127476; Сомали +252</option>
+<option value="+249">&#127480;&#127465; Судан +249</option>
+<option value="+597">&#127480;&#127479; Суринам +597</option>
+<option value="+1">&#127482;&#127480; США +1</option>
+<option value="+232">&#127480;&#127473; Сьерра-Леоне +232</option>
+<option value="+992">&#127481;&#127471; Таджикистан +992</option>
+<option value="+66">&#127481;&#127469; Таиланд +66</option>
+<option value="+886">&#127481;&#127484; Тайвань +886</option>
+<option value="+255">&#127481;&#127487; Танзания +255</option>
+<option value="+228">&#127481;&#127468; Того +228</option>
+<option value="+676">&#127481;&#127476; Тонга +676</option>
+<option value="+1868">&#127481;&#127481; Тринидад и Тобаго +1868</option>
+<option value="+688">&#127481;&#127483; Тувалу +688</option>
+<option value="+216">&#127481;&#127475; Тунис +216</option>
+<option value="+993">&#127481;&#127474; Туркменистан +993</option>
+<option value="+90">&#127481;&#127479; Турция +90</option>
+<option value="+256">&#127482;&#127468; Уганда +256</option>
+<option value="+998">&#127482;&#127487; Узбекистан +998</option>
+<option value="+380">&#127482;&#127462; Украина +380</option>
+<option value="+598">&#127482;&#127486; Уругвай +598</option>
+<option value="+679">&#127467;&#127471; Фиджи +679</option>
+<option value="+63">&#127477;&#127469; Филиппины +63</option>
+<option value="+358">&#127467;&#127470; Финляндия +358</option>
+<option value="+33">&#127467;&#127479; Франция +33</option>
+<option value="+385">&#127469;&#127479; Хорватия +385</option>
+<option value="+236">&#127464;&#127467; ЦАР +236</option>
+<option value="+235">&#127481;&#127465; Чад +235</option>
+<option value="+382">&#127474;&#127466; Черногория +382</option>
+<option value="+420">&#127464;&#127487; Чехия +420</option>
+<option value="+56">&#127464;&#127473; Чили +56</option>
+<option value="+46">&#127480;&#127466; Швеция +46</option>
+<option value="+94">&#127473;&#127472; Шри-Ланка +94</option>
+<option value="+593">&#127466;&#127464; Эквадор +593</option>
+<option value="+240">&#127468;&#127478; Экваториальная Гвинея +240</option>
+<option value="+291">&#127466;&#127479; Эритрея +291</option>
+<option value="+268">&#127480;&#127487; Эсватини +268</option>
+<option value="+372">&#127466;&#127466; Эстония +372</option>
+<option value="+251">&#127466;&#127481; Эфиопия +251</option>
+<option value="+27">&#127487;&#127462; Южная Африка +27</option>
+<option value="+82">&#127472;&#127479; Южная Корея +82</option>
+<option value="+211">&#127480;&#127480; Южный Судан +211</option>
+<option value="+1876">&#127471;&#127474; Ямайка +1876</option>
+<option value="+81">&#127471;&#127477; Япония +81</option>
+</select><input type="tel" class="phone-input" placeholder="xx xxx xx xx"></div>
+        </div>
+        <textarea placeholder="Кратко опишите ваш проект…" style="background:#fff;border:none;border-radius:10px;padding:15px 18px;font-family:'Manrope',sans-serif;font-size:14px;width:100%;min-height:100px;outline:none;resize:vertical"></textarea>
+        <div class="form-submit"><button type="submit">Отправить</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+<footer id="n20-footer">
+  <div class="n20-footer-main">
+    <div class="n20-footer-inner">
+      <div>
+        <img class="n20-footer-logo" src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+        <p class="n20-footer-tagline">Ваш партнёр в сфере недвижимости в Женеве</p>
+        <ul class="n20-footer-contact">
+          <li><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:info@n20immobilier.ch">info@n20immobilier.ch</a></li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg><a href="tel:+41764192021">+41 76 419 20 21</a></li>
+        </ul>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="/ru/find-accomodation/">Найти жильё</a></li>
+          <li><a href="/ru/terminate-lease/">Расторжение договора</a></li>
+          <li><a href="/ru/buy-sell/">Купить / продать</a></li>
+          <li><a href="/ru/additional-services/">Доп. услуги</a></li>
+        </ul>
+      </div>
+      <div class="n20-footer-col">
+        <h4>Профессионалам</h4>
+        <ul>
+          <li><a href="/ru/professional-client/">Корп. клиентам</a></li>
+          <li><a href="/ru/professional-mandate/">Профессиональная форма</a></li>
+          <li><a href="/ru/terms-and-conditions/">Условия использования</a></li>
+          <li><a href="/ru/privacy-policy/">Конфиденциальность</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="n20-footer-bottom"><span>&copy; 2026 N20 Immobilier. Все права защищены.</span></div>
+</footer>
+<a id="whatsapp-btn" href="https://wa.me/41764192021" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/></svg></a>
+<script>
+document.getElementById('burgerBtn').addEventListener('click',()=>document.getElementById('mobNav').classList.toggle('open'));
+</script>
+</body>
+</html>
