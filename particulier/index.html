@@ -1081,14 +1081,8 @@ async function generatePDF(d){
     pagebreak:{mode:['avoid-all','css','legacy']}
   };
 
-  // Générer le blob PDF (pour email + téléchargement)
+  // Générer le blob PDF pour envoi email
   const pdfBlob=await html2pdf().set(pdfOpt).from(wrap).outputPdf('blob');
-
-  // Téléchargement local
-  const url=URL.createObjectURL(pdfBlob);
-  const a=document.createElement('a');
-  a.href=url;a.download=`Mandat_Recherche_N20_${ref}.pdf`;
-  a.click();URL.revokeObjectURL(url);
 
   // Convertir en base64 pour envoi email
   const pdfBase64=await new Promise(res=>{
