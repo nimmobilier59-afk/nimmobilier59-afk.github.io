@@ -883,6 +883,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
   <svg viewBox="0 0 32 32"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/></svg>
 </a>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
 
 const mobToggle=document.getElementById('mobToggle');
@@ -1030,12 +1031,60 @@ function buildMandat(){
   };
 }
 
-// ── Génère ref et date (le PDF est généré côté serveur) ──────────────────────
-function generatePDF(){
+// ── Génère le PDF depuis mandat-template.html ─────────────────────────────────
+async function generatePDF(d){
   const now=new Date();
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const ref=`MR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
-  return{ref,dt};
+
+  let tpl=await fetch('mandat-template.html').then(r=>r.text());
+  tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
+  const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
+  tpl=tpl.replace(/\{\{#if (\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,(_,k,content)=>condVals[k]?content:'');
+  const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—'};
+  Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,v);});
+
+  const dom=new DOMParser().parseFromString(tpl,'text/html');
+
+  // Scoper le CSS (body → .mw pour éviter conflits)
+  let css='';
+  dom.querySelectorAll('style').forEach(s=>{css+=s.textContent;});
+  css=css.replace(/@import[^;]+;/g,'').replace(/@page\s*\{[^}]*\}/g,'').replace(/\bbody\b(?=\s*\{)/g,'.mw');
+  const styleEl=document.createElement('style');
+  styleEl.id='_mw_css';styleEl.textContent=css;
+  document.head.appendChild(styleEl);
+
+  // Overlay navy qui cache la page pendant le rendu
+  const overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:#021623;z-index:10000;';
+  document.body.appendChild(overlay);
+
+  // Élément de rendu — pleinement visible pour html2canvas
+  const wrap=document.createElement('div');
+  wrap.className='mw';
+  wrap.style.cssText='position:fixed;top:0;left:0;width:794px;background:#fff;z-index:10001;';
+  wrap.innerHTML=dom.body.innerHTML;
+  document.body.appendChild(wrap);
+
+  // Laisser le navigateur appliquer les styles
+  await new Promise(r=>setTimeout(r,150));
+
+  const pdfBlob=await html2pdf().set({
+    margin:0,
+    image:{type:'jpeg',quality:0.97},
+    html2canvas:{scale:2,useCORS:true,logging:false,backgroundColor:'#ffffff',allowTaint:true},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+    pagebreak:{mode:['avoid-all','css']}
+  }).from(wrap).outputPdf('blob');
+
+  document.body.removeChild(wrap);
+  document.body.removeChild(overlay);
+  document.getElementById('_mw_css').remove();
+
+  const pdfBase64=await new Promise(res=>{
+    const fr=new FileReader();fr.onload=()=>res(fr.result.split(',')[1]);fr.readAsDataURL(pdfBlob);
+  });
+  return{ref,dt,pdfBase64};
 }
 
 // ── Envoi email via Resend ────────────────────────────────────────────────────
@@ -1046,9 +1095,8 @@ const fileToB64=file=>new Promise((res,rej)=>{
   fr.readAsDataURL(file);
 });
 
-async function sendEmail(d,ref,dt){
-  // Annexes uploadées par le client
-  const attachments=[];
+async function sendEmail(d,ref,dt,pdfBase64){
+  const attachments=pdfBase64?[{filename:`Mandat_Recherche_N20_${ref}.pdf`,content:pdfBase64}]:[];
   for(const[file,label] of [[d.annexFile1,'Annexe_1'],[d.annexFile2,'Annexe_2'],[d.annexFile3,'Annexe_3']]){
     if(!file)continue;
     const content=await fileToB64(file);
@@ -1083,10 +1131,11 @@ async function submitForm(){
   btn.disabled=true;btn.textContent='Envoi en cours…';
 
   const data=buildMandat();
-  const{ref,dt}=generatePDF();
+  btn.textContent='Génération du mandat…';
+  const{ref,dt,pdfBase64}=await generatePDF(data);
 
   btn.textContent='Envoi en cours…';
-  try{await sendEmail(data,ref,dt);}
+  try{await sendEmail(data,ref,dt,pdfBase64);}
   catch(e){console.warn('Resend:',e);}
 
   document.getElementById('formCard').style.display='none';

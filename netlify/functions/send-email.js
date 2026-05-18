@@ -1,135 +1,4 @@
-const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const RESEND_KEY = process.env.RESEND_KEY;
-
-const NAV = rgb(2/255, 22/255, 35/255);
-const ACC = rgb(110/255, 193/255, 228/255);
-const LG  = rgb(240/255, 243/255, 246/255);
-const MG  = rgb(150/255, 162/255, 172/255);
-const BK  = rgb(20/255, 25/255, 30/255);
-const WH  = rgb(1, 1, 1);
-
-async function generateMandatPDF(d, ref, dt) {
-  const pdfDoc = await PDFDocument.create();
-  const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const fontN = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-  const pageW = 595, pageH = 842;
-  const M = 50, CW = pageW - M * 2;
-  let page = pdfDoc.addPage([pageW, pageH]);
-  let y = pageH;
-
-  const addPage = () => {
-    page = pdfDoc.addPage([pageW, pageH]);
-    y = pageH - 30;
-  };
-
-  const chk = h => { if (y - h < 40) addPage(); };
-
-  // ── EN-TÊTE ──
-  page.drawRectangle({ x: 0, y: pageH - 80, width: pageW, height: 80, color: NAV });
-  page.drawText('N20 IMMOBILIER', { x: M, y: pageH - 30, font: fontB, size: 18, color: WH });
-  page.drawText('Votre partenaire de relocation a Geneve', { x: M, y: pageH - 46, font: fontN, size: 8, color: ACC });
-  page.drawText('MANDAT DE RECHERCHE', { x: pageW - M - fontB.widthOfTextAtSize('MANDAT DE RECHERCHE', 13), y: pageH - 30, font: fontB, size: 13, color: WH });
-  page.drawText(`Ref. ${ref}  -  ${dt}`, { x: pageW - M - fontN.widthOfTextAtSize(`Ref. ${ref}  -  ${dt}`, 8), y: pageH - 46, font: fontN, size: 8, color: ACC });
-  y = pageH - 100;
-
-  // ── Helpers ──
-  const sec = (title) => {
-    chk(24);
-    page.drawRectangle({ x: M, y: y - 18, width: CW, height: 18, color: ACC });
-    page.drawText(title, { x: M + 8, y: y - 13, font: fontB, size: 8, color: NAV });
-    y -= 26;
-  };
-
-  const row = (label, value, shade) => {
-    chk(28);
-    page.drawRectangle({ x: M, y: y - 24, width: CW, height: 24, color: shade ? LG : rgb(0.98, 0.98, 0.99) });
-    page.drawText(label.toUpperCase(), { x: M + 6, y: y - 10, font: fontN, size: 6.5, color: MG });
-    const val = String(value || '—');
-    page.drawText(val.length > 60 ? val.slice(0, 60) + '…' : val, { x: M + 6, y: y - 19, font: fontB, size: 8.5, color: BK });
-    y -= 26;
-  };
-
-  const row2 = (f1, f2) => {
-    chk(28);
-    const hw = CW / 2;
-    page.drawRectangle({ x: M, y: y - 24, width: CW, height: 24, color: LG });
-    page.drawText(f1.l.toUpperCase(), { x: M + 6, y: y - 10, font: fontN, size: 6.5, color: MG });
-    page.drawText(String(f1.v || '—'), { x: M + 6, y: y - 19, font: fontB, size: 8.5, color: BK });
-    if (f2) {
-      page.drawText(f2.l.toUpperCase(), { x: M + hw + 6, y: y - 10, font: fontN, size: 6.5, color: MG });
-      page.drawText(String(f2.v || '—'), { x: M + hw + 6, y: y - 19, font: fontB, size: 8.5, color: BK });
-    }
-    y -= 26;
-  };
-
-  const gap = () => { y -= 6; };
-
-  // ── 1. DEMANDEUR ──
-  sec('1. DEMANDEUR');
-  row2({ l: 'Nom', v: d.lastName }, { l: 'Prenom', v: d.firstName });
-  row2({ l: 'Date de naissance', v: d.dob }, { l: "Nb d'enfants", v: d.children });
-  row('Adresse actuelle', d.currentAddress, true);
-  row2({ l: 'Telephone', v: d.phone }, { l: 'Email', v: d.email });
-  row2({ l: 'Bail a son nom', v: d.leaseInName }, { l: 'Resiliation necessaire', v: d.needTermination });
-  gap();
-
-  // ── 2. CO-LOCATAIRE ──
-  if (d.coVisible) {
-    sec('2. CO-LOCATAIRE');
-    row2({ l: 'Nom', v: d.coLastName }, { l: 'Prenom', v: d.coFirstName });
-    row2({ l: 'Date de naissance', v: d.coDob }, { l: 'Telephone', v: d.coPhone });
-    row('Email', d.coEmail, true);
-    gap();
-  }
-
-  // ── CRITÈRES DU BIEN ──
-  sec(`${d.coVisible ? '3' : '2'}. CRITERES DU BIEN`);
-  row2({ l: 'Type de bien', v: d.propertyType }, { l: 'Pieces minimum', v: d.minRooms });
-  row2({ l: 'Budget max (CHF/mois)', v: d.budget }, { l: "Date d'entree", v: d.moveIn });
-  const zones = [d.area1, d.area2, d.area3].filter(Boolean).join('  >  ') || '—';
-  row('Communes souhaitees', zones, true);
-  if (d.notes) { row('Remarques', d.notes, false); }
-  gap();
-
-  // ── PIÈCES JOINTES ──
-  sec(`${d.coVisible ? '4' : '3'}. PIECES JOINTES`);
-  const annexes = [d.annex1, d.annex2, d.annex3].filter(Boolean);
-  if (annexes.length === 0) {
-    chk(20);
-    page.drawText('Aucune piece jointe transmise.', { x: M + 6, y: y - 12, font: fontN, size: 8, color: MG });
-    y -= 20;
-  } else {
-    annexes.forEach((name, i) => {
-      chk(22);
-      page.drawRectangle({ x: M, y: y - 20, width: CW, height: 20, color: i % 2 === 0 ? LG : rgb(0.98, 0.98, 0.99) });
-      page.drawText(`Annexe ${i + 1} :`, { x: M + 6, y: y - 14, font: fontB, size: 8, color: BK });
-      const n = String(name).length > 55 ? String(name).slice(0, 55) + '…' : String(name);
-      page.drawText(n, { x: M + 70, y: y - 14, font: fontN, size: 8, color: BK });
-      y -= 22;
-    });
-  }
-  gap();
-
-  // ── SIGNATURE ──
-  chk(80);
-  sec(`${d.coVisible ? '5' : '4'}. SIGNATURE`);
-  page.drawRectangle({ x: M, y: y - 70, width: CW, height: 70, color: LG });
-  page.drawText('Le soussigne mandate N20 Immobilier pour effectuer des recherches', { x: M + 8, y: y - 16, font: fontN, size: 7.5, color: MG });
-  page.drawText('conformement aux criteres definis ci-dessus.', { x: M + 8, y: y - 26, font: fontN, size: 7.5, color: MG });
-  page.drawLine({ start: { x: M + 8, y: y - 48 }, end: { x: M + 180, y: y - 48 }, thickness: 0.5, color: MG });
-  page.drawLine({ start: { x: M + 220, y: y - 48 }, end: { x: M + CW - 8, y: y - 48 }, thickness: 0.5, color: MG });
-  page.drawText('Lieu et date', { x: M + 8, y: y - 58, font: fontN, size: 7, color: MG });
-  page.drawText('Signature du mandant', { x: M + 220, y: y - 58, font: fontN, size: 7, color: MG });
-  y -= 80;
-
-  // ── PIED DE PAGE ──
-  page.drawLine({ start: { x: M, y: 30 }, end: { x: pageW - M, y: 30 }, thickness: 0.5, color: ACC });
-  page.drawText('N20 Immobilier  -  contact@n20immobilier.ch  -  +41 76 419 20 21', { x: M, y: 18, font: fontN, size: 7, color: MG });
-  page.drawText(`Ref. ${ref}  -  Genere le ${dt}`, { x: pageW - M - fontN.widthOfTextAtSize(`Ref. ${ref}  -  Genere le ${dt}`, 7), y: 18, font: fontN, size: 7, color: MG });
-
-  return pdfDoc.save();
-}
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -143,15 +12,7 @@ exports.handler = async (event) => {
   };
 
   try {
-    const { d, ref, dt, attachments: clientAttachments } = JSON.parse(event.body);
-
-    const pdfBytes = await generateMandatPDF(d, ref, dt);
-    const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
-
-    const attachments = [
-      { filename: `Mandat_Recherche_N20_${ref}.pdf`, content: pdfBase64 },
-      ...(clientAttachments || []),
-    ];
+    const { d, ref, dt, attachments } = JSON.parse(event.body);
 
     const zones = [d.area1, d.area2, d.area3].filter(Boolean).join(' › ') || '—';
     const aList = [d.annex1, d.annex2, d.annex3].filter(Boolean)
@@ -172,7 +33,7 @@ exports.handler = async (event) => {
         reply_to: d.email,
         subject: `Nouveau mandat de recherche — ${d.firstName} ${d.lastName} — Réf. ${ref}`,
         html,
-        attachments,
+        attachments: attachments || [],
       }),
     });
 
