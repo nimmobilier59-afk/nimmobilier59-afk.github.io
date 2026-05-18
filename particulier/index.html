@@ -1066,21 +1066,36 @@ async function generatePDF(d){
   wrap.innerHTML=dom.body.innerHTML;
   document.body.appendChild(wrap);
 
-  // Generate and download PDF
-  await html2pdf().set({
+  const pdfOpt={
     margin:0,
     filename:`Mandat_Recherche_N20_${ref}.pdf`,
     image:{type:'jpeg',quality:0.97},
     html2canvas:{scale:2,useCORS:true,logging:false,backgroundColor:'#ffffff'},
     jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
     pagebreak:{mode:['avoid-all','css','legacy']}
-  }).from(wrap).save();
+  };
+
+  // Générer le blob PDF (pour email + téléchargement)
+  const pdfBlob=await html2pdf().set(pdfOpt).from(wrap).outputPdf('blob');
+
+  // Téléchargement local
+  const url=URL.createObjectURL(pdfBlob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`Mandat_Recherche_N20_${ref}.pdf`;
+  a.click();URL.revokeObjectURL(url);
+
+  // Convertir en base64 pour envoi email
+  const pdfBase64=await new Promise(res=>{
+    const fr=new FileReader();
+    fr.onload=()=>res(fr.result.split(',')[1]);
+    fr.readAsDataURL(pdfBlob);
+  });
 
   // Cleanup
   document.body.removeChild(wrap);
   document.getElementById('mandat-tmp-css').remove();
 
-  return{ref,dt};
+  return{ref,dt,pdfBase64};
 }
 
 // ── Envoi email via Resend ────────────────────────────────────────────────────
@@ -1091,9 +1106,11 @@ const fileToB64=file=>new Promise((res,rej)=>{
   fr.readAsDataURL(file);
 });
 
-async function sendEmail(d,ref,dt){
-  // Convertir les pièces jointes en base64
-  const attachments=[];
+async function sendEmail(d,ref,dt,pdfBase64){
+  // Mandat PDF en première pièce jointe
+  const attachments=[{filename:`Mandat_Recherche_N20_${ref}.pdf`,content:pdfBase64}];
+
+  // Annexes uploadées par le client
   for(const[file,label] of [[d.annexFile1,'Annexe_1'],[d.annexFile2,'Annexe_2'],[d.annexFile3,'Annexe_3']]){
     if(!file)continue;
     const content=await fileToB64(file);
@@ -1129,10 +1146,10 @@ async function submitForm(){
 
   const data=buildMandat();
   btn.textContent='Génération du PDF…';
-  const{ref,dt}=await generatePDF(data);
+  const{ref,dt,pdfBase64}=await generatePDF(data);
 
   btn.textContent='Envoi en cours…';
-  try{await sendEmail(data,ref,dt);}
+  try{await sendEmail(data,ref,dt,pdfBase64);}
   catch(e){console.warn('Resend:',e);}
 
   document.getElementById('formCard').style.display='none';
