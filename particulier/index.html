@@ -883,7 +883,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
   <svg viewBox="0 0 32 32"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/></svg>
 </a>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 
 const mobToggle=document.getElementById('mobToggle');
@@ -1037,7 +1037,6 @@ async function generatePDF(d){
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const ref=`MR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
 
-  // Charger et traiter le template
   let tpl=await fetch('mandat-template.html').then(r=>r.text());
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
   const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
@@ -1045,32 +1044,60 @@ async function generatePDF(d){
   const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—'};
   Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,v);});
 
-  // Iframe avec son propre contexte de document — le CSS s'applique sans conflit
+  // Charger le HTML traité via blob URL (iframe navigue → document complet, contexte CSS intact)
+  const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
   const iframe=document.createElement('iframe');
-  iframe.style.cssText='position:fixed;left:-9999px;top:0;width:794px;height:1123px;border:none;';
+  iframe.style.cssText='position:fixed;left:0;top:0;width:794px;height:1px;border:none;visibility:hidden;pointer-events:none;';
   document.body.appendChild(iframe);
-  iframe.contentDocument.open();
-  iframe.contentDocument.write(tpl);
-  iframe.contentDocument.close();
 
-  // Attendre que les fonts et images soient chargées
-  await new Promise(r=>setTimeout(r,800));
+  await new Promise((res,rej)=>{iframe.onload=res;iframe.onerror=rej;iframe.src=blobUrl;});
+  URL.revokeObjectURL(blobUrl);
 
-  // Rendre depuis le body de l'iframe (contexte CSS intact)
-  const pdfBlob=await html2pdf().set({
-    margin:0,
-    image:{type:'jpeg',quality:0.97},
-    html2canvas:{scale:2,useCORS:true,logging:false,backgroundColor:'#ffffff',allowTaint:true,width:794},
-    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-    pagebreak:{mode:['avoid-all','css']}
-  }).from(iframe.contentDocument.body).outputPdf('blob');
+  // Ajuster la hauteur de l'iframe à la hauteur réelle du document
+  const docH=iframe.contentDocument.documentElement.scrollHeight;
+  iframe.style.height=docH+'px';
+
+  // Attendre fonts et images
+  await new Promise(r=>setTimeout(r,1200));
+
+  // Injecter html2canvas dans le contexte de l'iframe (clé : il voit son propre document)
+  await new Promise((res,rej)=>{
+    const s=iframe.contentDocument.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=res;s.onerror=rej;
+    iframe.contentDocument.head.appendChild(s);
+  });
+
+  // Capturer le document depuis l'intérieur de l'iframe
+  const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{
+    scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,
+    width:794,height:docH,windowWidth:794,windowHeight:docH,
+  });
 
   document.body.removeChild(iframe);
 
-  const pdfBase64=await new Promise(res=>{
-    const fr=new FileReader();fr.onload=()=>res(fr.result.split(',')[1]);fr.readAsDataURL(pdfBlob);
-  });
-  return{ref,dt,pdfBase64};
+  // Construire le PDF en découpant le canvas en pages A4
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+  const pdfW=pdf.internal.pageSize.getWidth();
+  const pdfH=pdf.internal.pageSize.getHeight();
+  const cW=canvas.width,cH=canvas.height;
+  const px2mm=pdfW/cW;
+  const pageHpx=Math.floor(pdfH/px2mm);
+
+  let y=0,first=true;
+  while(y<cH){
+    if(!first)pdf.addPage();
+    first=false;
+    const sliceH=Math.min(pageHpx,cH-y);
+    const tmp=document.createElement('canvas');
+    tmp.width=cW;tmp.height=sliceH;
+    tmp.getContext('2d').drawImage(canvas,0,y,cW,sliceH,0,0,cW,sliceH);
+    pdf.addImage(tmp.toDataURL('image/jpeg',0.97),'JPEG',0,0,pdfW,sliceH*px2mm);
+    y+=pageHpx;
+  }
+
+  return{ref,dt,pdfBase64:pdf.output('datauristring').split(',')[1]};
 }
 
 // ── Envoi email via Resend ────────────────────────────────────────────────────
