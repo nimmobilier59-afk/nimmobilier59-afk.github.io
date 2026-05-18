@@ -1031,12 +1031,13 @@ function buildMandat(){
   };
 }
 
-// ── Génère le PDF depuis mandat-template.html ─────────────────────────────────
+// ── Génère le PDF depuis mandat-template.html via iframe ──────────────────────
 async function generatePDF(d){
   const now=new Date();
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const ref=`MR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
 
+  // Charger et traiter le template
   let tpl=await fetch('mandat-template.html').then(r=>r.text());
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
   const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
@@ -1044,42 +1045,27 @@ async function generatePDF(d){
   const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—'};
   Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,v);});
 
-  const dom=new DOMParser().parseFromString(tpl,'text/html');
+  // Iframe avec son propre contexte de document — le CSS s'applique sans conflit
+  const iframe=document.createElement('iframe');
+  iframe.style.cssText='position:fixed;left:-9999px;top:0;width:794px;height:1123px;border:none;';
+  document.body.appendChild(iframe);
+  iframe.contentDocument.open();
+  iframe.contentDocument.write(tpl);
+  iframe.contentDocument.close();
 
-  // Scoper le CSS (body → .mw pour éviter conflits)
-  let css='';
-  dom.querySelectorAll('style').forEach(s=>{css+=s.textContent;});
-  css=css.replace(/@import[^;]+;/g,'').replace(/@page\s*\{[^}]*\}/g,'').replace(/\bbody\b(?=\s*\{)/g,'.mw');
-  const styleEl=document.createElement('style');
-  styleEl.id='_mw_css';styleEl.textContent=css;
-  document.head.appendChild(styleEl);
+  // Attendre que les fonts et images soient chargées
+  await new Promise(r=>setTimeout(r,800));
 
-  // Overlay navy qui cache la page pendant le rendu
-  const overlay=document.createElement('div');
-  overlay.style.cssText='position:fixed;inset:0;background:#021623;z-index:10000;';
-  document.body.appendChild(overlay);
-
-  // Élément de rendu — pleinement visible pour html2canvas
-  const wrap=document.createElement('div');
-  wrap.className='mw';
-  wrap.style.cssText='position:fixed;top:0;left:0;width:794px;background:#fff;z-index:10001;';
-  wrap.innerHTML=dom.body.innerHTML;
-  document.body.appendChild(wrap);
-
-  // Laisser le navigateur appliquer les styles
-  await new Promise(r=>setTimeout(r,150));
-
+  // Rendre depuis le body de l'iframe (contexte CSS intact)
   const pdfBlob=await html2pdf().set({
     margin:0,
     image:{type:'jpeg',quality:0.97},
-    html2canvas:{scale:2,useCORS:true,logging:false,backgroundColor:'#ffffff',allowTaint:true},
+    html2canvas:{scale:2,useCORS:true,logging:false,backgroundColor:'#ffffff',allowTaint:true,width:794},
     jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
     pagebreak:{mode:['avoid-all','css']}
-  }).from(wrap).outputPdf('blob');
+  }).from(iframe.contentDocument.body).outputPdf('blob');
 
-  document.body.removeChild(wrap);
-  document.body.removeChild(overlay);
-  document.getElementById('_mw_css').remove();
+  document.body.removeChild(iframe);
 
   const pdfBase64=await new Promise(res=>{
     const fr=new FileReader();fr.onload=()=>res(fr.result.split(',')[1]);fr.readAsDataURL(pdfBlob);
