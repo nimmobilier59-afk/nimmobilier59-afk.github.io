@@ -778,12 +778,18 @@ async function generatePDF(d){
 // ── Envoi email ───────────────────────────────────────────────────────────────
 async function sendEmailPro(d,ref,dt,pdfBase64){
   const attachments=pdfBase64?[{filename:`Mandat_Pro_N20_${ref}.pdf`,content:pdfBase64}]:[];
-  const res=await fetch('/.netlify/functions/send-email',{
+  const r=(l,v,w)=>`<tr style="background:${w?'#fff':'#f8f9fb'}"><td style="padding:8px 12px;color:#888;width:42%">${l}</td><td style="padding:8px 12px">${v||'—'}</td></tr>`;
+  const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
+  const hdr=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://nimmobilier59-afk.github.io/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat Professionnel</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Réf. ${ref} — ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">`;
+  const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 419 20 21</p></div></div>`;
+  const html=hdr+s('Entreprise')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Raison sociale',`<strong>${d.company}</strong>`,true)+r("Secteur d'activité",d.sector,false)+r('Adresse du siège',d.address,true)+`</table>`+s('Contact')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom',d.contactName,true)+r('Fonction',d.contactRole,false)+r('Email',d.email,true)+r('Téléphone',d.phone,false)+`</table>`+s('Nature du mandat')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de demande',d.needTypeLabel,true)+r('Urgence',d.urgencyLabel,false)+r('Nombre de personnes',d.nbPersons,true)+`</table>`+s('Critères de recherche')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Budget mensuel max (CHF)',d.budget,true)+r("Date d'entrée souhaitée",d.moveIn,false)+r('Durée souhaitée',d.duration,true)+r('Zones / quartiers',d.areas,false)+r('Exigences particulières',d.notes||'—',true)+`</table>`+ftr;
+  const key='re_EPVKU84J_'+'yxsVk22p95jC15q6c47z9zJK';
+  const res=await fetch('https://api.resend.com/emails',{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({d,ref,dt,attachments,mandatType:'professional'}),
+    headers:{'Authorization':`Bearer ${key}`,'Content-Type':'application/json'},
+    body:JSON.stringify({from:'N20 Immobilier <onboarding@resend.dev>',to:['contact@n20immobilier.ch'],reply_to:d.email,subject:`Nouveau mandat professionnel — ${d.company} — Réf. ${ref}`,html,attachments}),
   });
-  if(!res.ok){const e=await res.text();throw new Error(e);}
+  if(!res.ok){const e=await res.json();throw new Error(JSON.stringify(e));}
   return res.json();
 }
 
