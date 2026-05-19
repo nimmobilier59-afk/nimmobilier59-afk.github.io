@@ -164,7 +164,23 @@ textarea{resize:vertical;min-height:100px}
 .sr-img{opacity:0;transform:scale(.96) translateY(20px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
 .sr.in,.sr-img.in{opacity:1;transform:none}
 @media(max-width:960px){.intro-inner,.types-inner{grid-template-columns:1fr;gap:36px}.hon-single{grid-template-columns:1fr;padding:36px 28px;gap:32px}.hon-single-right{border-left:none;padding-left:0;border-top:1px solid rgba(2,22,35,.1);padding-top:32px}.n20-footer-inner{grid-template-columns:1fr}.n20-faq-inner,.contact-inner{padding:0 24px}.hero-flow{flex-direction:column;gap:0}.hf-arrow{transform:rotate(90deg);margin:0}.hf-step{padding:16px 0;min-width:unset;flex:none}}
-@media(max-width:600px){.hdr-inner,.hero-content,.intro-inner,.types-inner,.honoraires-inner,.n20-footer-inner{padding-left:20px;padding-right:20px}.hero-tag{display:none}.types-cards{display:flex;flex-direction:column;padding:0 16px;gap:0}.type-card+.type-card{margin-top:-36px}.form-row-2{grid-template-columns:1fr}.n20-footer-bottom{padding:18px 20px}.n20-footer-partners-inner{padding:0 20px}.hon-price{font-size:clamp(32px,9vw,64px)}.hon-single{padding:28px 20px}.hon-single-right{padding-left:0}}
+@media(max-width:600px){
+  .hdr-inner,.intro-inner,.types-inner,.honoraires-inner,.n20-footer-inner{padding-left:20px;padding-right:20px}
+  #hero{justify-content:flex-start;min-height:100dvh}
+  .hero-content{padding:104px 20px 44px;flex:1;display:flex;flex-direction:column}
+  .hero-content h1{text-align:center;margin-top:-5rem}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;z-index:3;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--white);border:1px solid rgba(255,255,255,.35);padding:6px 16px;border-radius:100px}
+  .hero-flow{flex-direction:column;gap:0;margin-top:3rem;margin-bottom:0;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .hf-step{flex-direction:row;align-items:center;gap:16px;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08);min-width:unset;flex:none}
+  .hf-step:last-child{border-bottom:none}
+  .hf-num{font-size:20px;min-width:36px;color:var(--accent);line-height:1}
+  .hf-label{display:none}
+  .hf-text{font-size:15px;font-weight:500;max-width:none;flex:1}
+  .hf-arrow{display:none}
+  .hero-content a.btn-pill{margin-top:2cm;width:auto;align-self:center;justify-content:center}
+  .types-cards{display:flex;flex-direction:column;padding:0 16px;gap:0}.type-card+.type-card{margin-top:-36px}.form-row-2{grid-template-columns:1fr}.n20-footer-bottom{padding:18px 20px}.n20-footer-partners-inner{padding:0 20px}.hon-price{font-size:clamp(32px,9vw,64px)}.hon-single{padding:28px 20px}.hon-single-right{padding-left:0}
+}
 .phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
 </style>
 </head>
@@ -214,6 +230,7 @@ textarea{resize:vertical;min-height:100px}
 
 <section id="hero">
   <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Услуги по релокации</span>
   <div class="hero-content">
     <span class="hero-tag">Услуги по релокации</span>
     <h1>Больше чем кров —<br>ваш новый дом</h1>
@@ -339,7 +356,7 @@ textarea{resize:vertical;min-height:100px}
       </details>
       <details class="n20-faq-item">
         <summary>В каких районах Женевы вы ищете? <div class="faq-toggle">+</div></summary>
-        <div class="n20-faq-answer"><p>N20 Immobilier охватывает весь кантон Женева: центр города, Эо-Вив, Каруж, Шампель, Гран-Саконне, Мерен, Лансе, Верньё, а также приграничные французские коммуны (Ферней-Вольтер, Сен-Жени-Пуйи, Аннемас). Мы адаптируем поиск под ваши приоритеты: международные школы, близость к работодателю, бюджет, атмосфера района.</p></div>
+        <div class="n20-faq-answer"><p>N20 Immobilier охватывает весь кантон Женева: центр города, Эо-Вив, Каруж, Шампель, Гран-Саконне, Мерен, Лансе, Верньё, а также приграничную зону Франции. Мы также работаем по всей Швейцарии в рамках мандатов на релокацию. Мы адаптируем поиск под ваши приоритеты: международные школы, близость к работодателю, бюджет, атмосфера района.</p></div>
       </details>
       <details class="n20-faq-item">
         <summary>Какие документы нужны для аренды в Женеве? <div class="faq-toggle">+</div></summary>

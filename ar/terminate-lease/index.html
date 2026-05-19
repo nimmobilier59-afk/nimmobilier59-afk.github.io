@@ -132,7 +132,15 @@ textarea{resize:vertical;min-height:100px}
 .wa-float:hover{transform:scale(1.08)}
 .wa-float svg{width:28px;height:28px;fill:#fff}
 @media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:40px}.intro-visual{min-height:280px}.check-grid{grid-template-columns:1fr}.n20-footer-inner{grid-template-columns:1fr}}
-@media(max-width:600px){.page-hero-content{padding:0 24px 56px}.intro-inner,.pourquoi-inner,.n20-faq-inner,.contact-inner,.gratuit-inner{padding:0 20px}.form-row{grid-template-columns:1fr}.gratuit-card{padding:36px 24px}}
+@media(max-width:600px){
+  .page-hero-content{padding:0 24px 56px}.intro-inner,.pourquoi-inner,.n20-faq-inner,.contact-inner,.gratuit-inner{padding:0 20px}.form-row{grid-template-columns:1fr}.gratuit-card{padding:36px 24px}
+  .page-hero{justify-content:flex-start;min-height:100dvh;padding:0}
+  .page-hero-content{padding:104px 24px 44px!important;flex:1;display:flex;flex-direction:column}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:100px;padding:6px 16px;z-index:3}
+  .page-hero-content h1{text-align:center;margin-top:4cm;font-size:clamp(32px,8vw,52px)}
+  .page-hero-content p{text-align:center;margin-top:1cm}
+}
 .phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
 </style>
 </head>
@@ -193,6 +201,7 @@ textarea{resize:vertical;min-height:100px}
 <!-- HERO -->
 <section class="page-hero">
   <div class="page-hero-overlay"></div>
+  <span class="hero-tag-top">إنهاء العقد</span>
   <div class="page-hero-content">
     <span class="hero-tag">إنهاء العقد</span>
     <h1>غادر مسكنك<br>بكل اطمئنان</h1>

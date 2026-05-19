@@ -104,12 +104,17 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
   .srv-card:nth-child(1){z-index:3}
   .srv-card:nth-child(2){z-index:2}
   .hdr-inner{padding:0 20px}
-  .hero-content{padding:0 20px}
+  .hero-content{padding:104px 20px 44px;flex:1;display:flex;flex-direction:column}
   .intro-inner{padding:0 20px;gap:28px}
   .services-inner{padding:0}
   .apporteur-inner{padding:0 20px;gap:28px}
   .apporteur-card{padding:32px 24px}
   .n20-faq-inner{padding:0 20px}
+  #hero{justify-content:flex-start;min-height:100dvh;padding:0}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:100px;padding:6px 16px;z-index:3}
+  .hero-content h1{text-align:center;margin-top:-3cm}
+  .hero-ctas{justify-content:center;margin-top:4cm}
 }
 
 /* ── REFERRAL ── */
@@ -268,6 +273,7 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 <!-- HERO -->
 <section id="hero">
   <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Buy &amp; Sell</span>
   <div class="hero-content">
     <span class="hero-tag">Buy &amp; Sell</span>
     <h1>Buy, sell.<br>With confidence.</h1>

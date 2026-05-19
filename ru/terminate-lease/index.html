@@ -115,7 +115,23 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 .form-submit button:hover{background:transparent;color:#fff;border-color:#fff}
 .form-submit button svg{width:14px;height:14px;fill:currentColor;transition:transform .18s}
 .form-submit button:hover svg{transform:translateX(4px)}
-@media(max-width:600px){.form-row{grid-template-columns:1fr}.contact-inner{padding:0 20px}.n20-faq-inner{padding:0 20px}.intro-inner{padding:0 20px}.pourquoi-inner{padding:0 20px}.gratuit-card{padding:36px 24px}.hdr-inner{padding:0 20px}}
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}.contact-inner{padding:0 20px}.n20-faq-inner{padding:0 20px}.intro-inner{padding:0 20px}.pourquoi-inner{padding:0 20px}.gratuit-card{padding:36px 24px}.hdr-inner{padding:0 20px}
+  .hero{justify-content:flex-start;min-height:100dvh;padding:0}
+  .hero-content{padding:104px 20px 44px;flex:1;display:flex;flex-direction:column}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:100px;padding:6px 16px;z-index:3}
+  .hero h1{text-align:center;margin-top:4cm;font-size:clamp(32px,8vw,52px)}
+  .hero-badge{align-self:center;margin-top:calc(12px + 0.5cm)}
+  .hero-flow{flex-direction:column;gap:0;margin-top:3rem;margin-bottom:0;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .hf-step{flex-direction:row;align-items:center;gap:16px;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .hf-step:last-child{border-bottom:none}
+  .hf-num{font-size:20px;min-width:36px;color:var(--accent)}
+  .hf-label{display:none}
+  .hf-text{font-size:15px;font-weight:500;max-width:none;flex:1}
+  .hf-arrow{display:none}
+  .hero .btn-white-dark{margin-top:2cm;align-self:center;border-radius:100px;padding:12px 28px}
+}
 #n20-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08)}
 .n20-footer-main{padding:60px 0 48px}
 .n20-footer-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
@@ -210,6 +226,7 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
+  <span class="hero-tag-top">Услуга расторжения аренды</span>
   <div class="hero-content">
     <span class="hero-tag">Услуга расторжения аренды</span>
     <h1>Покиньте жильё<br>без лишних хлопот</h1>

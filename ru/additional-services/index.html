@@ -143,7 +143,16 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 .sr-img{opacity:0;transform:scale(.96) translateY(20px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .82s cubic-bezier(.22,1,.36,1)}
 .sr.in,.sr-img.in{opacity:1;transform:none}
 @media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:40px;padding:0 24px}.intro-img{order:-1}.srv-grid{grid-template-columns:1fr}.srv-section-inner{padding:0 24px}.why-inner{grid-template-columns:1fr;padding:0 24px}.n20-footer-inner{grid-template-columns:1fr}}
-@media(max-width:600px){.hdr-inner{padding:0 20px}.hero-content,.srv-section-inner,.n20-faq-inner,.contact-inner{padding-left:20px;padding-right:20px}.form-row{grid-template-columns:1fr}.n20-footer-inner{padding:0 20px}.n20-footer-bottom{padding:18px 20px}.n20-footer-partners-inner{padding:0 20px}}
+@media(max-width:600px){
+  .hdr-inner{padding:0 20px}.srv-section-inner,.n20-faq-inner,.contact-inner{padding-left:20px;padding-right:20px}.form-row{grid-template-columns:1fr}.n20-footer-inner{padding:0 20px}.n20-footer-bottom{padding:18px 20px}.n20-footer-partners-inner{padding:0 20px}
+  #hero{min-height:100dvh;height:100dvh;justify-content:flex-start;padding:0}
+  .hero-content{padding:104px 20px 44px;flex:1;display:flex;flex-direction:column}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:100px;padding:6px 16px;z-index:3}
+  .hero-content h1{text-align:center;margin-top:-3cm}
+  .hero-content p{text-align:center;margin-top:2cm}
+  .hero-content .btn-white-dark{display:inline-block;text-align:center;margin-top:2cm;width:auto;left:50%;position:relative;transform:translateX(-50%)}
+}
 .phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:180px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
 </style>
 </head>
@@ -193,6 +202,7 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 
 <section id="hero">
   <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Дополнительные услуги</span>
   <div class="hero-content">
     <span class="hero-tag">Дополнительные услуги</span>
     <h1>Всё необходимое<br>для успешного переезда.</h1>

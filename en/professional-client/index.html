@@ -132,7 +132,16 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 .form-submit{display:flex;justify-content:center;margin-top:8px}
 .form-submit button{background:var(--accent);color:var(--navy);border:2px solid var(--accent);font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 40px;border-radius:100px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
 .form-submit button:hover{background:transparent;color:#fff;border-color:#fff}
-@media(max-width:600px){.form-row{grid-template-columns:1fr}.form-col{padding:28px 20px}}
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}.form-col{padding:28px 20px}
+  #hero{justify-content:flex-start;min-height:100dvh;padding:0}
+  .hero-content{padding:104px 20px 44px;flex:1;display:flex;flex-direction:column}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(110,193,228,.45);border-radius:100px;padding:6px 16px;z-index:3}
+  .hero-content h1{text-align:center;margin-top:-2cm}
+  .hero-content p{text-align:center;margin-top:2cm}
+  .hero-ctas{justify-content:center;margin-top:3cm}
+}
 #n20-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08)}
 .n20-footer-main{padding:60px 0 48px}
 .n20-footer-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
@@ -196,6 +205,7 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 </nav>
 <section id="hero">
   <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Professional Client</span>
   <div class="hero-content">
     <span class="hero-tag">Professional Client</span>
     <h1>B2B real estate solutions<br>to match your ambitions.</h1>
