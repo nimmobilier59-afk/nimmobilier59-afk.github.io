@@ -83,6 +83,14 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
 .radio-opt.selected .radio-circle{border-color:var(--accent)}
 .radio-opt.selected .radio-circle::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
 
+.recap-block{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px 22px;margin-bottom:24px}
+.recap-block h4{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.recap-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:5px 0;font-size:.85rem}
+.recap-row:not(:last-child){border-bottom:1px solid rgba(255,255,255,.06)}
+.recap-label{color:rgba(255,255,255,.45);white-space:nowrap;flex-shrink:0}
+.recap-val{color:rgba(255,255,255,.9);font-weight:600;text-align:right;word-break:break-word}
+.recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+@media(max-width:560px){.recap-grid{grid-template-columns:1fr}}
 .check-opt{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px;cursor:pointer;margin-bottom:14px;transition:border-color .2s}
 .check-opt:hover{border-color:rgba(110,193,228,.4)}
 .check-opt input[type=checkbox]{width:20px;height:20px;min-width:20px;accent-color:var(--accent);cursor:pointer;margin-top:1px;flex-shrink:0}
@@ -136,7 +144,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
 
 <header id="site-header">
   <div class="hdr-inner">
-    <a class="hdr-logo" href="/"><img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier"></a>
+    <a class="hdr-logo" href="/"><img src="../wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier"></a>
     <nav class="hdr-nav">
       <a href="/">Accueil</a>
       <a href="/me-loger/">Me Loger</a>
@@ -508,7 +516,37 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
       <!-- ÉTAPE 4 — CONFIRMATION -->
       <div class="step-pane" id="step4">
         <div class="step-title">Confirmation</div>
-        <div class="step-sub">Veuillez lire et accepter les conditions avant de soumettre votre mandat.</div>
+        <div class="step-sub">Vérifiez vos informations puis acceptez les conditions pour soumettre votre mandat.</div>
+
+        <!-- RÉCAP -->
+        <div class="recap-grid">
+          <div class="recap-block">
+            <h4>Entreprise</h4>
+            <div class="recap-row"><span class="recap-label">Société</span><span class="recap-val" id="rc-company">—</span></div>
+            <div class="recap-row"><span class="recap-label">Secteur</span><span class="recap-val" id="rc-sector">—</span></div>
+            <div class="recap-row"><span class="recap-label">Adresse</span><span class="recap-val" id="rc-address">—</span></div>
+          </div>
+          <div class="recap-block">
+            <h4>Contact</h4>
+            <div class="recap-row"><span class="recap-label">Nom</span><span class="recap-val" id="rc-contact">—</span></div>
+            <div class="recap-row"><span class="recap-label">Fonction</span><span class="recap-val" id="rc-role">—</span></div>
+            <div class="recap-row"><span class="recap-label">Email</span><span class="recap-val" id="rc-email">—</span></div>
+            <div class="recap-row"><span class="recap-label">Téléphone</span><span class="recap-val" id="rc-phone">—</span></div>
+          </div>
+          <div class="recap-block">
+            <h4>Nature du besoin</h4>
+            <div class="recap-row"><span class="recap-label">Type</span><span class="recap-val" id="rc-need">—</span></div>
+            <div class="recap-row"><span class="recap-label">Urgence</span><span class="recap-val" id="rc-urgency">—</span></div>
+            <div class="recap-row"><span class="recap-label">Personnes</span><span class="recap-val" id="rc-persons">—</span></div>
+          </div>
+          <div class="recap-block">
+            <h4>Critères</h4>
+            <div class="recap-row"><span class="recap-label">Budget max</span><span class="recap-val" id="rc-budget">—</span></div>
+            <div class="recap-row"><span class="recap-label">Date d'entrée</span><span class="recap-val" id="rc-movein">—</span></div>
+            <div class="recap-row"><span class="recap-label">Durée</span><span class="recap-val" id="rc-duration">—</span></div>
+            <div class="recap-row"><span class="recap-label">Zones</span><span class="recap-val" id="rc-areas">—</span></div>
+          </div>
+        </div>
 
         <label class="check-opt">
           <input type="checkbox" id="chkMandate" required>
@@ -544,7 +582,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
   <div class="ftr-inner">
     <div class="ftr-top">
       <div class="ftr-brand">
-        <img src="/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
+        <img src="../wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier">
         <p>Votre partenaire immobilier à Genève — solutions B2B, relocation, achat &amp; vente.</p>
       </div>
       <div class="ftr-col">
@@ -601,7 +639,27 @@ function goTo(n){
   });
   currentStep=n;
   document.getElementById('step'+n).classList.add('active');
+  if(n===4)fillRecap();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function fillRecap(){
+  const prefix=document.querySelector('.phone-prefix')?.value||'';
+  const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val||'—';};
+  set('rc-company', v('company'));
+  set('rc-sector',  v('sector'));
+  set('rc-address', v('address'));
+  set('rc-contact', v('contactName'));
+  set('rc-role',    v('contactRole'));
+  set('rc-email',   v('email'));
+  set('rc-phone',   (prefix+' '+v('phone')).trim());
+  set('rc-need',    NEED_LABELS[vRadio('needType')]||'—');
+  set('rc-urgency', URGENCY_LABELS[vRadio('urgency')]||'—');
+  set('rc-persons', v('nbPersons'));
+  set('rc-budget',  v('budget') ? 'CHF '+v('budget') : '—');
+  set('rc-movein',  v('moveIn') ? v('moveIn').split('-').reverse().join('.') : '—');
+  set('rc-duration',v('duration'));
+  set('rc-areas',   v('areas'));
 }
 
 document.querySelectorAll('.radio-opt').forEach(opt=>{
