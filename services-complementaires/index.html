@@ -102,6 +102,12 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
   .srv-card:nth-child(4){z-index:1}
   .hdr-inner{padding:0 20px}
   .hero-content{padding:0 20px}
+  #hero{min-height:100dvh;height:100dvh}
+  .hero-content h1{text-align:center;margin-top:-3cm}
+  .hero-content p{text-align:center;margin-top:2cm}
+  .hero-content .btn-white-dark{display:inline-block;text-align:center;margin-top:2cm;width:auto;left:50%;position:relative;transform:translateX(-50%)}
+  .hero-tag{display:none}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;z-index:3;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.35);padding:6px 16px;border-radius:100px}
   .intro-inner{padding:0 20px;gap:28px}
   .srv-section-inner{padding:0}
   .why-inner{padding:0 20px;gap:28px}
@@ -266,6 +272,7 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 <!-- HERO -->
 <section id="hero">
   <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Services complémentaires</span>
   <div class="hero-content">
     <span class="hero-tag">Services complémentaires</span>
     <h1>Tout ce qu'il faut<br>pour bien s'installer.</h1>

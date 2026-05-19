@@ -127,6 +127,11 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
   .hon-card:nth-child(3){z-index:1}
   /* Bug fixes mobile */
   .hero-content{padding:0 20px!important}
+  .hero-tag{display:none}
+  .hero-content h1{text-align:center;margin-top:-2cm}
+  .hero-content p{text-align:center;margin-top:2cm}
+  .hero-ctas{justify-content:center;margin-top:3cm}
+  .hero-tag-top{display:inline-block;position:absolute;top:calc(72px + 44px);left:50%;transform:translateX(-50%);white-space:nowrap;width:max-content;z-index:3;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(110,193,228,.45);padding:6px 16px;border-radius:100px}
   .clients-inner[style]{padding:0 16px!important}
   .stat-num{font-size:clamp(28px,8vw,42px)}
   .stats-inner{grid-template-columns:1fr 1fr;gap:20px;padding:0 20px}
@@ -317,6 +322,7 @@ body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--navy);l
 <!-- HERO -->
 <section id="hero">
   <div id="hero-overlay"></div>
+  <span class="hero-tag-top">Client Professionnel</span>
   <div class="hero-content">
     <span class="hero-tag">Client Professionnel</span>
     <h1>Des solutions immobilières<br>à la hauteur de vos ambitions.</h1>
