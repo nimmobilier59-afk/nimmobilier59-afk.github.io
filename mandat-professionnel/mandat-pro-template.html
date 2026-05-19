@@ -7,7 +7,7 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap');
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Manrope', Arial, sans-serif; font-size: 10pt; color: #1a1a2e; background: #fff; width: 210mm; min-height: 297mm; margin: 0 auto; }
+  body { font-family: 'Manrope', Arial, sans-serif; font-size: 10pt; color: #1a1a2e; background: #fff; width: 210mm; min-height: 297mm; margin: 0 auto; display: flex; flex-direction: column; }
 
   .doc-header { background: #021623; padding: 28px 32px 22px; display: flex; align-items: center; justify-content: space-between; }
   .doc-header-left img { height: 44px; display: block; margin-bottom: 6px; }
@@ -18,7 +18,7 @@
   .doc-header-right .doc-badge { display: inline-block; margin-top: 8px; background: #6EC1E4; color: #021623; font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
 
   .doc-accent-bar { background: #033560; height: 3px; }
-  .doc-body { padding: 22px 32px 32px; }
+  .doc-body { padding: 22px 32px 88px; flex: 1; }
 
   .doc-section { margin-bottom: 16px; page-break-inside: avoid; break-inside: avoid; }
   .doc-section-title { font-size: 7pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #033560; border-bottom: 1.5px solid #033560; padding-bottom: 4px; margin-bottom: 10px; }
@@ -56,11 +56,15 @@
   .sig-line { height: 1px; background: #bbb; margin-top: 40px; }
   .sig-stamp { font-size: 7pt; color: #aaa; letter-spacing: .08em; text-transform: uppercase; }
 
-  .doc-footer { background: #f4f6f8; border-top: 2px solid #033560; padding: 10px 32px; display: flex; justify-content: space-between; align-items: center; font-size: 7pt; color: #555; }
+  .doc-footer { background: #f4f6f8; border-top: 2px solid #033560; padding: 10px 32px; display: flex; justify-content: space-between; align-items: center; font-size: 7pt; color: #555; white-space: nowrap; }
 
   @media print {
-    .doc-header, .doc-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .partie-card, .critere-item, .honoraires-box, .badge-type { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    html, body { margin: 0; padding: 0; }
+    body { width: 210mm; height: 297mm; margin: 0 auto; overflow: hidden; }
+    .doc-header, .doc-footer, .doc-accent-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .partie-card, .critere-item, .honoraires-box, .badge-type, .doc-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .doc-footer { position: fixed; bottom: 0; left: 0; right: 0; width: 210mm; }
+    .doc-body { padding-bottom: 88px; }
   }
 </style>
 </head>
@@ -171,7 +175,7 @@
   </div>
 
   <!-- CONDITIONS -->
-  <div class="doc-section">
+  <div class="doc-section" style="page-break-before: always; break-before: page;">
     <div class="doc-section-title">Conditions du mandat</div>
     <div class="legal-text">
       <p>Le présent mandat confère à <strong>N20 Immobilier</strong>, en qualité de prestataire de services de relocation, la mission de rechercher un ou plusieurs biens immobiliers répondant aux critères définis ci-dessus, pour le compte de l'entreprise mandante.</p>
@@ -183,17 +187,30 @@
   <!-- HONORAIRES -->
   <div class="doc-section">
     <div class="doc-section-title">Honoraires</div>
-    <div class="honoraires-box">
-      <div>
-        <div class="hon-label">Honoraires de recherche</div>
-        <div class="hon-value">Sur devis</div>
-        <div class="hon-detail">Proposition personnalisée sous 24h — success fee uniquement</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+
+      <div class="honoraires-box" style="flex-direction:column;align-items:flex-start;gap:8px">
+        <div style="font-size:6.5pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6EC1E4">Locaux commerciaux</div>
+        <div>
+          <div class="hon-label">Honoraires de recherche</div>
+          <div class="hon-value">1 mois CC</div>
+          <div class="hon-detail">Minimum CHF 5'000 · payable à la signature du bail</div>
+        </div>
+        <div style="font-size:7.5pt;color:rgba(255,255,255,.45);border-top:1px solid rgba(255,255,255,.1);padding-top:6px;width:100%">Recherche active &amp; off-market incluse · aucun frais préalable</div>
       </div>
-      <div style="text-align:right">
-        <div class="hon-label">Facturation</div>
-        <div style="font-size:9pt;color:rgba(255,255,255,.75);margin-top:2px">À la signature du bail /<br>acte notarié uniquement</div>
+
+      <div class="honoraires-box" style="flex-direction:column;align-items:flex-start;gap:8px">
+        <div style="font-size:6.5pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6EC1E4">Relocation &amp; Services</div>
+        <div>
+          <div class="hon-label">Honoraires de recherche</div>
+          <div class="hon-value">Sur devis</div>
+          <div class="hon-detail">Tarifs préférentiels dès 3 collaborateurs</div>
+        </div>
+        <div style="font-size:7.5pt;color:rgba(255,255,255,.45);border-top:1px solid rgba(255,255,255,.1);padding-top:6px;width:100%">Convention de partenariat cadre possible · devis sous 24h</div>
       </div>
+
     </div>
+    <div style="margin-top:8px;font-size:7.5pt;color:#888;font-style:italic">Honoraires hors TVA. Un devis détaillé est remis avant tout engagement. Facturation uniquement à la réalisation du projet.</div>
   </div>
 
   <!-- SIGNATURE -->
@@ -239,9 +256,34 @@
 </div><!-- /doc-body -->
 
 <footer class="doc-footer">
-  <div><strong>N20 Immobilier</strong> &nbsp;·&nbsp; Cours des Bastions 13 · 1205 Genève &nbsp;·&nbsp; contact@n20immobilier.ch &nbsp;·&nbsp; +41 76 419 20 21</div>
-  <div>Réf. {{ref}} &nbsp;·&nbsp; Page 1/1</div>
+  <div><strong>N20 Immobilier</strong> &nbsp;·&nbsp; Cours des Bastions 13 &nbsp;·&nbsp; 1205 Genève &nbsp;·&nbsp; contact@n20immobilier.ch &nbsp;·&nbsp; +41&nbsp;76&nbsp;419&nbsp;20&nbsp;21</div>
+  <div>Réf. {{ref}} &nbsp;·&nbsp; Page 1/1 &nbsp;·&nbsp; <a href="https://nimmobilier59-afk.github.io/conditions-generales/" target="_blank" style="color:#033560;font-size:6.5pt;text-decoration:none;letter-spacing:.03em">Consulter les Conditions Générales →</a></div>
 </footer>
+
+<script>
+  const today = new Date();
+  const dateStr = String(today.getDate()).padStart(2,'0') + '.' + String(today.getMonth()+1).padStart(2,'0') + '.' + today.getFullYear();
+  const y=today.getFullYear(), mo=String(today.getMonth()+1).padStart(2,'0'), da=String(today.getDate()).padStart(2,'0');
+  const refStr = 'MP-' + y + mo + da + '-' + String(Math.floor(1000+Math.random()*9000));
+  document.body.innerHTML = document.body.innerHTML
+    .replaceAll('{{date}}', dateStr)
+    .replaceAll('{{ref}}', refStr)
+    .replaceAll('{{company}}', '[Entreprise]')
+    .replaceAll('{{sector}}', '—')
+    .replaceAll('{{address}}', '—')
+    .replaceAll('{{contactName}}', '—')
+    .replaceAll('{{contactRole}}', '—')
+    .replaceAll('{{email}}', '—')
+    .replaceAll('{{phone}}', '—')
+    .replaceAll('{{needTypeLabel}}', '—')
+    .replaceAll('{{urgencyLabel}}', '—')
+    .replaceAll('{{nbPersons}}', '—')
+    .replaceAll('{{budget}}', '—')
+    .replaceAll('{{moveIn}}', '—')
+    .replaceAll('{{duration}}', '—')
+    .replaceAll('{{areas}}', '—')
+    .replaceAll('{{notes}}', '');
+</script>
 
 </body>
 </html>
