@@ -162,6 +162,7 @@ strong { font-weight: 600; }
   display: flex; align-items: flex-start; gap: 0;
   flex-wrap: wrap;
   margin-bottom: 44px; margin-top: 40px;
+  justify-content: center;
 }
 .hf-step {
   display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
@@ -556,13 +557,13 @@ textarea { resize: vertical; min-height: 100px; }
   .hdr-inner { padding: 0 20px; }
   #hero { justify-content: flex-start; min-height: 100dvh; }
   .hero-content {
-    padding: calc(72px + 110px) 20px 44px;
+    padding: 104px 20px 44px;
     flex: 1;
     display: flex;
     flex-direction: column;
   }
-  .hero-content h1 { text-align: center; }
-  .hero-single-cta { margin-top: 16px; width: 100%; justify-content: center; }
+  .hero-content h1 { text-align: center; margin-top: -5rem !important; }
+  .hero-single-cta { margin-top: 2cm !important; width: auto; align-self: center; justify-content: center; }
   .hero-tag { display: none; }
   .hero-tag-top {
     display: inline-block;
@@ -582,7 +583,7 @@ textarea { resize: vertical; min-height: 100px; }
   .hero-flow {
     flex-direction: column;
     gap: 0;
-    margin-top: auto;
+    margin-top: 3rem;
     margin-bottom: 0;
     background: rgba(255,255,255,.09);
     border: 1px solid rgba(255,255,255,.14);
@@ -706,7 +707,7 @@ textarea { resize: vertical; min-height: 100px; }
 
   <div class="hero-content">
     <span class="hero-tag">Service de relocation</span>
-    <h1>Plus qu'un toit,<br>une signature</h1>
+    <h1 style="margin-top:-1.5rem">Plus qu'un toit,<br>une signature</h1>
 
     <!-- 3 étapes inline -->
     <div class="hero-flow">
@@ -733,7 +734,7 @@ textarea { resize: vertical; min-height: 100px; }
       </div>
     </div>
 
-    <a href="/particulier/" class="btn-pill btn-white-dark hero-single-cta">
+    <a href="/particulier/" class="btn-pill btn-white-dark hero-single-cta" style="margin-top:6rem">
       Accéder au formulaire
       <svg class="arr-icon" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
     </a>
@@ -871,8 +872,8 @@ textarea { resize: vertical; min-height: 100px; }
       </details>
 
       <details class="n20-faq-item">
-        <summary>Dans quels quartiers de Genève cherchez-vous des logements ? <div class="faq-toggle">+</div></summary>
-        <div class="n20-faq-answer"><p>N20 Immobilier couvre l'ensemble du canton de Genève : centre-ville, Eaux-Vives, Carouge, Champel, Grand-Saconnex, Meyrin, Lancy, Vernier, ainsi que les communes frontalières côté France (Ferney-Voltaire, Saint-Genis-Pouilly, Annemasse). Nous adaptons la recherche à vos priorités : école internationale, proximité du lieu de travail, budget, ambiance de quartier.</p></div>
+        <summary>Dans quels quartiers de Genève cherchez-vous un logement ? <div class="faq-toggle">+</div></summary>
+        <div class="n20-faq-answer"><p>N20 Immobilier couvre l'ensemble du canton de Genève : centre-ville, Eaux-Vives, Carouge, Champel, Grand-Saconnex, Meyrin, Lancy, Vernier, ainsi que la zone frontalière côté France. Nous intervenons également sur l'ensemble de la Suisse pour les mandats de relocation. Nous adaptons la recherche à vos priorités : école internationale, proximité du lieu de travail, budget, ambiance de quartier.</p></div>
       </details>
 
       <details class="n20-faq-item">
