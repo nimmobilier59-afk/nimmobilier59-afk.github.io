@@ -51,12 +51,12 @@ strong{font-weight:600}
 .page-hero-content p{font-size:18px;color:rgba(255,255,255,.72);max-width:580px;line-height:1.7}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;margin-top:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 18px;border-radius:100px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.04em}
 .hero-badge svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.5}
-.hero-flow{display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;margin-bottom:44px;margin-top:40px;direction:ltr}
+.hero-flow{display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;margin-bottom:44px;margin-top:40px}
 .hf-step{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:140px;flex:1}
-.hf-num{font-family:'Manrope',sans-serif;font-size:34px;font-weight:700;color:rgba(255,255,255,.18);line-height:1}
+.hf-num{font-family:'Amiri',serif;font-size:34px;color:rgba(255,255,255,.18);line-height:1}
 .hf-label{font-family:'Cairo',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .hf-text{font-family:'Cairo',sans-serif;font-size:15px;font-weight:600;color:#fff;max-width:160px;line-height:1.3}
-.hf-arrow{display:flex;align-items:center;padding:0 12px;margin-top:8px}
+.hf-arrow{display:flex;align-items:center;padding:0 12px;margin-top:8px;transform:scaleX(-1)}
 .hf-arrow svg{stroke:#fff;opacity:.3;fill:none}
 .n20-footer-social{display:flex;gap:10px;margin-top:22px}
 .n20-footer-social a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);transition:all .2s;text-decoration:none}
@@ -66,31 +66,36 @@ strong{font-weight:600}
 .n20-footer-partners img{height:36px;width:auto;opacity:.55;filter:brightness(0) invert(1);transition:opacity .2s}
 .n20-footer-partners img:hover{opacity:.85}
 /* LIGHT ZONE */
-.light-zone{background:#f4f8fb}
+.light-zone{background:radial-gradient(ellipse at top right,#B4F0F8 0%,#ffffff 80%)}
 /* INTRO */
 .intro-section{padding:90px 0}
 .intro-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.intro-label{font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
 .intro-text h2{font-size:clamp(28px,3.5vw,44px);color:var(--text-dark);margin-bottom:22px}
 .intro-text p{font-size:16px;color:var(--text-mid);line-height:1.82;margin-bottom:16px}
-.intro-visual{border-radius:24px;overflow:hidden;min-height:420px}
-.intro-visual img{width:100%;height:100%;object-fit:cover;display:block;min-height:420px}
-/* CHECK LIST */
-.pourquoi-section{padding:90px 0;background:#fff}
-.pourquoi-inner{max-width:820px;margin:0 auto;padding:0 40px;text-align:right}
-.pourquoi-inner h2{font-size:clamp(28px,3.5vw,44px);color:var(--text-dark);margin-bottom:14px}
-.pourquoi-inner>p{font-size:16px;color:var(--text-mid);margin-bottom:48px}
-.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.check-item{display:flex;align-items:flex-start;gap:16px;padding:24px;background:#f4f8fb;border-radius:16px;border:1px solid rgba(2,22,35,.06);flex-direction:row-reverse;text-align:right}
-.check-icon{width:40px;height:40px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.check-icon svg{width:18px;height:18px;fill:var(--accent)}
-.check-text h3{font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:4px}
-.check-text p{font-size:14px;color:var(--text-mid);line-height:1.65}
-/* FREE */
-.gratuit-section{padding:90px 0}
-.gratuit-inner{max-width:700px;margin:0 auto;padding:0 40px}
-.gratuit-card{background:var(--navy);border-radius:28px;padding:56px;text-align:center}
-.gratuit-card h2{font-family:'Amiri',serif;font-size:clamp(28px,4vw,48px);color:#fff;margin-bottom:16px}
-.gratuit-card p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:32px}
+.intro-highlight{display:flex;align-items:center;gap:12px;margin-top:24px;padding:18px 22px;background:rgba(2,22,35,.04);border-right:3px solid var(--accent);border-radius:10px 0 0 10px}
+.intro-highlight svg{width:20px;height:20px;flex-shrink:0;fill:none;stroke:var(--navy);stroke-width:2}
+.intro-highlight span{font-family:'Cairo',sans-serif;font-size:14px;font-weight:600;color:var(--navy)}
+.intro-visual{border-radius:24px;overflow:hidden;aspect-ratio:4/3}
+.intro-visual img{width:100%;height:100%;object-fit:cover;display:block}
+/* POURQUOI */
+.pourquoi-section{padding:90px 0}
+.pourquoi-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:440px 1fr;gap:48px;align-items:start;text-align:right}
+.pourquoi-inner h2{font-size:clamp(28px,3.5vw,44px);color:var(--text-dark);margin-bottom:8px}
+.pourquoi-inner .subtitle{font-size:16px;color:var(--text-mid);margin-bottom:36px}
+.checklist{display:flex;flex-direction:column;gap:16px}
+.check-item{display:flex;align-items:flex-start;gap:14px;flex-direction:row-reverse}
+.check-icon{width:28px;height:28px;border-radius:50%;background:rgba(2,22,35,.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.check-icon svg{width:13px;height:13px;fill:none;stroke:var(--navy);stroke-width:2.5}
+.check-text strong{display:block;font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.check-text span{font-family:'Cairo',sans-serif;font-size:14px;color:var(--text-mid);line-height:1.5}
+.gratuit-card{background:var(--navy);border-radius:28px;padding:48px 40px;color:#fff;display:flex;flex-direction:column}
+.gc-icon{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;margin-bottom:24px;margin-inline-start:auto}
+.gc-icon svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.8}
+.gratuit-card h3{font-family:'Amiri',serif;font-size:30px;font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2}
+.gratuit-card p{font-size:15px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:28px}
+.gratuit-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:10px 20px;border-radius:100px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.06em}
+.gratuit-badge svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2}
 .btn-pill{display:inline-flex;align-items:center;gap:10px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 32px;border-radius:100px;cursor:pointer;transition:all .22s}
 .btn-accent{background:var(--accent);color:var(--navy);border:2px solid var(--accent)}
 .btn-accent:hover{background:transparent;color:var(--accent)}
@@ -147,7 +152,7 @@ textarea{resize:vertical;min-height:100px}
 .wa-float{position:fixed;bottom:28px;left:24px;right:auto;width:54px;height:54px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.22);z-index:8000;transition:transform .2s}
 .wa-float:hover{transform:scale(1.08)}
 .wa-float svg{width:28px;height:28px;fill:#fff}
-@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:40px}.intro-visual{min-height:280px}.check-grid{grid-template-columns:1fr}.n20-footer-inner{grid-template-columns:1fr}}
+@media(max-width:900px){.intro-inner{grid-template-columns:1fr;gap:40px}.pourquoi-inner{grid-template-columns:1fr}.n20-footer-inner{grid-template-columns:1fr}}
 @media(max-width:600px){
   .page-hero-content{padding:0 24px 56px}.intro-inner,.pourquoi-inner,.n20-faq-inner,.contact-inner,.gratuit-inner{padding:0 20px}.form-row{grid-template-columns:1fr}.gratuit-card{padding:36px 24px}
   .page-hero{justify-content:flex-start;min-height:100dvh;padding:0}
@@ -258,12 +263,17 @@ textarea{resize:vertical;min-height:100px}
 <section class="intro-section">
   <div class="intro-inner">
     <div class="intro-text">
+      <div class="intro-label">نهجنا</div>
       <h2>نعثر على مستأجرك<br>البديل لتغادر بسلام</h2>
       <p>إنهاء عقد الإيجار في جنيف قد يكون معقداً: إشعار مبكر، مستأجر بديل، محضر المغادرة. N20 تتولى كل ذلك عنك.</p>
       <p>بفضل شبكتنا الواسعة من الراغبين في الإيجار وخبرتنا في سوق جنيف، نقدم لك مستأجرين مؤهلين بسرعة قياسية — مما يتيح لك المغادرة في الموعد المحدد.</p>
+      <div class="intro-highlight">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>إنهاء رسمي معتمد من المالك أو إدارة العقار، مع ملف كامل ومتابعة حتى نهاية العقد.</span>
+      </div>
     </div>
     <div class="intro-visual">
-      <img src="/wp-content/uploads/2025/10/couple-sorting-carton-boxes.jpg" alt="إنهاء عقد الإيجار في جنيف">
+      <img src="/wp-content/uploads/2025/10/9i5eqbarv-k.jpg" alt="إنهاء عقد الإيجار في جنيف" loading="lazy">
     </div>
   </div>
 </section>
@@ -271,65 +281,57 @@ textarea{resize:vertical;min-height:100px}
 <!-- POURQUOI -->
 <section class="pourquoi-section">
   <div class="pourquoi-inner">
-    <h2>لماذا تختار N20<br>لإنهاء عقدك؟</h2>
-    <p>خدمة شاملة تريحك من كل الإجراءات:</p>
-    <div class="check-grid">
-      <div class="check-item">
-        <div class="check-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        </div>
-        <div class="check-text">
-          <h3>مستأجر بديل مؤهل</h3>
-          <p>نختار مرشحين مؤهلين تلبيةً لمتطلبات المالك ومعايير البنك.</p>
-        </div>
+    <div class="gratuit-card">
+      <div class="gc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
-      <div class="check-item">
-        <div class="check-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        </div>
-        <div class="check-text">
-          <h3>إجراءات مُبسَّطة</h3>
-          <p>نتولى المراسلات مع المالك وإدارة العقار والجهات المختصة.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">
-          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
-        </div>
-        <div class="check-text">
-          <h3>استجابة سريعة</h3>
-          <p>شبكتنا الواسعة تضمن إيجاد مستأجر بديل في أقصر مدة ممكنة.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-        </div>
-        <div class="check-text">
-          <h3>مرافقة حتى النهاية</h3>
-          <p>من الإشعار الأول حتى توقيع محضر المغادرة، نحن معك في كل خطوة.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        </div>
-        <div class="check-text">
-          <h3>خبرة عميقة في سوق جنيف</h3>
-          <p>معرفة دقيقة بإدارات العقارات والملاك في جنيف لزيادة فرص قبول طلبك.</p>
-        </div>
+      <h3>الخدمة<br>مجانية 100%</h3>
+      <p>خدمتنا في إنهاء العقد مجانية تماماً للمستأجر الحالي. لا رسوم خفية، لا عمولة. تواصل معنا ونتولى الباقي.</p>
+      <div class="gratuit-badge">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        لا تكلفة عليك
       </div>
     </div>
-  </div>
-</section>
-
-<!-- FREE -->
-<section class="gratuit-section">
-  <div class="gratuit-inner">
-    <div class="gratuit-card">
-      <h2>الخدمة مجانية<br>لصاحب المسكن</h2>
-      <p>أتعابنا يتحملها المستأجر البديل حصراً. لا تكلفة عليك كصاحب مسكن حالي.</p>
-      <a href="/ar/private-individual/" class="btn-pill btn-accent">ابدأ الإجراء الآن</a>
+    <div>
+      <h2>لماذا تختار N20<br>لإنهاء عقدك؟</h2>
+      <p class="subtitle">مرافقة شاملة، بلا رسوم، بلا توتر.</p>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>مجاناً 100%</strong>
+            <span>لا رسوم تسجيل ولا عمولة على المستأجر الحالي.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>شبكة حصرية من المستأجرين المؤهلين</strong>
+            <span>مئات الملفات الجاهزة في قاعدة بياناتنا لاستلام مسكنك بسرعة.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>مراجعة دقيقة للملفات</strong>
+            <span>الدخل والضمانات والمراجع — نقدم للمالك مرشحين موثوقين فقط.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>توفير وقت كبير</strong>
+            <span>نتولى لوجستيات الزيارات وتسليم الملف — لا شيء عليك.</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-text">
+            <strong>خبرة عميقة في سوق جنيف</strong>
+            <span>معرفة دقيقة بإدارات العقارات والملاك في جنيف لتعظيم فرص قبولك.</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
