@@ -85,6 +85,20 @@ strong{font-weight:600}
 .partenaire-stat-sep{width:1px;height:36px;background:rgba(2,22,35,.12);flex-shrink:0}
 .stat-number{font-family:'Amiri',serif;font-size:52px;color:var(--navy);line-height:1;margin-bottom:8px}
 .stat-label{font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;color:var(--text-mid)}
+/* PARTENAIRE-SECTION restructured */
+#partenaire-section .partenaire-inner{display:block}
+.partenaire-top{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-bottom:64px;direction:rtl}
+.partenaire-badge{font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--navy);padding:6px 14px;border-radius:4px;display:inline-block;margin-bottom:24px}
+.partenaire-desc-block{border-right:3px solid var(--accent);padding-right:28px;text-align:right}
+.partenaire-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;direction:rtl;margin-bottom:48px}
+.partenaire-col{background:#fff;border:1px solid rgba(2,22,35,.07);border-radius:12px;padding:36px 32px;transition:box-shadow .25s,transform .25s;text-align:right}
+.partenaire-col:hover{box-shadow:0 16px 48px rgba(2,22,35,.09);transform:translateY(-4px)}
+.partenaire-col-num{font-family:'Amiri',serif;font-size:52px;font-style:italic;color:rgba(2,22,35,.07);line-height:1;margin-bottom:12px}
+.partenaire-col h3{font-family:'Cairo',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.partenaire-col p{font-size:15px;color:var(--navy);line-height:1.75;opacity:.72}
+#partenaire-section .partenaire-stats{border-radius:16px;background:rgba(255,255,255,.7);border:1px solid rgba(2,22,35,.06);box-shadow:none;padding:36px 40px}
+@media(max-width:900px){.partenaire-top{grid-template-columns:1fr;gap:32px}.partenaire-cols{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.partenaire-cols{grid-template-columns:1fr}.partenaire-col{padding:28px 24px}}
 /* SEC-ME-LOGER */
 #sec-me-loger{background:#f4f8fb}
 .sec-me-loger-visual img{border-radius:24px;width:100%;height:440px;object-fit:cover}
@@ -273,28 +287,51 @@ strong{font-weight:600}
 <!-- PARTNER -->
 <section id="partenaire-section">
   <div class="partenaire-inner">
-    <div class="partenaire-text">
-      <span class="partenaire-tag">من نحن</span>
-      <h2 class="partenaire-title">شريككم العقاري<br>في جنيف</h2>
-      <p class="partenaire-desc">مقرها جنيف، <strong>N20 Immobilier</strong> وكالة متخصصة في <strong>الانتقال والتوطين</strong> والدعم العقاري المخصص <strong>للأفراد والمؤسسات</strong>. مهمتنا: الاعتناء بمشروعك العقاري كاملاً — أبعد بكثير من مجرد إيجاد مسكن — بدقة واحترافية والتزام راسخ.</p>
-      <a href="/ar/private-individual/" class="partenaire-cta">أرسل تفويضك</a>
+    <div class="partenaire-top">
+      <div>
+        <span class="partenaire-badge">وكالتنا</span>
+        <h2 class="partenaire-title">شريككم العقاري<br>في جنيف</h2>
+      </div>
+      <div class="partenaire-desc-block">
+        <p class="partenaire-desc">مقرها جنيف، <strong>N20 Immobilier</strong> وكالة متخصصة في <strong>الانتقال والتوطين</strong> والدعم العقاري المخصص <strong>للأفراد والمؤسسات</strong>. مهمتنا: الاعتناء بمشروعك العقاري كاملاً — أبعد بكثير من مجرد إيجاد مسكن — بدقة واحترافية والتزام راسخ.</p>
+      </div>
     </div>
-    <div>
-      <div class="partenaire-stats">
-        <div class="partenaire-stat">
-          <div class="stat-number" data-to="203" data-prefix="+">0</div>
-          <div class="stat-label">عميل تمت خدمته</div>
-        </div>
-        <div class="partenaire-stat-sep"></div>
-        <div class="partenaire-stat">
-          <div class="stat-number" data-to="150" data-prefix="+">0</div>
-          <div class="stat-label">عقار سنوياً</div>
-        </div>
-        <div class="partenaire-stat-sep"></div>
-        <div class="partenaire-stat">
-          <div class="stat-number" data-to="15" data-prefix="+">0</div>
-          <div class="stat-label">سنة خبرة</div>
-        </div>
+    <div class="partenaire-cols">
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">01</div>
+        <h3>مهمتنا</h3>
+        <p>مرافقة كل عميل بـ<strong>نهج شخصي</strong> والتزام كامل في كل مرحلة من مشروعه العقاري.</p>
+      </div>
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">02</div>
+        <h3>التزامنا</h3>
+        <p>تقديم خدمة <strong>شفافة وإنسانية ومخصصة</strong>، مبنية على الثقة <strong>والتميز المهني</strong>.</p>
+      </div>
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">03</div>
+        <h3>رؤيتنا</h3>
+        <p>جعل كل عملية انتقال أو اقتناء تجربة <strong>سلسة ومريحة</strong> ومتكيفة تماماً مع احتياجاتكم.</p>
+      </div>
+      <div class="partenaire-col">
+        <div class="partenaire-col-num">04</div>
+        <h3>لماذا نحن؟</h3>
+        <p>خبرة محلية و<strong>شبكة حصرية</strong> ومرافقة كاملة — <strong>راحة بالكم</strong> هي أولويتنا.</p>
+      </div>
+    </div>
+    <div class="partenaire-stats">
+      <div class="partenaire-stat">
+        <div class="stat-number" data-to="203" data-prefix="+">0</div>
+        <div class="stat-label">عميل تمت خدمته</div>
+      </div>
+      <div class="partenaire-stat-sep"></div>
+      <div class="partenaire-stat">
+        <div class="stat-number" data-to="150" data-prefix="+">0</div>
+        <div class="stat-label">عقار سنوياً</div>
+      </div>
+      <div class="partenaire-stat-sep"></div>
+      <div class="partenaire-stat">
+        <div class="stat-number" data-to="15" data-prefix="+">0</div>
+        <div class="stat-label">سنة خبرة</div>
       </div>
     </div>
   </div>
