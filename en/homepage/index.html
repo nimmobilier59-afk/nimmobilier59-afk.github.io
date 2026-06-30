@@ -682,8 +682,10 @@ textarea { resize: vertical; min-height: 100px; }
 
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
-  <video id="hero-video" autoplay muted playsinline loop>
-    <source src="/wp-content/uploads/2025/11/geneva-city-centre-from-above-1080p-2025-08-29-04-42-11-utc.mov" type="video/mp4">
+  <video id="hero-video" autoplay muted playsinline loop preload="auto" poster="/wp-content/uploads/2025/11/vue-ville.jpeg">
+        <source src="/wp-content/uploads/2025/11/geneva-hero-720p.webm" type="video/webm">
+    <source src="/wp-content/uploads/2025/11/geneva-hero-720p.mp4" type="video/mp4">
+    <source src="/wp-content/uploads/2025/11/geneva-city-centre-from-above-1080p-2025-08-29-04-42-11-utc.mov" type="video/quicktime">
   </video>
   <div id="hero-overlay"></div>
 </section>
