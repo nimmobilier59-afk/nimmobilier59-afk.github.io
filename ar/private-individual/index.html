@@ -128,6 +128,39 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 @media(max-width:900px){.ftr-top{grid-template-columns:1fr 1fr;gap:32px}}
 @media(max-width:600px){.form-card{padding:32px 24px}.f-row.cols-2{grid-template-columns:1fr}.ftr-top{grid-template-columns:1fr;gap:24px}.ftr-inner{padding:0 20px}.ftr-bottom{flex-direction:column;gap:12px;text-align:center}}
 .phone-group{display:flex;gap:6px}.phone-group .phone-prefix{width:120px;flex-shrink:0;padding-left:6px;padding-right:4px}.phone-group .phone-input{flex:1;min-width:0}
+ 
+.recap-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:24px 28px;margin-bottom:28px}
+.recap-section{margin-bottom:20px}
+.recap-section:last-child{margin-bottom:0}
+.recap-section h4{font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.recap-item{display:flex;flex-direction:column;gap:3px}
+.recap-item span:first-child{font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.07em}
+.recap-item span:last-child{font-size:.9rem;color:#fff;font-weight:500}
+.annex-section{margin-bottom:28px}
+.annex-title{font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.annex-hint{font-size:.78rem;color:rgba(255,255,255,.45);margin:0 0 16px}
+.annex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.annex-item label{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(255,255,255,.7);margin-bottom:8px;font-weight:600}
+.badge-req{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(239,68,68,.18);color:#f87171;border:1px solid rgba(239,68,68,.3);border-radius:20px;padding:2px 8px}
+.badge-opt{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:2px 8px}
+.upload-zone{border:2px dashed rgba(255,255,255,.18);border-radius:12px;padding:20px 14px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:110px;justify-content:center}
+.upload-zone:hover{border-color:var(--accent);background:rgba(110,193,228,.06)}
+.upload-zone.has-file{border-color:var(--accent);border-style:solid;background:rgba(110,193,228,.08)}
+.upload-zone svg{width:28px;height:28px;stroke:rgba(255,255,255,.35);flex-shrink:0}
+.upload-zone.has-file svg{stroke:var(--accent)}
+.upload-zone .uz-label{font-size:.78rem;color:rgba(255,255,255,.45)}
+.upload-zone .uz-filename{font-size:.75rem;color:var(--accent);font-weight:600;word-break:break-all;display:none}
+.upload-zone.has-file .uz-filename{display:block}
+.upload-zone.has-file .uz-label{display:none}
+.annex-docs{list-style:none;margin:16px 0 0;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;display:flex;flex-direction:column;gap:10px}
+.annex-docs li{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(255,255,255,.75)}
+.annex-docs strong{color:#fff}
+.annex-doc-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);flex-shrink:0}
+.annex-doc-dot.req{background:var(--accent)}
+.annex-doc-note{font-size:.75rem;color:rgba(255,255,255,.35);font-style:italic;margin-left:2px}
+@media(max-width:600px){.recap-grid{grid-template-columns:1fr}.annex-grid{grid-template-columns:1fr}}
+.success-panel.visible{display:block}
 </style>
 </head>
 <body>
@@ -205,857 +238,574 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
     <h1>أرسل تفويض البحث</h1>
     <p>وفّر وقتك واستفد من مرافقة شخصية. أرسل التفويض ودعنا نعثر على العقار المثالي الذي يناسب احتياجاتك.</p>
     <div class="progress-bar" id="progressBar">
-      <div class="prog-step active" data-step="1">
-        <div class="prog-dot">1</div>
-        <div class="prog-label">مقدم الطلب</div>
-      </div>
-      <div class="prog-step" data-step="2">
-        <div class="prog-dot">2</div>
-        <div class="prog-label">مقدم مشارك</div>
-      </div>
-      <div class="prog-step" data-step="3">
-        <div class="prog-dot">3</div>
-        <div class="prog-label">معايير العقار</div>
-      </div>
-      <div class="prog-step" data-step="4">
-        <div class="prog-dot">4</div>
-        <div class="prog-label">التأكيد</div>
-      </div>
+      <div class="prog-step active" data-step="1"><div class="prog-dot">1</div><div class="prog-label">مقدّم الطلب</div></div>
+      <div class="prog-step" data-step="2"><div class="prog-dot">2</div><div class="prog-label">مقدّم طلب مشارك</div></div>
+      <div class="prog-step" data-step="3"><div class="prog-dot">3</div><div class="prog-label">العقار</div></div>
+      <div class="prog-step" data-step="4"><div class="prog-dot">4</div><div class="prog-label">التأكيد</div></div>
     </div>
   </section>
 
   <div class="form-outer">
     <div class="form-card" id="formCard">
 
-      <!-- STEP 1 -->
+      <!-- ÉTAPE 1 -->
       <div class="step-pane active" id="step1">
-        <div class="step-title">مقدم الطلب</div>
-        <div class="step-sub">أخبرنا عن نفسك حتى نتمكن من تخصيص بحثنا وفق احتياجاتك.</div>
+        <div class="step-title">مقدّم الطلب</div>
+        <div class="step-sub">حدّثونا عنكم لنخصّص بحثنا.</div>
 
-        <span class="radio-label">هل أنت فرد أم مؤسسة؟</span>
-        <div class="radio-group" id="typeGroup">
-          <label class="radio-opt selected" id="opt-individual">
-            <input type="radio" name="applicantType" value="individual" checked>
-            <span class="radio-circle"></span> فرد
-          </label>
-          <label class="radio-opt" id="opt-professional">
-            <input type="radio" name="applicantType" value="professional">
-            <span class="radio-circle"></span> مؤسسة / شركة
-          </label>
-        </div>
-
-        <div class="cond-block" id="proFields">
-          <div class="f-row cols-1">
-            <div class="f-group">
-              <label>اسم الشركة</label>
-              <input type="text" name="company" placeholder="Société SA">
-            </div>
+        <div id="indivFields">
+          <div class="f-row cols-2">
+            <div class="f-group"><label>اللقب</label><input type="text" name="lastName" placeholder="مثلاً: الأحمد"></div>
+            <div class="f-group"><label>الاسم</label><input type="text" name="firstName" placeholder="مثلاً: مريم"></div>
           </div>
           <div class="f-row cols-1">
-            <div class="f-group">
-              <label>العنوان المسجّل</label>
-              <input type="text" name="companyAddress" placeholder="Rue de Rive 10, 1204 Genève">
-            </div>
+            <div class="f-group"><label>العنوان الحالي</label><input type="text" name="currentAddress" placeholder="Rue de Rive 10, 1204 Genève"></div>
           </div>
           <div class="f-row cols-2">
-            <div class="f-group">
-              <label>الممثل القانوني</label>
-              <input type="text" name="legalRep" placeholder="الاسم الكامل">
-            </div>
-            <div class="f-group">
-              <label>الهاتف</label>
-              <div class="phone-group"><select class="phone-prefix" aria-label="رمز الدولة">
+            <div class="f-group"><label>تاريخ الميلاد</label><input type="date" name="dob"></div>
+            <div class="f-group"><label>عدد الأطفال</label><input type="number" name="children" placeholder="0" min="0" max="20"></div>
+          </div>
+          <div class="f-row cols-2">
+            <div class="f-group"><label>الهاتف</label><div class="phone-group"><select class="phone-prefix" aria-label="رمز الدولة">
 <option value="+41" selected>&#127464;&#127469; +41</option>
-<option value="+354">&#127470;&#127480; +354</option>
-<option value="+994">&#127462;&#127487; +994</option>
-<option value="+374">&#127462;&#127474; +374</option>
-<option value="+61">&#127462;&#127482; +61</option>
 <option value="+93">&#127462;&#127467; +93</option>
+<option value="+27">&#127487;&#127462; +27</option>
 <option value="+355">&#127462;&#127473; +355</option>
+<option value="+213">&#127465;&#127487; +213</option>
 <option value="+49">&#127465;&#127466; +49</option>
-<option value="+1268">&#127462;&#127468; +1268</option>
 <option value="+376">&#127462;&#127465; +376</option>
 <option value="+244">&#127462;&#127476; +244</option>
-<option value="+598">&#127482;&#127486; +598</option>
-<option value="+998">&#127482;&#127487; +998</option>
-<option value="+256">&#127482;&#127468; +256</option>
-<option value="+380">&#127482;&#127462; +380</option>
-<option value="+353">&#127470;&#127466; +353</option>
-<option value="+251">&#127466;&#127481; +251</option>
-<option value="+291">&#127466;&#127479; +291</option>
-<option value="+34">&#127466;&#127480; +34</option>
-<option value="+372">&#127466;&#127466; +372</option>
-<option value="+972">&#127470;&#127473; +972</option>
-<option value="+62">&#127470;&#127465; +62</option>
-<option value="+98">&#127470;&#127479; +98</option>
-<option value="+268">&#127480;&#127487; +268</option>
-<option value="+39">&#127470;&#127481; +39</option>
-<option value="+54">&#127462;&#127479; +54</option>
-<option value="+962">&#127471;&#127476; +962</option>
-<option value="+593">&#127466;&#127464; +593</option>
-<option value="+971">&#127462;&#127466; +971</option>
-<option value="+973">&#127463;&#127469; +973</option>
-<option value="+55">&#127463;&#127479; +55</option>
-<option value="+351">&#127477;&#127481; +351</option>
-<option value="+387">&#127463;&#127462; +387</option>
-<option value="+382">&#127474;&#127466; +382</option>
-<option value="+213">&#127465;&#127487; +213</option>
-<option value="+45">&#127465;&#127472; +45</option>
-<option value="+238">&#127464;&#127483; +238</option>
-<option value="+503">&#127480;&#127483; +503</option>
-<option value="+221">&#127480;&#127475; +221</option>
-<option value="+249">&#127480;&#127465; +249</option>
-<option value="+46">&#127480;&#127466; +46</option>
-<option value="+252">&#127480;&#127476; +252</option>
-<option value="+86">&#127464;&#127475; +86</option>
-<option value="+964">&#127470;&#127478; +964</option>
-<option value="+241">&#127468;&#127462; +241</option>
-<option value="+379">&#127483;&#127462; +379</option>
-<option value="+63">&#127477;&#127469; +63</option>
-<option value="+237">&#127464;&#127474; +237</option>
-<option value="+243">&#127464;&#127465; +243</option>
-<option value="+965">&#127472;&#127484; +965</option>
-<option value="+36">&#127469;&#127482; +36</option>
-<option value="+212">&#127474;&#127462; +212</option>
-<option value="+52">&#127474;&#127485; +52</option>
+<option value="+1268">&#127462;&#127468; +1268</option>
 <option value="+966">&#127480;&#127462; +966</option>
-<option value="+44">&#127468;&#127463; +44</option>
-<option value="+47">&#127475;&#127476; +47</option>
+<option value="+54">&#127462;&#127479; +54</option>
+<option value="+374">&#127462;&#127474; +374</option>
+<option value="+61">&#127462;&#127482; +61</option>
 <option value="+43">&#127462;&#127481; +43</option>
-<option value="+227">&#127475;&#127466; +227</option>
-<option value="+91">&#127470;&#127475; +91</option>
-<option value="+1">&#127482;&#127480; +1</option>
-<option value="+81">&#127471;&#127477; +81</option>
-<option value="+967">&#127486;&#127466; +967</option>
-<option value="+675">&#127477;&#127468; +675</option>
-<option value="+595">&#127477;&#127486; +595</option>
-<option value="+92">&#127477;&#127472; +92</option>
-<option value="+680">&#127477;&#127484; +680</option>
-<option value="+1246">&#127463;&#127463; +1246</option>
-<option value="+673">&#127463;&#127475; +673</option>
-<option value="+32">&#127463;&#127466; +32</option>
-<option value="+359">&#127463;&#127468; +359</option>
-<option value="+501">&#127463;&#127487; +501</option>
+<option value="+994">&#127462;&#127487; +994</option>
+<option value="+1242">&#127463;&#127480; +1242</option>
+<option value="+973">&#127463;&#127469; +973</option>
 <option value="+880">&#127463;&#127465; +880</option>
-<option value="+507">&#127477;&#127462; +507</option>
-<option value="+229">&#127463;&#127471; +229</option>
+<option value="+1246">&#127463;&#127463; +1246</option>
+<option value="+32">&#127463;&#127466; +32</option>
+<option value="+501">&#127463;&#127487; +501</option>
 <option value="+975">&#127463;&#127481; +975</option>
+<option value="+375">&#127463;&#127486; +375</option>
+<option value="+591">&#127463;&#127476; +591</option>
+<option value="+387">&#127463;&#127462; +387</option>
 <option value="+267">&#127463;&#127484; +267</option>
+<option value="+673">&#127463;&#127475; +673</option>
+<option value="+55">&#127463;&#127479; +55</option>
+<option value="+359">&#127463;&#127468; +359</option>
 <option value="+226">&#127463;&#127467; +226</option>
 <option value="+257">&#127463;&#127470; +257</option>
-<option value="+48">&#127477;&#127473; +48</option>
-<option value="+591">&#127463;&#127476; +591</option>
-<option value="+51">&#127477;&#127466; +51</option>
-<option value="+375">&#127463;&#127486; +375</option>
-<option value="+66">&#127481;&#127469; +66</option>
-<option value="+886">&#127481;&#127484; +886</option>
-<option value="+993">&#127481;&#127474; +993</option>
-<option value="+90">&#127481;&#127479; +90</option>
-<option value="+1868">&#127481;&#127481; +1868</option>
-<option value="+235">&#127481;&#127465; +235</option>
+<option value="+229">&#127463;&#127471; +229</option>
+<option value="+238">&#127464;&#127483; +238</option>
+<option value="+855">&#127472;&#127469; +855</option>
+<option value="+237">&#127464;&#127474; +237</option>
+<option value="+1">&#127464;&#127462; +1</option>
 <option value="+56">&#127464;&#127473; +56</option>
-<option value="+255">&#127481;&#127487; +255</option>
-<option value="+228">&#127481;&#127468; +228</option>
-<option value="+688">&#127481;&#127483; +688</option>
-<option value="+216">&#127481;&#127475; +216</option>
-<option value="+676">&#127481;&#127476; +676</option>
-<option value="+670">&#127481;&#127473; +670</option>
-<option value="+1876">&#127471;&#127474; +1876</option>
-<option value="+1242">&#127463;&#127480; +1242</option>
+<option value="+86">&#127464;&#127475; +86</option>
+<option value="+357">&#127464;&#127486; +357</option>
+<option value="+57">&#127464;&#127476; +57</option>
 <option value="+269">&#127472;&#127474; +269</option>
-<option value="+960">&#127474;&#127483; +960</option>
-<option value="+677">&#127480;&#127463; +677</option>
-<option value="+692">&#127474;&#127469; +692</option>
-<option value="+236">&#127464;&#127467; +236</option>
-<option value="+420">&#127464;&#127487; +420</option>
-<option value="+1809">&#127465;&#127476; +1809</option>
 <option value="+242">&#127464;&#127468; +242</option>
-<option value="+27">&#127487;&#127462; +27</option>
-<option value="+211">&#127480;&#127480; +211</option>
-<option value="+995">&#127468;&#127466; +995</option>
+<option value="+243">&#127464;&#127465; +243</option>
+<option value="+850">&#127472;&#127477; +850</option>
+<option value="+82">&#127472;&#127479; +82</option>
+<option value="+506">&#127464;&#127479; +506</option>
+<option value="+385">&#127469;&#127479; +385</option>
+<option value="+53">&#127464;&#127482; +53</option>
+<option value="+225">&#127464;&#127470; +225</option>
+<option value="+45">&#127465;&#127472; +45</option>
 <option value="+253">&#127465;&#127471; +253</option>
 <option value="+1767">&#127465;&#127474; +1767</option>
-<option value="+250">&#127479;&#127484; +250</option>
-<option value="+7">&#127479;&#127482; +7</option>
-<option value="+40">&#127479;&#127476; +40</option>
-<option value="+260">&#127487;&#127474; +260</option>
-<option value="+263">&#127487;&#127484; +263</option>
-<option value="+225">&#127464;&#127470; +225</option>
-<option value="+685">&#127484;&#127480; +685</option>
-<option value="+378">&#127480;&#127474; +378</option>
-<option value="+1784">&#127483;&#127464; +1784</option>
-<option value="+1869">&#127472;&#127475; +1869</option>
-<option value="+1758">&#127473;&#127464; +1758</option>
-<option value="+239">&#127480;&#127481; +239</option>
-<option value="+94">&#127473;&#127472; +94</option>
-<option value="+421">&#127480;&#127472; +421</option>
-<option value="+386">&#127480;&#127470; +386</option>
-<option value="+65">&#127480;&#127468; +65</option>
-<option value="+963">&#127480;&#127486; +963</option>
-<option value="+597">&#127480;&#127479; +597</option>
-<option value="+232">&#127480;&#127473; +232</option>
-<option value="+248">&#127480;&#127464; +248</option>
-<option value="+381">&#127479;&#127480; +381</option>
-<option value="+992">&#127481;&#127471; +992</option>
-<option value="+968">&#127476;&#127474; +968</option>
+<option value="+34">&#127466;&#127480; +34</option>
+<option value="+372">&#127466;&#127466; +372</option>
+<option value="+268">&#127480;&#127487; +268</option>
+<option value="+679">&#127467;&#127471; +679</option>
+<option value="+358">&#127467;&#127470; +358</option>
+<option value="+33">&#127467;&#127479; +33</option>
+<option value="+241">&#127468;&#127462; +241</option>
 <option value="+220">&#127468;&#127474; +220</option>
 <option value="+233">&#127468;&#127469; +233</option>
 <option value="+1473">&#127468;&#127465; +1473</option>
 <option value="+502">&#127468;&#127481; +502</option>
-<option value="+592">&#127468;&#127486; +592</option>
 <option value="+224">&#127468;&#127475; +224</option>
 <option value="+240">&#127468;&#127478; +240</option>
 <option value="+245">&#127468;&#127484; +245</option>
-<option value="+678">&#127483;&#127482; +678</option>
-<option value="+33">&#127467;&#127479; +33</option>
-<option value="+970">&#127477;&#127480; +970</option>
-<option value="+58">&#127483;&#127466; +58</option>
-<option value="+358">&#127467;&#127470; +358</option>
-<option value="+84">&#127483;&#127475; +84</option>
-<option value="+679">&#127467;&#127471; +679</option>
-<option value="+357">&#127464;&#127486; +357</option>
-<option value="+974">&#127478;&#127462; +974</option>
-<option value="+996">&#127472;&#127468; +996</option>
-<option value="+7">&#127472;&#127487; +7</option>
-<option value="+385">&#127469;&#127479; +385</option>
-<option value="+855">&#127472;&#127469; +855</option>
-<option value="+1">&#127464;&#127462; +1</option>
-<option value="+53">&#127464;&#127482; +53</option>
-<option value="+82">&#127472;&#127479; +82</option>
-<option value="+850">&#127472;&#127477; +850</option>
-<option value="+506">&#127464;&#127479; +506</option>
-<option value="+383">&#127485;&#127472; +383</option>
-<option value="+57">&#127464;&#127476; +57</option>
-<option value="+686">&#127472;&#127470; +686</option>
-<option value="+254">&#127472;&#127466; +254</option>
-<option value="+371">&#127473;&#127483; +371</option>
-<option value="+856">&#127473;&#127462; +856</option>
-<option value="+961">&#127473;&#127463; +961</option>
-<option value="+352">&#127473;&#127482; +352</option>
-<option value="+218">&#127473;&#127486; +218</option>
-<option value="+231">&#127473;&#127479; +231</option>
-<option value="+370">&#127473;&#127481; +370</option>
-<option value="+423">&#127473;&#127470; +423</option>
-<option value="+266">&#127473;&#127480; +266</option>
-<option value="+356">&#127474;&#127481; +356</option>
-<option value="+223">&#127474;&#127473; +223</option>
-<option value="+60">&#127474;&#127486; +60</option>
-<option value="+261">&#127474;&#127468; +261</option>
-<option value="+20">&#127466;&#127468; +20</option>
-<option value="+389">&#127474;&#127472; +389</option>
-<option value="+265">&#127474;&#127484; +265</option>
-<option value="+976">&#127474;&#127475; +976</option>
-<option value="+222">&#127474;&#127479; +222</option>
-<option value="+230">&#127474;&#127482; +230</option>
-<option value="+258">&#127474;&#127487; +258</option>
-<option value="+373">&#127474;&#127465; +373</option>
-<option value="+377">&#127474;&#127464; +377</option>
-<option value="+95">&#127474;&#127474; +95</option>
-<option value="+691">&#127467;&#127474; +691</option>
-<option value="+264">&#127475;&#127462; +264</option>
-<option value="+674">&#127475;&#127479; +674</option>
-<option value="+977">&#127475;&#127477; +977</option>
-<option value="+234">&#127475;&#127468; +234</option>
-<option value="+505">&#127475;&#127470; +505</option>
-<option value="+64">&#127475;&#127487; +64</option>
+<option value="+592">&#127468;&#127486; +592</option>
+<option value="+995">&#127468;&#127466; +995</option>
 <option value="+509">&#127469;&#127481; +509</option>
 <option value="+504">&#127469;&#127475; +504</option>
-<option value="+31">&#127475;&#127473; +31</option>
-</select><input type="tel" class="phone-input" name="proPhone" placeholder="xx xxx xx xx"></div>
-            </div>
-          </div>
-          <div class="f-row cols-1">
-            <div class="f-group">
-              <label>البريد الإلكتروني</label>
-              <input type="email" name="proEmail" placeholder="contact@company.ch">
-            </div>
-          </div>
-          <hr class="f-divider">
-        </div>
-
-        <div class="cond-block visible" id="indivFields">
-          <div class="f-row cols-2">
-            <div class="f-group">
-              <label>الكنية</label>
-              <input type="text" name="lastName" placeholder="الكنية">
-            </div>
-            <div class="f-group">
-              <label>الاسم</label>
-              <input type="text" name="firstName" placeholder="الاسم">
-            </div>
-          </div>
-          <div class="f-row cols-2">
-            <div class="f-group">
-              <label>تاريخ الميلاد</label>
-              <input type="date" name="dob">
-            </div>
-            <div class="f-group">
-              <label>عدد الأطفال</label>
-              <input type="number" name="children" placeholder="0" min="0" max="20">
-            </div>
-          </div>
-          <div class="f-row cols-2">
-            <div class="f-group">
-              <label>الهاتف</label>
-              <div class="phone-group"><select class="phone-prefix" aria-label="رمز الدولة">
-<option value="+41" selected>&#127464;&#127469; +41</option>
-<option value="+354">&#127470;&#127480; +354</option>
-<option value="+994">&#127462;&#127487; +994</option>
-<option value="+374">&#127462;&#127474; +374</option>
-<option value="+61">&#127462;&#127482; +61</option>
-<option value="+93">&#127462;&#127467; +93</option>
-<option value="+355">&#127462;&#127473; +355</option>
-<option value="+49">&#127465;&#127466; +49</option>
-<option value="+1268">&#127462;&#127468; +1268</option>
-<option value="+376">&#127462;&#127465; +376</option>
-<option value="+244">&#127462;&#127476; +244</option>
-<option value="+598">&#127482;&#127486; +598</option>
-<option value="+998">&#127482;&#127487; +998</option>
-<option value="+256">&#127482;&#127468; +256</option>
-<option value="+380">&#127482;&#127462; +380</option>
-<option value="+353">&#127470;&#127466; +353</option>
-<option value="+251">&#127466;&#127481; +251</option>
-<option value="+291">&#127466;&#127479; +291</option>
-<option value="+34">&#127466;&#127480; +34</option>
-<option value="+372">&#127466;&#127466; +372</option>
-<option value="+972">&#127470;&#127473; +972</option>
-<option value="+62">&#127470;&#127465; +62</option>
-<option value="+98">&#127470;&#127479; +98</option>
-<option value="+268">&#127480;&#127487; +268</option>
-<option value="+39">&#127470;&#127481; +39</option>
-<option value="+54">&#127462;&#127479; +54</option>
-<option value="+962">&#127471;&#127476; +962</option>
-<option value="+593">&#127466;&#127464; +593</option>
-<option value="+971">&#127462;&#127466; +971</option>
-<option value="+973">&#127463;&#127469; +973</option>
-<option value="+55">&#127463;&#127479; +55</option>
-<option value="+351">&#127477;&#127481; +351</option>
-<option value="+387">&#127463;&#127462; +387</option>
-<option value="+382">&#127474;&#127466; +382</option>
-<option value="+213">&#127465;&#127487; +213</option>
-<option value="+45">&#127465;&#127472; +45</option>
-<option value="+238">&#127464;&#127483; +238</option>
-<option value="+503">&#127480;&#127483; +503</option>
-<option value="+221">&#127480;&#127475; +221</option>
-<option value="+249">&#127480;&#127465; +249</option>
-<option value="+46">&#127480;&#127466; +46</option>
-<option value="+252">&#127480;&#127476; +252</option>
-<option value="+86">&#127464;&#127475; +86</option>
-<option value="+964">&#127470;&#127478; +964</option>
-<option value="+241">&#127468;&#127462; +241</option>
-<option value="+379">&#127483;&#127462; +379</option>
-<option value="+63">&#127477;&#127469; +63</option>
-<option value="+237">&#127464;&#127474; +237</option>
-<option value="+243">&#127464;&#127465; +243</option>
-<option value="+965">&#127472;&#127484; +965</option>
 <option value="+36">&#127469;&#127482; +36</option>
-<option value="+212">&#127474;&#127462; +212</option>
-<option value="+52">&#127474;&#127485; +52</option>
-<option value="+966">&#127480;&#127462; +966</option>
-<option value="+44">&#127468;&#127463; +44</option>
-<option value="+47">&#127475;&#127476; +47</option>
-<option value="+43">&#127462;&#127481; +43</option>
-<option value="+227">&#127475;&#127466; +227</option>
 <option value="+91">&#127470;&#127475; +91</option>
-<option value="+1">&#127482;&#127480; +1</option>
+<option value="+62">&#127470;&#127465; +62</option>
+<option value="+964">&#127470;&#127478; +964</option>
+<option value="+98">&#127470;&#127479; +98</option>
+<option value="+353">&#127470;&#127466; +353</option>
+<option value="+354">&#127470;&#127480; +354</option>
+<option value="+972">&#127470;&#127473; +972</option>
+<option value="+39">&#127470;&#127481; +39</option>
+<option value="+1876">&#127471;&#127474; +1876</option>
 <option value="+81">&#127471;&#127477; +81</option>
-<option value="+967">&#127486;&#127466; +967</option>
-<option value="+675">&#127477;&#127468; +675</option>
-<option value="+595">&#127477;&#127486; +595</option>
+<option value="+962">&#127471;&#127476; +962</option>
+<option value="+7">&#127472;&#127487; +7</option>
+<option value="+254">&#127472;&#127466; +254</option>
+<option value="+996">&#127472;&#127468; +996</option>
+<option value="+686">&#127472;&#127470; +686</option>
+<option value="+383">&#127485;&#127472; +383</option>
+<option value="+965">&#127472;&#127484; +965</option>
+<option value="+856">&#127473;&#127462; +856</option>
+<option value="+266">&#127473;&#127480; +266</option>
+<option value="+371">&#127473;&#127483; +371</option>
+<option value="+961">&#127473;&#127463; +961</option>
+<option value="+231">&#127473;&#127479; +231</option>
+<option value="+218">&#127473;&#127486; +218</option>
+<option value="+423">&#127473;&#127470; +423</option>
+<option value="+370">&#127473;&#127481; +370</option>
+<option value="+352">&#127473;&#127482; +352</option>
+<option value="+389">&#127474;&#127472; +389</option>
+<option value="+261">&#127474;&#127468; +261</option>
+<option value="+60">&#127474;&#127486; +60</option>
+<option value="+265">&#127474;&#127484; +265</option>
+<option value="+960">&#127474;&#127483; +960</option>
+<option value="+223">&#127474;&#127473; +223</option>
+<option value="+356">&#127474;&#127481; +356</option>
+<option value="+212">&#127474;&#127462; +212</option>
+<option value="+230">&#127474;&#127482; +230</option>
+<option value="+222">&#127474;&#127479; +222</option>
+<option value="+52">&#127474;&#127485; +52</option>
+<option value="+691">&#127467;&#127474; +691</option>
+<option value="+373">&#127474;&#127465; +373</option>
+<option value="+377">&#127474;&#127464; +377</option>
+<option value="+976">&#127474;&#127475; +976</option>
+<option value="+382">&#127474;&#127466; +382</option>
+<option value="+258">&#127474;&#127487; +258</option>
+<option value="+95">&#127474;&#127474; +95</option>
+<option value="+264">&#127475;&#127462; +264</option>
+<option value="+674">&#127475;&#127479; +674</option>
+<option value="+505">&#127475;&#127470; +505</option>
+<option value="+227">&#127475;&#127466; +227</option>
+<option value="+234">&#127475;&#127468; +234</option>
+<option value="+47">&#127475;&#127476; +47</option>
+<option value="+64">&#127475;&#127487; +64</option>
+<option value="+977">&#127475;&#127477; +977</option>
+<option value="+968">&#127476;&#127474; +968</option>
+<option value="+256">&#127482;&#127468; +256</option>
+<option value="+998">&#127482;&#127487; +998</option>
 <option value="+92">&#127477;&#127472; +92</option>
 <option value="+680">&#127477;&#127484; +680</option>
-<option value="+1246">&#127463;&#127463; +1246</option>
-<option value="+673">&#127463;&#127475; +673</option>
-<option value="+32">&#127463;&#127466; +32</option>
-<option value="+359">&#127463;&#127468; +359</option>
-<option value="+501">&#127463;&#127487; +501</option>
-<option value="+880">&#127463;&#127465; +880</option>
+<option value="+970">&#127477;&#127480; +970</option>
 <option value="+507">&#127477;&#127462; +507</option>
-<option value="+229">&#127463;&#127471; +229</option>
-<option value="+975">&#127463;&#127481; +975</option>
-<option value="+267">&#127463;&#127484; +267</option>
-<option value="+226">&#127463;&#127467; +226</option>
-<option value="+257">&#127463;&#127470; +257</option>
+<option value="+675">&#127477;&#127468; +675</option>
+<option value="+595">&#127477;&#127486; +595</option>
+<option value="+31">&#127475;&#127473; +31</option>
+<option value="+63">&#127477;&#127469; +63</option>
 <option value="+48">&#127477;&#127473; +48</option>
-<option value="+591">&#127463;&#127476; +591</option>
+<option value="+351">&#127477;&#127481; +351</option>
 <option value="+51">&#127477;&#127466; +51</option>
-<option value="+375">&#127463;&#127486; +375</option>
-<option value="+66">&#127481;&#127469; +66</option>
-<option value="+886">&#127481;&#127484; +886</option>
-<option value="+993">&#127481;&#127474; +993</option>
-<option value="+90">&#127481;&#127479; +90</option>
-<option value="+1868">&#127481;&#127481; +1868</option>
-<option value="+235">&#127481;&#127465; +235</option>
-<option value="+56">&#127464;&#127473; +56</option>
-<option value="+255">&#127481;&#127487; +255</option>
-<option value="+228">&#127481;&#127468; +228</option>
-<option value="+688">&#127481;&#127483; +688</option>
-<option value="+216">&#127481;&#127475; +216</option>
-<option value="+676">&#127481;&#127476; +676</option>
-<option value="+670">&#127481;&#127473; +670</option>
-<option value="+1876">&#127471;&#127474; +1876</option>
-<option value="+1242">&#127463;&#127480; +1242</option>
-<option value="+269">&#127472;&#127474; +269</option>
-<option value="+960">&#127474;&#127483; +960</option>
-<option value="+677">&#127480;&#127463; +677</option>
-<option value="+692">&#127474;&#127469; +692</option>
-<option value="+236">&#127464;&#127467; +236</option>
-<option value="+420">&#127464;&#127487; +420</option>
-<option value="+1809">&#127465;&#127476; +1809</option>
-<option value="+242">&#127464;&#127468; +242</option>
-<option value="+27">&#127487;&#127462; +27</option>
-<option value="+211">&#127480;&#127480; +211</option>
-<option value="+995">&#127468;&#127466; +995</option>
-<option value="+253">&#127465;&#127471; +253</option>
-<option value="+1767">&#127465;&#127474; +1767</option>
-<option value="+250">&#127479;&#127484; +250</option>
-<option value="+7">&#127479;&#127482; +7</option>
+<option value="+974">&#127478;&#127462; +974</option>
 <option value="+40">&#127479;&#127476; +40</option>
-<option value="+260">&#127487;&#127474; +260</option>
-<option value="+263">&#127487;&#127484; +263</option>
-<option value="+225">&#127464;&#127470; +225</option>
-<option value="+685">&#127484;&#127480; +685</option>
+<option value="+44">&#127468;&#127463; +44</option>
+<option value="+7">&#127479;&#127482; +7</option>
+<option value="+250">&#127479;&#127484; +250</option>
+<option value="+236">&#127464;&#127467; +236</option>
+<option value="+1809">&#127465;&#127476; +1809</option>
+<option value="+1869">&#127472;&#127475; +1869</option>
 <option value="+378">&#127480;&#127474; +378</option>
 <option value="+1784">&#127483;&#127464; +1784</option>
-<option value="+1869">&#127472;&#127475; +1869</option>
 <option value="+1758">&#127473;&#127464; +1758</option>
+<option value="+503">&#127480;&#127483; +503</option>
+<option value="+685">&#127484;&#127480; +685</option>
 <option value="+239">&#127480;&#127481; +239</option>
-<option value="+94">&#127473;&#127472; +94</option>
+<option value="+381">&#127479;&#127480; +381</option>
+<option value="+248">&#127480;&#127464; +248</option>
+<option value="+232">&#127480;&#127473; +232</option>
+<option value="+65">&#127480;&#127468; +65</option>
 <option value="+421">&#127480;&#127472; +421</option>
 <option value="+386">&#127480;&#127470; +386</option>
-<option value="+65">&#127480;&#127468; +65</option>
-<option value="+963">&#127480;&#127486; +963</option>
+<option value="+252">&#127480;&#127476; +252</option>
+<option value="+249">&#127480;&#127465; +249</option>
+<option value="+211">&#127480;&#127480; +211</option>
+<option value="+94">&#127473;&#127472; +94</option>
 <option value="+597">&#127480;&#127479; +597</option>
-<option value="+232">&#127480;&#127473; +232</option>
-<option value="+248">&#127480;&#127464; +248</option>
-<option value="+381">&#127479;&#127480; +381</option>
+<option value="+46">&#127480;&#127466; +46</option>
+<option value="+963">&#127480;&#127486; +963</option>
+<option value="+221">&#127480;&#127475; +221</option>
 <option value="+992">&#127481;&#127471; +992</option>
-<option value="+968">&#127476;&#127474; +968</option>
-<option value="+220">&#127468;&#127474; +220</option>
-<option value="+233">&#127468;&#127469; +233</option>
-<option value="+1473">&#127468;&#127465; +1473</option>
-<option value="+502">&#127468;&#127481; +502</option>
-<option value="+592">&#127468;&#127486; +592</option>
-<option value="+224">&#127468;&#127475; +224</option>
-<option value="+240">&#127468;&#127478; +240</option>
-<option value="+245">&#127468;&#127484; +245</option>
+<option value="+255">&#127481;&#127487; +255</option>
+<option value="+886">&#127481;&#127484; +886</option>
+<option value="+235">&#127481;&#127465; +235</option>
+<option value="+420">&#127464;&#127487; +420</option>
+<option value="+66">&#127481;&#127469; +66</option>
+<option value="+670">&#127481;&#127473; +670</option>
+<option value="+228">&#127481;&#127468; +228</option>
+<option value="+676">&#127481;&#127476; +676</option>
+<option value="+1868">&#127481;&#127481; +1868</option>
+<option value="+216">&#127481;&#127475; +216</option>
+<option value="+993">&#127481;&#127474; +993</option>
+<option value="+90">&#127481;&#127479; +90</option>
+<option value="+688">&#127481;&#127483; +688</option>
+<option value="+380">&#127482;&#127462; +380</option>
+<option value="+598">&#127482;&#127486; +598</option>
 <option value="+678">&#127483;&#127482; +678</option>
-<option value="+33">&#127467;&#127479; +33</option>
-<option value="+970">&#127477;&#127480; +970</option>
+<option value="+379">&#127483;&#127462; +379</option>
 <option value="+58">&#127483;&#127466; +58</option>
-<option value="+358">&#127467;&#127470; +358</option>
 <option value="+84">&#127483;&#127475; +84</option>
-<option value="+679">&#127467;&#127471; +679</option>
-<option value="+357">&#127464;&#127486; +357</option>
-<option value="+974">&#127478;&#127462; +974</option>
-<option value="+996">&#127472;&#127468; +996</option>
-<option value="+7">&#127472;&#127487; +7</option>
-<option value="+385">&#127469;&#127479; +385</option>
-<option value="+855">&#127472;&#127469; +855</option>
-<option value="+1">&#127464;&#127462; +1</option>
-<option value="+53">&#127464;&#127482; +53</option>
-<option value="+82">&#127472;&#127479; +82</option>
-<option value="+850">&#127472;&#127477; +850</option>
-<option value="+506">&#127464;&#127479; +506</option>
-<option value="+383">&#127485;&#127472; +383</option>
-<option value="+57">&#127464;&#127476; +57</option>
-<option value="+686">&#127472;&#127470; +686</option>
-<option value="+254">&#127472;&#127466; +254</option>
-<option value="+371">&#127473;&#127483; +371</option>
-<option value="+856">&#127473;&#127462; +856</option>
-<option value="+961">&#127473;&#127463; +961</option>
-<option value="+352">&#127473;&#127482; +352</option>
-<option value="+218">&#127473;&#127486; +218</option>
-<option value="+231">&#127473;&#127479; +231</option>
-<option value="+370">&#127473;&#127481; +370</option>
-<option value="+423">&#127473;&#127470; +423</option>
-<option value="+266">&#127473;&#127480; +266</option>
-<option value="+356">&#127474;&#127481; +356</option>
-<option value="+223">&#127474;&#127473; +223</option>
-<option value="+60">&#127474;&#127486; +60</option>
-<option value="+261">&#127474;&#127468; +261</option>
+<option value="+967">&#127486;&#127466; +967</option>
+<option value="+260">&#127487;&#127474; +260</option>
+<option value="+263">&#127487;&#127484; +263</option>
 <option value="+20">&#127466;&#127468; +20</option>
-<option value="+389">&#127474;&#127472; +389</option>
-<option value="+265">&#127474;&#127484; +265</option>
-<option value="+976">&#127474;&#127475; +976</option>
-<option value="+222">&#127474;&#127479; +222</option>
-<option value="+230">&#127474;&#127482; +230</option>
-<option value="+258">&#127474;&#127487; +258</option>
-<option value="+373">&#127474;&#127465; +373</option>
-<option value="+377">&#127474;&#127464; +377</option>
-<option value="+95">&#127474;&#127474; +95</option>
-<option value="+691">&#127467;&#127474; +691</option>
-<option value="+264">&#127475;&#127462; +264</option>
-<option value="+674">&#127475;&#127479; +674</option>
-<option value="+977">&#127475;&#127477; +977</option>
-<option value="+234">&#127475;&#127468; +234</option>
-<option value="+505">&#127475;&#127470; +505</option>
-<option value="+64">&#127475;&#127487; +64</option>
-<option value="+509">&#127469;&#127481; +509</option>
-<option value="+504">&#127469;&#127475; +504</option>
-<option value="+31">&#127475;&#127473; +31</option>
-</select><input type="tel" class="phone-input" name="phone" placeholder="xx xxx xx xx"></div>
-            </div>
-            <div class="f-group">
-              <label>البريد الإلكتروني</label>
-              <input type="email" name="email" placeholder="you@example.com">
-            </div>
+<option value="+971">&#127462;&#127466; +971</option>
+<option value="+593">&#127466;&#127464; +593</option>
+<option value="+291">&#127466;&#127479; +291</option>
+<option value="+1">&#127482;&#127480; +1</option>
+<option value="+251">&#127466;&#127481; +251</option>
+<option value="+692">&#127474;&#127469; +692</option>
+<option value="+677">&#127480;&#127463; +677</option>
+</select><input type="tel" class="phone-input" name="phone" placeholder="xx xxx xx xx"></div></div>
+            <div class="f-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com"></div>
           </div>
         </div>
 
         <hr class="f-divider">
 
-        <span class="radio-label">هل سيكون عقد الإيجار باسمك؟</span>
+        <span class="radio-label">هل سيكون عقد الإيجار باسمكم؟</span>
         <div class="radio-group">
-          <label class="radio-opt selected" id="opt-lease-yes">
-            <input type="radio" name="leaseInName" value="yes" checked>
-            <span class="radio-circle"></span> نعم
-          </label>
-          <label class="radio-opt" id="opt-lease-no">
-            <input type="radio" name="leaseInName" value="no">
-            <span class="radio-circle"></span> لا
-          </label>
+          <label class="radio-opt selected" id="opt-lease-yes"><input type="radio" name="leaseInName" value="yes" checked><span class="radio-circle"></span> نعم</label>
+          <label class="radio-opt" id="opt-lease-no"><input type="radio" name="leaseInName" value="no"><span class="radio-circle"></span> لا</label>
         </div>
 
-        <span class="radio-label">هل تحتاج مساعدة في إنهاء عقدك الحالي؟</span>
+        <span class="radio-label">هل تحتاجون مساعدة لإنهاء عقد إيجاركم الحالي؟</span>
         <div class="radio-group">
-          <label class="radio-opt" id="opt-term-yes">
-            <input type="radio" name="needTermination" value="yes">
-            <span class="radio-circle"></span> نعم
-          </label>
-          <label class="radio-opt selected" id="opt-term-no">
-            <input type="radio" name="needTermination" value="no" checked>
-            <span class="radio-circle"></span> لا
-          </label>
+          <label class="radio-opt" id="opt-term-yes"><input type="radio" name="needTermination" value="yes"><span class="radio-circle"></span> نعم</label>
+          <label class="radio-opt selected" id="opt-term-no"><input type="radio" name="needTermination" value="no" checked><span class="radio-circle"></span> لا</label>
         </div>
 
-        <div class="form-nav">
-          <button class="btn-next" onclick="goTo(2)">التالي &larr;</button>
-        </div>
+        <div class="form-nav"><button class="btn-next" onclick="goTo(2)">التالي &larr;</button></div>
       </div>
 
-      <!-- STEP 2 -->
+      <!-- ÉTAPE 2 -->
       <div class="step-pane" id="step2">
-        <div class="step-title">مقدم الطلب المشارك</div>
-        <div class="step-sub">هل هناك مستأجر مشارك؟ إذا لم يكن كذلك، يمكنك تخطي هذه الخطوة.</div>
+        <div class="step-title">مقدّم طلب مشارك</div>
+        <div class="step-sub">هل هناك مستأجر مشارك؟ إن لم يكن، يمكنكم تخطّي هذه الخطوة.</div>
 
-        <span class="radio-label">هل لديك مستأجر مشارك؟</span>
+        <span class="radio-label">هل لديكم مستأجر مشارك؟</span>
         <div class="radio-group">
-          <label class="radio-opt" id="opt-cotenant-yes">
-            <input type="radio" name="hasCotenant" value="yes">
-            <span class="radio-circle"></span> نعم
-          </label>
-          <label class="radio-opt selected" id="opt-cotenant-no">
-            <input type="radio" name="hasCotenant" value="no" checked>
-            <span class="radio-circle"></span> لا
-          </label>
+          <label class="radio-opt" id="opt-cotenant-yes"><input type="radio" name="hasCotenant" value="yes"><span class="radio-circle"></span> نعم</label>
+          <label class="radio-opt selected" id="opt-cotenant-no"><input type="radio" name="hasCotenant" value="no" checked><span class="radio-circle"></span> لا</label>
         </div>
 
         <div class="cond-block" id="cotenantFields">
           <hr class="f-divider">
           <div class="f-row cols-2">
-            <div class="f-group">
-              <label>الكنية</label>
-              <input type="text" name="coLastName" placeholder="الكنية">
-            </div>
-            <div class="f-group">
-              <label>الاسم</label>
-              <input type="text" name="coFirstName" placeholder="الاسم">
-            </div>
+            <div class="f-group"><label>اللقب</label><input type="text" name="coLastName" placeholder="مثلاً: الأحمد"></div>
+            <div class="f-group"><label>الاسم</label><input type="text" name="coFirstName" placeholder="مثلاً: يوسف"></div>
           </div>
           <div class="f-row cols-2">
-            <div class="f-group">
-              <label>تاريخ الميلاد</label>
-              <input type="date" name="coDob">
-            </div>
-            <div class="f-group">
-              <label>عدد الأطفال</label>
-              <input type="number" name="coChildren" placeholder="0" min="0" max="20">
-            </div>
+            <div class="f-group"><label>تاريخ الميلاد</label><input type="date" name="coDob"></div>
+            <div class="f-group"><label>عدد الأطفال</label><input type="number" name="coChildren" placeholder="0" min="0" max="20"></div>
           </div>
           <div class="f-row cols-2">
-            <div class="f-group">
-              <label>الهاتف</label>
-              <div class="phone-group"><select class="phone-prefix" aria-label="رمز الدولة">
+            <div class="f-group"><label>الهاتف</label><div class="phone-group"><select class="phone-prefix" aria-label="رمز الدولة">
 <option value="+41" selected>&#127464;&#127469; +41</option>
-<option value="+354">&#127470;&#127480; +354</option>
-<option value="+994">&#127462;&#127487; +994</option>
-<option value="+374">&#127462;&#127474; +374</option>
-<option value="+61">&#127462;&#127482; +61</option>
 <option value="+93">&#127462;&#127467; +93</option>
+<option value="+27">&#127487;&#127462; +27</option>
 <option value="+355">&#127462;&#127473; +355</option>
+<option value="+213">&#127465;&#127487; +213</option>
 <option value="+49">&#127465;&#127466; +49</option>
-<option value="+1268">&#127462;&#127468; +1268</option>
 <option value="+376">&#127462;&#127465; +376</option>
 <option value="+244">&#127462;&#127476; +244</option>
-<option value="+598">&#127482;&#127486; +598</option>
-<option value="+998">&#127482;&#127487; +998</option>
-<option value="+256">&#127482;&#127468; +256</option>
-<option value="+380">&#127482;&#127462; +380</option>
-<option value="+353">&#127470;&#127466; +353</option>
-<option value="+251">&#127466;&#127481; +251</option>
-<option value="+291">&#127466;&#127479; +291</option>
-<option value="+34">&#127466;&#127480; +34</option>
-<option value="+372">&#127466;&#127466; +372</option>
-<option value="+972">&#127470;&#127473; +972</option>
-<option value="+62">&#127470;&#127465; +62</option>
-<option value="+98">&#127470;&#127479; +98</option>
-<option value="+268">&#127480;&#127487; +268</option>
-<option value="+39">&#127470;&#127481; +39</option>
-<option value="+54">&#127462;&#127479; +54</option>
-<option value="+962">&#127471;&#127476; +962</option>
-<option value="+593">&#127466;&#127464; +593</option>
-<option value="+971">&#127462;&#127466; +971</option>
-<option value="+973">&#127463;&#127469; +973</option>
-<option value="+55">&#127463;&#127479; +55</option>
-<option value="+351">&#127477;&#127481; +351</option>
-<option value="+387">&#127463;&#127462; +387</option>
-<option value="+382">&#127474;&#127466; +382</option>
-<option value="+213">&#127465;&#127487; +213</option>
-<option value="+45">&#127465;&#127472; +45</option>
-<option value="+238">&#127464;&#127483; +238</option>
-<option value="+503">&#127480;&#127483; +503</option>
-<option value="+221">&#127480;&#127475; +221</option>
-<option value="+249">&#127480;&#127465; +249</option>
-<option value="+46">&#127480;&#127466; +46</option>
-<option value="+252">&#127480;&#127476; +252</option>
-<option value="+86">&#127464;&#127475; +86</option>
-<option value="+964">&#127470;&#127478; +964</option>
-<option value="+241">&#127468;&#127462; +241</option>
-<option value="+379">&#127483;&#127462; +379</option>
-<option value="+63">&#127477;&#127469; +63</option>
-<option value="+237">&#127464;&#127474; +237</option>
-<option value="+243">&#127464;&#127465; +243</option>
-<option value="+965">&#127472;&#127484; +965</option>
-<option value="+36">&#127469;&#127482; +36</option>
-<option value="+212">&#127474;&#127462; +212</option>
-<option value="+52">&#127474;&#127485; +52</option>
+<option value="+1268">&#127462;&#127468; +1268</option>
 <option value="+966">&#127480;&#127462; +966</option>
-<option value="+44">&#127468;&#127463; +44</option>
-<option value="+47">&#127475;&#127476; +47</option>
+<option value="+54">&#127462;&#127479; +54</option>
+<option value="+374">&#127462;&#127474; +374</option>
+<option value="+61">&#127462;&#127482; +61</option>
 <option value="+43">&#127462;&#127481; +43</option>
-<option value="+227">&#127475;&#127466; +227</option>
-<option value="+91">&#127470;&#127475; +91</option>
-<option value="+1">&#127482;&#127480; +1</option>
-<option value="+81">&#127471;&#127477; +81</option>
-<option value="+967">&#127486;&#127466; +967</option>
-<option value="+675">&#127477;&#127468; +675</option>
-<option value="+595">&#127477;&#127486; +595</option>
-<option value="+92">&#127477;&#127472; +92</option>
-<option value="+680">&#127477;&#127484; +680</option>
-<option value="+1246">&#127463;&#127463; +1246</option>
-<option value="+673">&#127463;&#127475; +673</option>
-<option value="+32">&#127463;&#127466; +32</option>
-<option value="+359">&#127463;&#127468; +359</option>
-<option value="+501">&#127463;&#127487; +501</option>
+<option value="+994">&#127462;&#127487; +994</option>
+<option value="+1242">&#127463;&#127480; +1242</option>
+<option value="+973">&#127463;&#127469; +973</option>
 <option value="+880">&#127463;&#127465; +880</option>
-<option value="+507">&#127477;&#127462; +507</option>
-<option value="+229">&#127463;&#127471; +229</option>
+<option value="+1246">&#127463;&#127463; +1246</option>
+<option value="+32">&#127463;&#127466; +32</option>
+<option value="+501">&#127463;&#127487; +501</option>
 <option value="+975">&#127463;&#127481; +975</option>
+<option value="+375">&#127463;&#127486; +375</option>
+<option value="+591">&#127463;&#127476; +591</option>
+<option value="+387">&#127463;&#127462; +387</option>
 <option value="+267">&#127463;&#127484; +267</option>
+<option value="+673">&#127463;&#127475; +673</option>
+<option value="+55">&#127463;&#127479; +55</option>
+<option value="+359">&#127463;&#127468; +359</option>
 <option value="+226">&#127463;&#127467; +226</option>
 <option value="+257">&#127463;&#127470; +257</option>
-<option value="+48">&#127477;&#127473; +48</option>
-<option value="+591">&#127463;&#127476; +591</option>
-<option value="+51">&#127477;&#127466; +51</option>
-<option value="+375">&#127463;&#127486; +375</option>
-<option value="+66">&#127481;&#127469; +66</option>
-<option value="+886">&#127481;&#127484; +886</option>
-<option value="+993">&#127481;&#127474; +993</option>
-<option value="+90">&#127481;&#127479; +90</option>
-<option value="+1868">&#127481;&#127481; +1868</option>
-<option value="+235">&#127481;&#127465; +235</option>
+<option value="+229">&#127463;&#127471; +229</option>
+<option value="+238">&#127464;&#127483; +238</option>
+<option value="+855">&#127472;&#127469; +855</option>
+<option value="+237">&#127464;&#127474; +237</option>
+<option value="+1">&#127464;&#127462; +1</option>
 <option value="+56">&#127464;&#127473; +56</option>
-<option value="+255">&#127481;&#127487; +255</option>
-<option value="+228">&#127481;&#127468; +228</option>
-<option value="+688">&#127481;&#127483; +688</option>
-<option value="+216">&#127481;&#127475; +216</option>
-<option value="+676">&#127481;&#127476; +676</option>
-<option value="+670">&#127481;&#127473; +670</option>
-<option value="+1876">&#127471;&#127474; +1876</option>
-<option value="+1242">&#127463;&#127480; +1242</option>
+<option value="+86">&#127464;&#127475; +86</option>
+<option value="+357">&#127464;&#127486; +357</option>
+<option value="+57">&#127464;&#127476; +57</option>
 <option value="+269">&#127472;&#127474; +269</option>
-<option value="+960">&#127474;&#127483; +960</option>
-<option value="+677">&#127480;&#127463; +677</option>
-<option value="+692">&#127474;&#127469; +692</option>
-<option value="+236">&#127464;&#127467; +236</option>
-<option value="+420">&#127464;&#127487; +420</option>
-<option value="+1809">&#127465;&#127476; +1809</option>
 <option value="+242">&#127464;&#127468; +242</option>
-<option value="+27">&#127487;&#127462; +27</option>
-<option value="+211">&#127480;&#127480; +211</option>
-<option value="+995">&#127468;&#127466; +995</option>
+<option value="+243">&#127464;&#127465; +243</option>
+<option value="+850">&#127472;&#127477; +850</option>
+<option value="+82">&#127472;&#127479; +82</option>
+<option value="+506">&#127464;&#127479; +506</option>
+<option value="+385">&#127469;&#127479; +385</option>
+<option value="+53">&#127464;&#127482; +53</option>
+<option value="+225">&#127464;&#127470; +225</option>
+<option value="+45">&#127465;&#127472; +45</option>
 <option value="+253">&#127465;&#127471; +253</option>
 <option value="+1767">&#127465;&#127474; +1767</option>
-<option value="+250">&#127479;&#127484; +250</option>
-<option value="+7">&#127479;&#127482; +7</option>
-<option value="+40">&#127479;&#127476; +40</option>
-<option value="+260">&#127487;&#127474; +260</option>
-<option value="+263">&#127487;&#127484; +263</option>
-<option value="+225">&#127464;&#127470; +225</option>
-<option value="+685">&#127484;&#127480; +685</option>
-<option value="+378">&#127480;&#127474; +378</option>
-<option value="+1784">&#127483;&#127464; +1784</option>
-<option value="+1869">&#127472;&#127475; +1869</option>
-<option value="+1758">&#127473;&#127464; +1758</option>
-<option value="+239">&#127480;&#127481; +239</option>
-<option value="+94">&#127473;&#127472; +94</option>
-<option value="+421">&#127480;&#127472; +421</option>
-<option value="+386">&#127480;&#127470; +386</option>
-<option value="+65">&#127480;&#127468; +65</option>
-<option value="+963">&#127480;&#127486; +963</option>
-<option value="+597">&#127480;&#127479; +597</option>
-<option value="+232">&#127480;&#127473; +232</option>
-<option value="+248">&#127480;&#127464; +248</option>
-<option value="+381">&#127479;&#127480; +381</option>
-<option value="+992">&#127481;&#127471; +992</option>
-<option value="+968">&#127476;&#127474; +968</option>
+<option value="+34">&#127466;&#127480; +34</option>
+<option value="+372">&#127466;&#127466; +372</option>
+<option value="+268">&#127480;&#127487; +268</option>
+<option value="+679">&#127467;&#127471; +679</option>
+<option value="+358">&#127467;&#127470; +358</option>
+<option value="+33">&#127467;&#127479; +33</option>
+<option value="+241">&#127468;&#127462; +241</option>
 <option value="+220">&#127468;&#127474; +220</option>
 <option value="+233">&#127468;&#127469; +233</option>
 <option value="+1473">&#127468;&#127465; +1473</option>
 <option value="+502">&#127468;&#127481; +502</option>
-<option value="+592">&#127468;&#127486; +592</option>
 <option value="+224">&#127468;&#127475; +224</option>
 <option value="+240">&#127468;&#127478; +240</option>
 <option value="+245">&#127468;&#127484; +245</option>
-<option value="+678">&#127483;&#127482; +678</option>
-<option value="+33">&#127467;&#127479; +33</option>
-<option value="+970">&#127477;&#127480; +970</option>
-<option value="+58">&#127483;&#127466; +58</option>
-<option value="+358">&#127467;&#127470; +358</option>
-<option value="+84">&#127483;&#127475; +84</option>
-<option value="+679">&#127467;&#127471; +679</option>
-<option value="+357">&#127464;&#127486; +357</option>
-<option value="+974">&#127478;&#127462; +974</option>
-<option value="+996">&#127472;&#127468; +996</option>
-<option value="+7">&#127472;&#127487; +7</option>
-<option value="+385">&#127469;&#127479; +385</option>
-<option value="+855">&#127472;&#127469; +855</option>
-<option value="+1">&#127464;&#127462; +1</option>
-<option value="+53">&#127464;&#127482; +53</option>
-<option value="+82">&#127472;&#127479; +82</option>
-<option value="+850">&#127472;&#127477; +850</option>
-<option value="+506">&#127464;&#127479; +506</option>
-<option value="+383">&#127485;&#127472; +383</option>
-<option value="+57">&#127464;&#127476; +57</option>
-<option value="+686">&#127472;&#127470; +686</option>
-<option value="+254">&#127472;&#127466; +254</option>
-<option value="+371">&#127473;&#127483; +371</option>
-<option value="+856">&#127473;&#127462; +856</option>
-<option value="+961">&#127473;&#127463; +961</option>
-<option value="+352">&#127473;&#127482; +352</option>
-<option value="+218">&#127473;&#127486; +218</option>
-<option value="+231">&#127473;&#127479; +231</option>
-<option value="+370">&#127473;&#127481; +370</option>
-<option value="+423">&#127473;&#127470; +423</option>
-<option value="+266">&#127473;&#127480; +266</option>
-<option value="+356">&#127474;&#127481; +356</option>
-<option value="+223">&#127474;&#127473; +223</option>
-<option value="+60">&#127474;&#127486; +60</option>
-<option value="+261">&#127474;&#127468; +261</option>
-<option value="+20">&#127466;&#127468; +20</option>
-<option value="+389">&#127474;&#127472; +389</option>
-<option value="+265">&#127474;&#127484; +265</option>
-<option value="+976">&#127474;&#127475; +976</option>
-<option value="+222">&#127474;&#127479; +222</option>
-<option value="+230">&#127474;&#127482; +230</option>
-<option value="+258">&#127474;&#127487; +258</option>
-<option value="+373">&#127474;&#127465; +373</option>
-<option value="+377">&#127474;&#127464; +377</option>
-<option value="+95">&#127474;&#127474; +95</option>
-<option value="+691">&#127467;&#127474; +691</option>
-<option value="+264">&#127475;&#127462; +264</option>
-<option value="+674">&#127475;&#127479; +674</option>
-<option value="+977">&#127475;&#127477; +977</option>
-<option value="+234">&#127475;&#127468; +234</option>
-<option value="+505">&#127475;&#127470; +505</option>
-<option value="+64">&#127475;&#127487; +64</option>
+<option value="+592">&#127468;&#127486; +592</option>
+<option value="+995">&#127468;&#127466; +995</option>
 <option value="+509">&#127469;&#127481; +509</option>
 <option value="+504">&#127469;&#127475; +504</option>
+<option value="+36">&#127469;&#127482; +36</option>
+<option value="+91">&#127470;&#127475; +91</option>
+<option value="+62">&#127470;&#127465; +62</option>
+<option value="+964">&#127470;&#127478; +964</option>
+<option value="+98">&#127470;&#127479; +98</option>
+<option value="+353">&#127470;&#127466; +353</option>
+<option value="+354">&#127470;&#127480; +354</option>
+<option value="+972">&#127470;&#127473; +972</option>
+<option value="+39">&#127470;&#127481; +39</option>
+<option value="+1876">&#127471;&#127474; +1876</option>
+<option value="+81">&#127471;&#127477; +81</option>
+<option value="+962">&#127471;&#127476; +962</option>
+<option value="+7">&#127472;&#127487; +7</option>
+<option value="+254">&#127472;&#127466; +254</option>
+<option value="+996">&#127472;&#127468; +996</option>
+<option value="+686">&#127472;&#127470; +686</option>
+<option value="+383">&#127485;&#127472; +383</option>
+<option value="+965">&#127472;&#127484; +965</option>
+<option value="+856">&#127473;&#127462; +856</option>
+<option value="+266">&#127473;&#127480; +266</option>
+<option value="+371">&#127473;&#127483; +371</option>
+<option value="+961">&#127473;&#127463; +961</option>
+<option value="+231">&#127473;&#127479; +231</option>
+<option value="+218">&#127473;&#127486; +218</option>
+<option value="+423">&#127473;&#127470; +423</option>
+<option value="+370">&#127473;&#127481; +370</option>
+<option value="+352">&#127473;&#127482; +352</option>
+<option value="+389">&#127474;&#127472; +389</option>
+<option value="+261">&#127474;&#127468; +261</option>
+<option value="+60">&#127474;&#127486; +60</option>
+<option value="+265">&#127474;&#127484; +265</option>
+<option value="+960">&#127474;&#127483; +960</option>
+<option value="+223">&#127474;&#127473; +223</option>
+<option value="+356">&#127474;&#127481; +356</option>
+<option value="+212">&#127474;&#127462; +212</option>
+<option value="+230">&#127474;&#127482; +230</option>
+<option value="+222">&#127474;&#127479; +222</option>
+<option value="+52">&#127474;&#127485; +52</option>
+<option value="+691">&#127467;&#127474; +691</option>
+<option value="+373">&#127474;&#127465; +373</option>
+<option value="+377">&#127474;&#127464; +377</option>
+<option value="+976">&#127474;&#127475; +976</option>
+<option value="+382">&#127474;&#127466; +382</option>
+<option value="+258">&#127474;&#127487; +258</option>
+<option value="+95">&#127474;&#127474; +95</option>
+<option value="+264">&#127475;&#127462; +264</option>
+<option value="+674">&#127475;&#127479; +674</option>
+<option value="+505">&#127475;&#127470; +505</option>
+<option value="+227">&#127475;&#127466; +227</option>
+<option value="+234">&#127475;&#127468; +234</option>
+<option value="+47">&#127475;&#127476; +47</option>
+<option value="+64">&#127475;&#127487; +64</option>
+<option value="+977">&#127475;&#127477; +977</option>
+<option value="+968">&#127476;&#127474; +968</option>
+<option value="+256">&#127482;&#127468; +256</option>
+<option value="+998">&#127482;&#127487; +998</option>
+<option value="+92">&#127477;&#127472; +92</option>
+<option value="+680">&#127477;&#127484; +680</option>
+<option value="+970">&#127477;&#127480; +970</option>
+<option value="+507">&#127477;&#127462; +507</option>
+<option value="+675">&#127477;&#127468; +675</option>
+<option value="+595">&#127477;&#127486; +595</option>
 <option value="+31">&#127475;&#127473; +31</option>
-</select><input type="tel" class="phone-input" name="coPhone" placeholder="xx xxx xx xx"></div>
-            </div>
-            <div class="f-group">
-              <label>البريد الإلكتروني</label>
-              <input type="email" name="coEmail" placeholder="co-tenant@example.com">
-            </div>
+<option value="+63">&#127477;&#127469; +63</option>
+<option value="+48">&#127477;&#127473; +48</option>
+<option value="+351">&#127477;&#127481; +351</option>
+<option value="+51">&#127477;&#127466; +51</option>
+<option value="+974">&#127478;&#127462; +974</option>
+<option value="+40">&#127479;&#127476; +40</option>
+<option value="+44">&#127468;&#127463; +44</option>
+<option value="+7">&#127479;&#127482; +7</option>
+<option value="+250">&#127479;&#127484; +250</option>
+<option value="+236">&#127464;&#127467; +236</option>
+<option value="+1809">&#127465;&#127476; +1809</option>
+<option value="+1869">&#127472;&#127475; +1869</option>
+<option value="+378">&#127480;&#127474; +378</option>
+<option value="+1784">&#127483;&#127464; +1784</option>
+<option value="+1758">&#127473;&#127464; +1758</option>
+<option value="+503">&#127480;&#127483; +503</option>
+<option value="+685">&#127484;&#127480; +685</option>
+<option value="+239">&#127480;&#127481; +239</option>
+<option value="+381">&#127479;&#127480; +381</option>
+<option value="+248">&#127480;&#127464; +248</option>
+<option value="+232">&#127480;&#127473; +232</option>
+<option value="+65">&#127480;&#127468; +65</option>
+<option value="+421">&#127480;&#127472; +421</option>
+<option value="+386">&#127480;&#127470; +386</option>
+<option value="+252">&#127480;&#127476; +252</option>
+<option value="+249">&#127480;&#127465; +249</option>
+<option value="+211">&#127480;&#127480; +211</option>
+<option value="+94">&#127473;&#127472; +94</option>
+<option value="+597">&#127480;&#127479; +597</option>
+<option value="+46">&#127480;&#127466; +46</option>
+<option value="+963">&#127480;&#127486; +963</option>
+<option value="+221">&#127480;&#127475; +221</option>
+<option value="+992">&#127481;&#127471; +992</option>
+<option value="+255">&#127481;&#127487; +255</option>
+<option value="+886">&#127481;&#127484; +886</option>
+<option value="+235">&#127481;&#127465; +235</option>
+<option value="+420">&#127464;&#127487; +420</option>
+<option value="+66">&#127481;&#127469; +66</option>
+<option value="+670">&#127481;&#127473; +670</option>
+<option value="+228">&#127481;&#127468; +228</option>
+<option value="+676">&#127481;&#127476; +676</option>
+<option value="+1868">&#127481;&#127481; +1868</option>
+<option value="+216">&#127481;&#127475; +216</option>
+<option value="+993">&#127481;&#127474; +993</option>
+<option value="+90">&#127481;&#127479; +90</option>
+<option value="+688">&#127481;&#127483; +688</option>
+<option value="+380">&#127482;&#127462; +380</option>
+<option value="+598">&#127482;&#127486; +598</option>
+<option value="+678">&#127483;&#127482; +678</option>
+<option value="+379">&#127483;&#127462; +379</option>
+<option value="+58">&#127483;&#127466; +58</option>
+<option value="+84">&#127483;&#127475; +84</option>
+<option value="+967">&#127486;&#127466; +967</option>
+<option value="+260">&#127487;&#127474; +260</option>
+<option value="+263">&#127487;&#127484; +263</option>
+<option value="+20">&#127466;&#127468; +20</option>
+<option value="+971">&#127462;&#127466; +971</option>
+<option value="+593">&#127466;&#127464; +593</option>
+<option value="+291">&#127466;&#127479; +291</option>
+<option value="+1">&#127482;&#127480; +1</option>
+<option value="+251">&#127466;&#127481; +251</option>
+<option value="+692">&#127474;&#127469; +692</option>
+<option value="+677">&#127480;&#127463; +677</option>
+</select><input type="tel" class="phone-input" name="coPhone" placeholder="xx xxx xx xx"></div></div>
+            <div class="f-group"><label>Email</label><input type="email" name="coEmail" placeholder="co-tenant@example.com"></div>
           </div>
         </div>
 
         <div class="form-nav">
+          <button class="btn-prev" onclick="goTo(1)">&rarr; رجوع</button>
+          <button class="btn-skip" onclick="goTo(3)">تخطّي</button>
           <button class="btn-next" onclick="goTo(3)">التالي &larr;</button>
-          <button class="btn-skip" onclick="goTo(3)">تخطي</button>
-          <button class="btn-prev" onclick="goTo(1)">&rarr; السابق</button>
         </div>
       </div>
 
-      <!-- STEP 3 -->
+      <!-- ÉTAPE 3 -->
       <div class="step-pane" id="step3">
         <div class="step-title">معايير العقار</div>
-        <div class="step-sub">أخبرنا بما تبحث عنه وسنتولى الباقي.</div>
+        <div class="step-sub">أخبرونا بما تبحثون عنه وسنتولّى الباقي.</div>
 
         <div class="f-row cols-2">
           <div class="f-group">
             <label>نوع العقار</label>
             <select name="propertyType">
-              <option value="">اختر...</option>
-              <option>شقة سكنية</option>
-              <option>منزل / فيلا</option>
+              <option value="">اختر…</option>
+              <option>شقة</option>
+              <option>منزل</option>
               <option>إيجار قصير المدى</option>
               <option>عقار فاخر</option>
             </select>
           </div>
           <div class="f-group">
-            <label>الحد الأدنى من الغرف</label>
+            <label>أدنى عدد غرف</label>
             <select name="minRooms">
-              <option value="">اختر...</option>
-              <option>1</option>
-              <option>2</option>
-              <option>2.5</option>
-              <option>3</option>
-              <option>3.5</option>
-              <option>4</option>
-              <option>4.5</option>
-              <option>5+</option>
+              <option value="">اختر…</option>
+              <option>1</option><option>2</option><option>2.5</option><option>3</option>
+              <option>3.5</option><option>4</option><option>4.5</option><option>5+</option>
             </select>
           </div>
         </div>
 
-        <div class="f-row cols-2">
-          <div class="f-group">
-            <label>الميزانية القصوى (شاملة الرسوم، CHF)</label>
-            <input type="text" name="budget" placeholder="مثال: 3 500">
-          </div>
-          <div class="f-group">
-            <label>تاريخ الانتقال المرغوب</label>
-            <input type="date" name="moveIn">
-          </div>
+        <div class="f-row cols-2" style="align-items:flex-end">
+          <div class="f-group"><label>الميزانية القصوى (شاملة الرسوم، CHF)</label><input type="text" name="budget" placeholder="مثلاً: 3 500"></div>
+          <div class="f-group"><label>تاريخ الدخول المرغوب</label><input type="date" name="moveIn"></div>
         </div>
 
-        <div class="f-row cols-1">
-          <div class="f-group">
-            <label>الأحياء المفضلة</label>
-            <input type="text" name="areas" placeholder="مثال: Champel، Eaux-Vives، Carouge...">
-          </div>
+        <div class="f-row cols-1"><div class="f-group"><label>البلديات / المناطق المفضّلة</label><small style="display:block;margin-bottom:10px;color:#aaa;font-size:0.78rem">اختاروا 3 بلديات مفضّلة حسب ترتيب الأفضلية.</small></div></div>
+        <div class="f-row cols-3">
+          <div class="f-group"><label>الخيار الأول</label><select name="area1"><option value="">— اختر —</option><option value="Aire-la-Ville">Aire-la-Ville</option><option value="Anières">Anières</option><option value="Avully">Avully</option><option value="Avusy">Avusy</option><option value="Bardonnex">Bardonnex</option><option value="Bellevue">Bellevue</option><option value="Bernex">Bernex</option><option value="Carouge">Carouge</option><option value="Cartigny">Cartigny</option><option value="Céligny">Céligny</option><option value="Chancy">Chancy</option><option value="Chêne-Bougeries">Chêne-Bougeries</option><option value="Chêne-Bourg">Chêne-Bourg</option><option value="Choulex">Choulex</option><option value="Collex-Bossy">Collex-Bossy</option><option value="Collonge-Bellerive">Collonge-Bellerive</option><option value="Cologny">Cologny</option><option value="Confignon">Confignon</option><option value="Corsier">Corsier</option><option value="Dardagny">Dardagny</option><option value="Genève">جنيف (المدينة)</option><option value="Genthod">Genthod</option><option value="Grand-Saconnex">Grand-Saconnex</option><option value="Gy">Gy</option><option value="Hermance">Hermance</option><option value="Jussy">Jussy</option><option value="Laconnex">Laconnex</option><option value="Lancy">Lancy</option><option value="Meinier">Meinier</option><option value="Meyrin">Meyrin</option><option value="Onex">Onex</option><option value="Perly-Certoux">Perly-Certoux</option><option value="Plan-les-Ouates">Plan-les-Ouates</option><option value="Pregny-Chambésy">Pregny-Chambésy</option><option value="Presinge">Presinge</option><option value="Puplinge">Puplinge</option><option value="Russin">Russin</option><option value="Satigny">Satigny</option><option value="Soral">Soral</option><option value="Thônex">Thônex</option><option value="Troinex">Troinex</option><option value="Vandœuvres">Vandœuvres</option><option value="Vernier">Vernier</option><option value="Versoix">Versoix</option><option value="Veyrier">Veyrier</option></select></div>
+          <div class="f-group"><label>الخيار الثاني</label><select name="area2"><option value="">— اختر —</option><option value="Aire-la-Ville">Aire-la-Ville</option><option value="Anières">Anières</option><option value="Avully">Avully</option><option value="Avusy">Avusy</option><option value="Bardonnex">Bardonnex</option><option value="Bellevue">Bellevue</option><option value="Bernex">Bernex</option><option value="Carouge">Carouge</option><option value="Cartigny">Cartigny</option><option value="Céligny">Céligny</option><option value="Chancy">Chancy</option><option value="Chêne-Bougeries">Chêne-Bougeries</option><option value="Chêne-Bourg">Chêne-Bourg</option><option value="Choulex">Choulex</option><option value="Collex-Bossy">Collex-Bossy</option><option value="Collonge-Bellerive">Collonge-Bellerive</option><option value="Cologny">Cologny</option><option value="Confignon">Confignon</option><option value="Corsier">Corsier</option><option value="Dardagny">Dardagny</option><option value="Genève">جنيف (المدينة)</option><option value="Genthod">Genthod</option><option value="Grand-Saconnex">Grand-Saconnex</option><option value="Gy">Gy</option><option value="Hermance">Hermance</option><option value="Jussy">Jussy</option><option value="Laconnex">Laconnex</option><option value="Lancy">Lancy</option><option value="Meinier">Meinier</option><option value="Meyrin">Meyrin</option><option value="Onex">Onex</option><option value="Perly-Certoux">Perly-Certoux</option><option value="Plan-les-Ouates">Plan-les-Ouates</option><option value="Pregny-Chambésy">Pregny-Chambésy</option><option value="Presinge">Presinge</option><option value="Puplinge">Puplinge</option><option value="Russin">Russin</option><option value="Satigny">Satigny</option><option value="Soral">Soral</option><option value="Thônex">Thônex</option><option value="Troinex">Troinex</option><option value="Vandœuvres">Vandœuvres</option><option value="Vernier">Vernier</option><option value="Versoix">Versoix</option><option value="Veyrier">Veyrier</option></select></div>
+          <div class="f-group"><label>الخيار الثالث</label><select name="area3"><option value="">— اختر —</option><option value="Aire-la-Ville">Aire-la-Ville</option><option value="Anières">Anières</option><option value="Avully">Avully</option><option value="Avusy">Avusy</option><option value="Bardonnex">Bardonnex</option><option value="Bellevue">Bellevue</option><option value="Bernex">Bernex</option><option value="Carouge">Carouge</option><option value="Cartigny">Cartigny</option><option value="Céligny">Céligny</option><option value="Chancy">Chancy</option><option value="Chêne-Bougeries">Chêne-Bougeries</option><option value="Chêne-Bourg">Chêne-Bourg</option><option value="Choulex">Choulex</option><option value="Collex-Bossy">Collex-Bossy</option><option value="Collonge-Bellerive">Collonge-Bellerive</option><option value="Cologny">Cologny</option><option value="Confignon">Confignon</option><option value="Corsier">Corsier</option><option value="Dardagny">Dardagny</option><option value="Genève">جنيف (المدينة)</option><option value="Genthod">Genthod</option><option value="Grand-Saconnex">Grand-Saconnex</option><option value="Gy">Gy</option><option value="Hermance">Hermance</option><option value="Jussy">Jussy</option><option value="Laconnex">Laconnex</option><option value="Lancy">Lancy</option><option value="Meinier">Meinier</option><option value="Meyrin">Meyrin</option><option value="Onex">Onex</option><option value="Perly-Certoux">Perly-Certoux</option><option value="Plan-les-Ouates">Plan-les-Ouates</option><option value="Pregny-Chambésy">Pregny-Chambésy</option><option value="Presinge">Presinge</option><option value="Puplinge">Puplinge</option><option value="Russin">Russin</option><option value="Satigny">Satigny</option><option value="Soral">Soral</option><option value="Thônex">Thônex</option><option value="Troinex">Troinex</option><option value="Vandœuvres">Vandœuvres</option><option value="Vernier">Vernier</option><option value="Versoix">Versoix</option><option value="Veyrier">Veyrier</option></select></div>
         </div>
-
-        <div class="f-row cols-1">
-          <div class="f-group">
-            <label>ملاحظات إضافية</label>
-            <textarea name="notes" placeholder="موقف سيارات، حديقة، متطلبات خاصة..."></textarea>
-          </div>
-        </div>
+        <div class="f-row cols-1"><div class="f-group"><label>ملاحظات إضافية</label><textarea name="notes" placeholder="موقف سيارات، حديقة، تجهيزات لذوي الاحتياجات…"></textarea></div></div>
 
         <div class="form-nav">
+          <button class="btn-prev" onclick="goTo(2)">&rarr; رجوع</button>
           <button class="btn-next" onclick="goTo(4)">التالي &larr;</button>
-          <button class="btn-prev" onclick="goTo(2)">&rarr; السابق</button>
         </div>
       </div>
 
-      <!-- STEP 4 -->
+      <!-- ÉTAPE 4 -->
       <div class="step-pane" id="step4">
         <div class="step-title">التأكيد</div>
-        <div class="step-sub">يرجى قراءة الشروط والموافقة عليها قبل إرسال تفويضك.</div>
+        <div class="step-sub">راجعوا معلوماتكم ثم اقبلوا الشروط لإرسال التفويض.</div>
+
+        <div id="recap" class="recap-card"></div>
+
+        <div class="annex-section">
+          <div class="annex-title">المرفقات</div>
+          <p class="annex-hint">أرفقوا مستنداً واحداً على الأقل. الصيغ المقبولة: PDF، JPG، PNG — 5 ميغابايت كحد أقصى لكل ملف.</p>
+          <div class="annex-grid">
+            <div class="annex-item">
+              <label>المرفق 1 <span class="badge-req">إلزامي</span></label>
+              <div class="upload-zone" id="uz1" onclick="document.getElementById('annex1').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="uz-label">انقر للإرفاق</span>
+                <span class="uz-filename" id="fn1"></span>
+              </div>
+              <input type="file" id="annex1" name="annex1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz1','fn1')">
+            </div>
+            <div class="annex-item">
+              <label>المرفق 2 <span class="badge-opt">اختياري</span></label>
+              <div class="upload-zone" id="uz2" onclick="document.getElementById('annex2').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="uz-label">انقر للإرفاق</span>
+                <span class="uz-filename" id="fn2"></span>
+              </div>
+              <input type="file" id="annex2" name="annex2" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz2','fn2')">
+            </div>
+            <div class="annex-item">
+              <label>المرفق 3 <span class="badge-opt">اختياري</span></label>
+              <div class="upload-zone" id="uz3" onclick="document.getElementById('annex3').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="uz-label">انقر للإرفاق</span>
+                <span class="uz-filename" id="fn3"></span>
+              </div>
+              <input type="file" id="annex3" name="annex3" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz3','fn3')">
+            </div>
+          </div>
+          <ul class="annex-docs">
+            <li><span class="annex-doc-dot req"></span><strong>آخر 3 كشوف رواتب</strong></li>
+            <li><span class="annex-doc-dot"></span><strong>مستخرج من سجل الديون</strong> <em class="annex-doc-note">صادر خلال آخر 3 أشهر</em></li>
+            <li><span class="annex-doc-dot"></span><strong>وثيقة هوية</strong> + <strong>تصريح إقامة</strong> <em class="annex-doc-note">للمواطنين الأجانب</em></li>
+          </ul>
+        </div>
 
         <label class="check-opt">
           <input type="checkbox" id="chkMandate" required>
@@ -1064,12 +814,12 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 
         <label class="check-opt">
           <input type="checkbox" id="chkPrivacy" required>
-          <span>لقد اطلعت وقبلت <a href="/ar/privacy-policy/" target="_blank">سياسة الخصوصية</a> ووافقت على معالجة بياناتي الشخصية.</span>
+          <span>قرأت وقبلت <a href="/ar/privacy-policy/" target="_blank">سياسة الخصوصية</a> وأوافق على معالجة بياناتي الشخصية.</span>
         </label>
 
         <div class="form-nav">
+          <button class="btn-prev" onclick="goTo(3)">&rarr; رجوع</button>
           <button class="btn-submit" onclick="submitForm()">إرسال التفويض</button>
-          <button class="btn-prev" onclick="goTo(3)">&rarr; السابق</button>
         </div>
       </div>
 
@@ -1077,15 +827,12 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 
     <div class="success-panel" id="successPanel">
       <div class="success-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <h2>تم استلام التفويض!</h2>
-      <p>شكراً لك — تم إرسال تفويض بحثك إلى فريقنا. سنتواصل معك خلال 24 ساعة لمناقشة الخطوات التالية.</p>
+      <p>شكراً — تم إرسال تفويض البحث إلى فريقنا. سنتواصل معكم خلال 24 ساعة لمناقشة الخطوات التالية.</p>
       <a href="/ar/homepage/">العودة إلى الرئيسية</a>
     </div>
-
   </div>
 
 </main>
@@ -1133,6 +880,7 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 </a>
 
 <script>
+
 const mobToggle=document.getElementById('mobToggle');
 const mobNav=document.getElementById('mob-nav');
 const mobClose=document.getElementById('mob-close');
@@ -1148,8 +896,7 @@ document.addEventListener('click',()=>langSw.classList.remove('open'));
 let currentStep=1;
 function goTo(n){
   document.getElementById('step'+currentStep).classList.remove('active');
-  const steps=document.querySelectorAll('.prog-step');
-  steps.forEach(s=>{
+  document.querySelectorAll('.prog-step').forEach(s=>{
     const sn=parseInt(s.dataset.step);
     s.classList.remove('active','done');
     if(sn<n)s.classList.add('done');
@@ -1157,7 +904,48 @@ function goTo(n){
   });
   currentStep=n;
   document.getElementById('step'+n).classList.add('active');
+  if(n===4)buildRecap();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildRecap(){
+  const v=name=>{const el=document.querySelector(`[name="${name}"]`);return el?el.value.trim():'';};
+  const r=name=>{const el=document.querySelector(`input[name="${name}"]:checked`);return el?el.value:'';};
+  const fmt=val=>val||'—';
+  const fmtDate=val=>{if(!val)return'—';const[y,m,d]=val.split('-');return`${d}.${m}.${y}`;};
+  const prefix1=document.querySelector('#step1 .phone-prefix')?.value||'+41';
+  const prefix2=document.querySelector('#step2 .phone-prefix')?.value||'+41';
+  const ph1=v('phone'),ph2=v('coPhone');
+  const coVisible=document.getElementById('cotenantFields')?.classList.contains('visible');
+  const zones=[v('area1'),v('area2'),v('area3')].filter(Boolean).join(' › ')||'—';
+  let html=`<div class="recap-section"><h4>مقدّم الطلب</h4><div class="recap-grid">
+    <div class="recap-item"><span>اللقب</span><span>${fmt(v('lastName'))}</span></div>
+    <div class="recap-item"><span>الاسم</span><span>${fmt(v('firstName'))}</span></div>
+    <div class="recap-item"><span>تاريخ الميلاد</span><span>${fmtDate(v('dob'))}</span></div>
+    <div class="recap-item"><span>عدد الأطفال</span><span>${v('children')||'0'}</span></div>
+    <div class="recap-item" style="grid-column:1/-1"><span>العنوان الحالي</span><span>${fmt(v('currentAddress'))}</span></div>
+    <div class="recap-item"><span>الهاتف</span><span>${ph1?prefix1+' '+ph1:'—'}</span></div>
+    <div class="recap-item"><span>Email</span><span>${fmt(v('email'))}</span></div>
+    <div class="recap-item"><span>العقد باسمه</span><span>${r('leaseInName')==='yes'?'نعم':'لا'}</span></div>
+    <div class="recap-item"><span>يلزم إنهاء العقد</span><span>${r('needTermination')==='yes'?'نعم':'لا'}</span></div>
+  </div></div>`;
+  if(coVisible){html+=`<div class="recap-section"><h4>مستأجر مشارك</h4><div class="recap-grid">
+    <div class="recap-item"><span>اللقب</span><span>${fmt(v('coLastName'))}</span></div>
+    <div class="recap-item"><span>الاسم</span><span>${fmt(v('coFirstName'))}</span></div>
+    <div class="recap-item"><span>تاريخ الميلاد</span><span>${fmtDate(v('coDob'))}</span></div>
+    <div class="recap-item"><span>عدد الأطفال</span><span>${v('coChildren')||'0'}</span></div>
+    <div class="recap-item"><span>الهاتف</span><span>${ph2?prefix2+' '+ph2:'—'}</span></div>
+    <div class="recap-item"><span>Email</span><span>${fmt(v('coEmail'))}</span></div>
+  </div></div>`;}
+  html+=`<div class="recap-section"><h4>معايير العقار</h4><div class="recap-grid">
+    <div class="recap-item"><span>نوع العقار</span><span>${fmt(v('propertyType'))}</span></div>
+    <div class="recap-item"><span>أدنى عدد غرف</span><span>${fmt(v('minRooms'))}</span></div>
+    <div class="recap-item"><span>الميزانية القصوى (CHF)</span><span>${fmt(v('budget'))}</span></div>
+    <div class="recap-item"><span>تاريخ الدخول</span><span>${fmtDate(v('moveIn'))}</span></div>
+    <div class="recap-item" style="grid-column:1/-1"><span>البلديات المفضّلة</span><span>${zones}</span></div>
+    ${v('notes')?`<div class="recap-item" style="grid-column:1/-1"><span>ملاحظات</span><span>${v('notes')}</span></div>`:''}
+  </div></div>`;
+  document.getElementById('recap').innerHTML=html;
 }
 
 function makeRadio(groupId,onChange){
@@ -1173,73 +961,149 @@ function makeRadio(groupId,onChange){
   });
 }
 
-makeRadio('typeGroup',val=>{
-  const pro=document.getElementById('proFields');
-  const ind=document.getElementById('indivFields');
-  if(val==='professional'){pro.classList.add('visible');ind.classList.remove('visible');}
-  else{ind.classList.add('visible');pro.classList.remove('visible');}
-});
 
 document.querySelectorAll('input[name="hasCotenant"]').forEach(inp=>{
   inp.closest('.radio-opt').addEventListener('click',()=>{
-    const show=inp.value==='yes';
-    document.getElementById('cotenantFields').classList.toggle('visible',show);
+    const coF=document.getElementById('cotenantFields');
+    if(inp.value==='yes')coF.classList.add('visible');
+    else coF.classList.remove('visible');
   });
 });
 
+document.querySelectorAll('.radio-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    const name=opt.querySelector('input[type=radio]')?.name;
+    if(!name)return;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(i=>{i.closest('.radio-opt').classList.remove('selected')});
+    opt.classList.add('selected');
+    const inp=opt.querySelector('input[type=radio]');
+    if(inp)inp.checked=true;
+  });
+});
+
+function showFile(input,zoneId,fnId){
+  const zone=document.getElementById(zoneId);
+  const fn=document.getElementById(fnId);
+  if(input.files&&input.files[0]){
+    fn.textContent=input.files[0].name;
+    zone.classList.add('has-file');
+  }else{
+    fn.textContent='';
+    zone.classList.remove('has-file');
+  }
+}
+
+// ── Collecte toutes les données du formulaire ─────────────────────────────────
 function buildMandat(){
   const v=n=>{const el=document.querySelector(`[name="${n}"]`);return el?el.value.trim():'';};
   const r=n=>{const el=document.querySelector(`input[name="${n}"]:checked`);return el?el.value:'';};
   const fd=val=>{if(!val)return'—';const[y,m,d]=val.split('-');return`${d}.${m}.${y}`;};
-  const ph=n=>{const el=document.querySelector(`[name="${n}"]`);if(!el||!el.value.trim())return'';const p=el.closest('.phone-group')?.querySelector('.phone-prefix')?.value||'';return p+' '+el.value.trim();};
-  const isPro=r('applicantType')==='professional';
-  const coVisible=r('hasCotenant')==='yes';
-  let firstName,lastName,currentAddress,phone,email,notesPrefix='';
-  if(isPro){firstName=v('legalRep');lastName=v('company');currentAddress=v('companyAddress');phone=ph('proPhone');email=v('proEmail');notesPrefix='[Demande professionnelle] ';}
-  else{firstName=v('firstName');lastName=v('lastName');currentAddress='';phone=ph('phone');email=v('email');}
+  const p1=document.querySelector('#step1 .phone-prefix')?.value||'+41';
+  const p2=document.querySelector('#step2 .phone-prefix')?.value||'+41';
+  const a1=document.getElementById('annex1')?.files[0]||null;
+  const a2=document.getElementById('annex2')?.files[0]||null;
+  const a3=document.getElementById('annex3')?.files[0]||null;
   return{
-    lastName,firstName,dob:fd(v('dob')),currentAddress:currentAddress||'—',children:v('children')||'0',
-    phone,email,leaseInName:r('leaseInName')==='yes'?'Oui':'Non',needTermination:r('needTermination')==='yes'?'Oui':'Non',
-    coVisible,coLastName:v('coLastName'),coFirstName:v('coFirstName'),coDob:fd(v('coDob')),coChildren:v('coChildren')||'0',coPhone:ph('coPhone'),coEmail:v('coEmail'),
-    propertyType:v('propertyType'),minRooms:v('minRooms'),budget:v('budget'),moveIn:fd(v('moveIn')),
-    area1:v('areas'),area2:'',area3:'',notes:notesPrefix+v('notes'),
-    annex1:'',annex2:'',annex3:'',annexFile1:null,annexFile2:null,annexFile3:null,
+    lastName:v('lastName'),firstName:v('firstName'),dob:fd(v('dob')),
+    currentAddress:v('currentAddress'),children:v('children')||'0',
+    phone:p1+' '+v('phone'),email:v('email'),
+    leaseInName:r('leaseInName')==='yes'?'نعم':'لا',
+    needTermination:r('needTermination')==='yes'?'نعم':'لا',
+    coVisible:document.getElementById('cotenantFields')?.classList.contains('visible'),
+    coLastName:v('coLastName'),coFirstName:v('coFirstName'),coDob:fd(v('coDob')),
+    coChildren:v('coChildren')||'0',coPhone:p2+' '+v('coPhone'),coEmail:v('coEmail'),
+    propertyType:v('propertyType'),minRooms:v('minRooms'),
+    budget:v('budget'),moveIn:fd(v('moveIn')),
+    area1:v('area1'),area2:v('area2'),area3:v('area3'),notes:v('notes'),
+    annex1:a1?a1.name:'',annex2:a2?a2.name:'',annex3:a3?a3.name:'',
+    annexFile1:a1,annexFile2:a2,annexFile3:a3,
   };
 }
+
+// ── Génère le PDF depuis mandat-template.html via iframe ──────────────────────
 async function generatePDF(d){
   const now=new Date();
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const ref=`MR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
-  let tpl=await fetch('/particulier/mandat-template.html').then(r=>r.text());
+
+  let tpl=await fetch('mandat-template.html').then(r=>r.text());
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
   const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
   tpl=tpl.replace(/\{\{#if (\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,(_,k,content)=>condVals[k]?content:'');
   const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—'};
   Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,v);});
+
+  // Charger le HTML traité via blob URL (iframe navigue → document complet, contexte CSS intact)
   const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
   const iframe=document.createElement('iframe');
   iframe.style.cssText='position:fixed;left:0;top:0;width:794px;height:1px;border:none;visibility:hidden;pointer-events:none;';
   document.body.appendChild(iframe);
+
   await new Promise((res,rej)=>{iframe.onload=res;iframe.onerror=rej;iframe.src=blobUrl;});
   URL.revokeObjectURL(blobUrl);
+
+  // Ajuster la hauteur de l'iframe à la hauteur réelle du document
   const docH=iframe.contentDocument.documentElement.scrollHeight;
   iframe.style.height=docH+'px';
+
+  // Attendre fonts et images
   await new Promise(r=>setTimeout(r,1200));
-  await new Promise((res,rej)=>{const s=iframe.contentDocument.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=res;s.onerror=rej;iframe.contentDocument.head.appendChild(s);});
-  const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:docH,windowWidth:794,windowHeight:docH});
+
+  // Injecter html2canvas dans le contexte de l'iframe (clé : il voit son propre document)
+  await new Promise((res,rej)=>{
+    const s=iframe.contentDocument.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=res;s.onerror=rej;
+    iframe.contentDocument.head.appendChild(s);
+  });
+
+  // Capturer le document depuis l'intérieur de l'iframe
+  const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{
+    scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,
+    width:794,height:docH,windowWidth:794,windowHeight:docH,
+  });
+
   document.body.removeChild(iframe);
+
+  // Construire le PDF en découpant le canvas en pages A4
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
-  const pdfW=pdf.internal.pageSize.getWidth(),pdfH=pdf.internal.pageSize.getHeight();
-  const cW=canvas.width,cH=canvas.height;const px2mm=pdfW/cW;const pageHpx=Math.floor(pdfH/px2mm);
+  const pdfW=pdf.internal.pageSize.getWidth();
+  const pdfH=pdf.internal.pageSize.getHeight();
+  const cW=canvas.width,cH=canvas.height;
+  const px2mm=pdfW/cW;
+  const pageHpx=Math.floor(pdfH/px2mm);
+
   let y=0,first=true;
-  while(y<cH){if(!first)pdf.addPage();first=false;const sliceH=Math.min(pageHpx,cH-y);const tmp=document.createElement('canvas');tmp.width=cW;tmp.height=sliceH;tmp.getContext('2d').drawImage(canvas,0,y,cW,sliceH,0,0,cW,sliceH);pdf.addImage(tmp.toDataURL('image/jpeg',0.97),'JPEG',0,0,pdfW,sliceH*px2mm);y+=pageHpx;}
+  while(y<cH){
+    if(!first)pdf.addPage();
+    first=false;
+    const sliceH=Math.min(pageHpx,cH-y);
+    const tmp=document.createElement('canvas');
+    tmp.width=cW;tmp.height=sliceH;
+    tmp.getContext('2d').drawImage(canvas,0,y,cW,sliceH,0,0,cW,sliceH);
+    pdf.addImage(tmp.toDataURL('image/jpeg',0.97),'JPEG',0,0,pdfW,sliceH*px2mm);
+    y+=pageHpx;
+  }
+
   return{ref,dt,pdfBase64:pdf.output('datauristring').split(',')[1]};
 }
-const fileToB64=file=>new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result.split(',')[1]);fr.onerror=rej;fr.readAsDataURL(file);});
+
+// ── Envoi email via Resend ────────────────────────────────────────────────────
+const fileToB64=file=>new Promise((res,rej)=>{
+  const fr=new FileReader();
+  fr.onload=()=>res(fr.result.split(',')[1]);
+  fr.onerror=rej;
+  fr.readAsDataURL(file);
+});
+
 async function sendEmail(d,ref,dt,pdfBase64){
   const attachments=pdfBase64?[{filename:`Mandat_Recherche_N20_${ref}.pdf`,content:pdfBase64}]:[];
-  for(const[file,label] of [[d.annexFile1,'Annexe_1'],[d.annexFile2,'Annexe_2'],[d.annexFile3,'Annexe_3']]){if(!file)continue;const content=await fileToB64(file);attachments.push({filename:`${label}_${file.name}`,content});}
+  for(const[file,label] of [[d.annexFile1,'Annexe_1'],[d.annexFile2,'Annexe_2'],[d.annexFile3,'Annexe_3']]){
+    if(!file)continue;
+    const content=await fileToB64(file);
+    attachments.push({filename:`${label}_${file.name}`,content});
+  }
   const r=(l,v,w)=>`<tr style="background:${w?'#fff':'#f8f9fb'}"><td style="padding:8px 12px;color:#888;width:42%">${l}</td><td style="padding:8px 12px">${v||'—'}</td></tr>`;
   const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
   const hdr=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://nimmobilier59-afk.github.io/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat de Recherche</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Réf. ${ref} — ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">`;
@@ -1247,29 +1111,53 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const zones=[d.area1,d.area2,d.area3].filter(Boolean).join(' › ')||'—';
   const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
   const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)+r('Date de naissance',d.dob,false)+r('Adresse actuelle',d.currentAddress,true)+r("Nombre d'enfants",d.children,false)+r('Téléphone',d.phone,true)+r('Email',d.email,false)+r('Bail à son nom',d.leaseInName,true)+r('Résiliation nécessaire',d.needTermination,false)+`</table>`+(d.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Téléphone',d.coPhone,true)+r('Email',d.coEmail,false)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',d.propertyType,true)+r('Pièces minimum',d.minRooms,false)+r('Budget max (CHF)',d.budget,true)+r("Date d'entrée",d.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',d.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
+  // Relais Cloudflare Worker (garde la clé Resend côté serveur). ⚠️ Remplacer par l'URL du Worker déployé :
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
-  const res=await fetch(MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat de recherche — ${d.firstName} ${d.lastName} — Réf. ${ref}`,html,attachments})});
+  const res=await fetch(MAILER_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat de recherche — ${d.firstName} ${d.lastName} — Réf. ${ref}`,html,attachments}),
+  });
   if(!res.ok){const e=await res.text();throw new Error(e);}
   return res.json();
 }
+
+// ── Soumission du formulaire ──────────────────────────────────────────────────
 async function submitForm(){
-  const m=document.getElementById('chkMandate');
-  const p=document.getElementById('chkPrivacy');
-  if(!m.checked||!p.checked){alert('يرجى قراءة الشروط والموافقة عليها.');return;}
-  const btn=document.querySelector('.btn-submit');
-  btn.disabled=true;btn.textContent='جارٍ إنشاء التفويض…';
-  const data=buildMandat();
-  try{
-    const{ref,dt,pdfBase64}=await generatePDF(data);
-    btn.textContent='جارٍ الإرسال…';
-    await sendEmail(data,ref,dt,pdfBase64);
-    document.getElementById('formCard').style.display='none';
-    document.getElementById('successPanel').style.display='block';
-    window.scrollTo({top:0,behavior:'smooth'});
-  }catch(err){
-    btn.disabled=false;btn.textContent='إرسال التفويض';
-    alert('خطأ في الإرسال: '+err.message);
+  const annex1=document.getElementById('annex1');
+  if(!annex1.files||!annex1.files.length){
+    document.getElementById('uz1').style.borderColor='#f87171';
+    alert("يرجى إرفاق المرفق 1 على الأقل (إلزامي).");
+    return;
   }
+  document.getElementById('uz1').style.borderColor='';
+  const chkM=document.getElementById('chkMandate');
+  const chkP=document.getElementById('chkPrivacy');
+  if(!chkM.checked||!chkP.checked){
+    alert('يرجى قبول الشروط العامة وسياسة الخصوصية للمتابعة.');
+    return;
+  }
+  const btn=document.querySelector('.btn-submit');
+  btn.disabled=true;btn.textContent='جارٍ الإرسال…';
+
+  const data=buildMandat();
+  btn.textContent='جارٍ إنشاء التفويض…';
+  const{ref,dt,pdfBase64}=await generatePDF(data);
+
+  btn.textContent='جارٍ الإرسال…';
+  try{
+    await sendEmail(data,ref,dt,pdfBase64);
+  }catch(e){
+    console.error('Envoi:',e);
+    btn.disabled=false;btn.textContent="إعادة المحاولة";
+    alert("فشل الإرسال. تم تنزيل PDF التفويض على جهازكم — يرجى إعادة المحاولة أو إرساله مباشرة إلى contact@n20immobilier.ch.");
+    return;
+  }
+
+  document.getElementById('formCard').style.display='none';
+  document.getElementById('progressBar').style.display='none';
+  document.querySelector('.pi-hero p').style.display='none';
+  document.getElementById('successPanel').classList.add('visible');
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
