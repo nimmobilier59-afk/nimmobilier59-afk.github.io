@@ -1,0 +1,9 @@
+name = "n20-mailer"
+main = "n20-mailer.js"
+compatibility_date = "2024-11-01"
+
+# Variables non-secrètes (la clé Resend est stockée séparément via `wrangler secret put`)
+[vars]
+MAIL_FROM = "N20 Immobilier <mandat@n20immobilier.ch>"
+MAIL_TO = "contact@n20immobilier.ch"
+ALLOWED_ORIGIN = "https://nimmobilier59-afk.github.io"
