@@ -45,8 +45,8 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 #mob-nav a.mob-cta{background:var(--accent);color:var(--navy);font-weight:800}
 #mob-nav a.mob-cta:hover{background:#4ab0d9;color:#fff}
 #mob-close{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;position:absolute;top:20px;left:24px}
-.mob-lang{display:flex;gap:10px;margin-top:8px}
-.mob-lang a{color:rgba(255,255,255,.65);font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:6px}
+.mob-lang{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px;max-width:220px}
+#mob-nav .mob-lang a{width:auto;color:rgba(255,255,255,.65);font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:6px}
 .mob-lang a:hover{background:rgba(255,255,255,.1);color:#fff}
 .mob-lang img{width:20px;border-radius:2px}
 @media(max-width:900px){.hdr-nav,.lang-sw{display:none}.mob-nav-toggle{display:flex}}
