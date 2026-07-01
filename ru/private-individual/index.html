@@ -1025,7 +1025,7 @@ async function generatePDF(d){
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const ref=`MR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
 
-  let tpl=await fetch('mandat-template.html').then(r=>r.text());
+  let tpl=await fetch('/particulier/mandat-template.html').then(r=>r.text());
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
   const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
   tpl=tpl.replace(/\{\{#if (\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,(_,k,content)=>condVals[k]?content:'');
@@ -1141,15 +1141,14 @@ async function submitForm(){
 
   const data=buildMandat();
   btn.textContent='Создание мандата…';
-  const{ref,dt,pdfBase64}=await generatePDF(data);
-
-  btn.textContent='Отправка…';
   try{
+    const{ref,dt,pdfBase64}=await generatePDF(data);
+    btn.textContent='Отправка…';
     await sendEmail(data,ref,dt,pdfBase64);
   }catch(e){
-    console.error('Envoi:',e);
-    btn.disabled=false;btn.textContent="Повторить отправку";
-    alert("Отправка не удалась. PDF мандата сохранён на вашем устройстве — повторите попытку или отправьте его напрямую на contact@n20immobilier.ch.");
+    console.error('Mandat:',e);
+    btn.disabled=false;btn.textContent="Повторить";
+    alert("Произошла ошибка при создании или отправке мандата. Повторите попытку или напишите нам напрямую на contact@n20immobilier.ch.");
     return;
   }
 
