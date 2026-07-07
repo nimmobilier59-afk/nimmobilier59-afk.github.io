@@ -20,7 +20,7 @@ le propriétaire du compte), et `onboarding@resend.dev` ne suffit pas.
    - `RESEND_API_KEY` → **Secret** = la nouvelle clé Resend
    - `MAIL_FROM` → `N20 Immobilier <mandat@n20immobilier.ch>` (domaine vérifié)
    - `MAIL_TO` → `contact@n20immobilier.ch`
-   - `ALLOWED_ORIGIN` → `https://nimmobilier59-afk.github.io`
+   - `ALLOWED_ORIGIN` → `https://n20immobilier.ch,https://nimmobilier59-afk.github.io` (liste séparée par des virgules ; retirer github.io après la bascule DNS)
 4. **Deploy**. L'URL ressemble à `https://n20-mailer.<sous-domaine>.workers.dev`.
 
 ## 4. Brancher le front

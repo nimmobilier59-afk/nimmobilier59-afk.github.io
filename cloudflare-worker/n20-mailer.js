@@ -8,13 +8,23 @@
 //   RESEND_API_KEY  (Secret)   ex : re_xxxxxxxx   ← la NOUVELLE clé Resend (l'ancienne doit être révoquée)
 //   MAIL_FROM       (Texte)    ex : N20 Immobilier <mandat@n20immobilier.ch>  (domaine vérifié dans Resend)
 //   MAIL_TO         (Texte)    ex : contact@n20immobilier.ch
-//   ALLOWED_ORIGIN  (Texte)    ex : https://nimmobilier59-afk.github.io
+//   ALLOWED_ORIGIN  (Texte)    liste d'origines séparées par des virgules,
+//                              ex : https://n20immobilier.ch,https://nimmobilier59-afk.github.io
+//                              (garder github.io le temps des tests, retirer après la bascule DNS)
 // ---------------------------------------------------------------------------
 
 export default {
   async fetch(request, env) {
+    // ALLOWED_ORIGIN peut contenir plusieurs origines séparées par des virgules :
+    // on renvoie l'origine de la requête si elle est autorisée, sinon la première.
+    const allowed = (env.ALLOWED_ORIGIN || '*').split(',').map((o) => o.trim());
+    const reqOrigin = request.headers.get('Origin') || '';
+    const allowOrigin = allowed.includes('*')
+      ? '*'
+      : (allowed.includes(reqOrigin) ? reqOrigin : allowed[0]);
+
     const cors = {
-      'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || '*',
+      'Access-Control-Allow-Origin': allowOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Vary': 'Origin',

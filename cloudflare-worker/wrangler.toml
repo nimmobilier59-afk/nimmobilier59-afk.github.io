@@ -6,4 +6,6 @@ compatibility_date = "2024-11-01"
 [vars]
 MAIL_FROM = "N20 Immobilier <mandat@n20immobilier.ch>"
 MAIL_TO = "contact@n20immobilier.ch"
-ALLOWED_ORIGIN = "https://nimmobilier59-afk.github.io"
+# Liste séparée par des virgules. github.io = tests avant bascule ; n20immobilier.ch = prod.
+# Après la bascule DNS, retirer l'origine github.io.
+ALLOWED_ORIGIN = "https://n20immobilier.ch,https://nimmobilier59-afk.github.io"
