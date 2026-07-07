@@ -1189,12 +1189,12 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       <div class="ftr-col">
         <h4>Contact</h4>
         <a href="mailto:info@n20immobilier.ch">info@n20immobilier.ch</a>
-        <a href="tel:+41764192021">+41 76 419 20 21</a>
-        <a href="https://wa.me/41764192021" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:+41764182123">+41 76 418 21 23</a>
+        <a href="https://wa.me/41764182123" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &nbsp;·&nbsp; Website created by <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.0</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &nbsp;·&nbsp; Website created by <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.1</span></span>
       <nav class="ftr-legal">
         <a href="/en/terms-and-conditions/">Terms</a>
         <a href="/en/privacy-policy/">Privacy</a>
@@ -1204,7 +1204,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 </footer>
 
 <!-- WhatsApp -->
-<a id="whatsapp-btn" href="https://wa.me/41764192021" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a id="whatsapp-btn" href="https://wa.me/41764182123" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.72 1.77 6.7L2 30l7.53-1.74A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.25-4.33 1 1-4.22-.27-.44A11.37 11.37 0 014.6 16C4.6 9.71 9.71 4.6 16 4.6S27.4 9.71 27.4 16 22.29 27.4 16 27.4zm6.24-8.54c-.34-.17-2-.99-2.31-1.1-.31-.12-.53-.17-.76.17-.22.34-.87 1.1-1.07 1.33-.2.22-.39.25-.73.08-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.59.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.59-.09-.17-.76-1.83-1.04-2.51-.27-.66-.55-.57-.76-.58h-.64c-.22 0-.57.08-.87.42-.3.34-1.14 1.11-1.14 2.71s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.64-.39z"/>
   </svg>
@@ -1439,7 +1439,7 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const r=(l,v,w)=>`<tr style="background:${w?'#fff':'#f8f9fb'}"><td style="padding:8px 12px;color:#888;width:42%">${l}</td><td style="padding:8px 12px">${v||'—'}</td></tr>`;
   const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
   const hdr=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://nimmobilier59-afk.github.io/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat de Recherche</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Réf. ${ref} — ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">`;
-  const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 419 20 21</p></div></div>`;
+  const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
   const zones=[d.area1,d.area2,d.area3].filter(Boolean).join(' › ')||'—';
   const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
   const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)+r('Date de naissance',d.dob,false)+r('Adresse actuelle',d.currentAddress,true)+r("Nombre d'enfants",d.children,false)+r('Téléphone',d.phone,true)+r('Email',d.email,false)+r('Bail à son nom',d.leaseInName,true)+r('Résiliation nécessaire',d.needTermination,false)+`</table>`+(d.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Téléphone',d.coPhone,true)+r('Email',d.coEmail,false)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',d.propertyType,true)+r('Pièces minimum',d.minRooms,false)+r('Budget max (CHF)',d.budget,true)+r("Date d'entrée",d.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',d.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
