@@ -870,5 +870,50 @@ function closeMob() {
   document.querySelectorAll('.sr,.sr-img').forEach(function(el){io.observe(el);});
 })();
 </script>
+<!-- N20 Formspree contact handler -->
+<script>
+(function(){
+  var ENDPOINT='https://formspree.io/f/xeebword';
+  var OK='Merci ! Votre message a bien ete envoye. Nous vous repondrons sous 24h.';
+  var ERR='Une erreur est survenue. Merci de reessayer ou de nous ecrire a contact@n20immobilier.ch.';
+  document.querySelectorAll('form.contact-form').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=f.querySelector('button[type="submit"]');
+      var status=f.querySelector('.form-status');
+      if(!status){
+        status=document.createElement('p');
+        status.className='form-status';
+        status.style.cssText='margin-top:14px;font-size:14px;text-align:center;line-height:1.5';
+        f.appendChild(status);
+      }
+      var prefix=f.querySelector('.phone-prefix');
+      var data={};
+      f.querySelectorAll('input,select,textarea').forEach(function(el){
+        if(el.classList.contains('phone-prefix'))return;
+        if(el.classList.contains('phone-input')){
+          data['Telephone']=((prefix&&prefix.value)?prefix.value+' ':'')+el.value;
+          return;
+        }
+        if(el.type==='email'){ data['email']=el.value; return; }
+        var key=el.getAttribute('placeholder')||el.getAttribute('aria-label');
+        if(!key && el.tagName==='SELECT'){ key=el.options[0]?el.options[0].text:'Selection'; }
+        if(!key) key='Message';
+        data[key]=el.value;
+      });
+      data['_page']=location.pathname;
+      status.textContent='';
+      if(btn) btn.disabled=true;
+      fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){
+          if(r.ok){ f.reset(); status.style.color='#6EC1E4'; status.textContent=OK; }
+          else { status.style.color='#ff9a9a'; status.textContent=ERR; }
+        })
+        .catch(function(){ status.style.color='#ff9a9a'; status.textContent=ERR; })
+        .then(function(){ if(btn) btn.disabled=false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>

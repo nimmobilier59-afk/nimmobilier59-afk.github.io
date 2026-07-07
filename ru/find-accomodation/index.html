@@ -653,5 +653,50 @@ function closeMob(){document.getElementById('mobNav').classList.remove('open');d
 (function(){if(window.innerWidth>600)return;var cards=document.querySelectorAll('.type-card');if(!cards.length)return;cards.forEach(function(c){c.style.opacity='0';c.style.transform='translateY(56px)';c.style.transition='opacity .6s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)';});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;var card=e.target;var grp=Array.from(card.parentElement.querySelectorAll('.type-card'));var idx=grp.indexOf(card);setTimeout(function(){card.style.opacity='1';card.style.transform='translateY(0)';},idx*180);io.unobserve(card);});},{threshold:0.08,rootMargin:'0px 0px -20px 0px'});cards.forEach(function(c){io.observe(c);});})();
 (function(){var T='.kicker,.n20-faq-title,.n20-faq-subtitle,.intro-text h2,.intro-text p,.types-text h2,.types-text p,.types-list,.honoraires-header h2,.honoraires-header p,.n20-faq-item';var I='.intro-visual';function add(el,c){if(!el||el.closest('#hero,#site-header,.mob-nav,#n20-footer'))return;el.classList.add(c);}document.querySelectorAll(T).forEach(function(el){add(el,'sr');});document.querySelectorAll(I).forEach(function(el){add(el,'sr-img');});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);});},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});document.querySelectorAll('.sr,.sr-img').forEach(function(el){io.observe(el);});})();
 </script>
+<!-- N20 Formspree contact handler -->
+<script>
+(function(){
+  var ENDPOINT='https://formspree.io/f/xeebword';
+  var OK='Спасибо! Ваше сообщение отправлено. Мы ответим вам в течение 24 часов.';
+  var ERR='Произошла ошибка. Пожалуйста, попробуйте ещё раз или напишите нам на contact@n20immobilier.ch.';
+  document.querySelectorAll('form.contact-form').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=f.querySelector('button[type="submit"]');
+      var status=f.querySelector('.form-status');
+      if(!status){
+        status=document.createElement('p');
+        status.className='form-status';
+        status.style.cssText='margin-top:14px;font-size:14px;text-align:center;line-height:1.5';
+        f.appendChild(status);
+      }
+      var prefix=f.querySelector('.phone-prefix');
+      var data={};
+      f.querySelectorAll('input,select,textarea').forEach(function(el){
+        if(el.classList.contains('phone-prefix'))return;
+        if(el.classList.contains('phone-input')){
+          data['Telephone']=((prefix&&prefix.value)?prefix.value+' ':'')+el.value;
+          return;
+        }
+        if(el.type==='email'){ data['email']=el.value; return; }
+        var key=el.getAttribute('placeholder')||el.getAttribute('aria-label');
+        if(!key && el.tagName==='SELECT'){ key=el.options[0]?el.options[0].text:'Selection'; }
+        if(!key) key='Message';
+        data[key]=el.value;
+      });
+      data['_page']=location.pathname;
+      status.textContent='';
+      if(btn) btn.disabled=true;
+      fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){
+          if(r.ok){ f.reset(); status.style.color='#6EC1E4'; status.textContent=OK; }
+          else { status.style.color='#ff9a9a'; status.textContent=ERR; }
+        })
+        .catch(function(){ status.style.color='#ff9a9a'; status.textContent=ERR; })
+        .then(function(){ if(btn) btn.disabled=false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>
