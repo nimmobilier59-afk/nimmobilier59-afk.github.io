@@ -745,8 +745,8 @@ textarea { resize: vertical; min-height: 100px; }
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
   <video id="hero-video" autoplay muted playsinline loop preload="auto" poster="/wp-content/uploads/2025/11/vue-ville.jpeg">
-        <source src="/wp-content/uploads/2025/11/geneva-hero-720p.webm" type="video/webm">
     <source src="/wp-content/uploads/2025/11/geneva-hero-720p.mp4" type="video/mp4">
+    <source src="/wp-content/uploads/2025/11/geneva-hero-720p.webm" type="video/webm">
     <source src="/wp-content/uploads/2025/11/geneva-city-centre-from-above-1080p-2025-08-29-04-42-11-utc.mov" type="video/quicktime">
   </video>
   <div id="hero-overlay"></div>
@@ -1296,7 +1296,7 @@ textarea { resize: vertical; min-height: 100px; }
     </div>
   </div>
   <div class="n20-footer-bottom">
-    <p>© 2026 N20 Immobilier — Tous droits réservés &nbsp;·&nbsp; <a href="/conditions-generales/">Conditions générales</a> &nbsp;·&nbsp; <a href="/politique-de-confidentialite/">Politique de confidentialité</a> &nbsp;·&nbsp; Site web créé par <a href="https://romand-web.com" target="_blank" rel="noopener">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.4</span></p>
+    <p>© 2026 N20 Immobilier — Tous droits réservés &nbsp;·&nbsp; <a href="/conditions-generales/">Conditions générales</a> &nbsp;·&nbsp; <a href="/politique-de-confidentialite/">Politique de confidentialité</a> &nbsp;·&nbsp; Site web créé par <a href="https://romand-web.com" target="_blank" rel="noopener">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.5</span></p>
   </div>
 </footer>
 
@@ -1557,6 +1557,24 @@ html[dir=rtl] #n20-cookie .n20-ck-btns{justify-content:flex-start}
 })();
 </script>
 <!-- /N20 cookie consent banner -->
+
+<!-- N20 hero video autoplay guard -->
+<script>
+(function(){
+  var v=document.getElementById('hero-video');
+  if(!v) return;
+  function tryPlay(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+  tryPlay();
+  v.addEventListener('loadeddata',tryPlay);
+  v.addEventListener('canplay',tryPlay);
+  window.addEventListener('pageshow',tryPlay);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tryPlay();});
+  ['click','touchstart','scroll','keydown'].forEach(function(ev){
+    window.addEventListener(ev,function(){tryPlay();},{once:true,passive:true});
+  });
+})();
+</script>
+<!-- /N20 hero video autoplay guard -->
 
 </body>
 </html>
