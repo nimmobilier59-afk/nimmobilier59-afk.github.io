@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+<!-- N20 GA4 + Consent Mode v2 -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  try {
+    if (localStorage.getItem('n20-consent') === 'granted') {
+      gtag('consent', 'update', { 'ad_storage':'denied', 'analytics_storage':'granted' });
+    }
+  } catch(e){}
+  gtag('js', new Date());
+  gtag('config', 'G-KCFQVRCE9Q', { 'anonymize_ip': true });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KCFQVRCE9Q"></script>
+<!-- /N20 GA4 + Consent Mode v2 -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Professional Mandate – N20 Immobilier</title>
@@ -618,7 +642,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &middot; <span class="site-ver" style="opacity:.5">v1.1.2</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &middot; <span class="site-ver" style="opacity:.5">v1.1.3</span></span>
       <nav class="ftr-legal">
         <a href="/en/terms-and-conditions/">T&amp;Cs</a>
         <a href="/en/privacy-policy/">Privacy</a>
@@ -749,5 +773,66 @@ async function submitForm(){
 (function(){var langSw=document.getElementById('langSw');var langBtn=document.getElementById('langBtn');if(langSw&&langBtn){langBtn.addEventListener('click',function(e){e.stopPropagation();langSw.classList.toggle('open');});document.addEventListener('click',function(){langSw.classList.remove('open');});}})();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- N20 cookie consent banner -->
+<style>
+#n20-cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;
+  background:#021623;color:#eaf3f8;border:1px solid #033560;border-radius:14px;
+  padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.45);
+  font-family:'Manrope',system-ui,sans-serif;font-size:14px;line-height:1.5;
+  display:none;max-width:760px;margin:0 auto}
+#n20-cookie.show{display:block}
+#n20-cookie p{margin:0 0 12px}
+#n20-cookie a{color:#6EC1E4;text-decoration:underline}
+#n20-cookie .n20-ck-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+#n20-cookie button{cursor:pointer;border:none;border-radius:9px;padding:10px 18px;
+  font-family:inherit;font-size:14px;font-weight:600}
+#n20-cookie .n20-ck-refuse{background:transparent;color:#eaf3f8;border:1px solid #33566f}
+#n20-cookie .n20-ck-accept{background:#6EC1E4;color:#021623}
+html[dir=rtl] #n20-cookie .n20-ck-btns{justify-content:flex-start}
+</style>
+<div id="n20-cookie" role="dialog" aria-live="polite">
+  <p id="n20-ck-txt"></p>
+  <div class="n20-ck-btns">
+    <button type="button" class="n20-ck-refuse" id="n20-ck-refuse"></button>
+    <button type="button" class="n20-ck-accept" id="n20-ck-accept"></button>
+  </div>
+</div>
+<script>
+(function(){
+  var L={
+    fr:{t:"Nous utilisons des cookies de mesure d'audience (Google Analytics) pour ameliorer notre site. Vous pouvez accepter ou refuser.",
+        p:' Voir notre <a href="/politique-de-confidentialite/">politique de confidentialite</a>.',
+        a:"Accepter",r:"Refuser"},
+    en:{t:"We use analytics cookies (Google Analytics) to improve our site. You can accept or decline.",
+        p:' See our <a href="/en/privacy-policy/">privacy policy</a>.',
+        a:"Accept",r:"Decline"},
+    ru:{t:"Мы используем аналитические файлы cookie (Google Analytics), чтобы улучшать сайт. Вы можете принять или отклонить.",
+        p:' См. нашу <a href="/ru/privacy-policy/">политику конфиденциальности</a>.',
+        a:"Принять",r:"Отклонить"},
+    ar:{t:"نستخدم ملفات تعريف الارتباط الخاصة بالتحليلات (Google Analytics) لتحسين موقعنا. يمكنك القبول أو الرفض.",
+        p:' اطّلع على <a href="/ar/privacy-policy/">سياسة الخصوصية</a>.',
+        a:"قبول",r:"رفض"}
+  };
+  var code=(document.documentElement.lang||'fr').slice(0,2).toLowerCase();
+  var t=L[code]||L.fr;
+  var box=document.getElementById('n20-cookie');
+  document.getElementById('n20-ck-txt').innerHTML=t.t+t.p;
+  document.getElementById('n20-ck-accept').textContent=t.a;
+  document.getElementById('n20-ck-refuse').textContent=t.r;
+  var saved;try{saved=localStorage.getItem('n20-consent');}catch(e){}
+  if(!saved){box.classList.add('show');}
+  function set(v){
+    try{localStorage.setItem('n20-consent',v);}catch(e){}
+    if(v==='granted'&&typeof gtag==='function'){
+      gtag('consent','update',{'ad_storage':'denied','analytics_storage':'granted'});
+    }
+    box.classList.remove('show');
+  }
+  document.getElementById('n20-ck-accept').addEventListener('click',function(){set('granted');});
+  document.getElementById('n20-ck-refuse').addEventListener('click',function(){set('denied');});
+})();
+</script>
+<!-- /N20 cookie consent banner -->
+
 </body>
 </html>
