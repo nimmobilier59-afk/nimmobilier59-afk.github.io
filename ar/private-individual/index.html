@@ -493,6 +493,13 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 </select><input type="tel" class="phone-input" name="phone" placeholder="xx xxx xx xx"></div></div>
             <div class="f-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com"></div>
           </div>
+          <div class="f-row cols-1">
+            <div class="f-group">
+              <label>الدخل الشهري الإجمالي (فرنك سويسري)</label>
+              <input type="text" name="income" id="income" inputmode="numeric" placeholder="مثال 7 500">
+              <small style="color:#aaa;font-size:.78rem">الراتب الإجمالي قبل الاقتطاعات، كما يظهر في قسيمة الراتب. تشترط وكالات الإيجار في جنيف عادةً دخلاً لا يقل عن 3.33 ضعف قيمة الإيجار.</small>
+            </div>
+          </div>
         </div>
 
         <hr class="f-divider">
@@ -734,6 +741,13 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
 </select><input type="tel" class="phone-input" name="coPhone" placeholder="xx xxx xx xx"></div></div>
             <div class="f-group"><label>Email</label><input type="email" name="coEmail" placeholder="co-tenant@example.com"></div>
           </div>
+          <div class="f-row cols-1">
+            <div class="f-group">
+              <label>الدخل الشهري الإجمالي (فرنك سويسري)</label>
+              <input type="text" name="coIncome" id="coIncome" inputmode="numeric" placeholder="مثال 5 200">
+              <small style="color:#aaa;font-size:.78rem">تُجمع دخول أفراد الأسرة عند تقييم الملف.</small>
+            </div>
+          </div>
         </div>
 
         <div class="form-nav">
@@ -953,6 +967,7 @@ function buildRecap(){
     <div class="recap-item" style="grid-column:1/-1"><span>العنوان الحالي</span><span>${fmt(v('currentAddress'))}</span></div>
     <div class="recap-item"><span>الهاتف</span><span>${ph1?prefix1+' '+ph1:'—'}</span></div>
     <div class="recap-item"><span>Email</span><span>${fmt(v('email'))}</span></div>
+    <div class="recap-item"><span>الدخل الشهري الإجمالي</span><span>${v('income')?'CHF '+v('income'):'—'}</span></div>
     <div class="recap-item"><span>العقد باسمه</span><span>${r('leaseInName')==='yes'?'نعم':'لا'}</span></div>
     <div class="recap-item"><span>يلزم إنهاء العقد</span><span>${r('needTermination')==='yes'?'نعم':'لا'}</span></div>
   </div></div>`;
@@ -963,6 +978,7 @@ function buildRecap(){
     <div class="recap-item"><span>عدد الأطفال</span><span>${v('coChildren')||'0'}</span></div>
     <div class="recap-item"><span>الهاتف</span><span>${ph2?prefix2+' '+ph2:'—'}</span></div>
     <div class="recap-item"><span>Email</span><span>${fmt(v('coEmail'))}</span></div>
+    <div class="recap-item"><span>الدخل الشهري الإجمالي</span><span>${v('coIncome')?'CHF '+v('coIncome'):'—'}</span></div>
   </div></div>`;}
   html+=`<div class="recap-section"><h4>معايير العقار</h4><div class="recap-grid">
     <div class="recap-item"><span>نوع العقار</span><span>${fmt(v('propertyType'))}</span></div>
@@ -1033,12 +1049,12 @@ function buildMandat(){
   return{
     lastName:v('lastName'),firstName:v('firstName'),dob:fd(v('dob')),
     currentAddress:v('currentAddress'),children:v('children')||'0',
-    phone:p1+' '+v('phone'),email:v('email'),
+    phone:p1+' '+v('phone'),email:v('email'),income:v('income'),
     leaseInName:r('leaseInName')==='yes'?'نعم':'لا',
     needTermination:r('needTermination')==='yes'?'نعم':'لا',
     coVisible:document.getElementById('cotenantFields')?.classList.contains('visible'),
     coLastName:v('coLastName'),coFirstName:v('coFirstName'),coDob:fd(v('coDob')),
-    coChildren:v('coChildren')||'0',coPhone:p2+' '+v('coPhone'),coEmail:v('coEmail'),
+    coChildren:v('coChildren')||'0',coPhone:p2+' '+v('coPhone'),coEmail:v('coEmail'),coIncome:v('coIncome'),
     propertyType:v('propertyType'),minRooms:v('minRooms'),
     budget:v('budget'),moveIn:fd(v('moveIn')),
     area1:v('area1'),area2:v('area2'),area3:v('area3'),notes:v('notes'),
@@ -1057,26 +1073,28 @@ async function generatePDF(d){
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
   const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
   tpl=tpl.replace(/\{\{#if (\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,(_,k,content)=>condVals[k]?content:'');
-  const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—'};
+  const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',income:d.income||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—',coIncome:d.coIncome||'—'};
   Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,v);});
 
   // Charger le HTML traité via blob URL (iframe navigue → document complet, contexte CSS intact)
   const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
   const iframe=document.createElement('iframe');
-  iframe.style.cssText='position:fixed;left:0;top:0;width:794px;height:1px;border:none;visibility:hidden;pointer-events:none;';
+  // Iframe VISIBLE mais placée hors écran : une iframe `visibility:hidden` n'est pas
+  // peinte par Safari/WebKit, et html2canvas en capturait alors une image noire.
+  iframe.style.cssText='position:fixed;left:-10000px;top:0;width:794px;height:1123px;border:none;opacity:1;pointer-events:none;z-index:-1;';
   document.body.appendChild(iframe);
 
   await new Promise((res,rej)=>{iframe.onload=res;iframe.onerror=rej;iframe.src=blobUrl;});
   URL.revokeObjectURL(blobUrl);
 
-  // Ajuster la hauteur de l'iframe à la hauteur réelle du document
+  // Attendre le chargement réel des polices (le setTimeout aveugle était peu fiable),
+  // puis mesurer la hauteur une fois la mise en page stabilisée.
+  try{await iframe.contentDocument.fonts.ready;}catch(e){}
+  await new Promise(r=>setTimeout(r,300));
   const docH=iframe.contentDocument.documentElement.scrollHeight;
   iframe.style.height=docH+'px';
 
-  // Attendre fonts et images
-  await new Promise(r=>setTimeout(r,1200));
-
-  // Injecter html2canvas dans le contexte de l'iframe (clé : il voit son propre document)
+  // Injecter html2canvas dans le contexte de l'iframe (il voit son propre document)
   await new Promise((res,rej)=>{
     const s=iframe.contentDocument.createElement('script');
     s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
@@ -1084,34 +1102,27 @@ async function generatePDF(d){
     iframe.contentDocument.head.appendChild(s);
   });
 
-  // Capturer le document depuis l'intérieur de l'iframe
-  const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{
-    scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,
-    width:794,height:docH,windowWidth:794,windowHeight:docH,
-  });
-
-  document.body.removeChild(iframe);
-
-  // Construire le PDF en découpant le canvas en pages A4
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
   const pdfW=pdf.internal.pageSize.getWidth();
-  const pdfH=pdf.internal.pageSize.getHeight();
-  const cW=canvas.width,cH=canvas.height;
-  const px2mm=pdfW/cW;
-  const pageHpx=Math.floor(pdfH/px2mm);
+  const A4W=794,A4H=1123;                       // px CSS pour 210×297 mm à 96 dpi
+  const pages=Math.max(1,Math.ceil(docH/A4H));
 
-  let y=0,first=true;
-  while(y<cH){
-    if(!first)pdf.addPage();
-    first=false;
-    const sliceH=Math.min(pageHpx,cH-y);
-    const tmp=document.createElement('canvas');
-    tmp.width=cW;tmp.height=sliceH;
-    tmp.getContext('2d').drawImage(canvas,0,y,cW,sliceH,0,0,cW,sliceH);
-    pdf.addImage(tmp.toDataURL('image/jpeg',0.97),'JPEG',0,0,pdfW,sliceH*px2mm);
-    y+=pageHpx;
+  // Capturer PAGE PAR PAGE : chaque canvas reste petit (≤ 1588×2246 px), ce qui évite
+  // la limite de taille de canvas d'iOS qui produisait aussi des pages noires (mandats 2 pages).
+  for(let i=0;i<pages;i++){
+    const yCss=i*A4H;
+    const hCss=Math.min(A4H,docH-yCss);
+    const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{
+      x:0,y:yCss,width:A4W,height:hCss,windowWidth:A4W,windowHeight:docH,
+      scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,
+    });
+    if(i>0)pdf.addPage();
+    const imgH=pdfW*(canvas.height/canvas.width);
+    pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',0,0,pdfW,imgH);
   }
+
+  document.body.removeChild(iframe);
 
   return{ref,dt,pdfBase64:pdf.output('datauristring').split(',')[1]};
 }
@@ -1137,7 +1148,7 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
   const zones=[d.area1,d.area2,d.area3].filter(Boolean).join(' › ')||'—';
   const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
-  const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)+r('Date de naissance',d.dob,false)+r('Adresse actuelle',d.currentAddress,true)+r("Nombre d'enfants",d.children,false)+r('Téléphone',d.phone,true)+r('Email',d.email,false)+r('Bail à son nom',d.leaseInName,true)+r('Résiliation nécessaire',d.needTermination,false)+`</table>`+(d.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Téléphone',d.coPhone,true)+r('Email',d.coEmail,false)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',d.propertyType,true)+r('Pièces minimum',d.minRooms,false)+r('Budget max (CHF)',d.budget,true)+r("Date d'entrée",d.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',d.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
+  const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)+r('Date de naissance',d.dob,false)+r('Adresse actuelle',d.currentAddress,true)+r("Nombre d'enfants",d.children,false)+r('Téléphone',d.phone,true)+r('Email',d.email,false)+r('Revenu mensuel brut',d.income?`<strong>CHF ${d.income}</strong>`:'—',true)+r('Bail à son nom',d.leaseInName,false)+r('Résiliation nécessaire',d.needTermination,true)+`</table>`+(d.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Téléphone',d.coPhone,true)+r('Email',d.coEmail,false)+r('Revenu mensuel brut',d.coIncome?`<strong>CHF ${d.coIncome}</strong>`:'—',true)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',d.propertyType,true)+r('Pièces minimum',d.minRooms,false)+r('Budget max (CHF)',d.budget,true)+r("Date d'entrée",d.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',d.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
   // Relais Cloudflare Worker (garde la clé Resend côté serveur). ⚠️ Remplacer par l'URL du Worker déployé :
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
   const res=await fetch(MAILER_URL,{
@@ -1150,7 +1161,32 @@ async function sendEmail(d,ref,dt,pdfBase64){
 }
 
 // ── Soumission du formulaire ──────────────────────────────────────────────────
+const ALERTE_REVENU="يرجى إدخال دخلك الشهري الإجمالي — بدونه لا تستطيع وكالات الإيجار تقييم ملفك.";
+const ALERTE_REVENU_CO="يرجى إدخال الدخل الشهري الإجمالي للمستأجر الشريك — تُجمع دخول الأسرة.";
+// ── Revenus : obligatoires, et ramènent à l'étape concernée s'ils manquent ────
+function montantValide(val){
+  const n=parseInt(String(val||'').replace(/[^\d]/g,''),10);
+  return n>0?n:0;
+}
+function signaler(id,etape,message){
+  const el=document.getElementById(id);
+  if(el){el.style.borderColor='#f87171';el.addEventListener('input',()=>{el.style.borderColor='';},{once:true});}
+  if(currentStep!==etape)goTo(etape);
+  setTimeout(()=>{el?.scrollIntoView({behavior:'smooth',block:'center'});el?.focus();},300);
+  alert(message);
+  return false;
+}
+function verifierRevenus(){
+  if(!montantValide(document.querySelector('[name="income"]')?.value))
+    return signaler('income',1,ALERTE_REVENU);
+  const coVisible=document.getElementById('cotenantFields')?.classList.contains('visible');
+  if(coVisible&&!montantValide(document.querySelector('[name="coIncome"]')?.value))
+    return signaler('coIncome',2,ALERTE_REVENU_CO);
+  return true;
+}
+
 async function submitForm(){
+  if(!verifierRevenus())return;
   const annex1=document.getElementById('annex1');
   if(!annex1.files||!annex1.files.length){
     document.getElementById('uz1').style.borderColor='#f87171';
