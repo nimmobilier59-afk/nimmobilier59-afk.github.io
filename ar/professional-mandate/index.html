@@ -642,7 +642,7 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#011522 0%
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. جميع الحقوق محفوظة. &middot; <span class="site-ver" style="opacity:.5">v1.1.6</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. جميع الحقوق محفوظة. &middot; <span class="site-ver" style="opacity:.5">v1.1.7</span></span>
       <nav class="ftr-legal">
         <a href="/ar/terms-and-conditions/">الشروط</a>
         <a href="/ar/privacy-policy/">الخصوصية</a>
@@ -716,22 +716,51 @@ async function generatePDF(d){
   Object.entries(subs).forEach(([k,val])=>{tpl=tpl.replaceAll(`{{${k}}}`,val);});
   const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
   const iframe=document.createElement('iframe');
-  iframe.style.cssText='position:fixed;left:0;top:0;width:794px;height:1px;border:none;visibility:hidden;pointer-events:none;';
+  // Iframe VISIBLE mais placée hors écran : une iframe `visibility:hidden` n'est pas
+  // peinte par Safari/WebKit, et html2canvas en capturait alors une image noire.
+  iframe.style.cssText='position:fixed;left:-10000px;top:0;width:794px;height:1123px;border:none;opacity:1;pointer-events:none;z-index:-1;';
   document.body.appendChild(iframe);
+
   await new Promise((res,rej)=>{iframe.onload=res;iframe.onerror=rej;iframe.src=blobUrl;});
   URL.revokeObjectURL(blobUrl);
+
+  // Attendre le chargement réel des polices (le setTimeout aveugle était peu fiable),
+  // puis mesurer la hauteur une fois la mise en page stabilisée.
+  try{await iframe.contentDocument.fonts.ready;}catch(e){}
+  await new Promise(r=>setTimeout(r,300));
   const docH=iframe.contentDocument.documentElement.scrollHeight;
   iframe.style.height=docH+'px';
-  await new Promise(r=>setTimeout(r,1200));
-  await new Promise((res,rej)=>{const s=iframe.contentDocument.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=res;s.onerror=rej;iframe.contentDocument.head.appendChild(s);});
-  const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:docH,windowWidth:794,windowHeight:docH});
-  document.body.removeChild(iframe);
+
+  // Injecter html2canvas dans le contexte de l'iframe (il voit son propre document)
+  await new Promise((res,rej)=>{
+    const s=iframe.contentDocument.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=res;s.onerror=rej;
+    iframe.contentDocument.head.appendChild(s);
+  });
+
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
-  const pdfW=pdf.internal.pageSize.getWidth(),pdfH=pdf.internal.pageSize.getHeight();
-  const cW=canvas.width,cH=canvas.height;const px2mm=pdfW/cW;const pageHpx=Math.floor(pdfH/px2mm);
-  let y=0,first=true;
-  while(y<cH){if(!first)pdf.addPage();first=false;const sliceH=Math.min(pageHpx,cH-y);const tmp=document.createElement('canvas');tmp.width=cW;tmp.height=sliceH;tmp.getContext('2d').drawImage(canvas,0,y,cW,sliceH,0,0,cW,sliceH);pdf.addImage(tmp.toDataURL('image/jpeg',0.97),'JPEG',0,0,pdfW,sliceH*px2mm);y+=pageHpx;}
+  const pdfW=pdf.internal.pageSize.getWidth();
+  const A4W=794,A4H=1123;                       // px CSS pour 210×297 mm à 96 dpi
+  const pages=Math.max(1,Math.ceil(docH/A4H));
+
+  // Capturer PAGE PAR PAGE : chaque canvas reste petit (≤ 1588×2246 px), ce qui évite
+  // la limite de taille de canvas d'iOS qui produisait aussi des pages noires (mandats 2 pages).
+  for(let i=0;i<pages;i++){
+    const yCss=i*A4H;
+    const hCss=Math.min(A4H,docH-yCss);
+    const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{
+      x:0,y:yCss,width:A4W,height:hCss,windowWidth:A4W,windowHeight:docH,
+      scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,
+    });
+    if(i>0)pdf.addPage();
+    const imgH=pdfW*(canvas.height/canvas.width);
+    pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',0,0,pdfW,imgH);
+  }
+
+  document.body.removeChild(iframe);
+
   return{ref,dt,pdfBase64:pdf.output('datauristring').split(',')[1]};
 }
 async function sendEmailPro(d,ref,dt,pdfBase64){
@@ -742,10 +771,50 @@ async function sendEmailPro(d,ref,dt,pdfBase64){
   const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
   const html=hdr+s('Entreprise')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Raison sociale',`<strong>${d.company}</strong>`,true)+r("Secteur d'activité",d.sector,false)+r('Adresse du siège',d.address,true)+`</table>`+s('Contact')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom',d.contactName,true)+r('Fonction',d.contactRole,false)+r('Email',d.email,true)+r('Téléphone',d.phone,false)+`</table>`+s('Nature du mandat')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de demande',d.needTypeLabel,true)+r('Urgence',d.urgencyLabel,false)+r('Nombre de personnes',d.nbPersons,true)+`</table>`+s('Critères de recherche')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Budget mensuel max (CHF)',d.budget,true)+r("Date d'entrée souhaitée",d.moveIn,false)+r('Durée souhaitée',d.duration,true)+r('Zones / quartiers',d.areas,false)+r('Exigences particulières',d.notes||'—',true)+`</table>`+ftr;
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
-  const res=await fetch(MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat professionnel — ${d.company} — Réf. ${ref}`,html,attachments})});
-  if(!res.ok){const e=await res.text();throw new Error(e);}
+  const res=await envoiAvecReprise(MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat professionnel — ${d.company} — Réf. ${ref}`,html,attachments})});
+  if(!res.ok){const e=await res.text();throw new Error('HTTP '+res.status+' '+e.slice(0,200));}
   return res.json();
 }
+// ── Envoi robuste + secours ───────────────────────────────────────────────────
+// Au-delà de cette taille de pièces jointes, l'envoi échoue (limite e-mail ~40 Mo +
+// uploads mobiles qui expirent). On bloque AVANT, avec un message clair.
+const LIMITE_ANNEXES_MO=20;
+// Délai d'expiration + un réessai automatique (réseaux mobiles instables).
+async function envoiAvecReprise(url,opts,timeoutMs=90000,tentatives=2){
+  let derniere;
+  for(let i=0;i<tentatives;i++){
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(),timeoutMs);
+    try{
+      const r=await fetch(url,Object.assign({},opts,{signal:ctrl.signal}));
+      clearTimeout(to);
+      if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer (taille/payload)
+      derniere=new Error('HTTP '+r.status);
+    }catch(e){clearTimeout(to);derniere=e;}
+    if(i<tentatives-1)await new Promise(r=>setTimeout(r,1500));
+  }
+  throw derniere||new Error('Échec réseau');
+}
+// Secours iOS-fiable : on injecte un lien que l'utilisateur TAPE (un geste est requis
+// sur iOS pour récupérer un fichier) → il obtient son mandat, le dossier n'est jamais perdu.
+function afficherSecours(pdfBase64,ref,T){
+  let url='';
+  try{
+    const bin=atob(pdfBase64),arr=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+    url=URL.createObjectURL(new Blob([arr],{type:'application/pdf'}));
+  }catch(e){console.error('secours',e);}
+  let box=document.getElementById('n20-secours');
+  if(!box){
+    box=document.createElement('div');box.id='n20-secours';
+    box.style.cssText='margin:18px 0;padding:16px 18px;border:1px solid #C9736E;border-radius:12px;background:rgba(201,115,110,.10);font-size:14px;line-height:1.55';
+    const b=document.querySelector('.btn-submit');b.parentNode.insertBefore(box,b);
+  }
+  box.innerHTML=`<p style="margin:0 0 10px"><strong>${T.titre}</strong> ${T.intro}</p>`
+    +(url?`<p style="margin:0 0 12px">${T.ou} <a href="mailto:contact@n20immobilier.ch" style="color:#6EC1E4;font-weight:600">contact@n20immobilier.ch</a> :</p><a href="${url}" download="Mandat_Pro_N20_${ref}.pdf" target="_blank" rel="noopener" style="display:inline-block;background:#6EC1E4;color:#021623;font-weight:700;padding:11px 18px;border-radius:9px;text-decoration:none">${T.bouton}</a>`:'');
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
 async function submitForm(){
   const chkM=document.getElementById('chkMandate');
   const chkP=document.getElementById('chkPrivacy');
@@ -754,20 +823,29 @@ async function submitForm(){
     return;
   }
   const btn=document.querySelector('.btn-submit');
-  btn.disabled=true;btn.textContent='جارٍ إنشاء التفويض…';
+  const label0=btn.textContent;
+  btn.disabled=true;
   const data=buildMandat();
+
+  btn.textContent='جارٍ إنشاء التفويض…';
+  let ref,dt,pdfBase64;
+  try{({ref,dt,pdfBase64}=await generatePDF(data));}
+  catch(e){console.error('Génération:',e);btn.disabled=false;btn.textContent=label0;alert("تعذّر إنشاء التفويض. يرجى إعادة المحاولة أو مراسلتنا على contact@n20immobilier.ch. تم الاحتفاظ بإجاباتك.");return;}
+
+  btn.textContent='جارٍ الإرسال…';
   try{
-    const{ref,dt,pdfBase64}=await generatePDF(data);
-    btn.textContent='جارٍ الإرسال…';
     await sendEmailPro(data,ref,dt,pdfBase64);
-    document.getElementById('formCard').style.display='none';
-    document.getElementById('progressBar').style.display='none';
-    document.querySelector('.pi-hero p').style.display='none';
-    document.getElementById('successPanel').classList.add('visible');
-  }catch(err){
-    btn.disabled=false;btn.textContent='إرسال التفويض';
-    alert('خطأ في الإرسال: '+err.message);
+  }catch(e){
+    console.error('Envoi:',e);
+    btn.disabled=false;btn.textContent="إعادة المحاولة";
+    afficherSecours(pdfBase64,ref,{titre:"لم يكتمل الإرسال التلقائي.",intro:"تم الاحتفاظ بإجاباتك — يمكنك إعادة المحاولة أدناه.",ou:'أو نزّل تفويضك وأرسله إلى',bouton:'⬇ تنزيل تفويضي (PDF)'});
+    return;
   }
+
+  document.getElementById('formCard').style.display='none';
+  document.getElementById('progressBar').style.display='none';
+  document.querySelector('.pi-hero p').style.display='none';
+  document.getElementById('successPanel').classList.add('visible');
 }
 
 (function(){var langSw=document.getElementById('langSw');var langBtn=document.getElementById('langBtn');if(langSw&&langBtn){langBtn.addEventListener('click',function(e){e.stopPropagation();langSw.classList.toggle('open');});document.addEventListener('click',function(){langSw.classList.remove('open');});}})();

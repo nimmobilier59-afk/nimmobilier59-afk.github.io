@@ -1232,7 +1232,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &nbsp;·&nbsp; Website created by <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.6</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &nbsp;·&nbsp; Website created by <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.7</span></span>
       <nav class="ftr-legal">
         <a href="/en/terms-and-conditions/">Terms</a>
         <a href="/en/privacy-policy/">Privacy</a>
@@ -1480,12 +1480,12 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)+r('Date de naissance',d.dob,false)+r('Adresse actuelle',d.currentAddress,true)+r("Nombre d'enfants",d.children,false)+r('Téléphone',d.phone,true)+r('Email',d.email,false)+r('Revenu mensuel brut',d.income?`<strong>CHF ${d.income}</strong>`:'—',true)+r('Bail à son nom',d.leaseInName,false)+r('Résiliation nécessaire',d.needTermination,true)+`</table>`+(d.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Téléphone',d.coPhone,true)+r('Email',d.coEmail,false)+r('Revenu mensuel brut',d.coIncome?`<strong>CHF ${d.coIncome}</strong>`:'—',true)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',d.propertyType,true)+r('Pièces minimum',d.minRooms,false)+r('Budget max (CHF)',d.budget,true)+r("Date d'entrée",d.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',d.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
   // Relais Cloudflare Worker (garde la clé Resend côté serveur). ⚠️ Remplacer par l'URL du Worker déployé :
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
-  const res=await fetch(MAILER_URL,{
+  const res=await envoiAvecReprise(MAILER_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat de recherche — ${d.firstName} ${d.lastName} — Réf. ${ref}`,html,attachments}),
   });
-  if(!res.ok){const e=await res.text();throw new Error(e);}
+  if(!res.ok){const e=await res.text();throw new Error('HTTP '+res.status+' '+e.slice(0,200));}
   return res.json();
 }
 
@@ -1514,6 +1514,46 @@ function verifierRevenus(){
   return true;
 }
 
+// ── Envoi robuste + secours ───────────────────────────────────────────────────
+// Au-delà de cette taille de pièces jointes, l'envoi échoue (limite e-mail ~40 Mo +
+// uploads mobiles qui expirent). On bloque AVANT, avec un message clair.
+const LIMITE_ANNEXES_MO=20;
+// Délai d'expiration + un réessai automatique (réseaux mobiles instables).
+async function envoiAvecReprise(url,opts,timeoutMs=90000,tentatives=2){
+  let derniere;
+  for(let i=0;i<tentatives;i++){
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(),timeoutMs);
+    try{
+      const r=await fetch(url,Object.assign({},opts,{signal:ctrl.signal}));
+      clearTimeout(to);
+      if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer (taille/payload)
+      derniere=new Error('HTTP '+r.status);
+    }catch(e){clearTimeout(to);derniere=e;}
+    if(i<tentatives-1)await new Promise(r=>setTimeout(r,1500));
+  }
+  throw derniere||new Error('Échec réseau');
+}
+// Secours iOS-fiable : on injecte un lien que l'utilisateur TAPE (un geste est requis
+// sur iOS pour récupérer un fichier) → il obtient son mandat, le dossier n'est jamais perdu.
+function afficherSecours(pdfBase64,ref,T){
+  let url='';
+  try{
+    const bin=atob(pdfBase64),arr=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+    url=URL.createObjectURL(new Blob([arr],{type:'application/pdf'}));
+  }catch(e){console.error('secours',e);}
+  let box=document.getElementById('n20-secours');
+  if(!box){
+    box=document.createElement('div');box.id='n20-secours';
+    box.style.cssText='margin:18px 0;padding:16px 18px;border:1px solid #C9736E;border-radius:12px;background:rgba(201,115,110,.10);font-size:14px;line-height:1.55';
+    const b=document.querySelector('.btn-submit');b.parentNode.insertBefore(box,b);
+  }
+  box.innerHTML=`<p style="margin:0 0 10px"><strong>${T.titre}</strong> ${T.intro}</p>`
+    +(url?`<p style="margin:0 0 12px">${T.ou} <a href="mailto:contact@n20immobilier.ch" style="color:#6EC1E4;font-weight:600">contact@n20immobilier.ch</a> :</p><a href="${url}" download="Mandat_Recherche_N20_${ref}.pdf" target="_blank" rel="noopener" style="display:inline-block;background:#6EC1E4;color:#021623;font-weight:700;padding:11px 18px;border-radius:9px;text-decoration:none">${T.bouton}</a>`:'');
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
 async function submitForm(){
   if(!verifierRevenus())return;
   const annex1=document.getElementById('annex1');
@@ -1530,22 +1570,47 @@ async function submitForm(){
     return;
   }
   const btn=document.querySelector('.btn-submit');
-  btn.disabled=true;btn.textContent='Sending…';
+  const label0=btn.textContent;
+  btn.disabled=true;
 
   const data=buildMandat();
-  btn.textContent='Generating mandate…';
-  try{
-    const{ref,dt,pdfBase64}=await generatePDF(data);
-    btn.textContent='Sending…';
-    await sendEmail(data,ref,dt,pdfBase64);
-  }catch(e){
-    console.error('Mandat:',e);
-    btn.disabled=false;btn.textContent="Retry";
-    alert("Something went wrong while generating or sending the mandate. Please retry, or contact us directly at contact@n20immobilier.ch.");
+
+  // Garde-fou taille : bloque AVANT l'envoi si les pièces jointes sont trop lourdes.
+  const annexes=[document.getElementById('annex1'),document.getElementById('annex2'),document.getElementById('annex3')]
+    .map(el=>el&&el.files&&el.files[0]).filter(Boolean);
+  const totalMo=annexes.reduce((s,f)=>s+f.size,0)/1048576;
+  if(totalMo>LIMITE_ANNEXES_MO){
+    btn.disabled=false;btn.textContent=label0;
+    alert(`Your attachments are too large: ${totalMo.toFixed(1)} MB in total, for a maximum of ${LIMITE_ANNEXES_MO} MB.\n\nPlease reduce or compress your documents (e.g. with a scanning app that exports a lighter PDF), then try again.`);
     return;
   }
 
-  document.getElementById('formCard').style.display='none';
+  btn.textContent='Generating mandate…';
+  let ref,dt,pdfBase64;
+  try{({ref,dt,pdfBase64}=await generatePDF(data));}
+  catch(e){
+    console.error('Génération:',e);
+    btn.disabled=false;btn.textContent=label0;
+    alert("Mandate generation failed. Please try again, or email us at contact@n20immobilier.ch. Your answers are kept.");
+    return;
+  }
+
+  btn.textContent='Sending…';
+  try{
+    await sendEmail(data,ref,dt,pdfBase64);
+  }catch(e){
+    console.error('Envoi:',e);
+    btn.disabled=false;btn.textContent="Retry";
+    afficherSecours(pdfBase64,ref,{
+      titre:"The automatic submission didn’t go through.",
+      intro:"Your attachments may be too large. Your answers are kept — you can try again below.",
+      ou:'Or download your mandate and email it, with your documents, to',
+      bouton:'⬇ Download my mandate (PDF)'
+    });
+    return;
+  }
+
+    document.getElementById('formCard').style.display='none';
   document.getElementById('progressBar').style.display='none';
   document.querySelector('.pi-hero p').style.display='none';
   document.getElementById('successPanel').classList.add('visible');
