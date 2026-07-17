@@ -905,7 +905,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &nbsp;·&nbsp; Сайт создан <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.7</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &nbsp;·&nbsp; Сайт создан <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.8</span></span>
       <nav class="ftr-legal">
         <a href="/ru/terms-and-conditions/">Условия</a>
         <a href="/ru/privacy-policy/">Конфиденциальность</a>
@@ -1175,6 +1175,23 @@ function signaler(id,etape,message){
   alert(message);
   return false;
 }
+function signalerEl(el,etape,message){
+  if(el){el.style.borderColor='#f87171';el.addEventListener('input',()=>{el.style.borderColor='';},{once:true});}
+  if(currentStep!==etape)goTo(etape);
+  setTimeout(()=>{el&&el.scrollIntoView({behavior:'smooth',block:'center'});el&&el.focus();},300);
+  alert(message);
+  return false;
+}
+function verifierChamps(){
+  const q=n=>document.querySelector(`[name="${n}"]`);
+  if(!q('lastName')||!q('lastName').value.trim())return signalerEl(q('lastName'),1,"Укажите, пожалуйста, вашу фамилию.");
+  if(!q('firstName')||!q('firstName').value.trim())return signalerEl(q('firstName'),1,"Укажите, пожалуйста, ваше имя.");
+  const email=q('email');
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()))return signalerEl(email,1,"Укажите действительный адрес эл. почты — по нему мы вам ответим.");
+  const phone=q('phone');
+  if(!phone||phone.value.replace(/\D/g,'').length<6)return signalerEl(phone,1,"Укажите действительный номер телефона.");
+  return true;
+}
 function verifierRevenus(){
   if(!montantValide(document.querySelector('[name="income"]')?.value))
     return signaler('income',1,ALERTE_REVENU);
@@ -1225,6 +1242,7 @@ function afficherSecours(pdfBase64,ref,T){
 }
 
 async function submitForm(){
+  if(!verifierChamps())return;
   if(!verifierRevenus())return;
   const annex1=document.getElementById('annex1');
   if(!annex1.files||!annex1.files.length){

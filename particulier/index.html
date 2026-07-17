@@ -911,7 +911,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés. &nbsp;·&nbsp; Site créé par <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.7</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés. &nbsp;·&nbsp; Site créé par <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.8</span></span>
       <nav class="ftr-legal">
         <a href="/conditions-generales/">CGU</a>
         <a href="/politique-de-confidentialite/">Confidentialité</a>
@@ -1186,6 +1186,27 @@ function signaler(id,etape,message){
   alert(message);
   return false;
 }
+// Surligne un champ repéré par son sélecteur, ramène à son étape, et explique.
+function signalerEl(el,etape,message){
+  if(el){el.style.borderColor='#f87171';el.addEventListener('input',()=>{el.style.borderColor='';},{once:true});}
+  if(currentStep!==etape)goTo(etape);
+  setTimeout(()=>{el&&el.scrollIntoView({behavior:'smooth',block:'center'});el&&el.focus();},300);
+  alert(message);
+  return false;
+}
+// Champs identité obligatoires : sans eux le dossier est incontactable et l'envoi échoue (reply_to).
+function verifierChamps(){
+  const q=n=>document.querySelector(`[name="${n}"]`);
+  if(!q('lastName')||!q('lastName').value.trim())return signalerEl(q('lastName'),1,"Merci d’indiquer votre nom.");
+  if(!q('firstName')||!q('firstName').value.trim())return signalerEl(q('firstName'),1,"Merci d’indiquer votre prénom.");
+  const email=q('email');
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()))
+    return signalerEl(email,1,"Merci d’indiquer une adresse e-mail valide : c’est par là que nous vous répondrons.");
+  const phone=q('phone');
+  if(!phone||phone.value.replace(/\D/g,'').length<6)
+    return signalerEl(phone,1,"Merci d’indiquer un numéro de téléphone valide.");
+  return true;
+}
 function verifierRevenus(){
   if(!montantValide(document.querySelector('[name="income"]')?.value))
     return signaler('income',1,'Merci d’indiquer votre revenu mensuel brut : sans lui, les régies ne peuvent pas évaluer votre dossier.');
@@ -1237,7 +1258,8 @@ function afficherSecours(pdfBase64,ref,T){
 
 // ── Soumission du formulaire ──────────────────────────────────────────────────
 async function submitForm(){
-  // Le revenu conditionne l'acceptation du dossier par les régies : sans lui, le mandat est inexploitable.
+  // Identité d'abord (dossier contactable), puis le revenu (inexploitable sans lui pour les régies).
+  if(!verifierChamps())return;
   if(!verifierRevenus())return;
   const annex1=document.getElementById('annex1');
   if(!annex1.files||!annex1.files.length){

@@ -641,7 +641,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &middot; <span class="site-ver" style="opacity:.5">v1.1.7</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &middot; <span class="site-ver" style="opacity:.5">v1.1.8</span></span>
       <nav class="ftr-legal">
         <a href="/ru/terms-and-conditions/">Условия</a>
         <a href="/ru/privacy-policy/">Конфиденциальность</a>
@@ -814,7 +814,25 @@ function afficherSecours(pdfBase64,ref,T){
   box.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
+function signalerEl(el,etape,message){
+  if(el){el.style.borderColor='#f87171';el.addEventListener('input',()=>{el.style.borderColor='';},{once:true});}
+  if(currentStep!==etape)goTo(etape);
+  setTimeout(()=>{el&&el.scrollIntoView({behavior:'smooth',block:'center'});el&&el.focus();},300);
+  alert(message);
+  return false;
+}
+function verifierChamps(){
+  const q=n=>document.querySelector(`[name="${n}"]`);
+  if(!q('company')||!q('company').value.trim())return signalerEl(q('company'),1,"Укажите название компании.");
+  if(!q('contactName')||!q('contactName').value.trim())return signalerEl(q('contactName'),1,"Укажите имя контактного лица.");
+  const email=q('email');
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()))return signalerEl(email,1,"Укажите действительный адрес эл. почты — по нему мы вам ответим.");
+  const phone=q('phone');
+  if(!phone||phone.value.replace(/\D/g,'').length<6)return signalerEl(phone,1,"Укажите действительный номер телефона.");
+  return true;
+}
 async function submitForm(){
+  if(!verifierChamps())return;
   const chkM=document.getElementById('chkMandate');
   const chkP=document.getElementById('chkPrivacy');
   if(!chkM.checked||!chkP.checked){
