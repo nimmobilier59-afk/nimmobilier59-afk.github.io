@@ -911,7 +911,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés. &nbsp;·&nbsp; Site créé par <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.8</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés. &nbsp;·&nbsp; Site créé par <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.9</span></span>
       <nav class="ftr-legal">
         <a href="/conditions-generales/">CGU</a>
         <a href="/politique-de-confidentialite/">Confidentialité</a>
@@ -956,7 +956,7 @@ function goTo(n){
 }
 
 function buildRecap(){
-  const v=name=>{const el=document.querySelector(`[name="${name}"]`);return el?el.value.trim():'';};
+  const v=name=>{const el=document.querySelector(`[name="${name}"]`);return el?esc(el.value.trim()):'';};
   const r=name=>{const el=document.querySelector(`input[name="${name}"]:checked`);return el?el.value:'';};
   const fmt=val=>val||'—';
   const fmtDate=val=>{if(!val)return'—';const[y,m,d]=val.split('-');return`${d}.${m}.${y}`;};
@@ -996,26 +996,6 @@ function buildRecap(){
   </div></div>`;
   document.getElementById('recap').innerHTML=html;
 }
-
-function makeRadio(groupId,onChange){
-  const group=document.getElementById(groupId);
-  if(!group)return;
-  group.querySelectorAll('.radio-opt').forEach(opt=>{
-    opt.addEventListener('click',()=>{
-      group.querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('selected'));
-      opt.classList.add('selected');
-      const inp=opt.querySelector('input[type=radio]');
-      if(inp){inp.checked=true;if(onChange)onChange(inp.value);}
-    });
-  });
-}
-
-makeRadio('typeGroup',val=>{
-  const pro=document.getElementById('proFields');
-  const ind=document.getElementById('indivFields');
-  if(val==='professional'){pro.classList.add('visible');ind.classList.remove('visible');}
-  else{ind.classList.add('visible');pro.classList.remove('visible');}
-});
 
 document.querySelectorAll('input[name="hasCotenant"]').forEach(inp=>{
   inp.closest('.radio-opt').addEventListener('click',()=>{
@@ -1076,6 +1056,8 @@ function buildMandat(){
 }
 
 // ── Génère le PDF depuis mandat-template.html via iframe ──────────────────────
+// Échappe les valeurs saisies avant toute insertion dans du HTML (récap, e-mail, gabarit PDF).
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 async function generatePDF(d){
   const now=new Date();
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
@@ -1086,7 +1068,7 @@ async function generatePDF(d){
   const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
   tpl=tpl.replace(/\{\{#if (\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,(_,k,content)=>condVals[k]?content:'');
   const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',income:d.income||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—',coIncome:d.coIncome||'—'};
-  Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,v);});
+  Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,()=>esc(v));});
 
   // Charger le HTML traité via blob URL (iframe navigue → document complet, contexte CSS intact)
   const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
@@ -1148,6 +1130,8 @@ const fileToB64=file=>new Promise((res,rej)=>{
 });
 
 async function sendEmail(d,ref,dt,pdfBase64){
+  const E={};for(const k in d)E[k]=typeof d[k]==='string'?esc(d[k]):d[k];
+
   const attachments=pdfBase64?[{filename:`Mandat_Recherche_N20_${ref}.pdf`,content:pdfBase64}]:[];
   for(const[file,label] of [[d.annexFile1,'Annexe_1'],[d.annexFile2,'Annexe_2'],[d.annexFile3,'Annexe_3']]){
     if(!file)continue;
@@ -1158,9 +1142,9 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
   const hdr=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://n20immobilier.ch/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat de Recherche</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Réf. ${ref} — ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">`;
   const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
-  const zones=[d.area1,d.area2,d.area3].filter(Boolean).join(' › ')||'—';
-  const aList=[d.annex1,d.annex2,d.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
-  const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${d.firstName} ${d.lastName}</strong>`,true)+r('Date de naissance',d.dob,false)+r('Adresse actuelle',d.currentAddress,true)+r("Nombre d'enfants",d.children,false)+r('Téléphone',d.phone,true)+r('Email',d.email,false)+r('Revenu mensuel brut',d.income?`<strong>CHF ${d.income}</strong>`:'—',true)+r('Bail à son nom',d.leaseInName,false)+r('Résiliation nécessaire',d.needTermination,true)+`</table>`+(d.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${d.coFirstName} ${d.coLastName}`,true)+r('Date de naissance',d.coDob,false)+r('Téléphone',d.coPhone,true)+r('Email',d.coEmail,false)+r('Revenu mensuel brut',d.coIncome?`<strong>CHF ${d.coIncome}</strong>`:'—',true)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',d.propertyType,true)+r('Pièces minimum',d.minRooms,false)+r('Budget max (CHF)',d.budget,true)+r("Date d'entrée",d.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',d.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
+  const zones=[E.area1,E.area2,E.area3].filter(Boolean).join(' › ')||'—';
+  const aList=[E.annex1,E.annex2,E.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
+  const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${E.firstName} ${E.lastName}</strong>`,true)+r('Date de naissance',E.dob,false)+r('Adresse actuelle',E.currentAddress,true)+r("Nombre d'enfants",E.children,false)+r('Téléphone',E.phone,true)+r('Email',E.email,false)+r('Revenu mensuel brut',E.income?`<strong>CHF ${E.income}</strong>`:'—',true)+r('Bail à son nom',E.leaseInName,false)+r('Résiliation nécessaire',E.needTermination,true)+`</table>`+(E.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${E.coFirstName} ${E.coLastName}`,true)+r('Date de naissance',E.coDob,false)+r('Téléphone',E.coPhone,true)+r('Email',E.coEmail,false)+r('Revenu mensuel brut',E.coIncome?`<strong>CHF ${E.coIncome}</strong>`:'—',true)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',E.propertyType,true)+r('Pièces minimum',E.minRooms,false)+r('Budget max (CHF)',E.budget,true)+r("Date d'entrée",E.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',E.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
   // Relais Cloudflare Worker (garde la clé Resend côté serveur). ⚠️ Remplacer par l'URL du Worker déployé :
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
   const res=await envoiAvecReprise(MAILER_URL,{
@@ -1308,7 +1292,7 @@ async function submitForm(){
     btn.disabled=false;btn.textContent="Réessayer l'envoi";
     afficherSecours(pdfBase64,ref,{
       titre:"L'envoi automatique n'a pas abouti.",
-      intro:"Vos pièces jointes sont peut-être trop lourdes. Vos réponses restent saisies — vous pouvez réessayer ci-dessous.",
+      intro:"Un problème réseau ou serveur a interrompu l'envoi. Vos réponses restent saisies — vous pouvez réessayer ci-dessous.",
       ou:'Ou récupérez votre mandat et envoyez-le, avec vos documents, à',
       bouton:'⬇ Télécharger mon mandat (PDF)'
     });

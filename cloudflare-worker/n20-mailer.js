@@ -41,6 +41,11 @@ export default {
     if (!p.subject || !p.html)
       return reply({ error: 'Missing subject/html' }, 422, cors);
 
+    // reply_to vide/invalide (page en cache, POST direct) : on l'omet au lieu de
+    // laisser Resend rejeter tout l'envoi.
+    const replyTo = typeof p.reply_to === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.reply_to.trim())
+      ? p.reply_to.trim() : undefined;
+
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -50,7 +55,7 @@ export default {
       body: JSON.stringify({
         from: env.MAIL_FROM,
         to: [env.MAIL_TO],
-        reply_to: p.reply_to,
+        ...(replyTo ? { reply_to: replyTo } : {}),
         subject: p.subject,
         html: p.html,
         attachments: Array.isArray(p.attachments) ? p.attachments : [],

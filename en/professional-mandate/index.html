@@ -642,7 +642,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &middot; <span class="site-ver" style="opacity:.5">v1.1.8</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &middot; <span class="site-ver" style="opacity:.5">v1.1.9</span></span>
       <nav class="ftr-legal">
         <a href="/en/terms-and-conditions/">T&amp;Cs</a>
         <a href="/en/privacy-policy/">Privacy</a>
@@ -688,7 +688,7 @@ document.querySelectorAll('.radio-opt').forEach(opt=>{
   });
 });
 
-function v(name){const el=document.querySelector(`[name="${name}"]`);return el?(el.value||''):'';}
+function v(name){const el=document.querySelector(`[name="${name}"]`);return el?(el.value||'').trim():'';}
 function vRadio(name){const el=document.querySelector(`input[name="${name}"]:checked`);return el?el.value:'';}
 const NEED_LABELS={reloc1:'Relocation d\'un collaborateur',relocMulti:'Relocation de plusieurs collaborateurs',locaux:'Recherche de locaux commerciaux',partnership:'Convention de partenariat RH'};
 const URGENCY_LABELS={immediate:'Immédiat (moins d\'1 mois)',short:'Court terme (1–3 mois)',medium:'Moyen terme (3–6 mois)',planning:'En cours de planification'};
@@ -705,6 +705,8 @@ function buildMandat(){
     duration:v('duration')||'—',areas:v('areas')||'—',notes:v('notes')
   };
 }
+// Échappe les valeurs saisies avant toute insertion dans du HTML (récap, e-mail, gabarit PDF).
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 async function generatePDF(d){
   const now=new Date();
   const dt=`${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
@@ -713,7 +715,7 @@ async function generatePDF(d){
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
   tpl=tpl.replace(/\{\{#if notes\}\}([\s\S]*?)\{\{\/if notes\}\}/g,(_,content)=>d.notes?content:'');
   const subs={ref,date:dt,company:d.company||'—',sector:d.sector||'—',address:d.address||'—',contactName:d.contactName||'—',contactRole:d.contactRole||'—',email:d.email||'—',phone:d.phone||'—',needTypeLabel:d.needTypeLabel||'—',urgencyLabel:d.urgencyLabel||'—',nbPersons:d.nbPersons||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',duration:d.duration||'—',areas:d.areas||'—',notes:d.notes||''};
-  Object.entries(subs).forEach(([k,val])=>{tpl=tpl.replaceAll(`{{${k}}}`,val);});
+  Object.entries(subs).forEach(([k,val])=>{tpl=tpl.replaceAll(`{{${k}}}`,()=>esc(val));});
   const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
   const iframe=document.createElement('iframe');
   // Iframe VISIBLE mais placée hors écran : une iframe `visibility:hidden` n'est pas
@@ -764,12 +766,14 @@ async function generatePDF(d){
   return{ref,dt,pdfBase64:pdf.output('datauristring').split(',')[1]};
 }
 async function sendEmailPro(d,ref,dt,pdfBase64){
+  const E={};for(const k in d)E[k]=typeof d[k]==='string'?esc(d[k]):d[k];
+
   const attachments=pdfBase64?[{filename:`Mandat_Pro_N20_${ref}.pdf`,content:pdfBase64}]:[];
   const r=(l,val,w)=>`<tr style="background:${w?'#fff':'#f8f9fb'}"><td style="padding:8px 12px;color:#888;width:42%">${l}</td><td style="padding:8px 12px">${val||'—'}</td></tr>`;
   const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
   const hdr=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://n20immobilier.ch/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat Professionnel</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Réf. ${ref} — ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">`;
   const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
-  const html=hdr+s('Entreprise')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Raison sociale',`<strong>${d.company}</strong>`,true)+r("Secteur d'activité",d.sector,false)+r('Adresse du siège',d.address,true)+`</table>`+s('Contact')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom',d.contactName,true)+r('Fonction',d.contactRole,false)+r('Email',d.email,true)+r('Téléphone',d.phone,false)+`</table>`+s('Nature du mandat')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de demande',d.needTypeLabel,true)+r('Urgence',d.urgencyLabel,false)+r('Nombre de personnes',d.nbPersons,true)+`</table>`+s('Critères de recherche')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Budget mensuel max (CHF)',d.budget,true)+r("Date d'entrée souhaitée",d.moveIn,false)+r('Durée souhaitée',d.duration,true)+r('Zones / quartiers',d.areas,false)+r('Exigences particulières',d.notes||'—',true)+`</table>`+ftr;
+  const html=hdr+s('Entreprise')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Raison sociale',`<strong>${E.company}</strong>`,true)+r("Secteur d'activité",E.sector,false)+r('Adresse du siège',E.address,true)+`</table>`+s('Contact')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom',E.contactName,true)+r('Fonction',E.contactRole,false)+r('Email',E.email,true)+r('Téléphone',E.phone,false)+`</table>`+s('Nature du mandat')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de demande',E.needTypeLabel,true)+r('Urgence',E.urgencyLabel,false)+r('Nombre de personnes',E.nbPersons,true)+`</table>`+s('Critères de recherche')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Budget mensuel max (CHF)',E.budget,true)+r("Date d'entrée souhaitée",E.moveIn,false)+r('Durée souhaitée',E.duration,true)+r('Zones / quartiers',E.areas,false)+r('Exigences particulières',E.notes||'—',true)+`</table>`+ftr;
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
   const res=await envoiAvecReprise(MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat professionnel — ${d.company} — Réf. ${ref}`,html,attachments})});
   if(!res.ok){const e=await res.text();throw new Error('HTTP '+res.status+' '+e.slice(0,200));}
