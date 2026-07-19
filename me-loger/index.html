@@ -562,23 +562,10 @@ textarea { resize: vertical; min-height: 100px; }
     display: flex;
     flex-direction: column;
   }
-  .hero-content h1 { text-align: center; margin-top: -5rem !important; }
-  .hero-single-cta { margin-top: 2cm !important; width: auto; align-self: center; justify-content: center; }
-  .hero-tag { display: none; }
-  .hero-tag-top {
-    display: inline-block;
-    position: absolute;
-    top: calc(72px + 44px);
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    width: max-content;
-    z-index: 3;
-    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: .14em; text-transform: uppercase;
-    color: var(--white); border: 1px solid rgba(255,255,255,.35);
-    padding: 6px 16px; border-radius: 100px;
-  }
+  .hero-content h1 { text-align: center; margin-top:0 !important;font-size:clamp(32px,9vw,40px);line-height:1.12; }
+  .hero-single-cta { margin-top:20px !important; width: auto; align-self: center; justify-content: center; }
+  .hero-tag{display:block;width:max-content;max-width:100%;margin:0 auto 22px}
+  .hero-tag-top{display:none}
   /* ── Hero flow compact card ── */
   .hero-flow {
     flex-direction: column;
