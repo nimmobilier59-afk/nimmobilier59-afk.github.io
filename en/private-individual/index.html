@@ -499,6 +499,23 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 .upload-zone .uz-filename{font-size:.75rem;color:var(--accent);font-weight:600;word-break:break-all;display:none}
 .upload-zone.has-file .uz-filename{display:block}
 .upload-zone.has-file .uz-label{display:none}
+/* N20 annexes multi */
+.annex-grid.annex-solo{grid-template-columns:1fr;max-width:340px}
+.annex-extra{margin-top:18px}
+.annex-extra-label{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(255,255,255,.7);margin-bottom:8px;font-weight:600}
+.annex-count{margin-inline-start:auto;font-size:.75rem;color:rgba(255,255,255,.45);font-weight:600;font-variant-numeric:tabular-nums}
+.annex-count.over{color:#f87171}
+.upload-zone.uz-multi{min-height:88px}
+.upload-zone.dragover{border-color:var(--accent);background:rgba(110,193,228,.12)}
+.upload-zone.uz-filled{border-color:var(--accent);border-style:solid;background:rgba(110,193,228,.06)}
+.upload-zone.uz-filled svg{stroke:var(--accent)}
+.annex-list{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.annex-list li{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 12px;font-size:.8rem;color:rgba(255,255,255,.82)}
+.annex-list .an-name{flex:1;word-break:break-all}
+.annex-list .an-size{color:rgba(255,255,255,.42);font-size:.74rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.annex-list .an-del{background:none;border:none;color:rgba(255,255,255,.42);cursor:pointer;font-size:1.05rem;line-height:1;padding:2px 6px;border-radius:6px}
+.annex-list .an-del:hover{color:#f87171;background:rgba(248,113,113,.1)}
+
 .annex-docs{list-style:none;margin:16px 0 0;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;display:flex;flex-direction:column;gap:10px}
 .annex-docs li{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(255,255,255,.75)}
 .annex-docs strong{color:#fff}
@@ -1135,8 +1152,8 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 
         <div class="annex-section">
           <div class="annex-title">Attachments</div>
-          <p class="annex-hint">Attach at least 1 document. Accepted formats: PDF, JPG, PNG — 5 MB max per file.</p>
-          <div class="annex-grid">
+          <p class="annex-hint">Attach at least 1 document. Accepted formats: PDF, JPG, PNG — 5 MB max per file, 20 MB in total.</p>
+          <div class="annex-grid annex-solo">
             <div class="annex-item">
               <label>Attachment 1 <span class="badge-req">Required</span></label>
               <div class="upload-zone" id="uz1" onclick="document.getElementById('annex1').click()">
@@ -1144,26 +1161,19 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
                 <span class="uz-label">Click to attach</span>
                 <span class="uz-filename" id="fn1"></span>
               </div>
-              <input type="file" id="annex1" name="annex1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz1','fn1')">
+              <input type="file" id="annex1" name="annex1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz1','fn1');rendreAnnexes()">
             </div>
-            <div class="annex-item">
-              <label>Attachment 2 <span class="badge-opt">Optional</span></label>
-              <div class="upload-zone" id="uz2" onclick="document.getElementById('annex2').click()">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                <span class="uz-label">Click to attach</span>
-                <span class="uz-filename" id="fn2"></span>
-              </div>
-              <input type="file" id="annex2" name="annex2" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz2','fn2')">
+          </div>
+
+          <!-- N20 annexes multi -->
+          <div class="annex-extra">
+            <label class="annex-extra-label">Additional documents <span class="badge-opt">Optional</span><span class="annex-count" id="annexCount">0/20</span></label>
+            <div class="upload-zone uz-multi" id="uzMulti" onclick="document.getElementById('annexMulti').click()">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span class="uz-label">Click or drop your files — up to 20</span>
             </div>
-            <div class="annex-item">
-              <label>Attachment 3 <span class="badge-opt">Optional</span></label>
-              <div class="upload-zone" id="uz3" onclick="document.getElementById('annex3').click()">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                <span class="uz-label">Click to attach</span>
-                <span class="uz-filename" id="fn3"></span>
-              </div>
-              <input type="file" id="annex3" name="annex3" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz3','fn3')">
-            </div>
+            <input type="file" id="annexMulti" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="ajouterAnnexes(this)">
+            <ul class="annex-list" id="annexList"></ul>
           </div>
           <ul class="annex-docs">
             <li><span class="annex-doc-dot req"></span><strong>Last 3 payslips</strong></li>
@@ -1232,7 +1242,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &nbsp;·&nbsp; Website created by <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.10</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. All rights reserved. &nbsp;·&nbsp; Website created by <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.11</span></span>
       <nav class="ftr-legal">
         <a href="/en/terms-and-conditions/">Terms</a>
         <a href="/en/privacy-policy/">Privacy</a>
@@ -1365,6 +1375,62 @@ function showFile(input,zoneId,fnId){
   }
 }
 
+
+// ── N20 annexes multi : cadre « documents annexes » (max 20) ──────────────────
+const MAX_ANNEXES=20, MAX_MO_FICHIER=5, UNITE_MO='MB';
+let ANNEXES=[];
+function fmtTaille(o){return (o/1048576).toFixed(1)+' '+UNITE_MO;}
+function ajouterAnnexes(input){
+  const entrants=Array.from(input.files||[]);
+  input.value='';               // permet de re-sélectionner le même fichier
+  const trop=[]; let plein=false;
+  for(const f of entrants){
+    if(ANNEXES.length>=MAX_ANNEXES){plein=true;break;}
+    if(f.size>MAX_MO_FICHIER*1048576){trop.push(f.name);continue;}
+    if(ANNEXES.some(x=>x.name===f.name&&x.size===f.size&&x.lastModified===f.lastModified))continue;
+    ANNEXES.push(f);
+  }
+  rendreAnnexes();
+  if(trop.length)alert(trop.map(n=>`The file “{n}” exceeds {m} MB and was not added.`.replace('{n}',n).replace('{m}',MAX_MO_FICHIER)).join('\n'));
+  if(plein)alert(`You can attach at most {x} additional documents.`.replace('{x}',MAX_ANNEXES));
+}
+function retirerAnnexe(i){ANNEXES.splice(i,1);rendreAnnexes();}
+function rendreAnnexes(){
+  const ul=document.getElementById('annexList');
+  const cpt=document.getElementById('annexCount');
+  if(!ul||!cpt)return;
+  ul.innerHTML='';
+  ANNEXES.forEach((f,i)=>{
+    const li=document.createElement('li');
+    const nom=document.createElement('span');nom.className='an-name';nom.textContent=f.name;
+    const tai=document.createElement('span');tai.className='an-size';tai.textContent=fmtTaille(f.size);
+    const del=document.createElement('button');
+    del.type='button';del.className='an-del';del.textContent='\u2715';
+    del.title='Remove';del.setAttribute('aria-label','Remove '+f.name);
+    del.onclick=e=>{e.stopPropagation();retirerAnnexe(i);};
+    li.append(nom,tai,del);ul.appendChild(li);
+  });
+  // Compteur : inclut l'Annexe 1 obligatoire dans le total de taille affiché.
+  const a1=document.getElementById('annex1');
+  const f1=a1&&a1.files&&a1.files[0]?a1.files[0].size:0;
+  const tot=ANNEXES.reduce((s,f)=>s+f.size,0)+f1;
+  cpt.textContent=`${ANNEXES.length}/${MAX_ANNEXES} · ${fmtTaille(tot)}`;
+  cpt.classList.toggle('over',tot/1048576>LIMITE_ANNEXES_MO);
+  const z=document.getElementById('uzMulti');
+  if(z)z.classList.toggle('uz-filled',ANNEXES.length>0);
+}
+// Glisser-déposer sur le cadre
+document.addEventListener('DOMContentLoaded',()=>{
+  const z=document.getElementById('uzMulti');
+  if(!z)return;
+  ['dragenter','dragover'].forEach(ev=>z.addEventListener(ev,e=>{e.preventDefault();z.classList.add('dragover');}));
+  ['dragleave','drop'].forEach(ev=>z.addEventListener(ev,e=>{e.preventDefault();z.classList.remove('dragover');}));
+  z.addEventListener('drop',e=>{
+    const dt=e.dataTransfer;
+    if(dt&&dt.files&&dt.files.length)ajouterAnnexes({files:dt.files,value:''});
+  });
+});
+
 // ── Collecte toutes les données du formulaire ─────────────────────────────────
 function buildMandat(){
   const v=n=>{const el=document.querySelector(`[name="${n}"]`);return el?el.value.trim():'';};
@@ -1373,8 +1439,7 @@ function buildMandat(){
   const p1=document.querySelector('#step1 .phone-prefix')?.value||'+41';
   const p2=document.querySelector('#step2 .phone-prefix')?.value||'+41';
   const a1=document.getElementById('annex1')?.files[0]||null;
-  const a2=document.getElementById('annex2')?.files[0]||null;
-  const a3=document.getElementById('annex3')?.files[0]||null;
+  const tousFichiers=[a1,...ANNEXES].filter(Boolean);
   return{
     lastName:v('lastName'),firstName:v('firstName'),dob:fd(v('dob')),
     currentAddress:v('currentAddress'),children:v('children')||'0',
@@ -1387,8 +1452,8 @@ function buildMandat(){
     propertyType:v('propertyType'),minRooms:v('minRooms'),
     budget:v('budget'),moveIn:fd(v('moveIn')),
     area1:v('area1'),area2:v('area2'),area3:v('area3'),notes:v('notes'),
-    annex1:a1?a1.name:'',annex2:a2?a2.name:'',annex3:a3?a3.name:'',
-    annexFile1:a1,annexFile2:a2,annexFile3:a3,
+    annex1:a1?a1.name:'',annexNames:tousFichiers.map(f=>f.name),
+    annexFiles:tousFichiers,
   };
 }
 
@@ -1402,10 +1467,12 @@ async function generatePDF(d){
 
   let tpl=await fetch('/particulier/mandat-template.html').then(r=>r.text());
   tpl=tpl.replace(/<script[\s\S]*?<\/script>/gi,'');
-  const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,annex1:d.annex1,annex2:d.annex2,annex3:d.annex3};
+  const condVals={coVisible:d.coVisible,area2:d.area2,area3:d.area3,notes:d.notes,hasAnnexes:(d.annexNames||[]).length};
   tpl=tpl.replace(/\{\{#if (\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,(_,k,content)=>condVals[k]?content:'');
-  const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',income:d.income||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',annex1:d.annex1||'',annex2:d.annex2||'',annex3:d.annex3||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—',coIncome:d.coIncome||'—'};
+  const subs={ref,date:dt,firstName:d.firstName||'—',lastName:d.lastName||'—',dob:d.dob||'—',currentAddress:d.currentAddress||'—',phone:d.phone||'—',email:d.email||'—',income:d.income||'—',children:d.children||'0',propertyType:d.propertyType||'—',minRooms:d.minRooms||'—',budget:d.budget||'—',moveIn:d.moveIn||'—',area1:d.area1||'—',area2:d.area2||'',area3:d.area3||'',notes:d.notes||'',coFirstName:d.coFirstName||'—',coLastName:d.coLastName||'—',coDob:d.coDob||'—',coPhone:d.coPhone||'—',coEmail:d.coEmail||'—',coIncome:d.coIncome||'—'};
   Object.entries(subs).forEach(([k,v])=>{tpl=tpl.replaceAll(`{{${k}}}`,()=>esc(v));});
+  const lignesAnnexes=(d.annexNames||[]).map((n,i)=>`<div class="annexe-item"><span class="ann-num">Annexe ${i+1}</span><span class="ann-name">${esc(n)}</span></div>`).join('');
+  tpl=tpl.replaceAll('{{annexesRows}}',()=>lignesAnnexes);
 
   // Charger le HTML traité via blob URL (iframe navigue → document complet, contexte CSS intact)
   const blobUrl=URL.createObjectURL(new Blob([tpl],{type:'text/html'}));
@@ -1470,17 +1537,18 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const E={};for(const k in d)E[k]=typeof d[k]==='string'?esc(d[k]):d[k];
 
   const attachments=pdfBase64?[{filename:`Mandat_Recherche_N20_${ref}.pdf`,content:pdfBase64}]:[];
-  for(const[file,label] of [[d.annexFile1,'Annexe_1'],[d.annexFile2,'Annexe_2'],[d.annexFile3,'Annexe_3']]){
-    if(!file)continue;
+  let nAnnexe=0;
+  for(const file of (d.annexFiles||[])){
+    nAnnexe++;
     const content=await fileToB64(file);
-    attachments.push({filename:`${label}_${file.name}`,content});
+    attachments.push({filename:`Annexe_${nAnnexe}_${file.name}`,content});
   }
   const r=(l,v,w)=>`<tr style="background:${w?'#fff':'#f8f9fb'}"><td style="padding:8px 12px;color:#888;width:42%">${l}</td><td style="padding:8px 12px">${v||'—'}</td></tr>`;
   const s=t=>`<h3 style="margin:20px 0 12px;padding:8px 14px;background:#021623;color:#6EC1E4;border-radius:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase">${t}</h3>`;
   const hdr=`<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#333;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0"><div style="background:#021623;padding:28px 32px;text-align:center"><img src="https://n20immobilier.ch/wp-content/uploads/2025/09/N20-Immobilier-.png" alt="N20 Immobilier" style="height:50px;display:block;margin:0 auto 14px"><p style="color:#6EC1E4;margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase">Nouveau Mandat de Recherche</p><p style="color:rgba(255,255,255,0.4);margin:6px 0 0;font-size:12px">Réf. ${ref} — ${dt}</p></div><div style="padding:24px 32px;background:#f8f9fb">`;
   const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
   const zones=[E.area1,E.area2,E.area3].filter(Boolean).join(' › ')||'—';
-  const aList=[E.annex1,E.annex2,E.annex3].filter(Boolean).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
+  const aList=(d.annexNames||[]).map(n=>esc(n)).map((n,i)=>`<tr><td style="padding:8px 12px;color:#888;width:42%">Annexe ${i+1}</td><td style="padding:8px 12px">${n}</td></tr>`).join('')||'<tr><td colspan="2" style="padding:8px 12px;color:#aaa">Aucune annexe</td></tr>';
   const html=hdr+s('Demandeur')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`<strong>${E.firstName} ${E.lastName}</strong>`,true)+r('Date de naissance',E.dob,false)+r('Adresse actuelle',E.currentAddress,true)+r("Nombre d'enfants",E.children,false)+r('Téléphone',E.phone,true)+r('Email',E.email,false)+r('Revenu mensuel brut',E.income?`<strong>CHF ${E.income}</strong>`:'—',true)+r('Bail à son nom',E.leaseInName,false)+r('Résiliation nécessaire',E.needTermination,true)+`</table>`+(E.coVisible?s('Co-locataire')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom complet',`${E.coFirstName} ${E.coLastName}`,true)+r('Date de naissance',E.coDob,false)+r('Téléphone',E.coPhone,true)+r('Email',E.coEmail,false)+r('Revenu mensuel brut',E.coIncome?`<strong>CHF ${E.coIncome}</strong>`:'—',true)+`</table>`:'')+s('Critères du bien')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de bien',E.propertyType,true)+r('Pièces minimum',E.minRooms,false)+r('Budget max (CHF)',E.budget,true)+r("Date d'entrée",E.moveIn,false)+r('Communes souhaitées',zones,true)+r('Remarques',E.notes||'—',false)+`</table>`+s('Pièces jointes')+`<table style="width:100%;border-collapse:collapse;font-size:13px">${aList}</table>`+ftr;
   // Relais Cloudflare Worker (garde la clé Resend côté serveur). ⚠️ Remplacer par l'URL du Worker déployé :
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
@@ -1598,9 +1666,7 @@ async function submitForm(){
   const data=buildMandat();
 
   // Garde-fou taille : bloque AVANT l'envoi si les pièces jointes sont trop lourdes.
-  const annexes=[document.getElementById('annex1'),document.getElementById('annex2'),document.getElementById('annex3')]
-    .map(el=>el&&el.files&&el.files[0]).filter(Boolean);
-  const totalMo=annexes.reduce((s,f)=>s+f.size,0)/1048576;
+  const totalMo=(data.annexFiles||[]).reduce((s,f)=>s+f.size,0)/1048576;
   if(totalMo>LIMITE_ANNEXES_MO){
     btn.disabled=false;btn.textContent=label0;
     alert(`Your attachments are too large: ${totalMo.toFixed(1)} MB in total, for a maximum of ${LIMITE_ANNEXES_MO} MB.\n\nPlease reduce or compress your documents (e.g. with a scanning app that exports a lighter PDF), then try again.`);

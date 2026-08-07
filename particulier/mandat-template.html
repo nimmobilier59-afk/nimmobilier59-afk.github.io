@@ -441,24 +441,7 @@
   <div class="doc-section">
     <div class="doc-section-title">Pièces jointes transmises</div>
     <div class="annexes-list">
-      {{#if annex1}}
-      <div class="annexe-item">
-        <span class="ann-num">Annexe 1</span>
-        <span class="ann-name">{{annex1}}</span>
-      </div>
-      {{/if}}
-      {{#if annex2}}
-      <div class="annexe-item">
-        <span class="ann-num">Annexe 2</span>
-        <span class="ann-name">{{annex2}}</span>
-      </div>
-      {{/if}}
-      {{#if annex3}}
-      <div class="annexe-item">
-        <span class="ann-num">Annexe 3</span>
-        <span class="ann-name">{{annex3}}</span>
-      </div>
-      {{/if}}
+      {{#if hasAnnexes}}{{annexesRows}}{{/if}}
     </div>
   </div>
 
