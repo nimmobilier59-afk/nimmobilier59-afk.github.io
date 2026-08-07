@@ -116,6 +116,11 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
 .f-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:28px 0}
 
 .form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:12px}
+/* N20 Turnstile */
+.n20-ts{margin:18px 0 6px}
+.n20-ts-lab{display:block;font-size:.78rem;color:rgba(255,255,255,.45);margin-bottom:8px}
+#n20-turnstile{min-height:65px}
+
 .btn-prev{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:600;padding:13px 28px;border-radius:50px;cursor:pointer;transition:background .2s}
 .btn-prev:hover{background:rgba(255,255,255,.18)}
 .btn-next,.btn-submit{background:var(--accent);border:none;color:var(--navy);font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;padding:13px 32px;border-radius:50px;cursor:pointer;transition:background .2s,transform .15s;margin-left:auto}
@@ -591,6 +596,11 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
           <input type="checkbox" id="chkPrivacy" required>
           <span>Я ознакомился(-лась) с <a href="/ru/privacy-policy/" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку данных моей компании.</span>
         </label>
+          <!-- N20 Turnstile -->
+          <div class="n20-ts">
+            <span class="n20-ts-lab">Проверка безопасности</span>
+            <div id="n20-turnstile"></div>
+          </div>
 
         <div class="form-nav">
           <button class="btn-prev" onclick="goTo(3)">&larr; Назад</button>
@@ -641,7 +651,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &middot; <span class="site-ver" style="opacity:.5">v1.1.13</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &middot; <span class="site-ver" style="opacity:.5">v1.1.14</span></span>
       <nav class="ftr-legal">
         <a href="/ru/terms-and-conditions/">Условия</a>
         <a href="/ru/privacy-policy/">Конфиденциальность</a>
@@ -673,6 +683,7 @@ function goTo(n){
   });
   currentStep=n;
   document.getElementById('step'+n).classList.add('active');
+  if(n===4)monterTurnstile();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -811,7 +822,7 @@ async function sendEmailPro(d,ref,dt,pdfBase64){
   const ftr=`</div><div style="background:#021623;padding:16px 32px;text-align:center"><p style="color:#6EC1E4;font-size:11px;margin:0">N20 Immobilier — contact@n20immobilier.ch — +41 76 418 21 23</p></div></div>`;
   const html=hdr+s('Entreprise')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Raison sociale',`<strong>${E.company}</strong>`,true)+r("Secteur d'activité",E.sector,false)+r('Adresse du siège',E.address,true)+`</table>`+s('Contact')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Nom',E.contactName,true)+r('Fonction',E.contactRole,false)+r('Email',E.email,true)+r('Téléphone',E.phone,false)+`</table>`+s('Nature du mandat')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Type de demande',E.needTypeLabel,true)+r('Urgence',E.urgencyLabel,false)+r('Nombre de personnes',E.nbPersons,true)+`</table>`+s('Critères de recherche')+`<table style="width:100%;border-collapse:collapse;font-size:13px">`+r('Budget mensuel max (CHF)',E.budget,true)+r("Date d'entrée souhaitée",E.moveIn,false)+r('Durée souhaitée',E.duration,true)+r('Zones / quartiers',E.areas,false)+r('Exigences particulières',E.notes||'—',true)+`</table>`+ftr;
   const MAILER_URL='https://n20-mailer.nimmobilier.workers.dev';
-  const res=await envoiAvecReprise(MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat professionnel — ${d.company} — Réf. ${ref}`,html,attachments})});
+  const res=await envoiAvecReprise(MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:async()=>JSON.stringify({reply_to:d.email,subject:`Nouveau mandat professionnel — ${d.company} — Réf. ${ref}`,html,attachments,turnstile:await jetonTurnstile()})});
   if(!res.ok){const e=await res.text();throw new Error('HTTP '+res.status+' '+e.slice(0,200));}
   return res.json();
 }
@@ -820,6 +831,41 @@ async function sendEmailPro(d,ref,dt,pdfBase64){
 // uploads mobiles qui expirent). On bloque AVANT, avec un message clair.
 const LIMITE_ANNEXES_MO=20;
 // Délai d'expiration + un réessai automatique (réseaux mobiles instables).
+
+// ── N20 Turnstile : vérification anti-robot ──────────────────────────────────
+// Le widget est monté à l'ARRIVÉE sur l'étape 4, pas au chargement : rendu dans
+// un panneau masqué, il ne s'initialise pas correctement.
+const TURNSTILE_CLE='0x4AAAAAAEJQUWv_h4vWFh4L';
+const MSG_TURNSTILE="Пожалуйста, пройдите проверку безопасности перед отправкой.";
+let tsWidget=null, tsJetonConsomme=false, tsEnPanne=false;
+function monterTurnstile(){
+  if(tsWidget!==null||typeof turnstile==='undefined')return;
+  const hote=document.getElementById('n20-turnstile');
+  if(!hote)return;
+  try{ tsWidget=turnstile.render(hote,{sitekey:TURNSTILE_CLE,language:'ru',theme:'dark',
+    'error-callback':()=>{tsEnPanne=true;},
+    'expired-callback':()=>{try{turnstile.reset(tsWidget);}catch(e){}}}); }
+  catch(e){ console.warn('turnstile',e); }
+}
+// Le jeton est à USAGE UNIQUE : la reprise automatique doit en demander un neuf,
+// sinon le 2e essai est refusé et le dossier se perd malgré le filet de secours.
+function jetonTurnstile(){
+  return new Promise(res=>{
+    if(typeof turnstile==='undefined'||tsWidget===null){res('');return;}
+    if(!tsJetonConsomme){
+      tsJetonConsomme=true;
+      let j='';try{j=turnstile.getResponse(tsWidget)||'';}catch(e){}
+      res(j);return;
+    }
+    try{turnstile.reset(tsWidget);}catch(e){}
+    let n=0;
+    const t=setInterval(()=>{
+      let j='';try{j=turnstile.getResponse(tsWidget)||'';}catch(e){}
+      if(j||++n>40){clearInterval(t);res(j);}    // 20 s max, puis on tente sans
+    },500);
+  });
+}
+
 let PROGRES_ENVOI=null;
 // XHR et non fetch : seul XHR expose la progression du téléversement — et c'est
 // précisément l'upload qui échouait silencieusement (0 erreur côté Cloudflare ET
@@ -847,11 +893,13 @@ function envoyerXHR(url,corps,delaiMs){
 // Délai proportionnel au poids : 90 s fixes condamnaient d'avance un dossier de 5 Mo
 // sur un lien montant à 0,3 Mbit/s (il lui faut plus de 2 minutes).
 async function envoiAvecReprise(url,opts,timeoutMs,tentatives=2){
-  const corps=opts.body;
-  const mo=(corps&&corps.length?corps.length:0)/1048576;
-  const delai=timeoutMs||Math.min(300000,Math.max(90000,60000+mo*45000));
   let derniere;
   for(let i=0;i<tentatives;i++){
+    // Le corps peut être une fonction : la reprise obtient alors un jeton
+    // anti-robot neuf, le précédent étant à usage unique.
+    const corps=typeof opts.body==='function'?await opts.body():opts.body;
+    const mo=(corps&&corps.length?corps.length:0)/1048576;
+    const delai=timeoutMs||Math.min(300000,Math.max(90000,60000+mo*45000));
     try{
       const r=await envoyerXHR(url,corps,delai);
       if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer
@@ -904,6 +952,12 @@ async function submitForm(){
   const chkP=document.getElementById('chkPrivacy');
   if(!chkM.checked||!chkP.checked){
     alert('Пожалуйста, примите Условия мандата и Политику конфиденциальности, чтобы продолжить.');
+    return;
+  }
+  // On n'exige le jeton que si le widget fonctionne : s'il est en panne
+  // (réseau, bloqueur de pub), bloquer l'envoi ferait perdre le dossier.
+  if(!tsEnPanne&&typeof turnstile!=='undefined'&&tsWidget!==null&&!turnstile.getResponse(tsWidget)){
+    alert(MSG_TURNSTILE);
     return;
   }
   const btn=document.querySelector('.btn-submit');
@@ -999,5 +1053,7 @@ html[dir=rtl] #n20-cookie .n20-ck-btns{justify-content:flex-start}
 </script>
 <!-- /N20 cookie consent banner -->
 
+<!-- N20 Turnstile -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </body>
 </html>

@@ -181,6 +181,11 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
 .annex-count.over{color:#f87171}
 .upload-zone.uz-multi{min-height:88px}
 .upload-zone.dragover{border-color:var(--accent);background:rgba(110,193,228,.12)}
+/* N20 Turnstile */
+.n20-ts{margin:18px 0 6px}
+.n20-ts-lab{display:block;font-size:.78rem;color:rgba(255,255,255,.45);margin-bottom:8px}
+#n20-turnstile{min-height:65px}
+
 .upload-zone.uz-filled{border-color:var(--accent);border-style:solid;background:rgba(110,193,228,.06)}
 .upload-zone.uz-filled svg{stroke:var(--accent)}
 .annex-list{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
@@ -871,6 +876,11 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
           <input type="checkbox" id="chkPrivacy" required>
           <span>J'ai lu et accepté la <a href="/politique-de-confidentialite/" target="_blank">Politique de Confidentialité</a> et consens au traitement de mes données personnelles.</span>
         </label>
+          <!-- N20 Turnstile -->
+          <div class="n20-ts">
+            <span class="n20-ts-lab">Vérification de sécurité</span>
+            <div id="n20-turnstile"></div>
+          </div>
 
         <div class="form-nav">
           <button class="btn-prev" onclick="goTo(3)">&larr; Retour</button>
@@ -921,7 +931,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(45deg,#011522 2
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés. &nbsp;·&nbsp; Site créé par <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.13</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Tous droits réservés. &nbsp;·&nbsp; Site créé par <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.14</span></span>
       <nav class="ftr-legal">
         <a href="/conditions-generales/">CGU</a>
         <a href="/politique-de-confidentialite/">Confidentialité</a>
@@ -961,7 +971,7 @@ function goTo(n){
   });
   currentStep=n;
   document.getElementById('step'+n).classList.add('active');
-  if(n===4)buildRecap();
+  if(n===4){buildRecap();monterTurnstile();}
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1296,7 +1306,7 @@ async function sendEmail(d,ref,dt,pdfBase64){
   const res=await envoiAvecReprise(MAILER_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({reply_to:d.email,subject:`Nouveau mandat de recherche — ${d.firstName} ${d.lastName} — Réf. ${ref}`,html,attachments}),
+    body:async()=>JSON.stringify({reply_to:d.email,subject:`Nouveau mandat de recherche — ${d.firstName} ${d.lastName} — Réf. ${ref}`,html,attachments,turnstile:await jetonTurnstile()}),
   });
   if(!res.ok){const e=await res.text();throw new Error('HTTP '+res.status+' '+e.slice(0,200));}
   return res.json();
@@ -1351,6 +1361,41 @@ function verifierRevenus(){
 // uploads mobiles qui expirent). On bloque AVANT, avec un message clair.
 const LIMITE_ANNEXES_MO=20;
 // Délai d'expiration + un réessai automatique (réseaux mobiles instables).
+
+// ── N20 Turnstile : vérification anti-robot ──────────────────────────────────
+// Le widget est monté à l'ARRIVÉE sur l'étape 4, pas au chargement : rendu dans
+// un panneau masqué, il ne s'initialise pas correctement.
+const TURNSTILE_CLE='0x4AAAAAAEJQUWv_h4vWFh4L';
+const MSG_TURNSTILE="Merci de valider la vérification de sécurité avant d'envoyer.";
+let tsWidget=null, tsJetonConsomme=false, tsEnPanne=false;
+function monterTurnstile(){
+  if(tsWidget!==null||typeof turnstile==='undefined')return;
+  const hote=document.getElementById('n20-turnstile');
+  if(!hote)return;
+  try{ tsWidget=turnstile.render(hote,{sitekey:TURNSTILE_CLE,language:'fr',theme:'dark',
+    'error-callback':()=>{tsEnPanne=true;},
+    'expired-callback':()=>{try{turnstile.reset(tsWidget);}catch(e){}}}); }
+  catch(e){ console.warn('turnstile',e); }
+}
+// Le jeton est à USAGE UNIQUE : la reprise automatique doit en demander un neuf,
+// sinon le 2e essai est refusé et le dossier se perd malgré le filet de secours.
+function jetonTurnstile(){
+  return new Promise(res=>{
+    if(typeof turnstile==='undefined'||tsWidget===null){res('');return;}
+    if(!tsJetonConsomme){
+      tsJetonConsomme=true;
+      let j='';try{j=turnstile.getResponse(tsWidget)||'';}catch(e){}
+      res(j);return;
+    }
+    try{turnstile.reset(tsWidget);}catch(e){}
+    let n=0;
+    const t=setInterval(()=>{
+      let j='';try{j=turnstile.getResponse(tsWidget)||'';}catch(e){}
+      if(j||++n>40){clearInterval(t);res(j);}    // 20 s max, puis on tente sans
+    },500);
+  });
+}
+
 let PROGRES_ENVOI=null;
 // XHR et non fetch : seul XHR expose la progression du téléversement — et c'est
 // précisément l'upload qui échouait silencieusement (0 erreur côté Cloudflare ET
@@ -1378,11 +1423,13 @@ function envoyerXHR(url,corps,delaiMs){
 // Délai proportionnel au poids : 90 s fixes condamnaient d'avance un dossier de 5 Mo
 // sur un lien montant à 0,3 Mbit/s (il lui faut plus de 2 minutes).
 async function envoiAvecReprise(url,opts,timeoutMs,tentatives=2){
-  const corps=opts.body;
-  const mo=(corps&&corps.length?corps.length:0)/1048576;
-  const delai=timeoutMs||Math.min(300000,Math.max(90000,60000+mo*45000));
   let derniere;
   for(let i=0;i<tentatives;i++){
+    // Le corps peut être une fonction : la reprise obtient alors un jeton
+    // anti-robot neuf, le précédent étant à usage unique.
+    const corps=typeof opts.body==='function'?await opts.body():opts.body;
+    const mo=(corps&&corps.length?corps.length:0)/1048576;
+    const delai=timeoutMs||Math.min(300000,Math.max(90000,60000+mo*45000));
     try{
       const r=await envoyerXHR(url,corps,delai);
       if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer
@@ -1428,6 +1475,12 @@ async function submitForm(){
   const chkP=document.getElementById('chkPrivacy');
   if(!chkM.checked||!chkP.checked){
     alert('Veuillez accepter les Conditions Generales et la Politique de Confidentialite pour continuer.');
+    return;
+  }
+  // On n'exige le jeton que si le widget fonctionne : s'il est en panne
+  // (réseau, bloqueur de pub), bloquer l'envoi ferait perdre le dossier.
+  if(!tsEnPanne&&typeof turnstile!=='undefined'&&tsWidget!==null&&!turnstile.getResponse(tsWidget)){
+    alert(MSG_TURNSTILE);
     return;
   }
   const btn=document.querySelector('.btn-submit');
@@ -1539,5 +1592,7 @@ html[dir=rtl] #n20-cookie .n20-ck-btns{justify-content:flex-start}
 </script>
 <!-- /N20 cookie consent banner -->
 
+<!-- N20 Turnstile -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </body>
 </html>
