@@ -836,7 +836,7 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
                 <span class="uz-label">انقر للإرفاق</span>
                 <span class="uz-filename" id="fn1"></span>
               </div>
-              <input type="file" id="annex1" name="annex1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz1','fn1');rendreAnnexes()">
+              <input type="file" id="annex1" name="annex1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="showFile(this,'uz1','fn1');preparerAnnexe1(this)">
             </div>
           </div>
 
@@ -920,7 +920,7 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(45deg,#011522 20%
         <a href="/ar/terms-and-conditions/">الشروط</a>
         <a href="/ar/privacy-policy/">الخصوصية</a>
       </nav>
-      <span class="ftr-copy">© 2026 N20 Immobilier. جميع الحقوق محفوظة · تصميم الموقع: <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.11</span></span>
+      <span class="ftr-copy">© 2026 N20 Immobilier. جميع الحقوق محفوظة · تصميم الموقع: <a href="https://romand-web.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,.38)">romand-web.com</a> &middot; <span class="site-ver" style="opacity:.5">v1.1.12</span></span>
     </div>
   </div>
 </footer>
@@ -1047,20 +1047,61 @@ function showFile(input,zoneId,fnId){
 }
 
 
+
+// ── N20 envoi v2 : compression des images avant envoi ─────────────────────────
+// La cause réelle des mandats perdus n'était pas la limite Resend (le Worker encaisse
+// 30 Mo) mais l'upload qui n'aboutit pas depuis un mobile. On réduit donc le poids
+// à la source : les scans/photos sont ramenés à 1600 px et réencodés en JPEG.
+const LIB_OPTIMISATION='جارٍ تحسين المستندات…';
+const MAX_PX_IMAGE=1600, QUALITE_JPEG=0.75;
+async function compresserImage(file){
+  if(!file||!/^image\//i.test(file.type||''))return file;   // PDF : on n'y touche pas
+  try{
+    const bmp=await createImageBitmap(file);
+    const ratio=Math.min(1,MAX_PX_IMAGE/Math.max(bmp.width,bmp.height));
+    const w=Math.max(1,Math.round(bmp.width*ratio)), h=Math.max(1,Math.round(bmp.height*ratio));
+    const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+    const ctx=cv.getContext('2d');
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);            // aplat blanc : un PNG transparent
+    ctx.drawImage(bmp,0,0,w,h);                              // deviendrait noir en JPEG
+    if(bmp.close)bmp.close();
+    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',QUALITE_JPEG));
+    if(!blob||blob.size>=file.size)return file;              // aucun gain : on garde l'original
+    const nom=file.name.replace(/\.(png|jpe?g|webp|heic|heif|gif|bmp|tiff?)$/i,'')+'.jpg';
+    return new File([blob],nom,{type:'image/jpeg',lastModified:file.lastModified});
+  }catch(e){ console.warn('compression impossible, fichier conservé tel quel',e); return file; }
+}
+// L'Annexe 1 obligatoire passe par le même filtre que le cadre multi.
+let ANNEXE1=null;
+async function preparerAnnexe1(input){
+  const brut=input&&input.files&&input.files[0];
+  if(!brut){ANNEXE1=null;rendreAnnexes();return;}
+  const fn=document.getElementById('fn1');
+  const avant=fn?fn.textContent:'';
+  if(fn)fn.textContent=LIB_OPTIMISATION;
+  ANNEXE1=await compresserImage(brut);
+  if(fn)fn.textContent=ANNEXE1?ANNEXE1.name:avant;
+  rendreAnnexes();
+}
+
 // ── N20 annexes multi : cadre « documents annexes » (max 20) ──────────────────
 const MAX_ANNEXES=20, MAX_MO_FICHIER=5, UNITE_MO='ميغابايت';
 let ANNEXES=[];
 function fmtTaille(o){return (o/1048576).toFixed(1)+' '+UNITE_MO;}
-function ajouterAnnexes(input){
+async function ajouterAnnexes(input){
   const entrants=Array.from(input.files||[]);
   input.value='';               // permet de re-sélectionner le même fichier
   const trop=[]; let plein=false;
-  for(const f of entrants){
+  const _z=document.getElementById('uzMulti'), _l=_z?_z.querySelector('.uz-label'):null, _l0=_l?_l.textContent:'';
+  if(_l)_l.textContent=LIB_OPTIMISATION;
+  for(const _brut of entrants){
     if(ANNEXES.length>=MAX_ANNEXES){plein=true;break;}
-    if(f.size>MAX_MO_FICHIER*1048576){trop.push(f.name);continue;}
+    const f=await compresserImage(_brut);
+    if(f.size>MAX_MO_FICHIER*1048576){trop.push(_brut.name);continue;}
     if(ANNEXES.some(x=>x.name===f.name&&x.size===f.size&&x.lastModified===f.lastModified))continue;
     ANNEXES.push(f);
   }
+  if(_l)_l.textContent=_l0;
   rendreAnnexes();
   if(trop.length)alert(trop.map(n=>`الملف «{n}» يتجاوز {m} ميغابايت ولم تتم إضافته.`.replace('{n}',n).replace('{m}',MAX_MO_FICHIER)).join('\n'));
   if(plein)alert(`يمكنكم إرفاق {x} مستنداً إضافياً كحد أقصى.`.replace('{x}',MAX_ANNEXES));
@@ -1083,7 +1124,7 @@ function rendreAnnexes(){
   });
   // Compteur : inclut l'Annexe 1 obligatoire dans le total de taille affiché.
   const a1=document.getElementById('annex1');
-  const f1=a1&&a1.files&&a1.files[0]?a1.files[0].size:0;
+  const f1=ANNEXE1?ANNEXE1.size:(a1&&a1.files&&a1.files[0]?a1.files[0].size:0);
   const tot=ANNEXES.reduce((s,f)=>s+f.size,0)+f1;
   cpt.textContent=`${ANNEXES.length}/${MAX_ANNEXES} · ${fmtTaille(tot)}`;
   cpt.classList.toggle('over',tot/1048576>LIMITE_ANNEXES_MO);
@@ -1109,7 +1150,7 @@ function buildMandat(){
   const fd=val=>{if(!val)return'—';const[y,m,d]=val.split('-');return`${d}.${m}.${y}`;};
   const p1=document.querySelector('#step1 .phone-prefix')?.value||'+41';
   const p2=document.querySelector('#step2 .phone-prefix')?.value||'+41';
-  const a1=document.getElementById('annex1')?.files[0]||null;
+  const a1=ANNEXE1||document.getElementById('annex1')?.files[0]||null;
   const tousFichiers=[a1,...ANNEXES].filter(Boolean);
   return{
     lastName:v('lastName'),firstName:v('firstName'),dob:fd(v('dob')),
@@ -1175,20 +1216,57 @@ async function generatePDF(d){
   const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
   const pdfW=pdf.internal.pageSize.getWidth();
   const A4W=794,A4H=1123;                       // px CSS pour 210×297 mm à 96 dpi
-  const pages=Math.max(1,Math.ceil(docH/A4H));
+  // Coupures de page « intelligentes ». html2canvas IGNORE les règles CSS de saut de
+  // page (il découpe une image tous les 1123 px), d'où des blocs signature coupés en
+  // deux et des pages quasi vides. On calcule donc nous-mêmes des coupures qui ne
+  // traversent aucun bloc insécable, et on honore les sauts forcés du gabarit.
+  const dd=iframe.contentDocument;
+  const mesure=el=>{const r=el.getBoundingClientRect();return{h:r.top,b:r.bottom};};
+  const insecables=[...dd.querySelectorAll('.doc-section,.partie-card,.annexe-item,.co-mandant,.critere-item,.signature-section,.honoraires-box')]
+    .map(mesure).filter(x=>x.b>x.h && (x.b-x.h)<A4H-60);
+  const forces=[...dd.querySelectorAll('[style*="page-break-before"]')]
+    .map(el=>Math.floor(mesure(el).h)).filter(y=>y>60 && y<docH-60);
+  const coupures=[0];
+  let garde=0;
+  while(coupures[coupures.length-1]+A4H<docH && garde++<60){
+    const debut=coupures[coupures.length-1];
+    let y=debut+A4H;
+    const force=forces.find(f=>f>debut+60 && f<=y);
+    if(force){ y=force; }
+    else{
+      for(const bl of insecables){
+        if(bl.h<y-1 && bl.b>y+1 && bl.h>debut+120 && bl.h<y) y=Math.floor(bl.h)-8;
+      }
+    }
+    if(y<=debut+120) y=debut+A4H;        // garde-fou : jamais de page minuscule
+    coupures.push(y);
+  }
+  coupures.push(docH);
 
-  // Capturer PAGE PAR PAGE : chaque canvas reste petit (≤ 1588×2246 px), ce qui évite
-  // la limite de taille de canvas d'iOS qui produisait aussi des pages noires (mandats 2 pages).
-  for(let i=0;i<pages;i++){
-    const yCss=i*A4H;
-    const hCss=Math.min(A4H,docH-yCss);
-    const canvas=await iframe.contentWindow.html2canvas(iframe.contentDocument.documentElement,{
+  for(let i=0;i<coupures.length-1;i++){
+    const yCss=coupures[i];
+    const hCss=Math.min(A4H,coupures[i+1]-yCss);
+    if(hCss<=0)continue;
+    // Chaque canvas reste ≤ 1588×2246 px : sous la limite de taille d'iOS, qui
+    // produisait des pages noires sur les mandats de 2 pages.
+    const canvas=await iframe.contentWindow.html2canvas(dd.documentElement,{
       x:0,y:yCss,width:A4W,height:hCss,windowWidth:A4W,windowHeight:docH,
       scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,
     });
     if(i>0)pdf.addPage();
     const imgH=pdfW*(canvas.height/canvas.width);
     pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',0,0,pdfW,imgH);
+  }
+
+  // Numérotation réelle : le gabarit affichait « Page 1/1 » en dur, y compris sur
+  // un mandat de 2 pages.
+  const totalPages=pdf.internal.getNumberOfPages();
+  const hPage=pdf.internal.pageSize.getHeight();
+  for(let p=1;p<=totalPages;p++){
+    pdf.setPage(p);
+    pdf.setFontSize(7);
+    pdf.setTextColor(110,110,110);
+    pdf.text('Page '+p+'/'+totalPages,pdfW-12,hPage-5,{align:'right'});
   }
 
   document.body.removeChild(iframe);
@@ -1279,17 +1357,43 @@ function verifierRevenus(){
 // uploads mobiles qui expirent). On bloque AVANT, avec un message clair.
 const LIMITE_ANNEXES_MO=20;
 // Délai d'expiration + un réessai automatique (réseaux mobiles instables).
-async function envoiAvecReprise(url,opts,timeoutMs=90000,tentatives=2){
+let PROGRES_ENVOI=null;
+// XHR et non fetch : seul XHR expose la progression du téléversement — et c'est
+// précisément l'upload qui échouait silencieusement (0 erreur côté Cloudflare ET
+// côté Resend, car une requête avortée n'est comptée nulle part).
+function envoyerXHR(url,corps,delaiMs){
+  return new Promise((res,rej)=>{
+    const x=new XMLHttpRequest();
+    x.open('POST',url,true);
+    x.setRequestHeader('Content-Type','application/json');
+    x.timeout=delaiMs;
+    if(x.upload)x.upload.onprogress=e=>{
+      if(e.lengthComputable&&typeof PROGRES_ENVOI==='function')PROGRES_ENVOI(e.loaded/e.total);
+    };
+    x.onload=()=>res({
+      ok:x.status>=200&&x.status<300, status:x.status,
+      text:async()=>x.responseText,
+      json:async()=>{try{return JSON.parse(x.responseText);}catch(e){return {};}},
+    });
+    x.onerror=()=>rej(new Error('Réseau indisponible'));
+    x.ontimeout=()=>rej(new Error('Délai dépassé'));
+    x.onabort=()=>rej(new Error('Envoi interrompu'));
+    x.send(corps);
+  });
+}
+// Délai proportionnel au poids : 90 s fixes condamnaient d'avance un dossier de 5 Mo
+// sur un lien montant à 0,3 Mbit/s (il lui faut plus de 2 minutes).
+async function envoiAvecReprise(url,opts,timeoutMs,tentatives=2){
+  const corps=opts.body;
+  const mo=(corps&&corps.length?corps.length:0)/1048576;
+  const delai=timeoutMs||Math.min(300000,Math.max(90000,60000+mo*45000));
   let derniere;
   for(let i=0;i<tentatives;i++){
-    const ctrl=new AbortController();
-    const to=setTimeout(()=>ctrl.abort(),timeoutMs);
     try{
-      const r=await fetch(url,Object.assign({},opts,{signal:ctrl.signal}));
-      clearTimeout(to);
-      if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer (taille/payload)
+      const r=await envoyerXHR(url,corps,delai);
+      if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer
       derniere=new Error('HTTP '+r.status);
-    }catch(e){clearTimeout(to);derniere=e;}
+    }catch(e){derniere=e;}
     if(i<tentatives-1)await new Promise(r=>setTimeout(r,1500));
   }
   throw derniere||new Error('Échec réseau');
@@ -1355,9 +1459,12 @@ async function submitForm(){
   }
 
   btn.textContent='جارٍ الإرسال…';
+  PROGRES_ENVOI=p=>{btn.textContent='جارٍ الإرسال…'+' '+Math.round(p*100)+' %';};
   try{
     await sendEmail(data,ref,dt,pdfBase64);
+    PROGRES_ENVOI=null;
   }catch(e){
+    PROGRES_ENVOI=null;
     console.error('Envoi:',e);
     btn.disabled=false;btn.textContent="إعادة المحاولة";
     afficherSecours(pdfBase64,ref,{
