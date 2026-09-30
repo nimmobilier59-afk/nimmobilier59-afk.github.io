@@ -8,4 +8,7 @@ MAIL_FROM = "N20 Immobilier <mandat@n20immobilier.ch>"
 MAIL_TO = "contact@n20immobilier.ch"
 # Liste séparée par des virgules. github.io = tests avant bascule ; n20immobilier.ch = prod.
 # Après la bascule DNS, retirer l'origine github.io.
-ALLOWED_ORIGIN = "https://n20immobilier.ch,https://nimmobilier59-afk.github.io"
+# www doit figurer ici : la redirection 301 couvre la plupart des cas, mais une
+# page servie depuis le cache sur www POSTerait avec cette origine et recevrait
+# un 403 — échec silencieux d'un mandat.
+ALLOWED_ORIGIN = "https://n20immobilier.ch,https://www.n20immobilier.ch,https://nimmobilier59-afk.github.io"

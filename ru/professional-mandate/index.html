@@ -651,7 +651,7 @@ body{font-family:'Manrope',sans-serif;background:linear-gradient(135deg,#011522 
       </div>
     </div>
     <div class="ftr-bottom">
-      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &middot; <span class="site-ver" style="opacity:.5">v1.1.18</span></span>
+      <span class="ftr-copy">&copy; 2026 N20 Immobilier. Все права защищены. &middot; <span class="site-ver" style="opacity:.5">v1.1.19</span></span>
       <nav class="ftr-legal">
         <a href="/ru/terms-and-conditions/">Условия</a>
         <a href="/ru/privacy-policy/">Конфиденциальность</a>
@@ -899,7 +899,7 @@ async function envoiAvecReprise(url,opts,timeoutMs,tentatives=2){
     // anti-robot neuf, le précédent étant à usage unique.
     const corps=typeof opts.body==='function'?await opts.body():opts.body;
     const mo=(corps&&corps.length?corps.length:0)/1048576;
-    const delai=timeoutMs||Math.min(300000,Math.max(90000,60000+mo*45000));
+    const delai=timeoutMs||Math.min(600000,Math.max(90000,60000+mo*45000));
     try{
       const r=await envoyerXHR(url,corps,delai);
       if(r.ok||r.status<500)return r;      // 4xx = inutile de réessayer
